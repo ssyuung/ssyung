@@ -1,6 +1,6 @@
 # ssyung 계약과 목데이터
 
-> 상태: 계약 0.1.0 초안 (2026-10-22)
+> 상태: 계약 0.2.0 (2026-10-22). 바뀐 것과 요청 처리 기록: [contracts/requests/README.md](../contracts/requests/README.md)
 > 관련 문서: [architecture.md](architecture.md), [agent-development.md](agent-development.md)
 
 모듈마다 다른 브랜치에서 동시에 개발할 수 있도록 **모듈 사이를 오가는 데이터 형식**을 `packages/schema`(zod)에 고정하고, 그 형식을 그대로 따르는 **목데이터**를 `fixtures/mock/`에 둔다. 각 모듈은 상대 모듈이 없어도 목데이터를 입력으로 받고, 자기 출력을 목데이터와 같은 형식으로 내면 된다.
@@ -19,7 +19,7 @@ pnpm mock:build    # dataset/ + 화면 시안 엔진 → fixtures/mock/ 다시 �
 | 파일 | 무엇 | 만드는 쪽 → 쓰는 쪽 |
 |---|---|---|
 | `ids.ts` | 코드 형식(S01, A01, T01, K1, 3-2, L06, D01), `LocationRef`, `Label`(20자), `IsoDate`, `Floor`(정수 또는 `"OUT"`) | 공통 |
-| `time.ts` | `Minute`(자정부터의 분, 10의 배수), `HHMM`, `Interval`, `TimeBlock`, `BellSchedule`, `Segment`, `Priority` | 공통 |
+| `time.ts` | `Minute`(자정부터의 분, 10의 배수), `HHMM`, `Interval`, `TimeBlock`, `BellSchedule`, `Segment`, `Priority`. 공용 함수 `hhmmToMinute`·`minuteToHHMM`·`ceil10`·`weekdayOf`, 기본 일과 `DEFAULT_BELL` | 공통 (모듈마다 다시 만들지 않는다) |
 | `dataset.ts` | `dataset/api/`(NEIS 행)와 `dataset/db/`(층배치·학생·지원인력 JSON) 파일 형식 | 파일 → M4 |
 | `domain.ts` | `SchoolBundle`, `Location`, `ClassGroup`, `Timetable`, `Student`, `Staff`, `Duty`, `ScheduleVersion`, `Attendance`, `CellCheck`, `CellNote`, `Memo`, `Notification`, `Actor` | M4 → M3·M7·M8·M9 |
 | `demand.ts` | `Demand`(lesson·move_group·requirement·duty), `DemandSet`. id는 내용에서 만든 안정된 문자열 | M3 → M1·M2 |
@@ -43,6 +43,8 @@ pnpm mock:build    # dataset/ + 화면 시안 엔진 → fixtures/mock/ 다시 �
 - **설명 문장은 계약에 없다.** 이유 코드와 수요 id만 오가고, 문장은 `packages/core`가 만든다. 예외로 `ChangeRequest.summary`(해석 확인 문장)는 서버가 만들어 넘긴다.
 - **읽기 화면은 `view.*` 프로시저**로 서버가 조립한다(`DayView`). 화면 개발이 DB 구조에 묶이지 않게 하기 위해서다.
 - **이름 필드는 없다.** `label`은 별칭(학생1, 지원인력1)이다.
+- **오늘 변경은 요청 시각부터 (D24).** `ProposeInput.now`(날짜, 10분 올림 분). `now` 이후에 시작하는 칸만 바뀌고, 진행 중인 칸과 지난 칸은 그대로다. 수요 생성은 오늘 변경을 그 칸들에만 적용하고, 배치 엔진은 `now` 이전에 시작한 이전 배정을 고정한다. 목데이터의 `now`는 `null`이다(시안 엔진이 고정을 하지 않음).
+- **배치 경고는 API가 계산한다.** 엔진의 `ValidateOutput.warnings`는 쓰지 않고, `schedule.validate` 출력(`ScheduleValidateOutput`)에만 있다.
 
 ## 3. 목데이터 (`fixtures/mock/`)
 
@@ -69,6 +71,7 @@ pnpm mock:build    # dataset/ + 화면 시안 엔진 → fixtures/mock/ 다시 �
 | 경로 | 계약 | 내용 |
 |---|---|---|
 | `fixtures/scenarios/cascade-scenarios.json` | `CascadeScenarioSet` | 연쇄 시나리오 10개와 정책별 기준선 ([scheduler-scenarios.md](scheduler-scenarios.md)) |
+| `fixtures/scenarios/inputs/S*.input.json` | `ProposeInput` | 시나리오 엔진 입력. 지금 S1·S2·S3·S4·S5·S7 (`pnpm mock:build`가 생성). M1·M2가 같은 입력으로 돌린다 |
 | `fixtures/change-requests/cases.json` | `ChangeRequestSet` | 해석기 평가 세트 22건. 어려운 유형(상대 날짜, 오전·오후, 과목→교시, 복합 명령, 지원 안 하는 요청, 수업일 아님)을 2건 이상씩 |
 
 ### 3.1 화면이 쓰는 주요 예시

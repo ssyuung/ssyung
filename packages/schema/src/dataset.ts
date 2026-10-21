@@ -51,8 +51,12 @@ export const SupportSubject = z.object({
   need_mid: z.boolean(),
   need_end: z.boolean(),
 });
+const LastCodeNo = z.number().int().min(0).optional()
+  .describe("지금까지 발급한 가장 큰 코드 번호. 지운 번호는 다시 쓰지 않는다. 없으면 남은 코드의 최댓값");
+
 export const StudentsFile = z.object({
   _note: z.string().optional(),
+  last_code_no: LastCodeNo,
   students: z.array(
     z.object({
       code: StudentCode,
@@ -68,6 +72,7 @@ export const StudentsFile = z.object({
 
 export const StaffFile = z.object({
   _note: z.string().optional(),
+  last_code_no: LastCodeNo,
   staff: z.array(
     z.object({
       code: StaffCode,

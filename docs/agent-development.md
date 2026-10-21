@@ -307,12 +307,16 @@ PR 1개. 본문에 구현 요약, 시나리오별 지표(기준선 대비), 남�
 
 ## 5. 계약 변경 절차
 
+처리 기록과 상태는 [contracts/requests/README.md](../contracts/requests/README.md)에 둔다.
+
 1. 모듈 에이전트가 `contracts/requests/<모듈>-<주제>.md`를 작성하고 PR에 포함한다.
 2. 통합 담당(사람 또는 M0 워크트리 세션)이 요청을 모아 `packages/schema`에 반영한다. `CONTRACT_VERSION`을 올리고 `pnpm gen`을 실행한다.
 3. main에 merge한다.
 4. 진행 중인 워크트리는 main을 rebase한다.
 
-하위 호환이 깨지는 변경(필드 삭제, 이름 변경)은 영향받는 모듈의 지시서에 반영 작업을 추가한다.
+하위 호환이 깨지는 변경(필드 삭제, 이름 변경)은 영향받는 모듈의 지시서에 반영 작업을 추가한다. 진행 중인 모듈 PR이 있으면 가능하면 하위 호환으로 넣고(선택 필드, 값 추가, 쓰지 않음 표시), 실제 삭제는 모듈이 따라온 뒤 다음 major에서 한다.
+
+처리가 끝난 요청 파일은 main에 들어온 뒤 `contracts/requests/done/`으로 옮긴다.
 
 ## 6. 하네스 운영
 

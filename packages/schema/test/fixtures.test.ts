@@ -58,8 +58,24 @@ test("dataset/: 파일 형식", () => {
   check(S.NeisTimetableFile, read(`${d}/api/서울개포초등학교/초등학교시간표.json`).slice(1), "초등학교시간표.json");
 });
 
-test("fixtures/scenarios: 연쇄 시나리오", () => {
-  check(S.CascadeScenarioSet, read("fixtures/scenarios/cascade-scenarios.json"), "cascade-scenarios.json");
+test("fixtures/scenarios: 연쇄 시나리오와 입력 파일", () => {
+  const set = check(S.CascadeScenarioSet, read("fixtures/scenarios/cascade-scenarios.json"), "cascade-scenarios.json") as z.infer<typeof S.CascadeScenarioSet>;
+  const withInput = set.scenarios.filter((x) => x.input);
+  assert.ok(withInput.length >= 6, "시나리오 입력이 6개 이상");
+  for (const sc of withInput) {
+    const input = check(S.ProposeInput, read(`fixtures/scenarios/${sc.input}`), sc.input!) as S.ProposeInput;
+    assert.deepEqual(input.dates, [sc.date], `${sc.id}: 날짜`);
+    assert.deepEqual(input.request?.ops ?? [], sc.trigger.type === "change_ops" ? sc.trigger.ops : [], `${sc.id}: 변경 명령`);
+  }
+});
+
+test("계약: 공용 시간 함수와 기본 일과", () => {
+  assert.equal(S.hhmmToMinute("09:30"), 570);
+  assert.equal(S.minuteToHHMM(570), "09:30");
+  assert.equal(S.ceil10(615), 620);
+  assert.equal(S.weekdayOf("2026-09-18"), "FRI");
+  check(z.array(S.BellSchedule), S.DEFAULT_BELL, "DEFAULT_BELL");
+  assert.deepEqual(read("fixtures/mock/domain/school.json").bell, S.DEFAULT_BELL, "목데이터 일과 = 기본 일과");
 });
 
 test("fixtures/change-requests: 해석기 평가 세트", () => {

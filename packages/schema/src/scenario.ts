@@ -35,6 +35,8 @@ export const CascadeScenario = z.object({
   title: z.string(),
   date: IsoDate,
   trigger: ScenarioTrigger,
+  input: z.string().regex(/^inputs\/S\d{1,2}\.input\.json$/).optional()
+    .describe("엔진 입력(ProposeInput) 파일. fixtures/scenarios/ 기준. 없으면 수요 생성(M3) 결과가 필요해 아직 없음"),
   chain: z.string(),
   checks: z.string(),
   expect: z.looseObject({

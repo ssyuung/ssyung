@@ -7,6 +7,7 @@ import { readFileSync, writeFileSync, mkdirSync, rmSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseHTML } from "linkedom";
+import { DEFAULT_BELL, hhmmToMinute, weekdayOf } from "../../packages/schema/src/index.ts";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const API_DIR = join(ROOT, "dataset/api/서울개포초등학교");
@@ -27,32 +28,12 @@ const NOW = 615; // 10:15 — 시안의 NOW_DEMO
 const WEEK = ["2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18"];
 const TS = (date: string, min: number) =>
   `${date}T${String(Math.floor(min / 60)).padStart(2, "0")}:${String(min % 60).padStart(2, "0")}:00+09:00`;
-const hhmm = (m: number) => `${String(Math.floor(m / 60)).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`;
-const toMin = (t: string) => +t.slice(0, 2) * 60 + +t.slice(3, 5);
+const toMin = hhmmToMinute;
 const ymd = (d: string) => `${d.slice(0, 4)}-${d.slice(4, 6)}-${d.slice(6, 8)}`;
-const DAYS = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"] as const;
-const dayOf = (date: string) => DAYS[new Date(date + "T00:00:00Z").getUTCDay()];
+const dayOf = weekdayOf;
 
-// 일과 (②). 시안과 같은 초등 40분 수업 가정
-const BELL_RAW: [string, string, string, string, number | null][] = [
-  ["arrival", "08:40", "09:00", "등교", null],
-  ["class", "09:00", "09:40", "1교시", 1],
-  ["break", "09:40", "09:50", "쉬는 시간", null],
-  ["class", "09:50", "10:30", "2교시", 2],
-  ["break", "10:30", "10:40", "쉬는 시간", null],
-  ["class", "10:40", "11:20", "3교시", 3],
-  ["break", "11:20", "11:30", "쉬는 시간", null],
-  ["class", "11:30", "12:10", "4교시", 4],
-  ["lunch", "12:10", "13:00", "점심", null],
-  ["class", "13:00", "13:40", "5교시", 5],
-  ["break", "13:40", "13:50", "쉬는 시간", null],
-  ["class", "13:50", "14:30", "6교시", 6],
-  ["dismissal", "14:30", "14:50", "하교", null],
-  ["other", "14:50", "16:40", "방과 후", null],
-];
-const BELL = BELL_RAW.map(([kind, s, e, label, period]) => ({
-  kind, period, start: toMin(s), end: toMin(e), label, part_of_day: toMin(s) < 720 ? "morning" : "afternoon",
-}));
+// 일과 (②): 계약의 기본 일과 (초등 40분 수업)
+const BELL = DEFAULT_BELL[0]!.blocks;
 const PERIODS = BELL.filter((b) => b.kind === "class");
 const periodAt = (min: number) => PERIODS.find((b) => b.start <= min && min < b.end)?.period ?? null;
 const periodEndingAt = (min: number) => PERIODS.find((b) => b.end === min)?.period ?? null;
@@ -305,8 +286,14 @@ function propose(date: string, mod: any, ops: any[]) {
     const dem = tagged.filter((x) => ["removed", "added", "group"].includes(x.t));
     const sDem = push("MOVE_SUPPORT_NEEDED", dem, 1);
     const mv = tagged.filter((x) => x.t === "moved" && !isRt(x.n, x.t));
-    const sUn = push("UNAVAILABLE", mv.filter((x) => x.os && away[x.os]), 1);
-    push("OVERLAP", mv.filter((x) => !(x.os && away[x.os])), sUn || sDem || 1);
+    const isAway = (x: (typeof tagged)[number]) => !!(x.os && away[x.os]);
+    // 이전 담당자가 새 배정에서 그 시간에 다른 일을 맡았는지
+    const busy = (x: (typeof tagged)[number]) =>
+      !!x.os && c.assignments.some((a) => a.staff === x.os && a.demand_id !== x.e.demand_id && a.start < x.e.before.end && x.e.before.start < a.end);
+    const fresh = !!(pol.flags as any).fresh;
+    const sUn = push("UNAVAILABLE", mv.filter(isAway), 1);
+    push("OVERLAP", mv.filter((x) => !isAway(x) && (busy(x) || !fresh)), sUn || sDem || 1);
+    push("REPLANNED", mv.filter((x) => !isAway(x) && !busy(x) && fresh), 1);
     push("EDGE_RELEASED", tagged.filter((x) => isRt(x.n, x.t)), sDem || sUn || 1);
     push("GAP", tagged.filter((x) => x.t === "gap"), 1);
 
@@ -362,7 +349,7 @@ for (const cs of CASES) {
   const opts = propose(TODAY, cs.mod, cs.ops);
   const newDemands = opts[0]._demands;
   const input = {
-    dates: [TODAY], demands: newDemands, staff: staffWindows(TODAY, cs.away),
+    dates: [TODAY], now: null, demands: newDemands, staff: staffWindows(TODAY, cs.away),
     previous: { demands: base[TODAY].demands, assignments: base[TODAY].assignments },
     pinned: [], policies: POLICIES.map((p) => p.key), request: { change_request_id: `cr_${cs.name}`, ops: cs.ops },
   };
@@ -370,6 +357,43 @@ for (const cs of CASES) {
   write(`scheduler/propose.${cs.name}.input.json`, input);
   write(`scheduler/propose.${cs.name}.output.json`, output);
   proposals[cs.name] = { input, output, cs };
+}
+
+// 연쇄 시나리오 입력 (fixtures/scenarios/inputs/, 계약 ProposeInput). M1·M2가 같은 입력으로 시나리오를 돌린다.
+// 시안 엔진이 수요를 만들 수 있는 것만 만든다. 나머지(S6 과목 장소, S8 지원 구간, S9 반 장소, S10 시간표)는 M3 merge 뒤 그 결과로 만든다.
+{
+  const SCN_DIR = join(ROOT, "fixtures/scenarios");
+  const set = json(join(SCN_DIR, "cascade-scenarios.json"));
+  const MODS: Record<string, { mod: any; away: Record<string, [number, number]> }> = {
+    S1: { mod: { absent: ["S03"] }, away: {} },
+    S2: { mod: { away: { A01: [630, 690] } }, away: { A01: [630, 690] } },
+    S3: { mod: { away: { A03: [520, 1000] } }, away: { A03: [520, 1000] } },
+    S4: { mod: { place: { S01: { 2: "K1" } } }, away: {} },
+    S5: { mod: { place: { S04: { 1: "K1" } } }, away: {} },
+    S7: { mod: {}, away: {} },
+  };
+  rmSync(join(SCN_DIR, "inputs"), { recursive: true, force: true });
+  mkdirSync(join(SCN_DIR, "inputs"), { recursive: true });
+  for (const sc of set.scenarios) {
+    delete sc.input;
+    const m = MODS[sc.id];
+    if (!m) continue;
+    const ops = sc.trigger.type === "change_ops" ? sc.trigger.ops : [];
+    const opts = propose(sc.date, m.mod, ops);
+    const input = {
+      dates: [sc.date], now: null, demands: opts[0]._demands, staff: staffWindows(sc.date, m.away),
+      previous: { demands: base[sc.date].demands, assignments: base[sc.date].assignments },
+      pinned: [], policies: POLICIES.map((p) => p.key), request: ops.length ? { change_request_id: null, ops } : null,
+    };
+    const rel = `inputs/${sc.id}.input.json`;
+    writeFileSync(join(SCN_DIR, rel), JSON.stringify(input, null, 2) + "\n");
+    // 시나리오 정의에서 trigger 바로 뒤에 input을 둔다
+    const ordered: any = {};
+    for (const [k, v] of Object.entries(sc)) { ordered[k] = v; if (k === "trigger") ordered.input = rel; }
+    Object.keys(sc).forEach((k) => delete sc[k]);
+    Object.assign(sc, ordered);
+  }
+  writeFileSync(join(SCN_DIR, "cascade-scenarios.json"), JSON.stringify(set, null, 2) + "\n");
 }
 
 // validate: W4에서 지원인력1이 맡은 첫 이동 묶음에 지원인력2를 하나 더 끌어 놓음 → 겹침 + 묶음 2명
@@ -395,7 +419,7 @@ function validate(demands: any[], windows: any[], assignments: any[]) {
   const target = asg.find((a: any) => a.staff === "A01" && a.demand_id.startsWith("mv:"))!;
   const edited = asg.concat([{ ...target, staff: "A02" }]).sort((x: any, y: any) => x.start - y.start || x.staff.localeCompare(y.staff));
   const vin = { demands: base[TODAY].demands, staff: staffWindows(TODAY), pinned: [], assignments: edited };
-  const vout = { violations: validate(vin.demands, vin.staff, edited), shortfalls: base[TODAY].shortfalls, warnings: [] };
+  const vout = { violations: validate(vin.demands, vin.staff, edited), shortfalls: base[TODAY].shortfalls };
   write("scheduler/validate.overlap.input.json", vin);
   write("scheduler/validate.overlap.output.json", vout);
   proposals.validate = { edited, vout };
@@ -538,8 +562,8 @@ const draft = { ...version, id: "ver_draft01", parent_id: null, status: "draft",
     output: { version: draft, option: { key: "A", policies: ["fresh"], label: "처음부터 다시", assignments: all.assignments, shortfalls: all.shortfalls,
       metrics: metricsOf(all as any), diff: [], explanation: [] } } }]);
 }
-api("schedule.validate", [{ title: "끌어 놓기로 겹침 발생 (W4)", input: { version_id: "ver_draft01", date: TODAY, assignments: proposals.validate.edited }, output: proposals.validate.vout }]);
-api("schedule.updateDraft", [{ title: "수동 수정 저장 (겹침은 경고로 돌려줌)", input: { version_id: "ver_draft01", date: TODAY, assignments: proposals.validate.edited }, output: proposals.validate.vout }]);
+api("schedule.validate", [{ title: "끌어 놓기로 겹침 발생 (W4)", input: { version_id: "ver_draft01", date: TODAY, assignments: proposals.validate.edited }, output: { ...proposals.validate.vout, warnings: [] } }]);
+api("schedule.updateDraft", [{ title: "수동 수정 저장 (겹침은 경고로 돌려줌)", input: { version_id: "ver_draft01", date: TODAY, assignments: proposals.validate.edited }, output: { ...proposals.validate.vout, warnings: [] } }]);
 api("schedule.activate", [{ title: "draft 승인", input: { version_id: "ver_draft01" },
   output: { version: { ...draft, status: "active", activated_at: TS("2026-09-11", 910) }, notified: ["A01", "A02", "A03"] } }]);
 api("schedule.rollback", [{ title: "과거 버전 복제 → draft", input: { version_id: "ver_0901" },
