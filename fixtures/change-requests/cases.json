@@ -1,0 +1,541 @@
+{
+  "_note": "해석기(M6) 평가 세트의 씨앗. 기준일 2026-09-18(금), 컨텍스트는 fixtures/mock/interpreter/context-2026-09-18.json. 과목→교시는 9월 시간표로 확인함(학생6=5-5반: 9/18 과학 4교시, 9/22 영어 4교시). 특수교사 팀원 검토 후 50~100건으로 늘린다. 별칭만 쓰고 실명은 쓰지 않는다.",
+  "cases": [
+    {
+      "id": "CR01",
+      "raw_text": "학생3 오늘 결석",
+      "today": "2026-09-18",
+      "tags": [
+        "absent"
+      ],
+      "expected": {
+        "ops": [
+          {
+            "op": "mark_absent",
+            "student": "S03",
+            "when": {
+              "date": "2026-09-18"
+            }
+          }
+        ],
+        "scope": "this_week",
+        "confidence": "high",
+        "unsupported": null
+      }
+    },
+    {
+      "id": "CR02",
+      "raw_text": "지원인력1 10시 30분부터 11시 30분까지 출장",
+      "today": "2026-09-18",
+      "tags": [
+        "staff",
+        "time-range"
+      ],
+      "expected": {
+        "ops": [
+          {
+            "op": "staff_unavailable",
+            "staff": "A01",
+            "when": [
+              {
+                "date": "2026-09-18",
+                "start": "10:30",
+                "end": "11:30"
+              }
+            ]
+          }
+        ],
+        "scope": "this_week",
+        "confidence": "high",
+        "unsupported": null
+      }
+    },
+    {
+      "id": "CR03",
+      "raw_text": "지원인력3 오늘 병가",
+      "today": "2026-09-18",
+      "tags": [
+        "staff"
+      ],
+      "expected": {
+        "ops": [
+          {
+            "op": "staff_unavailable",
+            "staff": "A03",
+            "when": {
+              "date": "2026-09-18"
+            }
+          }
+        ],
+        "scope": "this_week",
+        "confidence": "high",
+        "unsupported": null
+      }
+    },
+    {
+      "id": "CR04",
+      "raw_text": "학생1 3교시 미술은 K1에서",
+      "today": "2026-09-18",
+      "tags": [
+        "placement"
+      ],
+      "expected": {
+        "ops": [
+          {
+            "op": "set_placement",
+            "student": "S01",
+            "when": {
+              "date": "2026-09-18",
+              "period": 3
+            },
+            "placement": "special_class",
+            "location": "K1"
+          }
+        ],
+        "scope": "this_week",
+        "confidence": "high",
+        "unsupported": null
+      }
+    },
+    {
+      "id": "CR05",
+      "raw_text": "학생6 과학은 오늘 K2에서 해요",
+      "today": "2026-09-18",
+      "tags": [
+        "placement",
+        "subject-to-period"
+      ],
+      "expected": {
+        "ops": [
+          {
+            "op": "set_placement",
+            "student": "S06",
+            "when": {
+              "date": "2026-09-18",
+              "period": 4
+            },
+            "placement": "special_class",
+            "location": "K2"
+          }
+        ],
+        "scope": "this_week",
+        "confidence": "high",
+        "unsupported": null
+      }
+    },
+    {
+      "id": "CR06",
+      "raw_text": "학생2 오후 수업은 K1에서",
+      "today": "2026-09-18",
+      "tags": [
+        "placement",
+        "part-of-day"
+      ],
+      "expected": {
+        "ops": [
+          {
+            "op": "set_placement",
+            "student": "S02",
+            "when": [
+              {
+                "date": "2026-09-18",
+                "period": 5
+              },
+              {
+                "date": "2026-09-18",
+                "period": 6
+              }
+            ],
+            "placement": "special_class",
+            "location": "K1"
+          }
+        ],
+        "scope": "this_week",
+        "confidence": "high",
+        "unsupported": null
+      }
+    },
+    {
+      "id": "CR07",
+      "raw_text": "다음 주 월요일 지원인력2 오전 부재",
+      "today": "2026-09-18",
+      "tags": [
+        "staff",
+        "relative-date",
+        "part-of-day"
+      ],
+      "expected": {
+        "ops": [
+          {
+            "op": "staff_unavailable",
+            "staff": "A02",
+            "when": [
+              {
+                "date": "2026-09-21",
+                "start": "08:40",
+                "end": "12:10"
+              }
+            ]
+          }
+        ],
+        "scope": "this_week",
+        "confidence": "high",
+        "unsupported": null
+      }
+    },
+    {
+      "id": "CR08",
+      "raw_text": "3-2반 오늘 4교시 미술은 미술실에서 해요",
+      "today": "2026-09-18",
+      "tags": [
+        "relocate"
+      ],
+      "expected": {
+        "ops": [
+          {
+            "op": "relocate_class",
+            "class_group": "3-2",
+            "when": {
+              "date": "2026-09-18",
+              "period": 4
+            },
+            "location": "L09"
+          }
+        ],
+        "scope": "this_week",
+        "confidence": "high",
+        "unsupported": null
+      }
+    },
+    {
+      "id": "CR09",
+      "raw_text": "학생5 2교시 끝나고 쉬는 시간에 화장실 지원 필요",
+      "today": "2026-09-18",
+      "tags": [
+        "break"
+      ],
+      "expected": {
+        "ops": [
+          {
+            "op": "set_support",
+            "student": "S05",
+            "when": {
+              "date": "2026-09-18",
+              "kind": "break",
+              "after_period": 2
+            },
+            "headcount": 1
+          }
+        ],
+        "scope": "this_week",
+        "confidence": "high",
+        "unsupported": null
+      }
+    },
+    {
+      "id": "CR10",
+      "raw_text": "점심시간에 학생7 한 명 붙여줘",
+      "today": "2026-09-18",
+      "tags": [
+        "lunch"
+      ],
+      "expected": {
+        "ops": [
+          {
+            "op": "set_support",
+            "student": "S07",
+            "when": {
+              "date": "2026-09-18",
+              "kind": "lunch"
+            },
+            "headcount": 1
+          }
+        ],
+        "scope": "this_week",
+        "confidence": "high",
+        "unsupported": null
+      }
+    },
+    {
+      "id": "CR11",
+      "raw_text": "오늘 2교시 학생4는 지원인력1이 맡아줘",
+      "today": "2026-09-18",
+      "tags": [
+        "pin"
+      ],
+      "expected": {
+        "ops": [
+          {
+            "op": "pin_assignment",
+            "staff": "A01",
+            "target": {
+              "student": "S04"
+            },
+            "when": {
+              "date": "2026-09-18",
+              "period": 2
+            }
+          }
+        ],
+        "scope": "this_week",
+        "confidence": "high",
+        "unsupported": null
+      }
+    },
+    {
+      "id": "CR12",
+      "raw_text": "다음 주 월요일 학생3, 학생6 결석",
+      "today": "2026-09-18",
+      "tags": [
+        "absent",
+        "multi-op",
+        "relative-date"
+      ],
+      "expected": {
+        "ops": [
+          {
+            "op": "mark_absent",
+            "student": "S03",
+            "when": {
+              "date": "2026-09-21"
+            }
+          },
+          {
+            "op": "mark_absent",
+            "student": "S06",
+            "when": {
+              "date": "2026-09-21"
+            }
+          }
+        ],
+        "scope": "this_week",
+        "confidence": "high",
+        "unsupported": null
+      }
+    },
+    {
+      "id": "CR13",
+      "raw_text": "앞으로 매주 월요일 1교시 학생5는 K1에서 수업",
+      "today": "2026-09-18",
+      "tags": [
+        "placement",
+        "permanent"
+      ],
+      "expected": {
+        "ops": [
+          {
+            "op": "set_placement",
+            "student": "S05",
+            "when": {
+              "day": "MON",
+              "period": 1
+            },
+            "placement": "special_class",
+            "location": "K1"
+          }
+        ],
+        "scope": "permanent",
+        "confidence": "high",
+        "unsupported": null
+      }
+    },
+    {
+      "id": "CR14",
+      "raw_text": "지원인력2 다음 주 화요일 하교 지도 못 해요",
+      "today": "2026-09-18",
+      "tags": [
+        "staff",
+        "dismissal",
+        "relative-date"
+      ],
+      "expected": {
+        "ops": [
+          {
+            "op": "staff_unavailable",
+            "staff": "A02",
+            "when": [
+              {
+                "date": "2026-09-22",
+                "kind": "dismissal"
+              }
+            ]
+          }
+        ],
+        "scope": "this_week",
+        "confidence": "high",
+        "unsupported": null
+      }
+    },
+    {
+      "id": "CR15",
+      "raw_text": "학생1 담임 선생님 바꿔줘",
+      "today": "2026-09-18",
+      "tags": [
+        "unsupported"
+      ],
+      "expected": {
+        "ops": [],
+        "scope": "this_week",
+        "confidence": "high",
+        "unsupported": "담임 배정은 ssyung에서 다루지 않아요"
+      }
+    },
+    {
+      "id": "CR16",
+      "raw_text": "학생7 지원 강도 올려줘",
+      "today": "2026-09-18",
+      "tags": [
+        "unsupported"
+      ],
+      "expected": {
+        "ops": [],
+        "scope": "this_week",
+        "confidence": "high",
+        "unsupported": "지원 과목·구간은 기초정보의 학생 설정(④)에서 바꿔요"
+      }
+    },
+    {
+      "id": "CR17",
+      "raw_text": "지원인력 한 명 더 뽑아줘",
+      "today": "2026-09-18",
+      "tags": [
+        "unsupported"
+      ],
+      "expected": {
+        "ops": [],
+        "scope": "this_week",
+        "confidence": "high",
+        "unsupported": "지원인력 추가는 기초정보의 지원인력 설정(⑧)에서 해요"
+      }
+    },
+    {
+      "id": "CR18",
+      "raw_text": "오늘 오후 지원인력3 조퇴",
+      "today": "2026-09-18",
+      "tags": [
+        "staff",
+        "part-of-day"
+      ],
+      "expected": {
+        "ops": [
+          {
+            "op": "staff_unavailable",
+            "staff": "A03",
+            "when": [
+              {
+                "date": "2026-09-18",
+                "start": "12:10",
+                "end": "16:40"
+              }
+            ]
+          }
+        ],
+        "scope": "this_week",
+        "confidence": "medium",
+        "unsupported": null
+      }
+    },
+    {
+      "id": "CR19",
+      "raw_text": "학생4 내일 결석",
+      "today": "2026-09-18",
+      "tags": [
+        "absent",
+        "non-school-day"
+      ],
+      "expected": {
+        "ops": [],
+        "scope": "this_week",
+        "confidence": "low",
+        "unsupported": "9월 19일(토)은 수업일이 아니에요. 다음 수업일(9월 21일 월)인지 확인해 주세요"
+      }
+    },
+    {
+      "id": "CR20",
+      "raw_text": "2교시 끝나고 학생2 이동은 지원인력3이 데려가",
+      "today": "2026-09-18",
+      "tags": [
+        "pin",
+        "break"
+      ],
+      "expected": {
+        "ops": [
+          {
+            "op": "pin_assignment",
+            "staff": "A03",
+            "target": {
+              "student": "S02"
+            },
+            "when": {
+              "date": "2026-09-18",
+              "kind": "break",
+              "after_period": 2
+            }
+          }
+        ],
+        "scope": "this_week",
+        "confidence": "high",
+        "unsupported": null
+      }
+    },
+    {
+      "id": "CR21",
+      "raw_text": "다음 주 화요일 학생6 영어는 K2에서",
+      "today": "2026-09-18",
+      "tags": [
+        "placement",
+        "subject-to-period",
+        "relative-date"
+      ],
+      "expected": {
+        "ops": [
+          {
+            "op": "set_placement",
+            "student": "S06",
+            "when": {
+              "date": "2026-09-22",
+              "period": 4
+            },
+            "placement": "special_class",
+            "location": "K2"
+          }
+        ],
+        "scope": "this_week",
+        "confidence": "high",
+        "unsupported": null
+      }
+    },
+    {
+      "id": "CR22",
+      "raw_text": "학생3 오늘 결석이고 지원인력2는 3교시에 없어요",
+      "today": "2026-09-18",
+      "tags": [
+        "absent",
+        "staff",
+        "multi-op"
+      ],
+      "expected": {
+        "ops": [
+          {
+            "op": "mark_absent",
+            "student": "S03",
+            "when": {
+              "date": "2026-09-18"
+            }
+          },
+          {
+            "op": "staff_unavailable",
+            "staff": "A02",
+            "when": {
+              "date": "2026-09-18",
+              "period": 3
+            }
+          }
+        ],
+        "scope": "this_week",
+        "confidence": "high",
+        "unsupported": null
+      }
+    }
+  ]
+}

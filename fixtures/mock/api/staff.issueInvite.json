@@ -1,0 +1,15 @@
+{
+  "procedure": "staff.issueInvite",
+  "examples": [
+    {
+      "title": "초대 코드 발급",
+      "input": {
+        "staff": "A02"
+      },
+      "output": {
+        "code": "482915",
+        "expires_at": "2026-09-18T23:50:00+09:00"
+      }
+    }
+  ]
+}

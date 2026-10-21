@@ -1,0 +1,44 @@
+{
+  "procedure": "proposal.approve",
+  "examples": [
+    {
+      "title": "선택지 A 승인",
+      "input": {
+        "proposal_id": "prp_staff-away",
+        "option_key": "A"
+      },
+      "output": {
+        "version": {
+          "id": "ver_0918b",
+          "parent_id": "ver_0901",
+          "status": "active",
+          "date_from": "2026-09-01",
+          "date_to": "2026-09-30",
+          "cause": "change_request",
+          "created_by": {
+            "kind": "member",
+            "code": "T01"
+          },
+          "created_at": "2026-09-18T10:00:00+09:00",
+          "activated_at": "2026-09-18T10:01:00+09:00"
+        },
+        "notified": [
+          "A01",
+          "A02",
+          "A03"
+        ]
+      }
+    },
+    {
+      "title": "그 사이 다른 변경이 승인됨",
+      "input": {
+        "proposal_id": "prp_absent",
+        "option_key": "A"
+      },
+      "error": {
+        "code": "BASE_VERSION_CHANGED",
+        "message": "다른 변경이 먼저 승인됐어요. 다시 계산할게요."
+      }
+    }
+  ]
+}

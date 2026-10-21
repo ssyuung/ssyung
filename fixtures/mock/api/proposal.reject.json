@@ -1,0 +1,14 @@
+{
+  "procedure": "proposal.reject",
+  "examples": [
+    {
+      "title": "거절",
+      "input": {
+        "proposal_id": "prp_absent"
+      },
+      "output": {
+        "ok": true
+      }
+    }
+  ]
+}

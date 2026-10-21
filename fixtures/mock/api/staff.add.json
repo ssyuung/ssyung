@@ -1,0 +1,49 @@
+{
+  "procedure": "staff.add",
+  "examples": [
+    {
+      "title": "지원인력 추가 (월·수·금 오전)",
+      "input": {
+        "label": "지원인력4",
+        "availability": [
+          {
+            "day": "MON",
+            "start": 540,
+            "end": 780
+          },
+          {
+            "day": "WED",
+            "start": 540,
+            "end": 780
+          },
+          {
+            "day": "FRI",
+            "start": 540,
+            "end": 780
+          }
+        ]
+      },
+      "output": {
+        "code": "A04",
+        "label": "지원인력4",
+        "availability": [
+          {
+            "day": "MON",
+            "start": 540,
+            "end": 780
+          },
+          {
+            "day": "WED",
+            "start": 540,
+            "end": 780
+          },
+          {
+            "day": "FRI",
+            "start": 540,
+            "end": 780
+          }
+        ]
+      }
+    }
+  ]
+}

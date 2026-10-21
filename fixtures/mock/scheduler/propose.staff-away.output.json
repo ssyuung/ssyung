@@ -1,0 +1,1118 @@
+{
+  "options": [
+    {
+      "key": "A",
+      "policies": [
+        "keep_minimal"
+      ],
+      "label": "변경 최소",
+      "assignments": [
+        {
+          "staff": "A01",
+          "demand_id": "les:2026-09-18:S05:p1",
+          "date": "2026-09-18",
+          "start": 540,
+          "end": 580,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A02",
+          "demand_id": "les:2026-09-18:S07:p1",
+          "date": "2026-09-18",
+          "start": 540,
+          "end": 580,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A01",
+          "demand_id": "mv:2026-09-18:b1:1-3",
+          "date": "2026-09-18",
+          "start": 580,
+          "end": 590,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A02",
+          "demand_id": "mv:2026-09-18:b1:1-4",
+          "date": "2026-09-18",
+          "start": 580,
+          "end": 590,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A01",
+          "demand_id": "les:2026-09-18:S04:p2",
+          "date": "2026-09-18",
+          "start": 590,
+          "end": 630,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A02",
+          "demand_id": "les:2026-09-18:S05:p2",
+          "date": "2026-09-18",
+          "start": 590,
+          "end": 630,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A03",
+          "demand_id": "les:2026-09-18:S03:p2",
+          "date": "2026-09-18",
+          "start": 590,
+          "end": 630,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A02",
+          "demand_id": "mv:2026-09-18:b2:4-1",
+          "date": "2026-09-18",
+          "start": 630,
+          "end": 640,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A03",
+          "demand_id": "mv:2026-09-18:b2:1-2",
+          "date": "2026-09-18",
+          "start": 630,
+          "end": 640,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A02",
+          "demand_id": "mv:2026-09-18:b2:1-3",
+          "date": "2026-09-18",
+          "start": 640,
+          "end": 650,
+          "mode": "second_trip",
+          "pinned": false
+        },
+        {
+          "staff": "A02",
+          "demand_id": "mv:2026-09-18:b3:4-1",
+          "date": "2026-09-18",
+          "start": 680,
+          "end": 690,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A03",
+          "demand_id": "mv:2026-09-18:b3:1-4",
+          "date": "2026-09-18",
+          "start": 680,
+          "end": 690,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A02",
+          "demand_id": "les:2026-09-18:S06:p4",
+          "date": "2026-09-18",
+          "start": 690,
+          "end": 730,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A03",
+          "demand_id": "les:2026-09-18:S03:p4",
+          "date": "2026-09-18",
+          "start": 690,
+          "end": 730,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A02",
+          "demand_id": "les:2026-09-18:S07:p5",
+          "date": "2026-09-18",
+          "start": 780,
+          "end": 820,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A03",
+          "demand_id": "les:2026-09-18:S03:p5",
+          "date": "2026-09-18",
+          "start": 780,
+          "end": 820,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A02",
+          "demand_id": "mv:2026-09-18:b5:4-1",
+          "date": "2026-09-18",
+          "start": 820,
+          "end": 830,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A03",
+          "demand_id": "les:2026-09-18:S02:p6",
+          "date": "2026-09-18",
+          "start": 830,
+          "end": 870,
+          "mode": "normal",
+          "pinned": false
+        }
+      ],
+      "shortfalls": [],
+      "metrics": {
+        "changed_cells": 4,
+        "gaps": 0,
+        "late_students": 1,
+        "notify_staff": [
+          "A01",
+          "A02",
+          "A03"
+        ],
+        "staff_minutes": {
+          "A01": 90,
+          "A02": 210,
+          "A03": 180
+        },
+        "pair_share": {
+          "A01:S05": 0.5,
+          "A02:S05": 0.5,
+          "A02:S07": 1,
+          "A01:S04": 1,
+          "A02:S03": 0.19,
+          "A03:S03": 0.81,
+          "A02:S06": 0.83,
+          "A03:S06": 0.17,
+          "A03:S01": 1,
+          "A02:S02": 0.2,
+          "A03:S02": 0.8
+        }
+      },
+      "diff": [
+        {
+          "demand_id": "mv:2026-09-18:b2:1-2",
+          "type": "moved",
+          "before": {
+            "staff": "A01",
+            "start": 630,
+            "end": 640,
+            "students": [
+              "S01"
+            ]
+          },
+          "after": {
+            "staff": "A03",
+            "start": 630,
+            "end": 640,
+            "students": [
+              "S01"
+            ]
+          }
+        },
+        {
+          "demand_id": "mv:2026-09-18:b2:1-3",
+          "type": "retimed",
+          "before": {
+            "staff": "A03",
+            "start": 630,
+            "end": 640,
+            "students": [
+              "S02"
+            ]
+          },
+          "after": {
+            "staff": "A02",
+            "start": 640,
+            "end": 650,
+            "students": [
+              "S02"
+            ]
+          }
+        },
+        {
+          "demand_id": "mv:2026-09-18:b3:1-4",
+          "type": "moved",
+          "before": {
+            "staff": "A02",
+            "start": 680,
+            "end": 690,
+            "students": [
+              "S03",
+              "S06"
+            ]
+          },
+          "after": {
+            "staff": "A03",
+            "start": 680,
+            "end": 690,
+            "students": [
+              "S03",
+              "S06"
+            ]
+          }
+        },
+        {
+          "demand_id": "mv:2026-09-18:b3:4-1",
+          "type": "moved",
+          "before": {
+            "staff": "A01",
+            "start": 680,
+            "end": 690,
+            "students": [
+              "S07"
+            ]
+          },
+          "after": {
+            "staff": "A02",
+            "start": 680,
+            "end": 690,
+            "students": [
+              "S07"
+            ]
+          }
+        }
+      ],
+      "explanation": [
+        {
+          "step": 1,
+          "cause": null,
+          "reason": {
+            "code": "REQUESTED",
+            "op_index": 0
+          },
+          "demand_ids": [
+            "mv:2026-09-18:b2:1-2",
+            "mv:2026-09-18:b2:1-3",
+            "mv:2026-09-18:b3:1-4",
+            "mv:2026-09-18:b3:4-1"
+          ]
+        },
+        {
+          "step": 2,
+          "cause": 1,
+          "reason": {
+            "code": "UNAVAILABLE"
+          },
+          "demand_ids": [
+            "mv:2026-09-18:b2:1-2",
+            "mv:2026-09-18:b3:4-1"
+          ]
+        },
+        {
+          "step": 3,
+          "cause": 2,
+          "reason": {
+            "code": "OVERLAP"
+          },
+          "demand_ids": [
+            "mv:2026-09-18:b3:1-4"
+          ]
+        },
+        {
+          "step": 4,
+          "cause": 2,
+          "reason": {
+            "code": "EDGE_RELEASED"
+          },
+          "demand_ids": [
+            "mv:2026-09-18:b2:1-3"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "B",
+      "policies": [
+        "fresh"
+      ],
+      "label": "처음부터 다시",
+      "assignments": [
+        {
+          "staff": "A01",
+          "demand_id": "les:2026-09-18:S05:p1",
+          "date": "2026-09-18",
+          "start": 540,
+          "end": 580,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A03",
+          "demand_id": "les:2026-09-18:S07:p1",
+          "date": "2026-09-18",
+          "start": 540,
+          "end": 580,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A01",
+          "demand_id": "mv:2026-09-18:b1:1-3",
+          "date": "2026-09-18",
+          "start": 580,
+          "end": 590,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A02",
+          "demand_id": "mv:2026-09-18:b1:1-4",
+          "date": "2026-09-18",
+          "start": 580,
+          "end": 590,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A01",
+          "demand_id": "les:2026-09-18:S04:p2",
+          "date": "2026-09-18",
+          "start": 590,
+          "end": 630,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A02",
+          "demand_id": "les:2026-09-18:S05:p2",
+          "date": "2026-09-18",
+          "start": 590,
+          "end": 630,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A03",
+          "demand_id": "les:2026-09-18:S03:p2",
+          "date": "2026-09-18",
+          "start": 590,
+          "end": 630,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A02",
+          "demand_id": "mv:2026-09-18:b2:4-1",
+          "date": "2026-09-18",
+          "start": 630,
+          "end": 640,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A03",
+          "demand_id": "mv:2026-09-18:b2:1-2",
+          "date": "2026-09-18",
+          "start": 630,
+          "end": 640,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A02",
+          "demand_id": "mv:2026-09-18:b2:1-3",
+          "date": "2026-09-18",
+          "start": 640,
+          "end": 650,
+          "mode": "second_trip",
+          "pinned": false
+        },
+        {
+          "staff": "A02",
+          "demand_id": "mv:2026-09-18:b3:4-1",
+          "date": "2026-09-18",
+          "start": 680,
+          "end": 690,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A03",
+          "demand_id": "mv:2026-09-18:b3:1-4",
+          "date": "2026-09-18",
+          "start": 680,
+          "end": 690,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A01",
+          "demand_id": "les:2026-09-18:S06:p4",
+          "date": "2026-09-18",
+          "start": 690,
+          "end": 730,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A03",
+          "demand_id": "les:2026-09-18:S03:p4",
+          "date": "2026-09-18",
+          "start": 690,
+          "end": 730,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A01",
+          "demand_id": "les:2026-09-18:S07:p5",
+          "date": "2026-09-18",
+          "start": 780,
+          "end": 820,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A03",
+          "demand_id": "les:2026-09-18:S03:p5",
+          "date": "2026-09-18",
+          "start": 780,
+          "end": 820,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A03",
+          "demand_id": "mv:2026-09-18:b5:4-1",
+          "date": "2026-09-18",
+          "start": 820,
+          "end": 830,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A01",
+          "demand_id": "les:2026-09-18:S02:p6",
+          "date": "2026-09-18",
+          "start": 830,
+          "end": 870,
+          "mode": "normal",
+          "pinned": false
+        }
+      ],
+      "shortfalls": [],
+      "metrics": {
+        "changed_cells": 9,
+        "gaps": 0,
+        "late_students": 1,
+        "notify_staff": [
+          "A01",
+          "A02",
+          "A03"
+        ],
+        "staff_minutes": {
+          "A01": 210,
+          "A02": 80,
+          "A03": 190
+        },
+        "pair_share": {
+          "A01:S05": 0.5,
+          "A02:S05": 0.5,
+          "A03:S07": 0.5,
+          "A02:S07": 0.1,
+          "A01:S07": 0.4,
+          "A01:S04": 1,
+          "A02:S03": 0.13,
+          "A03:S03": 0.88,
+          "A02:S06": 0.17,
+          "A03:S06": 0.17,
+          "A01:S06": 0.67,
+          "A03:S01": 1,
+          "A02:S02": 0.2,
+          "A01:S02": 0.8
+        }
+      },
+      "diff": [
+        {
+          "demand_id": "les:2026-09-18:S07:p1",
+          "type": "moved",
+          "before": {
+            "staff": "A02",
+            "start": 540,
+            "end": 580,
+            "students": [
+              "S07"
+            ]
+          },
+          "after": {
+            "staff": "A03",
+            "start": 540,
+            "end": 580,
+            "students": [
+              "S07"
+            ]
+          }
+        },
+        {
+          "demand_id": "mv:2026-09-18:b2:1-2",
+          "type": "moved",
+          "before": {
+            "staff": "A01",
+            "start": 630,
+            "end": 640,
+            "students": [
+              "S01"
+            ]
+          },
+          "after": {
+            "staff": "A03",
+            "start": 630,
+            "end": 640,
+            "students": [
+              "S01"
+            ]
+          }
+        },
+        {
+          "demand_id": "mv:2026-09-18:b2:1-3",
+          "type": "retimed",
+          "before": {
+            "staff": "A03",
+            "start": 630,
+            "end": 640,
+            "students": [
+              "S02"
+            ]
+          },
+          "after": {
+            "staff": "A02",
+            "start": 640,
+            "end": 650,
+            "students": [
+              "S02"
+            ]
+          }
+        },
+        {
+          "demand_id": "mv:2026-09-18:b3:1-4",
+          "type": "moved",
+          "before": {
+            "staff": "A02",
+            "start": 680,
+            "end": 690,
+            "students": [
+              "S03",
+              "S06"
+            ]
+          },
+          "after": {
+            "staff": "A03",
+            "start": 680,
+            "end": 690,
+            "students": [
+              "S03",
+              "S06"
+            ]
+          }
+        },
+        {
+          "demand_id": "mv:2026-09-18:b3:4-1",
+          "type": "moved",
+          "before": {
+            "staff": "A01",
+            "start": 680,
+            "end": 690,
+            "students": [
+              "S07"
+            ]
+          },
+          "after": {
+            "staff": "A02",
+            "start": 680,
+            "end": 690,
+            "students": [
+              "S07"
+            ]
+          }
+        },
+        {
+          "demand_id": "les:2026-09-18:S06:p4",
+          "type": "moved",
+          "before": {
+            "staff": "A02",
+            "start": 690,
+            "end": 730,
+            "students": [
+              "S06"
+            ]
+          },
+          "after": {
+            "staff": "A01",
+            "start": 690,
+            "end": 730,
+            "students": [
+              "S06"
+            ]
+          }
+        },
+        {
+          "demand_id": "les:2026-09-18:S07:p5",
+          "type": "moved",
+          "before": {
+            "staff": "A02",
+            "start": 780,
+            "end": 820,
+            "students": [
+              "S07"
+            ]
+          },
+          "after": {
+            "staff": "A01",
+            "start": 780,
+            "end": 820,
+            "students": [
+              "S07"
+            ]
+          }
+        },
+        {
+          "demand_id": "mv:2026-09-18:b5:4-1",
+          "type": "moved",
+          "before": {
+            "staff": "A02",
+            "start": 820,
+            "end": 830,
+            "students": [
+              "S03",
+              "S07"
+            ]
+          },
+          "after": {
+            "staff": "A03",
+            "start": 820,
+            "end": 830,
+            "students": [
+              "S03",
+              "S07"
+            ]
+          }
+        },
+        {
+          "demand_id": "les:2026-09-18:S02:p6",
+          "type": "moved",
+          "before": {
+            "staff": "A03",
+            "start": 830,
+            "end": 870,
+            "students": [
+              "S02"
+            ]
+          },
+          "after": {
+            "staff": "A01",
+            "start": 830,
+            "end": 870,
+            "students": [
+              "S02"
+            ]
+          }
+        }
+      ],
+      "explanation": [
+        {
+          "step": 1,
+          "cause": null,
+          "reason": {
+            "code": "REQUESTED",
+            "op_index": 0
+          },
+          "demand_ids": [
+            "les:2026-09-18:S07:p1",
+            "mv:2026-09-18:b2:1-2",
+            "mv:2026-09-18:b2:1-3",
+            "mv:2026-09-18:b3:1-4",
+            "mv:2026-09-18:b3:4-1",
+            "les:2026-09-18:S06:p4",
+            "les:2026-09-18:S07:p5",
+            "mv:2026-09-18:b5:4-1",
+            "les:2026-09-18:S02:p6"
+          ]
+        },
+        {
+          "step": 2,
+          "cause": 1,
+          "reason": {
+            "code": "UNAVAILABLE"
+          },
+          "demand_ids": [
+            "mv:2026-09-18:b2:1-2",
+            "mv:2026-09-18:b3:4-1"
+          ]
+        },
+        {
+          "step": 3,
+          "cause": 2,
+          "reason": {
+            "code": "OVERLAP"
+          },
+          "demand_ids": [
+            "les:2026-09-18:S02:p6",
+            "les:2026-09-18:S06:p4",
+            "les:2026-09-18:S07:p1",
+            "les:2026-09-18:S07:p5",
+            "mv:2026-09-18:b3:1-4",
+            "mv:2026-09-18:b5:4-1"
+          ]
+        },
+        {
+          "step": 4,
+          "cause": 2,
+          "reason": {
+            "code": "EDGE_RELEASED"
+          },
+          "demand_ids": [
+            "mv:2026-09-18:b2:1-3"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "C",
+      "policies": [
+        "no_late"
+      ],
+      "label": "늦게 도착 없음",
+      "assignments": [
+        {
+          "staff": "A01",
+          "demand_id": "les:2026-09-18:S05:p1",
+          "date": "2026-09-18",
+          "start": 540,
+          "end": 580,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A02",
+          "demand_id": "les:2026-09-18:S07:p1",
+          "date": "2026-09-18",
+          "start": 540,
+          "end": 580,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A01",
+          "demand_id": "mv:2026-09-18:b1:1-3",
+          "date": "2026-09-18",
+          "start": 580,
+          "end": 590,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A02",
+          "demand_id": "mv:2026-09-18:b1:1-4",
+          "date": "2026-09-18",
+          "start": 580,
+          "end": 590,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A01",
+          "demand_id": "les:2026-09-18:S04:p2",
+          "date": "2026-09-18",
+          "start": 590,
+          "end": 630,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A02",
+          "demand_id": "les:2026-09-18:S05:p2",
+          "date": "2026-09-18",
+          "start": 590,
+          "end": 630,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A03",
+          "demand_id": "les:2026-09-18:S03:p2",
+          "date": "2026-09-18",
+          "start": 590,
+          "end": 630,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A02",
+          "demand_id": "mv:2026-09-18:b2:4-1",
+          "date": "2026-09-18",
+          "start": 630,
+          "end": 640,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A03",
+          "demand_id": "mv:2026-09-18:b2:1-2",
+          "date": "2026-09-18",
+          "start": 630,
+          "end": 640,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A02",
+          "demand_id": "mv:2026-09-18:b3:4-1",
+          "date": "2026-09-18",
+          "start": 680,
+          "end": 690,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A03",
+          "demand_id": "mv:2026-09-18:b3:1-4",
+          "date": "2026-09-18",
+          "start": 680,
+          "end": 690,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A02",
+          "demand_id": "les:2026-09-18:S06:p4",
+          "date": "2026-09-18",
+          "start": 690,
+          "end": 730,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A03",
+          "demand_id": "les:2026-09-18:S03:p4",
+          "date": "2026-09-18",
+          "start": 690,
+          "end": 730,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A02",
+          "demand_id": "les:2026-09-18:S07:p5",
+          "date": "2026-09-18",
+          "start": 780,
+          "end": 820,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A03",
+          "demand_id": "les:2026-09-18:S03:p5",
+          "date": "2026-09-18",
+          "start": 780,
+          "end": 820,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A02",
+          "demand_id": "mv:2026-09-18:b5:4-1",
+          "date": "2026-09-18",
+          "start": 820,
+          "end": 830,
+          "mode": "normal",
+          "pinned": false
+        },
+        {
+          "staff": "A03",
+          "demand_id": "les:2026-09-18:S02:p6",
+          "date": "2026-09-18",
+          "start": 830,
+          "end": 870,
+          "mode": "normal",
+          "pinned": false
+        }
+      ],
+      "shortfalls": [
+        {
+          "demand_id": "mv:2026-09-18:b2:1-3",
+          "date": "2026-09-18",
+          "start": 630,
+          "end": 640,
+          "short_by": 1,
+          "priority": "MOVE",
+          "segment": null,
+          "waived": false
+        }
+      ],
+      "metrics": {
+        "changed_cells": 4,
+        "gaps": 1,
+        "late_students": 0,
+        "notify_staff": [
+          "A01",
+          "A02",
+          "A03"
+        ],
+        "staff_minutes": {
+          "A01": 90,
+          "A02": 200,
+          "A03": 180
+        },
+        "pair_share": {
+          "A01:S05": 0.5,
+          "A02:S05": 0.5,
+          "A02:S07": 1,
+          "A01:S04": 1,
+          "A02:S03": 0.19,
+          "A03:S03": 0.81,
+          "A02:S06": 0.83,
+          "A03:S06": 0.17,
+          "A03:S01": 1,
+          "A03:S02": 1
+        }
+      },
+      "diff": [
+        {
+          "demand_id": "mv:2026-09-18:b2:1-2",
+          "type": "moved",
+          "before": {
+            "staff": "A01",
+            "start": 630,
+            "end": 640,
+            "students": [
+              "S01"
+            ]
+          },
+          "after": {
+            "staff": "A03",
+            "start": 630,
+            "end": 640,
+            "students": [
+              "S01"
+            ]
+          }
+        },
+        {
+          "demand_id": "mv:2026-09-18:b2:1-3",
+          "type": "gap",
+          "before": {
+            "staff": "A03",
+            "start": 630,
+            "end": 640,
+            "students": [
+              "S02"
+            ]
+          },
+          "after": {
+            "staff": null,
+            "start": 630,
+            "end": 640,
+            "students": [
+              "S02"
+            ]
+          }
+        },
+        {
+          "demand_id": "mv:2026-09-18:b3:1-4",
+          "type": "moved",
+          "before": {
+            "staff": "A02",
+            "start": 680,
+            "end": 690,
+            "students": [
+              "S03",
+              "S06"
+            ]
+          },
+          "after": {
+            "staff": "A03",
+            "start": 680,
+            "end": 690,
+            "students": [
+              "S03",
+              "S06"
+            ]
+          }
+        },
+        {
+          "demand_id": "mv:2026-09-18:b3:4-1",
+          "type": "moved",
+          "before": {
+            "staff": "A01",
+            "start": 680,
+            "end": 690,
+            "students": [
+              "S07"
+            ]
+          },
+          "after": {
+            "staff": "A02",
+            "start": 680,
+            "end": 690,
+            "students": [
+              "S07"
+            ]
+          }
+        }
+      ],
+      "explanation": [
+        {
+          "step": 1,
+          "cause": null,
+          "reason": {
+            "code": "REQUESTED",
+            "op_index": 0
+          },
+          "demand_ids": [
+            "mv:2026-09-18:b2:1-2",
+            "mv:2026-09-18:b2:1-3",
+            "mv:2026-09-18:b3:1-4",
+            "mv:2026-09-18:b3:4-1"
+          ]
+        },
+        {
+          "step": 2,
+          "cause": 1,
+          "reason": {
+            "code": "UNAVAILABLE"
+          },
+          "demand_ids": [
+            "mv:2026-09-18:b2:1-2",
+            "mv:2026-09-18:b3:4-1"
+          ]
+        },
+        {
+          "step": 3,
+          "cause": 2,
+          "reason": {
+            "code": "OVERLAP"
+          },
+          "demand_ids": [
+            "mv:2026-09-18:b3:1-4"
+          ]
+        },
+        {
+          "step": 4,
+          "cause": 1,
+          "reason": {
+            "code": "GAP"
+          },
+          "demand_ids": [
+            "mv:2026-09-18:b2:1-3"
+          ]
+        }
+      ]
+    }
+  ],
+  "engine": {
+    "name": "heuristic",
+    "version": "prototype-v12.29",
+    "elapsed_ms": 12
+  }
+}

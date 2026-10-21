@@ -1,0 +1,637 @@
+{
+  "_note": "배치 엔진(packages/scheduler) 연쇄 시나리오. 기본 데이터는 dataset/(서울개포초 9월 시간표, 학생 S01–S07, 지원인력 A01–A03). baseline_heuristic은 임시 규칙 엔진의 현재 결과(2026-10-20 화면 시안 기준)이며 정책 A=변경 최소, B=처음부터 다시, C=늦게 도착 없음. 엔진을 고칠 때 각 정책의 gaps·late가 기준선보다 나빠지면 실패로 본다. changed는 바뀌는 칸 수, kinds는 removed(없어짐)·added(생김)·moved(담당 바뀜)·group(묶음 구성 바뀜)·retimed(두 번째 이동·시작 10분 비움)·gap(맡을 사람 없음).",
+  "base": {
+    "school": "서울개포초등학교",
+    "data": "dataset/",
+    "students": [
+      "S01",
+      "S02",
+      "S03",
+      "S04",
+      "S05",
+      "S06",
+      "S07"
+    ],
+    "staff": [
+      "A01",
+      "A02",
+      "A03"
+    ]
+  },
+  "policies": {
+    "A": "변경 최소 (keep-previous, noLast)",
+    "B": "처음부터 다시 (fresh)",
+    "C": "늦게 도착 없음 (noLate)"
+  },
+  "scenarios": [
+    {
+      "id": "S1",
+      "title": "학생 결석",
+      "date": "2026-09-18",
+      "trigger": {
+        "type": "change_ops",
+        "ops": [
+          {
+            "op": "mark_absent",
+            "student": "S03",
+            "when": {
+              "date": "2026-09-18"
+            }
+          }
+        ],
+        "scope": "this_week"
+      },
+      "chain": "학생3 수업 지원 해제 → 이동 묶음 3개에서 학생3이 빠짐(학생6·학생7 혼자 이동) → 학생3의 09:40 이동 없어짐",
+      "checks": "묶음 축소, 없어진 수요가 다른 칸을 흔들지 않음",
+      "expect": {
+        "change_kinds_include": [
+          "removed",
+          "group"
+        ],
+        "reason_codes_include": [
+          "REQUESTED",
+          "MOVE_SUPPORT_NEEDED"
+        ],
+        "max": {
+          "gaps": 0,
+          "late": 0
+        }
+      },
+      "baseline_heuristic": {
+        "A": {
+          "changed": 7,
+          "gaps": 0,
+          "late": 0,
+          "kinds": {
+            "removed": 4,
+            "group": 3
+          }
+        },
+        "B": {
+          "changed": 8,
+          "gaps": 0,
+          "late": 0,
+          "kinds": {
+            "removed": 4,
+            "moved": 3,
+            "group": 1
+          }
+        },
+        "C": {
+          "changed": 7,
+          "gaps": 0,
+          "late": 0,
+          "kinds": {
+            "removed": 4,
+            "group": 3
+          }
+        }
+      }
+    },
+    {
+      "id": "S2",
+      "title": "지원인력 일부 시간 부재",
+      "date": "2026-09-18",
+      "trigger": {
+        "type": "change_ops",
+        "ops": [
+          {
+            "op": "staff_unavailable",
+            "staff": "A01",
+            "when": [
+              {
+                "date": "2026-09-18",
+                "start": "10:30",
+                "end": "11:30"
+              }
+            ]
+          }
+        ],
+        "scope": "this_week"
+      },
+      "chain": "지원인력1의 이동 2개가 지원인력2로 → 지원인력2의 10:30 이동이 겹쳐 지원인력3으로 → 지원인력3의 10:30 묶음 이동이 밀려 두 번째 이동(늦게 도착) 또는 지원 공백",
+      "checks": "3단계 이상 밀림, 선택지별로 늦게 도착과 공백이 맞바뀜",
+      "expect": {
+        "change_kinds_include": [
+          "moved"
+        ],
+        "reason_codes_include": [
+          "REQUESTED",
+          "UNAVAILABLE",
+          "OVERLAP"
+        ],
+        "policy_tradeoff": "C는 late 0, gaps ≥ 1 / A는 gaps 0, late ≥ 1"
+      },
+      "baseline_heuristic": {
+        "A": {
+          "changed": 4,
+          "gaps": 0,
+          "late": 1,
+          "kinds": {
+            "moved": 3,
+            "retimed": 1
+          }
+        },
+        "B": {
+          "changed": 9,
+          "gaps": 0,
+          "late": 1,
+          "kinds": {
+            "moved": 8,
+            "retimed": 1
+          }
+        },
+        "C": {
+          "changed": 4,
+          "gaps": 1,
+          "late": 0,
+          "kinds": {
+            "moved": 3,
+            "gap": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "title": "지원인력 하루 병가",
+      "date": "2026-09-18",
+      "trigger": {
+        "type": "change_ops",
+        "ops": [
+          {
+            "op": "staff_unavailable",
+            "staff": "A03",
+            "when": [
+              {
+                "date": "2026-09-18"
+              }
+            ]
+          }
+        ],
+        "scope": "this_week"
+      },
+      "chain": "남은 2명에게 하루 전체 재배정 → 쉬는 시간마다 이동이 사람보다 많아짐 → 두 번째 이동 → 맡은 사람의 다음 수업 시작 10분 비움 → 남는 수업은 지원 공백",
+      "checks": "하루 전체 재계산, 두 번째 이동 우선순위(늦게 도착 비용), 선택지 차이",
+      "expect": {
+        "change_kinds_include": [
+          "moved",
+          "gap"
+        ],
+        "reason_codes_include": [
+          "UNAVAILABLE",
+          "EDGE_RELEASED",
+          "GAP"
+        ]
+      },
+      "baseline_heuristic": {
+        "A": {
+          "changed": 7,
+          "gaps": 1,
+          "late": 1,
+          "kinds": {
+            "moved": 5,
+            "gap": 1,
+            "retimed": 1
+          }
+        },
+        "B": {
+          "changed": 7,
+          "gaps": 1,
+          "late": 1,
+          "kinds": {
+            "moved": 5,
+            "gap": 1,
+            "retimed": 1
+          }
+        },
+        "C": {
+          "changed": 7,
+          "gaps": 2,
+          "late": 0,
+          "kinds": {
+            "moved": 5,
+            "gap": 2
+          }
+        }
+      }
+    },
+    {
+      "id": "S4",
+      "title": "배치 변경으로 이동이 옮겨 감",
+      "date": "2026-09-18",
+      "trigger": {
+        "type": "change_ops",
+        "ops": [
+          {
+            "op": "set_placement",
+            "student": "S01",
+            "when": {
+              "date": "2026-09-18",
+              "period": 3
+            },
+            "placement": "special_class",
+            "location": "K1"
+          }
+        ],
+        "scope": "this_week"
+      },
+      "chain": "10:30 이동(K1→3-2) 없어짐 → 11:20 이동(K1→3-2) 생김 → 11:20에 그 지원인력이 맡던 학생7 이동이 겹쳐 다른 사람으로",
+      "checks": "없어짐·생김·바뀜이 한 번에",
+      "expect": {
+        "change_kinds_include": [
+          "removed",
+          "added",
+          "moved"
+        ],
+        "reason_codes_include": [
+          "MOVE_SUPPORT_NEEDED",
+          "OVERLAP"
+        ],
+        "max": {
+          "gaps": 0
+        }
+      },
+      "baseline_heuristic": {
+        "A": {
+          "changed": 3,
+          "gaps": 0,
+          "late": 0,
+          "kinds": {
+            "removed": 1,
+            "moved": 1,
+            "added": 1
+          }
+        },
+        "B": {
+          "changed": 9,
+          "gaps": 0,
+          "late": 0,
+          "kinds": {
+            "moved": 7,
+            "removed": 1,
+            "added": 1
+          }
+        },
+        "C": {
+          "changed": 3,
+          "gaps": 0,
+          "late": 0,
+          "kinds": {
+            "removed": 1,
+            "moved": 1,
+            "added": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "S5",
+      "title": "같은 층 학생이 묶음에 합류",
+      "date": "2026-09-18",
+      "trigger": {
+        "type": "change_ops",
+        "ops": [
+          {
+            "op": "set_placement",
+            "student": "S04",
+            "when": {
+              "date": "2026-09-18",
+              "period": 2
+            },
+            "placement": "special_class",
+            "location": "K1"
+          }
+        ],
+        "scope": "this_week"
+      },
+      "chain": "학생4 2교시 과학 지원 해제 → 09:40 이동(K1→4-4) 없어짐 → 10:30 학생4가 학생2의 묶음(1F→3F)에 합류 → 학생4를 맡던 사람이 비게 됨",
+      "checks": "묶음 확대가 수요를 줄임(사람이 남음)",
+      "expect": {
+        "change_kinds_include": [
+          "removed",
+          "group"
+        ],
+        "reason_codes_include": [
+          "MOVE_SUPPORT_NEEDED",
+          "GROUP_MOVE"
+        ],
+        "max": {
+          "gaps": 0
+        }
+      },
+      "baseline_heuristic": {
+        "A": {
+          "changed": 3,
+          "gaps": 0,
+          "late": 0,
+          "kinds": {
+            "removed": 2,
+            "group": 1
+          }
+        },
+        "B": {
+          "changed": 12,
+          "gaps": 0,
+          "late": 0,
+          "kinds": {
+            "removed": 2,
+            "moved": 9,
+            "group": 1
+          }
+        },
+        "C": {
+          "changed": 3,
+          "gaps": 0,
+          "late": 0,
+          "kinds": {
+            "removed": 2,
+            "group": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "S6",
+      "title": "묶음이 쪼개짐",
+      "date": "2026-09-18",
+      "trigger": {
+        "type": "setup_change",
+        "patch": {
+          "student_placement": {
+            "student": "S06",
+            "subject": "국어",
+            "location": "L05"
+          }
+        }
+      },
+      "chain": "학생6 국어 수업 장소가 도서실(2층)로 → 학생3과 같던 묶음(4F→1F)이 4F→1F, 4F→2F 둘로 나뉨 → 이동 수요가 늘어 사람이 모자람 → 두 번째 이동 또는 공백",
+      "checks": "과목별 수업 장소(D20) 변경, 묶음 분리 → 수요 증가",
+      "expect": {
+        "change_kinds_include": [
+          "group",
+          "added"
+        ],
+        "reason_codes_include": [
+          "MOVE_SUPPORT_NEEDED"
+        ]
+      },
+      "baseline_heuristic": {
+        "A": {
+          "changed": 6,
+          "gaps": 0,
+          "late": 1,
+          "kinds": {
+            "moved": 1,
+            "retimed": 1,
+            "group": 2,
+            "added": 2
+          }
+        },
+        "B": {
+          "changed": 8,
+          "gaps": 0,
+          "late": 1,
+          "kinds": {
+            "moved": 3,
+            "retimed": 1,
+            "group": 2,
+            "added": 2
+          }
+        },
+        "C": {
+          "changed": 6,
+          "gaps": 1,
+          "late": 0,
+          "kinds": {
+            "moved": 1,
+            "gap": 1,
+            "group": 2,
+            "added": 2
+          }
+        }
+      }
+    },
+    {
+      "id": "S7",
+      "title": "이동이 몰리는 쉬는 시간 (변경 없음)",
+      "date": "2026-09-15",
+      "trigger": {
+        "type": "none"
+      },
+      "chain": "쉬는 시간마다 이동 묶음 4개, 지원인력 3명 → 늦어도 되는 묶음이 두 번째 이동 → 맡은 사람의 다음 수업 시작 10분 비움 → 체크된 구간이면 마지막 수단(공백)",
+      "checks": "늦게 도착 비용 순서, 시작 구간 체크 반영, 기준선 자체가 회귀 테스트",
+      "expect": {
+        "reason_codes_include": [
+          "EDGE_RELEASED"
+        ],
+        "note": "변경 없이 그날 배정 자체를 검증. 정책별 지표가 기준선보다 나빠지면 실패"
+      },
+      "baseline_heuristic": {
+        "A": {
+          "changed": 4,
+          "gaps": 3,
+          "late": 1,
+          "kinds": {
+            "retimed": 2,
+            "gap": 2
+          }
+        },
+        "B": {
+          "changed": 0,
+          "gaps": 3,
+          "late": 3,
+          "kinds": {}
+        },
+        "C": {
+          "changed": 5,
+          "gaps": 4,
+          "late": 0,
+          "kinds": {
+            "retimed": 2,
+            "gap": 3
+          }
+        }
+      }
+    },
+    {
+      "id": "S8",
+      "title": "학생 지원 구간 변경",
+      "date": "2026-09-15",
+      "trigger": {
+        "type": "setup_change",
+        "patch": {
+          "student_subject_support": {
+            "student": "S02",
+            "subject": "과학",
+            "need_start": false
+          }
+        }
+      },
+      "chain": "학생2 과학 시작 10분을 '체크 안 함'으로 → 두 번째 이동을 맡은 사람이 그 10분을 공백 없이 비울 수 있게 됨 → 지원 공백 줄어듦",
+      "checks": "학생 설정(④) 변경만으로 생기는 연쇄. 반대로 체크하면 공백이 늘어야 함",
+      "expect": {
+        "change_kinds_include": [
+          "retimed"
+        ],
+        "reason_codes_include": [
+          "EDGE_RELEASED"
+        ],
+        "compare": "S7보다 정책 A의 gaps가 작거나 같음"
+      },
+      "baseline_heuristic": {
+        "A": {
+          "changed": 4,
+          "gaps": 2,
+          "late": 2,
+          "kinds": {
+            "retimed": 3,
+            "gap": 1
+          }
+        },
+        "B": {
+          "changed": 8,
+          "gaps": 2,
+          "late": 3,
+          "kinds": {
+            "retimed": 2,
+            "moved": 6
+          }
+        },
+        "C": {
+          "changed": 6,
+          "gaps": 4,
+          "late": 0,
+          "kinds": {
+            "retimed": 3,
+            "gap": 3
+          }
+        }
+      }
+    },
+    {
+      "id": "S9",
+      "title": "원반 수업 장소 변경",
+      "date": "2026-09-18",
+      "trigger": {
+        "type": "change_ops",
+        "ops": [
+          {
+            "op": "relocate_class",
+            "class_group": "3-2",
+            "when": {
+              "date": "2026-09-18",
+              "period": 3
+            },
+            "location": "L10"
+          }
+        ],
+        "scope": "this_week"
+      },
+      "chain": "3-2반 3교시가 체육관(건물 밖) → 학생1의 10:30 이동 도착지가 바뀜(K1→체육관) → 11:20 체육관→3-2 이동 생김 → 같은 쉬는 시간의 다른 이동과 겹쳐 재배정",
+      "checks": "반 단위 변경이 학생 이동으로 번짐, 건물 밖(층 '밖') 묶음",
+      "expect": {
+        "change_kinds_include": [
+          "removed",
+          "added"
+        ],
+        "reason_codes_include": [
+          "MOVE_SUPPORT_NEEDED"
+        ]
+      },
+      "baseline_heuristic": {
+        "A": {
+          "changed": 4,
+          "gaps": 0,
+          "late": 0,
+          "kinds": {
+            "removed": 1,
+            "moved": 1,
+            "added": 2
+          }
+        },
+        "B": {
+          "changed": 8,
+          "gaps": 0,
+          "late": 0,
+          "kinds": {
+            "moved": 5,
+            "removed": 1,
+            "added": 2
+          }
+        },
+        "C": {
+          "changed": 4,
+          "gaps": 0,
+          "late": 0,
+          "kinds": {
+            "removed": 1,
+            "moved": 1,
+            "added": 2
+          }
+        }
+      }
+    },
+    {
+      "id": "S10",
+      "title": "시간표 다시 가져오기",
+      "date": "2026-09-18",
+      "trigger": {
+        "type": "timetable_import",
+        "patch": {
+          "class_group": "4-4",
+          "date": "2026-09-18",
+          "swap_periods": [
+            1,
+            2
+          ]
+        }
+      },
+      "chain": "4-4반 1·2교시 과목 순서가 바뀜 → 학생4의 특수학급 수업 시각이 바뀜 → 이동 시각이 바뀌어 묶음 구성이 바뀜 → 이전 배정을 유지할 수 없는 칸이 재배정",
+      "checks": "TIMETABLE_CHANGED로 시작하는 연쇄 (§6.7)",
+      "expect": {
+        "change_kinds_include": [
+          "removed",
+          "added"
+        ],
+        "reason_codes_include": [
+          "TIMETABLE_CHANGED",
+          "MOVE_SUPPORT_NEEDED"
+        ]
+      },
+      "baseline_heuristic": {
+        "A": {
+          "changed": 5,
+          "gaps": 0,
+          "late": 0,
+          "kinds": {
+            "removed": 2,
+            "group": 1,
+            "added": 2
+          }
+        },
+        "B": {
+          "changed": 11,
+          "gaps": 0,
+          "late": 0,
+          "kinds": {
+            "removed": 2,
+            "moved": 6,
+            "group": 1,
+            "added": 2
+          }
+        },
+        "C": {
+          "changed": 5,
+          "gaps": 0,
+          "late": 0,
+          "kinds": {
+            "removed": 2,
+            "group": 1,
+            "added": 2
+          }
+        }
+      }
+    }
+  ]
+}

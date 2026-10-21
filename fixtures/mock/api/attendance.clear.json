@@ -1,0 +1,15 @@
+{
+  "procedure": "attendance.clear",
+  "examples": [
+    {
+      "title": "등교 체크 취소",
+      "input": {
+        "date": "2026-09-18",
+        "student": "S05"
+      },
+      "output": {
+        "ok": true
+      }
+    }
+  ]
+}

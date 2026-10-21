@@ -1,0 +1,35 @@
+name: ci
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      - name: 범위 검사 (모듈 브랜치만)
+        if: github.event_name == 'pull_request'
+        run: node scripts/ci/scope-check.mjs "${{ github.head_ref }}" "origin/${{ github.base_ref }}"
+
+      - name: 타입 검사 + 테스트 (목데이터 계약 검증 포함)
+        run: pnpm test
+
+      - name: 하네스 테스트
+        run: node --test scripts/hooks/test/*.test.mjs
+
+      - name: 생성물 최신 여부 (JSON Schema, 목데이터)
+        run: |
+          pnpm gen
+          pnpm mock:build
+          git diff --exit-code -- packages/schema/generated fixtures/mock

@@ -1,0 +1,104 @@
+{
+  "procedure": "staff.list",
+  "examples": [
+    {
+      "title": "지원인력 목록",
+      "input": {},
+      "output": [
+        {
+          "code": "A01",
+          "label": "지원인력1",
+          "availability": [
+            {
+              "day": "MON",
+              "start": 520,
+              "end": 1000
+            },
+            {
+              "day": "TUE",
+              "start": 520,
+              "end": 1000
+            },
+            {
+              "day": "WED",
+              "start": 520,
+              "end": 1000
+            },
+            {
+              "day": "THU",
+              "start": 520,
+              "end": 1000
+            },
+            {
+              "day": "FRI",
+              "start": 520,
+              "end": 1000
+            }
+          ]
+        },
+        {
+          "code": "A02",
+          "label": "지원인력2",
+          "availability": [
+            {
+              "day": "MON",
+              "start": 520,
+              "end": 1000
+            },
+            {
+              "day": "TUE",
+              "start": 520,
+              "end": 1000
+            },
+            {
+              "day": "WED",
+              "start": 520,
+              "end": 1000
+            },
+            {
+              "day": "THU",
+              "start": 520,
+              "end": 1000
+            },
+            {
+              "day": "FRI",
+              "start": 520,
+              "end": 1000
+            }
+          ]
+        },
+        {
+          "code": "A03",
+          "label": "지원인력3",
+          "availability": [
+            {
+              "day": "MON",
+              "start": 520,
+              "end": 1000
+            },
+            {
+              "day": "TUE",
+              "start": 520,
+              "end": 1000
+            },
+            {
+              "day": "WED",
+              "start": 520,
+              "end": 1000
+            },
+            {
+              "day": "THU",
+              "start": 520,
+              "end": 1000
+            },
+            {
+              "day": "FRI",
+              "start": 520,
+              "end": 1000
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

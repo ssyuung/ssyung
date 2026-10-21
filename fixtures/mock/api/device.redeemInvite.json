@@ -1,0 +1,28 @@
+{
+  "procedure": "device.redeemInvite",
+  "examples": [
+    {
+      "title": "초대 코드로 연결",
+      "input": {
+        "code": "482915",
+        "push_token": "ExponentPushToken[mock]"
+      },
+      "output": {
+        "staff": "A02",
+        "label": "지원인력2",
+        "session_token": "mock-session-token"
+      }
+    },
+    {
+      "title": "만료된 코드",
+      "input": {
+        "code": "000000",
+        "push_token": null
+      },
+      "error": {
+        "code": "NOT_FOUND",
+        "message": "코드가 없거나 만료됐어요."
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "_note": "개발용 지원인력 데이터. DB 대신 사용. label은 별칭이며 실명을 쓰지 않는다. 풀타임 = 월~금 08:40–16:40으로 가정.",
+  "staff": [
+    { "code": "A01", "label": "지원인력1", "availability": [
+      { "day": "MON", "start": "08:40", "end": "16:40" }, { "day": "TUE", "start": "08:40", "end": "16:40" },
+      { "day": "WED", "start": "08:40", "end": "16:40" }, { "day": "THU", "start": "08:40", "end": "16:40" },
+      { "day": "FRI", "start": "08:40", "end": "16:40" } ] },
+    { "code": "A02", "label": "지원인력2", "availability": [
+      { "day": "MON", "start": "08:40", "end": "16:40" }, { "day": "TUE", "start": "08:40", "end": "16:40" },
+      { "day": "WED", "start": "08:40", "end": "16:40" }, { "day": "THU", "start": "08:40", "end": "16:40" },
+      { "day": "FRI", "start": "08:40", "end": "16:40" } ] },
+    { "code": "A03", "label": "지원인력3", "availability": [
+      { "day": "MON", "start": "08:40", "end": "16:40" }, { "day": "TUE", "start": "08:40", "end": "16:40" },
+      { "day": "WED", "start": "08:40", "end": "16:40" }, { "day": "THU", "start": "08:40", "end": "16:40" },
+      { "day": "FRI", "start": "08:40", "end": "16:40" } ] }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "violations": [
+    {
+      "code": "OVERLAP",
+      "staff": "A02",
+      "demand_ids": [
+        "mv:2026-09-18:b1:1-4",
+        "mv:2026-09-18:b1:1-3"
+      ],
+      "date": "2026-09-18",
+      "start": 580,
+      "end": 590
+    },
+    {
+      "code": "MOVE_GROUP_HEADCOUNT",
+      "staff": null,
+      "demand_ids": [
+        "mv:2026-09-18:b1:1-3"
+      ],
+      "date": "2026-09-18",
+      "start": 580,
+      "end": 590
+    }
+  ],
+  "shortfalls": [],
+  "warnings": []
+}

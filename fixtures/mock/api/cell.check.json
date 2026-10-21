@@ -1,0 +1,59 @@
+{
+  "procedure": "cell.check",
+  "examples": [
+    {
+      "title": "이동 묶음 [도착] (학생별 확인)",
+      "input": {
+        "cell": {
+          "date": "2026-09-18",
+          "start": 580,
+          "demand_id": "mv:2026-09-18:b1:1-4"
+        },
+        "arrived_students": [
+          "S03"
+        ]
+      },
+      "output": {
+        "cell": {
+          "date": "2026-09-18",
+          "start": 580,
+          "demand_id": "mv:2026-09-18:b1:1-4"
+        },
+        "staff": "A02",
+        "done_at": "2026-09-18T10:15:00+09:00",
+        "done_by": {
+          "kind": "staff",
+          "code": "A02"
+        },
+        "arrived_students": [
+          "S03"
+        ]
+      }
+    },
+    {
+      "title": "수업 지원 완료",
+      "input": {
+        "cell": {
+          "date": "2026-09-18",
+          "start": 540,
+          "demand_id": "les:2026-09-18:S05:p1"
+        },
+        "arrived_students": null
+      },
+      "output": {
+        "cell": {
+          "date": "2026-09-18",
+          "start": 540,
+          "demand_id": "les:2026-09-18:S05:p1"
+        },
+        "staff": "A01",
+        "done_at": "2026-09-18T09:40:00+09:00",
+        "done_by": {
+          "kind": "staff",
+          "code": "A01"
+        },
+        "arrived_students": null
+      }
+    }
+  ]
+}

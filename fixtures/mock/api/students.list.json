@@ -1,0 +1,270 @@
+{
+  "procedure": "students.list",
+  "examples": [
+    {
+      "title": "학생 목록",
+      "input": {},
+      "output": [
+        {
+          "code": "S01",
+          "label": "학생1",
+          "class_group": "3-2",
+          "special_class": "K1",
+          "special_class_subjects": [
+            {
+              "subject": "국어",
+              "location": "K1"
+            },
+            {
+              "subject": "수학",
+              "location": "K1"
+            }
+          ],
+          "support_subjects": [
+            {
+              "subject": "과학",
+              "need_start": true,
+              "need_mid": true,
+              "need_end": true
+            },
+            {
+              "subject": "영어",
+              "need_start": true,
+              "need_mid": false,
+              "need_end": true
+            },
+            {
+              "subject": "음악",
+              "need_start": true,
+              "need_mid": false,
+              "need_end": false
+            }
+          ],
+          "support_note": ""
+        },
+        {
+          "code": "S02",
+          "label": "학생2",
+          "class_group": "4-1",
+          "special_class": "K1",
+          "special_class_subjects": [
+            {
+              "subject": "국어",
+              "location": "K1"
+            },
+            {
+              "subject": "수학",
+              "location": "K1"
+            }
+          ],
+          "support_subjects": [
+            {
+              "subject": "과학",
+              "need_start": true,
+              "need_mid": true,
+              "need_end": false
+            },
+            {
+              "subject": "영어",
+              "need_start": false,
+              "need_mid": true,
+              "need_end": false
+            },
+            {
+              "subject": "음악",
+              "need_start": true,
+              "need_mid": false,
+              "need_end": true
+            }
+          ],
+          "support_note": ""
+        },
+        {
+          "code": "S03",
+          "label": "학생3",
+          "class_group": "5-3",
+          "special_class": "K2",
+          "special_class_subjects": [
+            {
+              "subject": "국어",
+              "location": "K2"
+            },
+            {
+              "subject": "수학",
+              "location": "K2"
+            }
+          ],
+          "support_subjects": [
+            {
+              "subject": "과학",
+              "need_start": false,
+              "need_mid": true,
+              "need_end": true
+            },
+            {
+              "subject": "영어",
+              "need_start": true,
+              "need_mid": true,
+              "need_end": true
+            },
+            {
+              "subject": "음악",
+              "need_start": false,
+              "need_mid": false,
+              "need_end": true
+            }
+          ],
+          "support_note": ""
+        },
+        {
+          "code": "S04",
+          "label": "학생4",
+          "class_group": "4-4",
+          "special_class": "K1",
+          "special_class_subjects": [
+            {
+              "subject": "국어",
+              "location": "K1"
+            },
+            {
+              "subject": "수학",
+              "location": "K1"
+            }
+          ],
+          "support_subjects": [
+            {
+              "subject": "과학",
+              "need_start": true,
+              "need_mid": false,
+              "need_end": true
+            },
+            {
+              "subject": "영어",
+              "need_start": true,
+              "need_mid": true,
+              "need_end": false
+            },
+            {
+              "subject": "음악",
+              "need_start": true,
+              "need_mid": true,
+              "need_end": true
+            }
+          ],
+          "support_note": ""
+        },
+        {
+          "code": "S05",
+          "label": "학생5",
+          "class_group": "4-7",
+          "special_class": "K1",
+          "special_class_subjects": [
+            {
+              "subject": "국어",
+              "location": "K1"
+            },
+            {
+              "subject": "수학",
+              "location": "K1"
+            }
+          ],
+          "support_subjects": [
+            {
+              "subject": "과학",
+              "need_start": true,
+              "need_mid": true,
+              "need_end": true
+            },
+            {
+              "subject": "영어",
+              "need_start": false,
+              "need_mid": false,
+              "need_end": true
+            },
+            {
+              "subject": "음악",
+              "need_start": false,
+              "need_mid": true,
+              "need_end": false
+            }
+          ],
+          "support_note": ""
+        },
+        {
+          "code": "S06",
+          "label": "학생6",
+          "class_group": "5-5",
+          "special_class": "K2",
+          "special_class_subjects": [
+            {
+              "subject": "국어",
+              "location": "K2"
+            },
+            {
+              "subject": "수학",
+              "location": "K2"
+            }
+          ],
+          "support_subjects": [
+            {
+              "subject": "과학",
+              "need_start": false,
+              "need_mid": true,
+              "need_end": false
+            },
+            {
+              "subject": "영어",
+              "need_start": true,
+              "need_mid": false,
+              "need_end": true
+            },
+            {
+              "subject": "음악",
+              "need_start": true,
+              "need_mid": true,
+              "need_end": false
+            }
+          ],
+          "support_note": ""
+        },
+        {
+          "code": "S07",
+          "label": "학생7",
+          "class_group": "5-6",
+          "special_class": "K2",
+          "special_class_subjects": [
+            {
+              "subject": "국어",
+              "location": "K2"
+            },
+            {
+              "subject": "수학",
+              "location": "K2"
+            }
+          ],
+          "support_subjects": [
+            {
+              "subject": "과학",
+              "need_start": true,
+              "need_mid": false,
+              "need_end": false
+            },
+            {
+              "subject": "영어",
+              "need_start": true,
+              "need_mid": true,
+              "need_end": true
+            },
+            {
+              "subject": "음악",
+              "need_start": false,
+              "need_mid": true,
+              "need_end": true
+            }
+          ],
+          "support_note": ""
+        }
+      ]
+    }
+  ]
+}

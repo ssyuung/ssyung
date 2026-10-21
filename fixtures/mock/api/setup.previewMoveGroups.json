@@ -1,0 +1,223 @@
+{
+  "procedure": "setup.previewMoveGroups",
+  "examples": [
+    {
+      "title": "현재 배치로 생기는 이동 묶음 (⑥)",
+      "input": {
+        "date": "2026-09-18"
+      },
+      "output": [
+        {
+          "id": "mv:2026-09-18:b1:1-3",
+          "kind": "move_group",
+          "date": "2026-09-18",
+          "start": 580,
+          "end": 590,
+          "headcount": 1,
+          "after_period": 1,
+          "from_floor": 1,
+          "to_floor": 3,
+          "students": [
+            {
+              "student": "S04",
+              "from": "K1",
+              "to": "4-4",
+              "late_cost": 2
+            }
+          ],
+          "late_cost": 2,
+          "second_trip": {
+            "start": 590,
+            "end": 600
+          }
+        },
+        {
+          "id": "mv:2026-09-18:b1:1-4",
+          "kind": "move_group",
+          "date": "2026-09-18",
+          "start": 580,
+          "end": 590,
+          "headcount": 1,
+          "after_period": 1,
+          "from_floor": 1,
+          "to_floor": 4,
+          "students": [
+            {
+              "student": "S03",
+              "from": "K2",
+              "to": "5-3",
+              "late_cost": 0
+            }
+          ],
+          "late_cost": 0,
+          "second_trip": {
+            "start": 590,
+            "end": 600
+          }
+        },
+        {
+          "id": "mv:2026-09-18:b2:1-2",
+          "kind": "move_group",
+          "date": "2026-09-18",
+          "start": 630,
+          "end": 640,
+          "headcount": 1,
+          "after_period": 2,
+          "from_floor": 1,
+          "to_floor": 2,
+          "students": [
+            {
+              "student": "S01",
+              "from": "K1",
+              "to": "3-2",
+              "late_cost": 0
+            }
+          ],
+          "late_cost": 0,
+          "second_trip": {
+            "start": 640,
+            "end": 650
+          }
+        },
+        {
+          "id": "mv:2026-09-18:b2:1-3",
+          "kind": "move_group",
+          "date": "2026-09-18",
+          "start": 630,
+          "end": 640,
+          "headcount": 1,
+          "after_period": 2,
+          "from_floor": 1,
+          "to_floor": 3,
+          "students": [
+            {
+              "student": "S02",
+              "from": "K1",
+              "to": "4-1",
+              "late_cost": 0
+            }
+          ],
+          "late_cost": 0,
+          "second_trip": {
+            "start": 640,
+            "end": 650
+          }
+        },
+        {
+          "id": "mv:2026-09-18:b2:4-1",
+          "kind": "move_group",
+          "date": "2026-09-18",
+          "start": 630,
+          "end": 640,
+          "headcount": 1,
+          "after_period": 2,
+          "from_floor": 4,
+          "to_floor": 1,
+          "students": [
+            {
+              "student": "S03",
+              "from": "5-3",
+              "to": "K2",
+              "late_cost": 1
+            },
+            {
+              "student": "S06",
+              "from": "5-5",
+              "to": "K2",
+              "late_cost": 1
+            }
+          ],
+          "late_cost": 1,
+          "second_trip": {
+            "start": 640,
+            "end": 650
+          }
+        },
+        {
+          "id": "mv:2026-09-18:b3:1-4",
+          "kind": "move_group",
+          "date": "2026-09-18",
+          "start": 680,
+          "end": 690,
+          "headcount": 1,
+          "after_period": 3,
+          "from_floor": 1,
+          "to_floor": 4,
+          "students": [
+            {
+              "student": "S03",
+              "from": "K2",
+              "to": "5-3",
+              "late_cost": 0
+            },
+            {
+              "student": "S06",
+              "from": "K2",
+              "to": "5-5",
+              "late_cost": 0
+            }
+          ],
+          "late_cost": 0,
+          "second_trip": {
+            "start": 690,
+            "end": 700
+          }
+        },
+        {
+          "id": "mv:2026-09-18:b3:4-1",
+          "kind": "move_group",
+          "date": "2026-09-18",
+          "start": 680,
+          "end": 690,
+          "headcount": 1,
+          "after_period": 3,
+          "from_floor": 4,
+          "to_floor": 1,
+          "students": [
+            {
+              "student": "S07",
+              "from": "5-6",
+              "to": "K2",
+              "late_cost": 1
+            }
+          ],
+          "late_cost": 1,
+          "second_trip": {
+            "start": 690,
+            "end": 700
+          }
+        },
+        {
+          "id": "mv:2026-09-18:b5:4-1",
+          "kind": "move_group",
+          "date": "2026-09-18",
+          "start": 820,
+          "end": 830,
+          "headcount": 1,
+          "after_period": 5,
+          "from_floor": 4,
+          "to_floor": 1,
+          "students": [
+            {
+              "student": "S03",
+              "from": "5-3",
+              "to": "K2",
+              "late_cost": 1
+            },
+            {
+              "student": "S07",
+              "from": "5-6",
+              "to": "K2",
+              "late_cost": 1
+            }
+          ],
+          "late_cost": 1,
+          "second_trip": {
+            "start": 830,
+            "end": 840
+          }
+        }
+      ]
+    }
+  ]
+}

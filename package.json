@@ -1,0 +1,21 @@
+{
+  "name": "ssyung",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.15.0",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "gen": "pnpm --filter @ssyung/schema gen",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r typecheck && pnpm -r test",
+    "mock:build": "node scripts/mock/build-mocks.ts && pnpm --filter @ssyung/schema test"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "linkedom": "^0.18.12",
+    "typescript": "^5.9.3",
+    "zod": "^4.1.12"
+  }
+}

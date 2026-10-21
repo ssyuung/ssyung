@@ -1,0 +1,14 @@
+{
+  "procedure": "staff.revokeDevice",
+  "examples": [
+    {
+      "title": "기기 연결 해제",
+      "input": {
+        "staff": "A02"
+      },
+      "output": {
+        "ok": true
+      }
+    }
+  ]
+}

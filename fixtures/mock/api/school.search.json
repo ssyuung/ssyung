@@ -1,0 +1,19 @@
+{
+  "procedure": "school.search",
+  "examples": [
+    {
+      "title": "학교 이름 검색 (지금은 서울개포초만)",
+      "input": {
+        "query": "개포초"
+      },
+      "output": [
+        {
+          "label": "서울개포초등학교",
+          "neis_office_code": "B10",
+          "neis_school_code": "7091371",
+          "address": "서울특별시 강남구"
+        }
+      ]
+    }
+  ]
+}

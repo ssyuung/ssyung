@@ -1,0 +1,30 @@
+{
+  "procedure": "cell.note",
+  "examples": [
+    {
+      "title": "쉬는 시간 칸 메모",
+      "input": {
+        "cell": {
+          "date": "2026-09-18",
+          "start": 630,
+          "demand_id": "mv:2026-09-18:b2:1-2"
+        },
+        "body": "계단 대신 엘리베이터 이용"
+      },
+      "output": {
+        "id": "note_0001",
+        "cell": {
+          "date": "2026-09-18",
+          "start": 630,
+          "demand_id": "mv:2026-09-18:b2:1-2"
+        },
+        "author": {
+          "kind": "member",
+          "code": "T01"
+        },
+        "body": "계단 대신 엘리베이터 이용",
+        "created_at": "2026-09-18T08:20:00+09:00"
+      }
+    }
+  ]
+}

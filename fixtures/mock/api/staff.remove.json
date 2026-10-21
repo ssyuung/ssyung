@@ -1,0 +1,14 @@
+{
+  "procedure": "staff.remove",
+  "examples": [
+    {
+      "title": "지원인력 삭제",
+      "input": {
+        "code": "A03"
+      },
+      "output": {
+        "ok": true
+      }
+    }
+  ]
+}

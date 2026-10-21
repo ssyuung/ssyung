@@ -1,0 +1,71 @@
+{
+  "procedure": "staff.update",
+  "examples": [
+    {
+      "title": "근무 시간 수정",
+      "input": {
+        "code": "A03",
+        "patch": {
+          "availability": [
+            {
+              "day": "MON",
+              "start": 520,
+              "end": 900
+            },
+            {
+              "day": "TUE",
+              "start": 520,
+              "end": 900
+            },
+            {
+              "day": "WED",
+              "start": 520,
+              "end": 900
+            },
+            {
+              "day": "THU",
+              "start": 520,
+              "end": 900
+            },
+            {
+              "day": "FRI",
+              "start": 520,
+              "end": 900
+            }
+          ]
+        }
+      },
+      "output": {
+        "code": "A03",
+        "label": "지원인력3",
+        "availability": [
+          {
+            "day": "MON",
+            "start": 520,
+            "end": 900
+          },
+          {
+            "day": "TUE",
+            "start": 520,
+            "end": 900
+          },
+          {
+            "day": "WED",
+            "start": 520,
+            "end": 900
+          },
+          {
+            "day": "THU",
+            "start": 520,
+            "end": 900
+          },
+          {
+            "day": "FRI",
+            "start": 520,
+            "end": 900
+          }
+        ]
+      }
+    }
+  ]
+}

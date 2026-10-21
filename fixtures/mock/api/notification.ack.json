@@ -1,0 +1,22 @@
+{
+  "procedure": "notification.ack",
+  "examples": [
+    {
+      "title": "변경 알림 확인",
+      "input": {
+        "notification_id": "ntf_0001"
+      },
+      "output": {
+        "id": "ntf_0001",
+        "staff": "A02",
+        "kind": "version",
+        "version_id": "ver_0918b",
+        "ref_id": null,
+        "channel": "push",
+        "sent_at": "2026-09-18T10:00:00+09:00",
+        "acknowledged_at": "2026-09-18T10:10:00+09:00",
+        "summary": "오늘 10:30–11:30 배정이 바뀌었어요 (3칸)"
+      }
+    }
+  ]
+}

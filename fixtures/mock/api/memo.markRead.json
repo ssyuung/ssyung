@@ -1,0 +1,14 @@
+{
+  "procedure": "memo.markRead",
+  "examples": [
+    {
+      "title": "메모 읽음",
+      "input": {
+        "memo_id": "memo_0001"
+      },
+      "output": {
+        "ok": true
+      }
+    }
+  ]
+}

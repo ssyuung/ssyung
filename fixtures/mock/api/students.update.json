@@ -1,0 +1,46 @@
+{
+  "procedure": "students.update",
+  "examples": [
+    {
+      "title": "지원 구간 수정",
+      "input": {
+        "code": "S02",
+        "patch": {
+          "support_subjects": [
+            {
+              "subject": "과학",
+              "need_start": false,
+              "need_mid": true,
+              "need_end": false
+            }
+          ]
+        }
+      },
+      "output": {
+        "code": "S02",
+        "label": "학생2",
+        "class_group": "4-1",
+        "special_class": "K1",
+        "special_class_subjects": [
+          {
+            "subject": "국어",
+            "location": "K1"
+          },
+          {
+            "subject": "수학",
+            "location": "K1"
+          }
+        ],
+        "support_subjects": [
+          {
+            "subject": "과학",
+            "need_start": false,
+            "need_mid": true,
+            "need_end": false
+          }
+        ],
+        "support_note": ""
+      }
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "procedure": "schedule.rollback",
+  "examples": [
+    {
+      "title": "과거 버전 복제 → draft",
+      "input": {
+        "version_id": "ver_0901"
+      },
+      "output": {
+        "id": "ver_rb01",
+        "parent_id": "ver_0901",
+        "status": "draft",
+        "date_from": "2026-09-01",
+        "date_to": "2026-09-30",
+        "cause": "rollback",
+        "created_by": {
+          "kind": "member",
+          "code": "T01"
+        },
+        "created_at": "2026-09-18T11:40:00+09:00",
+        "activated_at": null
+      }
+    }
+  ]
+}

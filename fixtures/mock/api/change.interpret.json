@@ -1,0 +1,114 @@
+{
+  "procedure": "change.interpret",
+  "examples": [
+    {
+      "title": "지원인력 부재",
+      "input": {
+        "raw_text": "지원인력1 10시 30분부터 11시 30분까지 출장",
+        "today": "2026-09-18"
+      },
+      "output": {
+        "id": "cr_staff-away",
+        "base_version_id": "ver_0901",
+        "raw_text": "지원인력1 10시 30분부터 11시 30분까지 출장",
+        "parsed": {
+          "ops": [
+            {
+              "op": "staff_unavailable",
+              "staff": "A01",
+              "when": [
+                {
+                  "date": "2026-09-18",
+                  "start": "10:30",
+                  "end": "11:30"
+                }
+              ]
+            }
+          ],
+          "scope": "this_week",
+          "confidence": "high",
+          "unsupported": null
+        },
+        "summary": [
+          "지원인력1 · 9월 18일(금) 10:30–11:30 부재"
+        ],
+        "status": "parsed",
+        "created_by": "T01",
+        "created_at": "2026-09-18T10:00:00+09:00"
+      }
+    },
+    {
+      "title": "결석",
+      "input": {
+        "raw_text": "학생3 오늘 결석",
+        "today": "2026-09-18"
+      },
+      "output": {
+        "id": "cr_absent",
+        "base_version_id": "ver_0901",
+        "raw_text": "학생3 오늘 결석",
+        "parsed": {
+          "ops": [
+            {
+              "op": "mark_absent",
+              "student": "S03",
+              "when": {
+                "date": "2026-09-18"
+              }
+            }
+          ],
+          "scope": "this_week",
+          "confidence": "high",
+          "unsupported": null
+        },
+        "summary": [
+          "학생3 · 9월 18일(금) 결석"
+        ],
+        "status": "parsed",
+        "created_by": "T01",
+        "created_at": "2026-09-18T10:00:00+09:00"
+      }
+    },
+    {
+      "title": "지원하지 않는 요청",
+      "input": {
+        "raw_text": "학생7 지원 강도 올려줘",
+        "today": "2026-09-18"
+      },
+      "output": {
+        "id": "cr_unsup",
+        "base_version_id": "ver_0901",
+        "raw_text": "학생7 지원 강도 올려줘",
+        "parsed": {
+          "ops": [],
+          "scope": "this_week",
+          "confidence": "high",
+          "unsupported": "지원 과목·구간은 기초정보의 학생 설정(④)에서 바꿔요"
+        },
+        "summary": [],
+        "status": "parsed",
+        "created_by": "T01",
+        "created_at": "2026-09-18T10:00:00+09:00"
+      }
+    },
+    {
+      "title": "실명으로 보이는 입력",
+      "input": {
+        "raw_text": "김철수 오늘 결석",
+        "today": "2026-09-18"
+      },
+      "error": {
+        "code": "NAME_SUSPECTED",
+        "message": "사람 이름으로 보이는 말이 있어요. 학생1처럼 별칭으로 써 주세요.",
+        "details": {
+          "spans": [
+            [
+              0,
+              3
+            ]
+          ]
+        }
+      }
+    }
+  ]
+}

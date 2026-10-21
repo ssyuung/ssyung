@@ -1,0 +1,714 @@
+{
+  "school": {
+    "id": "sch_gaepo",
+    "label": "서울개포초등학교",
+    "neis_office_code": "B10",
+    "neis_school_code": "7091371",
+    "academic_year": 2026,
+    "floors": 5,
+    "timezone": "Asia/Seoul"
+  },
+  "bell": [
+    {
+      "days": [
+        "MON",
+        "TUE",
+        "WED",
+        "THU",
+        "FRI"
+      ],
+      "blocks": [
+        {
+          "kind": "arrival",
+          "period": null,
+          "start": 520,
+          "end": 540,
+          "label": "등교",
+          "part_of_day": "morning"
+        },
+        {
+          "kind": "class",
+          "period": 1,
+          "start": 540,
+          "end": 580,
+          "label": "1교시",
+          "part_of_day": "morning"
+        },
+        {
+          "kind": "break",
+          "period": null,
+          "start": 580,
+          "end": 590,
+          "label": "쉬는 시간",
+          "part_of_day": "morning"
+        },
+        {
+          "kind": "class",
+          "period": 2,
+          "start": 590,
+          "end": 630,
+          "label": "2교시",
+          "part_of_day": "morning"
+        },
+        {
+          "kind": "break",
+          "period": null,
+          "start": 630,
+          "end": 640,
+          "label": "쉬는 시간",
+          "part_of_day": "morning"
+        },
+        {
+          "kind": "class",
+          "period": 3,
+          "start": 640,
+          "end": 680,
+          "label": "3교시",
+          "part_of_day": "morning"
+        },
+        {
+          "kind": "break",
+          "period": null,
+          "start": 680,
+          "end": 690,
+          "label": "쉬는 시간",
+          "part_of_day": "morning"
+        },
+        {
+          "kind": "class",
+          "period": 4,
+          "start": 690,
+          "end": 730,
+          "label": "4교시",
+          "part_of_day": "morning"
+        },
+        {
+          "kind": "lunch",
+          "period": null,
+          "start": 730,
+          "end": 780,
+          "label": "점심",
+          "part_of_day": "afternoon"
+        },
+        {
+          "kind": "class",
+          "period": 5,
+          "start": 780,
+          "end": 820,
+          "label": "5교시",
+          "part_of_day": "afternoon"
+        },
+        {
+          "kind": "break",
+          "period": null,
+          "start": 820,
+          "end": 830,
+          "label": "쉬는 시간",
+          "part_of_day": "afternoon"
+        },
+        {
+          "kind": "class",
+          "period": 6,
+          "start": 830,
+          "end": 870,
+          "label": "6교시",
+          "part_of_day": "afternoon"
+        },
+        {
+          "kind": "dismissal",
+          "period": null,
+          "start": 870,
+          "end": 890,
+          "label": "하교",
+          "part_of_day": "afternoon"
+        },
+        {
+          "kind": "other",
+          "period": null,
+          "start": 890,
+          "end": 1000,
+          "label": "방과 후",
+          "part_of_day": "afternoon"
+        }
+      ]
+    }
+  ],
+  "locations": [
+    {
+      "code": "1-1",
+      "label": "1-1 교실",
+      "kind": "homeroom",
+      "floor": 1
+    },
+    {
+      "code": "1-2",
+      "label": "1-2 교실",
+      "kind": "homeroom",
+      "floor": 1
+    },
+    {
+      "code": "1-3",
+      "label": "1-3 교실",
+      "kind": "homeroom",
+      "floor": 1
+    },
+    {
+      "code": "1-4",
+      "label": "1-4 교실",
+      "kind": "homeroom",
+      "floor": 1
+    },
+    {
+      "code": "1-5",
+      "label": "1-5 교실",
+      "kind": "homeroom",
+      "floor": 1
+    },
+    {
+      "code": "1-6",
+      "label": "1-6 교실",
+      "kind": "homeroom",
+      "floor": 1
+    },
+    {
+      "code": "2-1",
+      "label": "2-1 교실",
+      "kind": "homeroom",
+      "floor": 2
+    },
+    {
+      "code": "2-2",
+      "label": "2-2 교실",
+      "kind": "homeroom",
+      "floor": 2
+    },
+    {
+      "code": "2-3",
+      "label": "2-3 교실",
+      "kind": "homeroom",
+      "floor": 2
+    },
+    {
+      "code": "2-4",
+      "label": "2-4 교실",
+      "kind": "homeroom",
+      "floor": 2
+    },
+    {
+      "code": "2-5",
+      "label": "2-5 교실",
+      "kind": "homeroom",
+      "floor": 2
+    },
+    {
+      "code": "3-1",
+      "label": "3-1 교실",
+      "kind": "homeroom",
+      "floor": 2
+    },
+    {
+      "code": "3-2",
+      "label": "3-2 교실",
+      "kind": "homeroom",
+      "floor": 2
+    },
+    {
+      "code": "3-3",
+      "label": "3-3 교실",
+      "kind": "homeroom",
+      "floor": 2
+    },
+    {
+      "code": "3-4",
+      "label": "3-4 교실",
+      "kind": "homeroom",
+      "floor": 3
+    },
+    {
+      "code": "3-5",
+      "label": "3-5 교실",
+      "kind": "homeroom",
+      "floor": 3
+    },
+    {
+      "code": "3-6",
+      "label": "3-6 교실",
+      "kind": "homeroom",
+      "floor": 3
+    },
+    {
+      "code": "4-1",
+      "label": "4-1 교실",
+      "kind": "homeroom",
+      "floor": 3
+    },
+    {
+      "code": "4-2",
+      "label": "4-2 교실",
+      "kind": "homeroom",
+      "floor": 3
+    },
+    {
+      "code": "4-3",
+      "label": "4-3 교실",
+      "kind": "homeroom",
+      "floor": 3
+    },
+    {
+      "code": "4-4",
+      "label": "4-4 교실",
+      "kind": "homeroom",
+      "floor": 3
+    },
+    {
+      "code": "4-5",
+      "label": "4-5 교실",
+      "kind": "homeroom",
+      "floor": 3
+    },
+    {
+      "code": "4-6",
+      "label": "4-6 교실",
+      "kind": "homeroom",
+      "floor": 3
+    },
+    {
+      "code": "4-7",
+      "label": "4-7 교실",
+      "kind": "homeroom",
+      "floor": 3
+    },
+    {
+      "code": "5-1",
+      "label": "5-1 교실",
+      "kind": "homeroom",
+      "floor": 4
+    },
+    {
+      "code": "5-2",
+      "label": "5-2 교실",
+      "kind": "homeroom",
+      "floor": 4
+    },
+    {
+      "code": "5-3",
+      "label": "5-3 교실",
+      "kind": "homeroom",
+      "floor": 4
+    },
+    {
+      "code": "5-4",
+      "label": "5-4 교실",
+      "kind": "homeroom",
+      "floor": 4
+    },
+    {
+      "code": "5-5",
+      "label": "5-5 교실",
+      "kind": "homeroom",
+      "floor": 4
+    },
+    {
+      "code": "5-6",
+      "label": "5-6 교실",
+      "kind": "homeroom",
+      "floor": 4
+    },
+    {
+      "code": "5-7",
+      "label": "5-7 교실",
+      "kind": "homeroom",
+      "floor": 4
+    },
+    {
+      "code": "6-1",
+      "label": "6-1 교실",
+      "kind": "homeroom",
+      "floor": 5
+    },
+    {
+      "code": "6-2",
+      "label": "6-2 교실",
+      "kind": "homeroom",
+      "floor": 5
+    },
+    {
+      "code": "6-3",
+      "label": "6-3 교실",
+      "kind": "homeroom",
+      "floor": 5
+    },
+    {
+      "code": "6-4",
+      "label": "6-4 교실",
+      "kind": "homeroom",
+      "floor": 5
+    },
+    {
+      "code": "6-5",
+      "label": "6-5 교실",
+      "kind": "homeroom",
+      "floor": 5
+    },
+    {
+      "code": "6-6",
+      "label": "6-6 교실",
+      "kind": "homeroom",
+      "floor": 5
+    },
+    {
+      "code": "6-7",
+      "label": "6-7 교실",
+      "kind": "homeroom",
+      "floor": 5
+    },
+    {
+      "code": "6-8",
+      "label": "6-8 교실",
+      "kind": "homeroom",
+      "floor": 5
+    },
+    {
+      "code": "K1",
+      "label": "특수학급 K1",
+      "kind": "special_class",
+      "floor": 1
+    },
+    {
+      "code": "K2",
+      "label": "특수학급 K2",
+      "kind": "special_class",
+      "floor": 1
+    },
+    {
+      "code": "L01",
+      "label": "교무실",
+      "floor": 1,
+      "kind": "office"
+    },
+    {
+      "code": "L02",
+      "label": "행정실",
+      "floor": 1,
+      "kind": "office"
+    },
+    {
+      "code": "L03",
+      "label": "보건실",
+      "floor": 1,
+      "kind": "office"
+    },
+    {
+      "code": "L04",
+      "label": "급식실",
+      "floor": 1,
+      "kind": "office"
+    },
+    {
+      "code": "L05",
+      "label": "도서실",
+      "floor": 2,
+      "kind": "special_room"
+    },
+    {
+      "code": "L06",
+      "label": "과학실",
+      "floor": 3,
+      "kind": "special_room"
+    },
+    {
+      "code": "L07",
+      "label": "음악실",
+      "floor": 4,
+      "kind": "special_room"
+    },
+    {
+      "code": "L08",
+      "label": "컴퓨터실",
+      "floor": 4,
+      "kind": "special_room"
+    },
+    {
+      "code": "L09",
+      "label": "미술실",
+      "floor": 5,
+      "kind": "special_room"
+    },
+    {
+      "code": "L10",
+      "label": "체육관",
+      "floor": "OUT",
+      "kind": "outdoor"
+    },
+    {
+      "code": "L11",
+      "label": "운동장",
+      "floor": "OUT",
+      "kind": "outdoor"
+    },
+    {
+      "code": "L12",
+      "label": "정문",
+      "floor": "OUT",
+      "kind": "outdoor"
+    },
+    {
+      "code": "L13",
+      "label": "후문",
+      "floor": "OUT",
+      "kind": "outdoor"
+    }
+  ],
+  "class_groups": [
+    {
+      "code": "1-1",
+      "grade": 1,
+      "home_location": "1-1",
+      "has_timetable": true
+    },
+    {
+      "code": "1-2",
+      "grade": 1,
+      "home_location": "1-2",
+      "has_timetable": true
+    },
+    {
+      "code": "1-3",
+      "grade": 1,
+      "home_location": "1-3",
+      "has_timetable": false
+    },
+    {
+      "code": "1-4",
+      "grade": 1,
+      "home_location": "1-4",
+      "has_timetable": true
+    },
+    {
+      "code": "1-5",
+      "grade": 1,
+      "home_location": "1-5",
+      "has_timetable": true
+    },
+    {
+      "code": "1-6",
+      "grade": 1,
+      "home_location": "1-6",
+      "has_timetable": true
+    },
+    {
+      "code": "2-1",
+      "grade": 2,
+      "home_location": "2-1",
+      "has_timetable": true
+    },
+    {
+      "code": "2-2",
+      "grade": 2,
+      "home_location": "2-2",
+      "has_timetable": true
+    },
+    {
+      "code": "2-3",
+      "grade": 2,
+      "home_location": "2-3",
+      "has_timetable": true
+    },
+    {
+      "code": "2-4",
+      "grade": 2,
+      "home_location": "2-4",
+      "has_timetable": true
+    },
+    {
+      "code": "2-5",
+      "grade": 2,
+      "home_location": "2-5",
+      "has_timetable": true
+    },
+    {
+      "code": "3-1",
+      "grade": 3,
+      "home_location": "3-1",
+      "has_timetable": true
+    },
+    {
+      "code": "3-2",
+      "grade": 3,
+      "home_location": "3-2",
+      "has_timetable": true
+    },
+    {
+      "code": "3-3",
+      "grade": 3,
+      "home_location": "3-3",
+      "has_timetable": true
+    },
+    {
+      "code": "3-4",
+      "grade": 3,
+      "home_location": "3-4",
+      "has_timetable": true
+    },
+    {
+      "code": "3-5",
+      "grade": 3,
+      "home_location": "3-5",
+      "has_timetable": true
+    },
+    {
+      "code": "3-6",
+      "grade": 3,
+      "home_location": "3-6",
+      "has_timetable": true
+    },
+    {
+      "code": "4-1",
+      "grade": 4,
+      "home_location": "4-1",
+      "has_timetable": true
+    },
+    {
+      "code": "4-2",
+      "grade": 4,
+      "home_location": "4-2",
+      "has_timetable": true
+    },
+    {
+      "code": "4-3",
+      "grade": 4,
+      "home_location": "4-3",
+      "has_timetable": true
+    },
+    {
+      "code": "4-4",
+      "grade": 4,
+      "home_location": "4-4",
+      "has_timetable": true
+    },
+    {
+      "code": "4-5",
+      "grade": 4,
+      "home_location": "4-5",
+      "has_timetable": true
+    },
+    {
+      "code": "4-6",
+      "grade": 4,
+      "home_location": "4-6",
+      "has_timetable": true
+    },
+    {
+      "code": "4-7",
+      "grade": 4,
+      "home_location": "4-7",
+      "has_timetable": true
+    },
+    {
+      "code": "5-1",
+      "grade": 5,
+      "home_location": "5-1",
+      "has_timetable": true
+    },
+    {
+      "code": "5-2",
+      "grade": 5,
+      "home_location": "5-2",
+      "has_timetable": true
+    },
+    {
+      "code": "5-3",
+      "grade": 5,
+      "home_location": "5-3",
+      "has_timetable": true
+    },
+    {
+      "code": "5-4",
+      "grade": 5,
+      "home_location": "5-4",
+      "has_timetable": true
+    },
+    {
+      "code": "5-5",
+      "grade": 5,
+      "home_location": "5-5",
+      "has_timetable": true
+    },
+    {
+      "code": "5-6",
+      "grade": 5,
+      "home_location": "5-6",
+      "has_timetable": true
+    },
+    {
+      "code": "5-7",
+      "grade": 5,
+      "home_location": "5-7",
+      "has_timetable": true
+    },
+    {
+      "code": "6-1",
+      "grade": 6,
+      "home_location": "6-1",
+      "has_timetable": true
+    },
+    {
+      "code": "6-2",
+      "grade": 6,
+      "home_location": "6-2",
+      "has_timetable": true
+    },
+    {
+      "code": "6-3",
+      "grade": 6,
+      "home_location": "6-3",
+      "has_timetable": true
+    },
+    {
+      "code": "6-4",
+      "grade": 6,
+      "home_location": "6-4",
+      "has_timetable": true
+    },
+    {
+      "code": "6-5",
+      "grade": 6,
+      "home_location": "6-5",
+      "has_timetable": true
+    },
+    {
+      "code": "6-6",
+      "grade": 6,
+      "home_location": "6-6",
+      "has_timetable": true
+    },
+    {
+      "code": "6-7",
+      "grade": 6,
+      "home_location": "6-7",
+      "has_timetable": true
+    },
+    {
+      "code": "6-8",
+      "grade": 6,
+      "home_location": "6-8",
+      "has_timetable": true
+    }
+  ],
+  "special_classes": [
+    {
+      "code": "K1",
+      "location": "K1",
+      "teachers": [
+        "T01"
+      ]
+    },
+    {
+      "code": "K2",
+      "location": "K2",
+      "teachers": [
+        "T02"
+      ]
+    }
+  ]
+}

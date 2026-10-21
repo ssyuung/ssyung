@@ -1,0 +1,261 @@
+{
+  "$id": "ssyung/SchoolBundle",
+  "x-contract-version": "0.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "school": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "description": "서버가 만드는 불투명 ID"
+        },
+        "label": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "neis_office_code": {
+          "type": "string"
+        },
+        "neis_school_code": {
+          "type": "string"
+        },
+        "academic_year": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "floors": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        },
+        "timezone": {
+          "type": "string",
+          "const": "Asia/Seoul"
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "neis_office_code",
+        "neis_school_code",
+        "academic_year",
+        "floors",
+        "timezone"
+      ]
+    },
+    "bell": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "days": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "MON",
+                "TUE",
+                "WED",
+                "THU",
+                "FRI"
+              ]
+            }
+          },
+          "blocks": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "enum": [
+                    "class",
+                    "break",
+                    "lunch",
+                    "arrival",
+                    "dismissal",
+                    "other"
+                  ]
+                },
+                "period": {
+                  "anyOf": [
+                    {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 8
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "start": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1440,
+                  "multipleOf": 10,
+                  "description": "자정부터의 분, 10의 배수"
+                },
+                "end": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1440,
+                  "multipleOf": 10,
+                  "description": "자정부터의 분, 10의 배수"
+                },
+                "label": {
+                  "type": "string",
+                  "maxLength": 10
+                },
+                "part_of_day": {
+                  "type": "string",
+                  "enum": [
+                    "morning",
+                    "afternoon"
+                  ]
+                }
+              },
+              "required": [
+                "kind",
+                "period",
+                "start",
+                "end",
+                "label",
+                "part_of_day"
+              ]
+            }
+          }
+        },
+        "required": [
+          "days",
+          "blocks"
+        ]
+      }
+    },
+    "locations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "pattern": "^(\\d-\\d{1,2}|K\\d{1,2}|L\\d{2,3})$",
+            "description": "장소: 반 코드(원반 교실) | K 코드(특수학급) | L 코드(특별실 등)"
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 20
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "homeroom",
+              "special_class",
+              "special_room",
+              "office",
+              "outdoor"
+            ]
+          },
+          "floor": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 20
+              },
+              {
+                "type": "string",
+                "const": "OUT"
+              }
+            ]
+          }
+        },
+        "required": [
+          "code",
+          "label",
+          "kind",
+          "floor"
+        ]
+      }
+    },
+    "class_groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "pattern": "^\\d-\\d{1,2}$",
+            "description": "원반 (3-2)"
+          },
+          "grade": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "home_location": {
+            "type": "string",
+            "pattern": "^(\\d-\\d{1,2}|K\\d{1,2}|L\\d{2,3})$",
+            "description": "장소: 반 코드(원반 교실) | K 코드(특수학급) | L 코드(특별실 등)"
+          },
+          "has_timetable": {
+            "type": "boolean",
+            "description": "시간표 자료가 없는 반(개발 데이터의 1-3)은 false"
+          }
+        },
+        "required": [
+          "code",
+          "grade",
+          "home_location",
+          "has_timetable"
+        ]
+      }
+    },
+    "special_classes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "pattern": "^K\\d{1,2}$",
+            "description": "특수학급 코드 (K1)"
+          },
+          "location": {
+            "type": "string",
+            "pattern": "^(\\d-\\d{1,2}|K\\d{1,2}|L\\d{2,3})$",
+            "description": "장소: 반 코드(원반 교실) | K 코드(특수학급) | L 코드(특별실 등)"
+          },
+          "teachers": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^T\\d{2,3}$",
+              "description": "교사 코드 (T01)"
+            }
+          }
+        },
+        "required": [
+          "code",
+          "location",
+          "teachers"
+        ]
+      }
+    }
+  },
+  "required": [
+    "school",
+    "bell",
+    "locations",
+    "class_groups",
+    "special_classes"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "procedure": "attendance.set",
+  "examples": [
+    {
+      "title": "등교 체크",
+      "input": {
+        "date": "2026-09-18",
+        "student": "S05"
+      },
+      "output": {
+        "date": "2026-09-18",
+        "student": "S05",
+        "status": "present",
+        "checked_by": {
+          "kind": "staff",
+          "code": "A01"
+        },
+        "checked_at": "2026-09-18T08:50:00+09:00"
+      }
+    }
+  ]
+}

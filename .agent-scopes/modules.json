@@ -1,0 +1,250 @@
+{
+  "_note": "모듈별 쓰기 범위와 완료 검사. 하네스 훅(scripts/hooks)과 CI(scripts/ci/scope-check.mjs)가 읽는다. 워크트리의 .agent-scope에 모듈 ID 한 줄을 쓰면 그 모듈로 동작한다. M0만 수정한다. docs/agent-development.md §1·§6",
+  "common_write": [
+    "tasks/{ID}-questions.md",
+    "contracts/requests/{ID}-*.md",
+    "pnpm-lock.yaml"
+  ],
+  "protected": [
+    "packages/schema/**",
+    "**/generated/**",
+    "fixtures/**",
+    "scripts/**",
+    "packages/testing/**",
+    "supabase/migrations/0001_*",
+    ".agent-scopes/**",
+    ".claude/**",
+    ".github/**",
+    "CLAUDE.md",
+    "package.json",
+    "pnpm-workspace.yaml",
+    "tsconfig.base.json",
+    "dataset/**",
+    "docs/**",
+    "tasks/*.md"
+  ],
+  "always_check": [
+    "pnpm --filter @ssyung/schema test"
+  ],
+  "modules": {
+    "M0": {
+      "name": "계약·통합",
+      "branch": "m0-contract",
+      "task": null,
+      "write": [
+        "**"
+      ],
+      "deny": [],
+      "requires": [],
+      "check": [
+        "pnpm test"
+      ],
+      "protected_ok": []
+    },
+    "M1": {
+      "name": "배치 엔진",
+      "branch": "m1-scheduler",
+      "task": "tasks/M1-scheduler.md",
+      "write": [
+        "packages/scheduler/**"
+      ],
+      "deny": [
+        "packages/scheduler/src/engines/cpsat/**"
+      ],
+      "requires": [
+        "packages/scheduler/package.json"
+      ],
+      "check": [
+        "pnpm --filter @ssyung/scheduler typecheck",
+        "pnpm --filter @ssyung/scheduler test"
+      ],
+      "protected_ok": []
+    },
+    "M2": {
+      "name": "CP-SAT 엔진",
+      "branch": "m2-cpsat",
+      "task": "tasks/M2-cpsat.md",
+      "write": [
+        "services/solver/**",
+        "packages/scheduler/src/engines/cpsat/**"
+      ],
+      "deny": [],
+      "requires": [
+        "services/solver/pyproject.toml"
+      ],
+      "check": [
+        "uv run --directory services/solver pytest -q"
+      ],
+      "protected_ok": []
+    },
+    "M3": {
+      "name": "수요 생성",
+      "branch": "m3-demand",
+      "task": "tasks/M3-demand.md",
+      "write": [
+        "packages/core/**"
+      ],
+      "deny": [],
+      "requires": [
+        "packages/core/package.json"
+      ],
+      "check": [
+        "pnpm --filter @ssyung/core typecheck",
+        "pnpm --filter @ssyung/core test"
+      ],
+      "protected_ok": []
+    },
+    "M4": {
+      "name": "학교 데이터·저장소",
+      "branch": "m4-data",
+      "task": "tasks/M4-data.md",
+      "write": [
+        "packages/school-data/**",
+        "packages/repository/**"
+      ],
+      "deny": [],
+      "requires": [
+        "packages/school-data/package.json",
+        "packages/repository/package.json"
+      ],
+      "check": [
+        "pnpm --filter @ssyung/school-data --filter @ssyung/repository typecheck",
+        "pnpm --filter @ssyung/school-data --filter @ssyung/repository test"
+      ],
+      "protected_ok": []
+    },
+    "M5": {
+      "name": "실명 검사",
+      "branch": "m5-name-guard",
+      "task": "tasks/M5-name-guard.md",
+      "write": [
+        "packages/name-guard/**"
+      ],
+      "deny": [],
+      "requires": [
+        "packages/name-guard/package.json"
+      ],
+      "check": [
+        "pnpm --filter @ssyung/name-guard typecheck",
+        "pnpm --filter @ssyung/name-guard test"
+      ],
+      "protected_ok": []
+    },
+    "M6": {
+      "name": "해석기",
+      "branch": "m6-interpreter",
+      "task": "tasks/M6-interpreter.md",
+      "write": [
+        "packages/interpreter/**"
+      ],
+      "deny": [],
+      "requires": [
+        "packages/interpreter/package.json"
+      ],
+      "check": [
+        "pnpm --filter @ssyung/interpreter typecheck",
+        "pnpm --filter @ssyung/interpreter test"
+      ],
+      "protected_ok": []
+    },
+    "M7": {
+      "name": "API",
+      "branch": "m7-api",
+      "task": "tasks/M7-api.md",
+      "write": [
+        "apps/web/server/**",
+        "apps/web/package.json",
+        "apps/web/tsconfig.json",
+        "apps/web/*.config.*",
+        "supabase/migrations/**",
+        "supabase/tests/**",
+        "supabase/config.toml"
+      ],
+      "deny": [
+        "apps/web/server/notify/**",
+        "supabase/migrations/0001_*"
+      ],
+      "requires": [
+        "apps/web/package.json"
+      ],
+      "check": [
+        "pnpm --filter @ssyung/web typecheck",
+        "pnpm --filter @ssyung/web test"
+      ],
+      "protected_ok": []
+    },
+    "M8": {
+      "name": "교사 웹 UI",
+      "branch": "m8-web",
+      "task": "tasks/M8-web.md",
+      "write": [
+        "apps/web/app/**",
+        "apps/web/components/**",
+        "apps/web/public/**",
+        "apps/web/e2e/**",
+        "packages/api-client/**",
+        "packages/design-tokens/**"
+      ],
+      "deny": [],
+      "requires": [
+        "apps/web/package.json"
+      ],
+      "check": [
+        "pnpm --filter @ssyung/web typecheck",
+        "pnpm --filter @ssyung/web test"
+      ],
+      "protected_ok": []
+    },
+    "M9": {
+      "name": "모바일 앱",
+      "branch": "m9-mobile",
+      "task": "tasks/M9-mobile.md",
+      "write": [
+        "apps/mobile/**"
+      ],
+      "deny": [],
+      "requires": [
+        "apps/mobile/package.json"
+      ],
+      "check": [
+        "pnpm --filter @ssyung/mobile typecheck",
+        "pnpm --filter @ssyung/mobile test"
+      ],
+      "protected_ok": []
+    },
+    "M10": {
+      "name": "알림",
+      "branch": "m10-notify",
+      "task": "tasks/M10-notify.md",
+      "write": [
+        "packages/notify/**",
+        "apps/web/server/notify/**"
+      ],
+      "deny": [],
+      "requires": [
+        "packages/notify/package.json"
+      ],
+      "check": [
+        "pnpm --filter @ssyung/notify typecheck",
+        "pnpm --filter @ssyung/notify test"
+      ],
+      "protected_ok": []
+    },
+    "M11": {
+      "name": "인프라",
+      "branch": "m11-infra",
+      "task": "tasks/M11-infra.md",
+      "write": [
+        "infra/**",
+        ".github/workflows/deploy-*"
+      ],
+      "deny": [],
+      "requires": [],
+      "check": [],
+      "protected_ok": [
+        ".github/workflows/deploy-*"
+      ]
+    }
+  },
+  "_rule": "판정 순서: M0이면 허용 → common_write·모듈 protected_ok면 허용 → protected면 차단(계약·하네스) → 모듈 deny면 차단 → 모듈 write면 허용 → 나머지 차단(범위 밖)"
+}

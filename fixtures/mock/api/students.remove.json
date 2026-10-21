@@ -1,0 +1,14 @@
+{
+  "procedure": "students.remove",
+  "examples": [
+    {
+      "title": "학생 삭제",
+      "input": {
+        "code": "S07"
+      },
+      "output": {
+        "ok": true
+      }
+    }
+  ]
+}

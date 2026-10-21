@@ -1,0 +1,18 @@
+{
+  "procedure": "cell.uncheck",
+  "examples": [
+    {
+      "title": "완료 취소",
+      "input": {
+        "cell": {
+          "date": "2026-09-18",
+          "start": 540,
+          "demand_id": "les:2026-09-18:S05:p1"
+        }
+      },
+      "output": {
+        "ok": true
+      }
+    }
+  ]
+}

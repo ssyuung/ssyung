@@ -1,0 +1,79 @@
+{
+  "procedure": "students.add",
+  "examples": [
+    {
+      "title": "학생 추가",
+      "input": {
+        "label": "학생8",
+        "class_group": "6-2",
+        "special_class": "K2",
+        "special_class_subjects": [
+          {
+            "subject": "국어",
+            "location": "K2"
+          }
+        ],
+        "support_subjects": [
+          {
+            "subject": "과학",
+            "need_start": true,
+            "need_mid": true,
+            "need_end": true
+          }
+        ],
+        "support_note": ""
+      },
+      "output": {
+        "code": "S08",
+        "label": "학생8",
+        "class_group": "6-2",
+        "special_class": "K2",
+        "special_class_subjects": [
+          {
+            "subject": "국어",
+            "location": "K2"
+          }
+        ],
+        "support_subjects": [
+          {
+            "subject": "과학",
+            "need_start": true,
+            "need_mid": true,
+            "need_end": true
+          }
+        ],
+        "support_note": ""
+      }
+    },
+    {
+      "title": "실명으로 보이는 별칭은 거부",
+      "input": {
+        "label": "홍길동",
+        "class_group": "6-2",
+        "special_class": "K2",
+        "special_class_subjects": [
+          {
+            "subject": "국어",
+            "location": "K2"
+          }
+        ],
+        "support_subjects": [
+          {
+            "subject": "과학",
+            "need_start": true,
+            "need_mid": true,
+            "need_end": true
+          }
+        ],
+        "support_note": ""
+      },
+      "error": {
+        "code": "NAME_SUSPECTED",
+        "message": "사람 이름으로 보이는 별칭은 쓸 수 없어요. 학생8처럼 별칭을 써 주세요.",
+        "details": {
+          "field": "label"
+        }
+      }
+    }
+  ]
+}
