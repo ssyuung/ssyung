@@ -1,5 +1,6 @@
 # M? <모듈 이름> v1
 
+> 상태: 진행 | 완료 | 보류
 > 브랜치 `<id>/m?-<이름>` · 범위 `.agent-scopes/modules.json`의 M? · 공통 규칙 `CLAUDE.md`
 
 ## 목표
@@ -18,4 +19,4 @@ modules.json의 write. 그 밖은 훅이 막는다.
 하지 않을 것.
 
 ## 산출물
-변경 요약, 완료 명령 결과, 목데이터 대조 결과, 남은 질문(tasks/M?-questions.md). 커밋은 요청이 있을 때만.
+보드 `tasks/board/M?.md` 갱신. 변경 요약, 완료 명령 결과, 목데이터 대조 결과, 남은 질문(tasks/M?-questions.md). 커밋은 요청이 있을 때만.

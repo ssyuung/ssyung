@@ -1,5 +1,6 @@
 # M4 학교 데이터·저장소 v1
 
+> 상태: 진행
 > 브랜치 `<id>/m4-data` · 범위 `packages/school-data/**`, `packages/repository/**` · 공통 규칙 `CLAUDE.md`
 
 ## 목표
@@ -35,4 +36,4 @@ docs/architecture.md §4.6의 두 인터페이스를 파일 구현으로 만든�
 - Supabase 구현, 버전·배정 저장(Wave 2), 실명 검사(M5. 저장소는 길이만 본다)
 
 ## 산출물
-변경 요약, 목데이터 대조 결과, 남은 질문(`tasks/M4-questions.md`).
+보드 `tasks/board/M4.md` 갱신(완료 조건 체크, 다음에 할 것, 다른 모듈에 필요한 것). 변경 요약, 목데이터 대조 결과, 남은 질문(`tasks/M4-questions.md`).

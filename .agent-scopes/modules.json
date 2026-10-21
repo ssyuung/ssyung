@@ -1,7 +1,8 @@
 {
-  "_note": "모듈별 쓰기 범위와 완료 검사. 하네스 훅(scripts/hooks)과 CI(scripts/ci/scope-check.mjs)가 읽는다. 워크트리의 .agent-scope에 모듈 ID 한 줄을 쓰면 그 모듈로 동작한다. M0만 수정한다. docs/agent-development.md §1·§6",
+  "_note": "모듈별 쓰기 범위와 완료 검사. 하네스 훅(scripts/hooks)과 CI(scripts/ci/scope-check.mjs)가 읽는다. 워크트리의 .agent-scope에 모듈 ID 한 줄을 쓰면 그 모듈로 동작한다. M0만 수정한다. docs/agent-development.md §1·§6 지시서는 tasks/<ID>-*.md 중 '> 상태: 진행'인 것 (scripts/hooks/lib.mjs moduleTasks).",
   "common_write": [
     "tasks/{ID}-questions.md",
+    "tasks/board/{ID}.md",
     "contracts/requests/{ID}-*.md",
     "pnpm-lock.yaml"
   ],
@@ -30,7 +31,6 @@
     "M0": {
       "name": "계약·통합",
       "branch": "m0-contract",
-      "task": null,
       "write": [
         "**"
       ],
@@ -44,7 +44,6 @@
     "M1": {
       "name": "배치 엔진",
       "branch": "m1-scheduler",
-      "task": "tasks/M1-scheduler.md",
       "write": [
         "packages/scheduler/**"
       ],
@@ -63,7 +62,6 @@
     "M2": {
       "name": "CP-SAT 엔진",
       "branch": "m2-cpsat",
-      "task": "tasks/M2-cpsat.md",
       "write": [
         "services/solver/**",
         "packages/scheduler/src/engines/cpsat/**"
@@ -80,7 +78,6 @@
     "M3": {
       "name": "수요 생성",
       "branch": "m3-demand",
-      "task": "tasks/M3-demand.md",
       "write": [
         "packages/core/**"
       ],
@@ -97,7 +94,6 @@
     "M4": {
       "name": "학교 데이터·저장소",
       "branch": "m4-data",
-      "task": "tasks/M4-data.md",
       "write": [
         "packages/school-data/**",
         "packages/repository/**"
@@ -116,7 +112,6 @@
     "M5": {
       "name": "실명 검사",
       "branch": "m5-name-guard",
-      "task": "tasks/M5-name-guard.md",
       "write": [
         "packages/name-guard/**"
       ],
@@ -133,7 +128,6 @@
     "M6": {
       "name": "해석기",
       "branch": "m6-interpreter",
-      "task": "tasks/M6-interpreter.md",
       "write": [
         "packages/interpreter/**"
       ],
@@ -150,7 +144,6 @@
     "M7": {
       "name": "API",
       "branch": "m7-api",
-      "task": "tasks/M7-api.md",
       "write": [
         "apps/web/server/**",
         "apps/web/package.json",
@@ -176,7 +169,6 @@
     "M8": {
       "name": "교사 웹 UI",
       "branch": "m8-web",
-      "task": "tasks/M8-web.md",
       "write": [
         "apps/web/app/**",
         "apps/web/components/**",
@@ -198,7 +190,6 @@
     "M9": {
       "name": "모바일 앱",
       "branch": "m9-mobile",
-      "task": "tasks/M9-mobile.md",
       "write": [
         "apps/mobile/**"
       ],
@@ -215,7 +206,6 @@
     "M10": {
       "name": "알림",
       "branch": "m10-notify",
-      "task": "tasks/M10-notify.md",
       "write": [
         "packages/notify/**",
         "apps/web/server/notify/**"
@@ -233,7 +223,6 @@
     "M11": {
       "name": "인프라",
       "branch": "m11-infra",
-      "task": "tasks/M11-infra.md",
       "write": [
         "infra/**",
         ".github/workflows/deploy-*"
@@ -246,5 +235,9 @@
       ]
     }
   },
-  "_rule": "판정 순서: M0이면 허용 → common_write·모듈 protected_ok면 허용 → protected면 차단(계약·하네스) → 모듈 deny면 차단 → 모듈 write면 허용 → 나머지 차단(범위 밖)"
+  "_rule": "판정 순서: M0이면 허용 → common_write·모듈 protected_ok면 허용 → protected면 차단(계약·하네스) → 모듈 deny면 차단 → 모듈 write면 허용 → 나머지 차단(범위 밖)",
+  "board": {
+    "dir": "tasks/board",
+    "required_on_stop": true
+  }
 }

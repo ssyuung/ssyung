@@ -1,5 +1,6 @@
 # M6 해석기 v1
 
+> 상태: 진행
 > 브랜치 `<id>/m6-interpreter` · 범위 `packages/interpreter/**` · 공통 규칙 `CLAUDE.md`
 
 ## 목표
@@ -42,4 +43,4 @@ interpret(req: InterpretRequest, deps: { claude: ClaudeClient }): Promise<Interp
 - 해석 결과 문장화
 
 ## 산출물
-변경 요약, 프롬프트 토큰 수(캐시 전·후), 남은 질문(`tasks/M6-questions.md`). eval 결과는 사람이 돌린 뒤 붙인다.
+보드 `tasks/board/M6.md` 갱신(완료 조건 체크, 다음에 할 것, 다른 모듈에 필요한 것). 변경 요약, 프롬프트 토큰 수(캐시 전·후), 남은 질문(`tasks/M6-questions.md`). eval 결과는 사람이 돌린 뒤 붙인다.

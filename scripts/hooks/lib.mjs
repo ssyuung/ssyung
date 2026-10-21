@@ -1,6 +1,6 @@
 // 하네스 훅 공용: 입력 읽기, 모듈 범위 판정.
 // 훅 규약(Claude Code): stdin으로 JSON을 받고, exit 2 + stderr면 막고 그 이유를 에이전트에게 돌려준다.
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
 import { execFileSync } from "node:child_process";
 import { tmpdir, homedir } from "node:os";
@@ -40,6 +40,24 @@ export function scopeId(root) {
   if (!existsSync(p)) return null;
   const id = readFileSync(p, "utf8").trim();
   return id || null;
+}
+
+/**
+ * 모듈의 지시서와 상태. tasks/<ID>-*.md 중 질문 파일을 빼고, 맨 위 "> 상태: 진행|완료|보류" 줄을 읽는다.
+ * 한 모듈을 여러 버전(M1-scheduler.md, M1-scheduler-v2.md …)으로 발전시킬 때 "진행"인 것이 지금 할 일이다.
+ * @returns {{ path: string, status: string }[]}
+ */
+export function moduleTasks(root, id) {
+  const dir = join(root, "tasks");
+  if (!existsSync(dir)) return [];
+  return readdirSync(dir)
+    .filter((f) => f.startsWith(id + "-") && f.endsWith(".md") && f !== `${id}-questions.md`)
+    .sort()
+    .map((f) => {
+      const head = readFileSync(join(dir, f), "utf8").split("\n").slice(0, 8).join("\n");
+      const m = head.match(/^>\s*상태:\s*(\S+)/m);
+      return { path: `tasks/${f}`, status: m ? m[1] : "진행" };
+    });
 }
 
 /** glob → 정규식. ** 는 디렉터리 여러 단계, * 는 한 단계 안, ? 는 한 글자 */

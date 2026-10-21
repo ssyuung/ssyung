@@ -1,5 +1,6 @@
 # M1 배치 엔진 v1 (임시 규칙 엔진)
 
+> 상태: 진행
 > 브랜치 `<id>/m1-scheduler` · 범위 `packages/scheduler/**` (단 `src/engines/cpsat/` 제외) · 공통 규칙 `CLAUDE.md`
 
 ## 목표
@@ -54,4 +55,4 @@ validate(input: ValidateInput): ValidateOutput
 - 시나리오·목데이터가 내 결과와 다르면 고치지 말고 `contracts/requests/M1-<주제>.md`에 근거를 적는다.
 
 ## 산출물
-변경 요약, 목데이터 대조 결과, 시나리오 비교표, 남은 질문(`tasks/M1-questions.md`).
+보드 `tasks/board/M1.md` 갱신(완료 조건 체크, 다음에 할 것, 다른 모듈에 필요한 것). 변경 요약, 목데이터 대조 결과, 시나리오 비교표, 남은 질문(`tasks/M1-questions.md`).

@@ -1,5 +1,6 @@
 # M5 실명 검사 v1
 
+> 상태: 보류 (이름 저장 여부 결정 대기)
 > 브랜치 `<id>/m5-name-guard` · 범위 `packages/name-guard/**` · 공통 규칙 `CLAUDE.md`
 
 ## 목표
@@ -33,4 +34,4 @@ detect(text: string, opts?: { allow?: string[] }): { start: number; end: number;
 - 이름이 아닌 개인정보(전화번호 등, §5.4)
 
 ## 산출물
-변경 요약, 재현율·오탐률 표, 남은 질문(`tasks/M5-questions.md`).
+보드 `tasks/board/M5.md` 갱신(완료 조건 체크, 다음에 할 것, 다른 모듈에 필요한 것). 변경 요약, 재현율·오탐률 표, 남은 질문(`tasks/M5-questions.md`).

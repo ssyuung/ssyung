@@ -197,14 +197,17 @@ packages/schema (zod)
 | `.agent-scopes/modules.json` | 모듈별 쓰기 범위(`write`·`deny`), 보호 경로(`protected`), 공통 허용(`common_write`), 필수 파일(`requires`), 완료 검사(`check`), 브랜치 이름 |
 | `.agent-scope` (gitignore) | 각 워크트리에서 자기 모듈 ID 한 줄 (예: `M1`). `scripts/agent/init.sh M1`이 만든다 |
 | `.claude/settings.json` | 아래 훅 등록 |
-| `scripts/hooks/session-start.mjs` | SessionStart: 모듈·지시서·쓰기 범위·완료 검사를 컨텍스트에 넣음. 지시서가 없으면 시작하지 말라고 알림 |
+| `scripts/hooks/session-start.mjs` | SessionStart: 모듈, 지금 할 지시서(`상태: 진행`), 쓰기 범위, 완료 검사를 컨텍스트에 넣음. 진행 지시서가 없거나 여럿이거나 보류면 시작하지 말라고 알림 |
 | `scripts/hooks/guard-edit.mjs` | PreToolUse(Write·Edit·MultiEdit·NotebookEdit): 범위(scope-guard)와 계약·목데이터·하네스 보호(contract-guard). 워크트리 밖 경로 차단(임시 디렉터리·`~/.claude` 제외) |
 | `scripts/hooks/guard-bash.mjs` | PreToolUse(Bash): 누구에게나 강제 push, 루트·상위 `rm -rf`, 공유 stash, 검사 건너뛰기 차단. 모듈 에이전트에게는 push·merge·rebase·브랜치 이동·`reset --hard` 등, 요청 없는 커밋(`SSY_ALLOW_COMMIT=1`일 때만), 외부 전송, 워크트리 밖 경로 수정도 차단 |
 | `scripts/hooks/post-edit.mjs` | PostToolUse: 고친 TS 파일이 속한 패키지의 `typecheck`를 돌려 실패를 바로 돌려줌 |
 | `scripts/hooks/stop-check.mjs` | Stop: 바뀐 파일이 있으면 `requires` 확인 후 모듈 `check` + `always_check`(계약·목데이터 검증) 실행. 실패하면 끝내지 못하게 하고, 3번 연속이면 사람에게 넘김 |
-| `scripts/hooks/test/hooks.test.mjs` | 하네스 테스트 26개 (임시 저장소에서 훅을 실제로 호출) |
+| `scripts/hooks/test/hooks.test.mjs` | 하네스 테스트 29개 (임시 저장소에서 훅을 실제로 호출) |
 | `scripts/ci/scope-check.mjs` | CI: 브랜치 이름 → 모듈, main 대비 바뀐 파일이 모두 범위 안인지 |
 | `scripts/agent/init.sh` | 워크트리 준비: `.agent-scope`, `pnpm i`, 시작 문장 안내 |
+| `tasks/board/<ID>.md` | 모듈 보드: 이번 버전 체크리스트, 다음에 할 것(제안), 다른 모듈에 필요한 것. 그 모듈만 고치고 끝낼 때마다 갱신(Stop 훅이 확인). 모듈마다 파일이 따로라 merge 충돌이 없다 |
+| `scripts/agent/board.mjs` (`pnpm board`) | 모든 워크트리의 보드를 직접 읽어 모아 보기. merge 전 진행도 보인다 |
+| `tasks/BACKLOG.md` | 사람의 업무 리스트·모듈별 버전 로드맵. 보드의 제안을 사람이 옮겨야 다음 버전이 된다 |
 
 훅은 `.agent-scope`가 없으면(사람이 직접 작업하는 워크트리) 범위 검사와 모듈 전용 차단을 건너뛴다. 되돌릴 수 없는 명령(강제 push, 루트 삭제, 공유 stash) 차단은 항상 동작한다.
 
@@ -259,7 +262,9 @@ Wave 0는 에이전트 1개가 순서대로 진행하되, 리뷰하기 쉽게 PR
 
 ## 4. 업무 지시서 형식
 
-에이전트마다 `tasks/<모듈>.md`를 주고, 세션 시작 시 "tasks/M1-scheduler.md를 읽고 수행해"라고만 지시한다.
+에이전트마다 `tasks/<ID>-<이름>.md`를 주고, 세션 시작 시 "진행 중인 지시서를 읽고 수행해"라고만 지시한다. 세션 시작 훅이 맨 위 `> 상태: 진행`인 지시서를 찾아 알려준다.
+
+**버전.** 한 모듈을 여러 번 발전시킨다(버전 하나 = 지시서 하나 = PR 하나). 다음 버전은 `tasks/M1-scheduler-v2.md`(`상태: 진행`)를 만들고 이전 지시서를 `상태: 완료`로 바꾼 뒤, 같은 워크트리에서 `2khs21/m1-scheduler-v2` 브랜치를 main에서 새로 만든다. 사람이 보는 업무 리스트와 모듈별 버전 로드맵은 [tasks/BACKLOG.md](../tasks/BACKLOG.md).
 
 ```markdown
 # M1 배치 엔진 v1 (임시 규칙 엔진)
@@ -330,7 +335,7 @@ PR 1개. 본문에 구현 요약, 시나리오별 지표(기준선 대비), 남�
 git worktree add ~/orca/workspaces/ssyung/m1-scheduler -b 2khs21/m1-scheduler main
 cd ~/orca/workspaces/ssyung/m1-scheduler
 bash scripts/agent/init.sh M1      # .agent-scope, pnpm i, 시작 문장 안내
-claude                              # "tasks/M1-scheduler.md를 읽고 수행해"
+claude                              # "진행 중인 지시서를 읽고 수행해"
 ```
 
 브랜치 이름은 `<id>/` + modules.json의 `branch`(뒤에 `-v2` 등은 붙여도 됨)여야 CI 범위 검사가 모듈을 알아본다. Wave 1 지시서는 M1, M3, M4, M5, M6, M7이 있다.
@@ -351,7 +356,7 @@ claude                              # "tasks/M1-scheduler.md를 읽고 수행해
 | 시점 | 실행 | 목적 |
 |---|---|---|
 | 파일 수정 직후 (PostToolUse) | 그 패키지만 타입 검사·lint (수 초) | 바로 고치게 함 |
-| 에이전트가 끝내려 할 때 (Stop) | 지시서의 완료 명령 전체 | 실패하면 종료를 막고 결과를 돌려줌 |
+| 에이전트가 끝내려 할 때 (Stop) | 지시서의 완료 명령 전체 + 자기 보드 갱신 여부 | 실패하면 종료를 막고 결과를 돌려줌 |
 | PR (CI) | 범위 검사, `pnpm gen` 최신 여부, `pnpm test`(목데이터 계약 검증 포함), 바뀐 패키지 테스트, 하네스 테스트 | merge 전 마지막 관문 |
 | 매일 밤 | 전체 E2E: gaepo-dev 데이터로 설정 → 생성 → 변경 → 승인 → 앱 | 모듈 사이 어긋남 발견 |
 
@@ -391,7 +396,7 @@ PR은 모듈 안에서도 작게 나눈다. 예: 엔진 v1 규칙 3개 → secon
 | 언제 | 무엇 |
 |---|---|
 | Wave 0 | 계약(`packages/schema`), 목데이터, 시나리오, 검사기를 꼼꼼히 리뷰 |
-| 매일 | `tasks/*-questions.md` 답변, `contracts/requests/` 처리, 배치 엔진 비교표, PR 리뷰와 merge, 다음 지시서 |
+| 매일 | `pnpm board --all`, `tasks/*-questions.md` 답변, `contracts/requests/` 처리, 배치 엔진 비교표, PR 리뷰와 merge, 다음 지시서 |
 | 수시 | 기준선·기대 결과·목데이터 변경 승인, 화면 스크린샷 확인 |
 
 ## 7. 첫 주 예시

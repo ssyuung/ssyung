@@ -1,5 +1,6 @@
 # M3 수요 생성 v1
 
+> 상태: 진행
 > 브랜치 `<id>/m3-demand` · 범위 `packages/core/**` · 공통 규칙 `CLAUDE.md`
 
 ## 목표
@@ -44,4 +45,4 @@ generateDemands(input: {
 목데이터 값과 다르면 먼저 내 코드를 의심한다. 목데이터가 틀렸다고 판단되면 근거와 함께 `contracts/requests/M3-<주제>.md`.
 
 ## 산출물
-변경 요약, 목데이터 대조 결과, 남은 질문(`tasks/M3-questions.md`).
+보드 `tasks/board/M3.md` 갱신(완료 조건 체크, 다음에 할 것, 다른 모듈에 필요한 것). 변경 요약, 목데이터 대조 결과, 남은 질문(`tasks/M3-questions.md`).

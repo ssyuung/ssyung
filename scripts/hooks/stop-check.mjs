@@ -24,9 +24,11 @@ const counter = join(stateDir, "stop-blocks");
 const count = input.stop_hook_active && existsSync(counter) ? +readFileSync(counter, "utf8") || 0 : 0;
 
 const failures = [];
+
 for (const req of mod.requires ?? [])
   if (!existsSync(join(root, req))) failures.push(`필수 파일이 없음: ${req} (지시서의 첫 단계에서 만든다)`);
-if (!failures.length) {
+const requiresMissing = failures.length > 0;
+if (!requiresMissing) {
   for (const cmd of [...(mod.check ?? []), ...(manifest.always_check ?? [])]) {
     const r = spawnSync(cmd, { cwd: root, shell: true, encoding: "utf8", timeout: 300000 });
     if (r.status !== 0) {
@@ -34,6 +36,22 @@ if (!failures.length) {
       failures.push(`$ ${cmd}  → 실패 (exit ${r.status})\n${tail}`);
     }
   }
+}
+
+// 보드: main에서 갈라진 뒤(작업 트리 포함) 자기 보드를 한 번도 안 고쳤으면 끝내지 못한다
+if (manifest.board?.required_on_stop && id !== "M0") {
+  const boardRel = `${manifest.board.dir}/${id}.md`;
+  const git = (...a) => spawnSync("git", ["-C", root, ...a], { encoding: "utf8" }).stdout ?? "";
+  const base = git("merge-base", "HEAD", process.env.SSY_BASE ?? "main").trim() || "HEAD";
+  const touched = new Set([
+    ...git("diff", "--name-only", base).split("\n"),
+    ...git("ls-files", "--others", "--exclude-standard").split("\n"),
+  ]);
+  if (!touched.has(boardRel))
+    failures.push(
+      `보드를 갱신하지 않았습니다: ${boardRel}\n` +
+        `이번 버전 완료 조건에 체크하고, 다음에 할 것(제안)과 다른 모듈에 필요한 것을 적으세요. 형식은 ${manifest.board.dir}/_template.md.`,
+    );
 }
 
 mkdirSync(stateDir, { recursive: true });

@@ -1,5 +1,6 @@
 # M7 API v1 (계약 라우터 + 목데이터 구현)
 
+> 상태: 진행
 > 브랜치 `<id>/m7-api` · 범위 `apps/web/server/**`, `apps/web` 설정 파일, `supabase/` (0001 제외) · 공통 규칙 `CLAUDE.md`
 
 ## 목표
@@ -34,4 +35,4 @@
 - 실제 배치·해석·알림 모듈 연결(Wave 2)
 
 ## 산출물
-변경 요약, 프로시저별 구현 상태 표, 남은 질문(`tasks/M7-questions.md`).
+보드 `tasks/board/M7.md` 갱신(완료 조건 체크, 다음에 할 것, 다른 모듈에 필요한 것). 변경 요약, 프로시저별 구현 상태 표, 남은 질문(`tasks/M7-questions.md`).

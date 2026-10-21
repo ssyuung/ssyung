@@ -10,7 +10,8 @@
     "gen": "pnpm --filter @ssyung/schema gen",
     "typecheck": "pnpm -r typecheck",
     "test": "pnpm -r typecheck && pnpm -r test",
-    "mock:build": "node scripts/mock/build-mocks.ts && pnpm --filter @ssyung/schema test"
+    "mock:build": "node scripts/mock/build-mocks.ts && pnpm --filter @ssyung/schema test",
+    "board": "node scripts/agent/board.mjs"
   },
   "devDependencies": {
     "@types/node": "^26.6.5",

@@ -75,6 +75,9 @@ test("M1: 자기 질문 파일·계약 요청·lockfile은 허용, 남의 질문
   assert.equal(edit("contracts/requests/M1-segment-id.md", "M1").code, 0);
   assert.equal(edit("pnpm-lock.yaml", "M1").code, 0);
   assert.equal(edit("tasks/M3-questions.md", "M1").code, 2);
+  assert.equal(edit("tasks/board/M1.md", "M1").code, 0);
+  assert.equal(edit("tasks/board/M3.md", "M1").code, 2);
+  assert.equal(edit("tasks/BACKLOG.md", "M1").code, 2);
 });
 test("M2: cpsat 어댑터는 허용, 나머지 scheduler는 차단", () => {
   assert.equal(edit("packages/scheduler/src/engines/cpsat/adapter.ts", "M2").code, 0);
@@ -175,8 +178,23 @@ test("세션 시작: 모듈·범위·완료 검사를 알려주고, 지시서가
   assert.equal(r.code, 0);
   assert.match(r.out, /M1\(배치 엔진\)/);
   assert.match(r.out, /packages\/scheduler/);
-  assert.match(r.out, /지시서 tasks\/M1-scheduler.md가 아직 없다/); // 임시 저장소에는 tasks/가 없음
+  assert.match(r.out, /진행 중인 지시서.*없다/); // 임시 저장소에는 tasks/가 없음
   assert.equal(hook("session-start.mjs", {}, { scope: null }).out, "");
+});
+test("세션 시작: 여러 버전 중 '상태: 진행'인 지시서를 고르고, 끝난 버전은 참고로", () => {
+  mkdirSync(join(root, "tasks"), { recursive: true });
+  writeFileSync(join(root, "tasks/M1-scheduler.md"), "# M1 v1\n\n> 상태: 완료\n");
+  writeFileSync(join(root, "tasks/M1-scheduler-v2.md"), "# M1 v2\n\n> 상태: 진행\n");
+  writeFileSync(join(root, "tasks/M1-questions.md"), "# 질문\n");
+  const r = hook("session-start.mjs", {}, { scope: "M1" });
+  assert.match(r.out, /지금 할 지시서: tasks\/M1-scheduler-v2.md/);
+  assert.match(r.out, /끝난 버전\(참고용\): tasks\/M1-scheduler.md/);
+  assert.doesNotMatch(r.out, /(지시서|참고용\)):[^\n]*M1-questions/);
+  writeFileSync(join(root, "tasks/M1-scheduler.md"), "# M1 v1\n\n> 상태: 진행\n");
+  assert.match(hook("session-start.mjs", {}, { scope: "M1" }).out, /여럿이다/);
+  writeFileSync(join(root, "tasks/M5-name-guard.md"), "# M5\n\n> 상태: 보류 (결정 대기)\n");
+  assert.match(hook("session-start.mjs", {}, { scope: "M5" }).out, /보류 중이다/);
+  rmSync(join(root, "tasks"), { recursive: true, force: true });
 });
 test("종료 검사: 바뀐 게 없으면 통과", () => {
   assert.equal(hook("stop-check.mjs", {}, { scope: "M1" }).code, 0);
@@ -203,6 +221,8 @@ test("종료 검사: 완료 명령이 실패하면 출력과 함께 막음", () 
     JSON.stringify({ name: "@ssyung/scheduler", scripts: { typecheck: "true", test: "echo 시나리오S2-공백증가 && exit 1" } }),
   );
   writeFileSync(join(root, "pnpm-workspace.yaml"), "packages:\n  - packages/*\n");
+  mkdirSync(join(root, "tasks/board"), { recursive: true });
+  writeFileSync(join(root, "tasks/board/M1.md"), "# M1 보드\n\n## 이번 버전\n- [ ] a\n");
   const m = JSON.parse(readFileSync(join(root, ".agent-scopes/modules.json"), "utf8"));
   m.always_check = []; // 임시 저장소에는 @ssyung/schema가 없음
   writeFileSync(join(root, ".agent-scopes/modules.json"), JSON.stringify(m));
@@ -210,6 +230,17 @@ test("종료 검사: 완료 명령이 실패하면 출력과 함께 막음", () 
   assert.equal(r.code, 2);
   assert.match(r.err, /pnpm --filter @ssyung\/scheduler test {2}→ 실패/);
   assert.match(r.err, /시나리오S2-공백증가/);
+});
+test("종료 검사: 바뀐 게 있는데 자기 보드를 안 고쳤으면 막음", () => {
+  rmSync(join(root, "tasks/board/M1.md"));
+  const m = JSON.parse(readFileSync(join(root, ".agent-scopes/modules.json"), "utf8"));
+  m.modules.M1.check = [];
+  writeFileSync(join(root, ".agent-scopes/modules.json"), JSON.stringify(m));
+  const r = hook("stop-check.mjs", { stop_hook_active: false }, { scope: "M1" });
+  assert.equal(r.code, 2);
+  assert.match(r.err, /보드를 갱신하지 않았습니다: tasks\/board\/M1.md/);
+  writeFileSync(join(root, "tasks/board/M1.md"), "# M1 보드\n\n## 이번 버전\n- [x] a\n");
+  assert.equal(hook("stop-check.mjs", { stop_hook_active: false }, { scope: "M1" }).code, 0);
 });
 test("종료 검사: 사람 워크트리에서는 돌지 않음", () => {
   assert.equal(hook("stop-check.mjs", {}, { scope: null }).code, 0);
@@ -235,4 +266,12 @@ test("settings.json이 모든 훅 파일을 가리킴", () => {
     assert.ok(existsSync(join(REPO, f)), f);
   }
   assert.equal(cmds.length, 5);
+});
+
+test("pnpm board: 워크트리마다 보드를 읽어 진행·제안·요청 수를 모은다", () => {
+  const r = spawnSync("node", [join(REPO, "scripts/agent/board.mjs"), "--json"], { cwd: REPO, encoding: "utf8" });
+  assert.equal(r.status, 0, r.stderr);
+  const rows = JSON.parse(r.stdout);
+  assert.equal(rows.length, 11); // M1–M11
+  for (const row of rows) assert.ok(["워크트리 없음", "보드 없음", "진행", "완료 조건 다 됨"].includes(row.state), row.state);
 });
