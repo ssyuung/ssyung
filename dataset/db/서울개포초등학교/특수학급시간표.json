@@ -1,0 +1,207 @@
+{
+  "_note": "개발용 특수학급 시간표. 임의로 만든 값이며 실제 시간표가 아니다. 요일·시각 기준(매주 반복). 학생은 그 요일·시각에 자기 과목(special_class_subjects)을 하는 특수학급으로 간다. 없거나 둘 이상이면 특수학급 수업이지만 장소 미정(D25). 9월 학생 시간표의 국어·수학이 모두 한 곳에 맞도록 만들었다.",
+  "special_classes": [
+    {
+      "code": "K1",
+      "lessons": [
+        {
+          "day": "MON",
+          "start": "09:50",
+          "end": "10:30",
+          "subject": "국어"
+        },
+        {
+          "day": "MON",
+          "start": "13:00",
+          "end": "13:40",
+          "subject": "수학"
+        },
+        {
+          "day": "TUE",
+          "start": "09:00",
+          "end": "09:40",
+          "subject": "수학"
+        },
+        {
+          "day": "TUE",
+          "start": "09:50",
+          "end": "10:30",
+          "subject": "수학"
+        },
+        {
+          "day": "TUE",
+          "start": "10:40",
+          "end": "11:20",
+          "subject": "국어"
+        },
+        {
+          "day": "TUE",
+          "start": "11:30",
+          "end": "12:10",
+          "subject": "국어"
+        },
+        {
+          "day": "WED",
+          "start": "09:00",
+          "end": "09:40",
+          "subject": "국어"
+        },
+        {
+          "day": "WED",
+          "start": "09:50",
+          "end": "10:30",
+          "subject": "수학"
+        },
+        {
+          "day": "WED",
+          "start": "10:40",
+          "end": "11:20",
+          "subject": "수학"
+        },
+        {
+          "day": "WED",
+          "start": "13:00",
+          "end": "13:40",
+          "subject": "국어"
+        },
+        {
+          "day": "THU",
+          "start": "09:00",
+          "end": "09:40",
+          "subject": "국어"
+        },
+        {
+          "day": "THU",
+          "start": "09:50",
+          "end": "10:30",
+          "subject": "국어"
+        },
+        {
+          "day": "THU",
+          "start": "10:40",
+          "end": "11:20",
+          "subject": "국어"
+        },
+        {
+          "day": "THU",
+          "start": "11:30",
+          "end": "12:10",
+          "subject": "국어"
+        },
+        {
+          "day": "THU",
+          "start": "13:00",
+          "end": "13:40",
+          "subject": "수학"
+        },
+        {
+          "day": "FRI",
+          "start": "09:00",
+          "end": "09:40",
+          "subject": "국어"
+        },
+        {
+          "day": "FRI",
+          "start": "09:50",
+          "end": "10:30",
+          "subject": "수학"
+        },
+        {
+          "day": "FRI",
+          "start": "13:00",
+          "end": "13:40",
+          "subject": "수학"
+        }
+      ]
+    },
+    {
+      "code": "K2",
+      "lessons": [
+        {
+          "day": "MON",
+          "start": "09:00",
+          "end": "09:40",
+          "subject": "국어"
+        },
+        {
+          "day": "MON",
+          "start": "09:50",
+          "end": "10:30",
+          "subject": "수학"
+        },
+        {
+          "day": "MON",
+          "start": "13:00",
+          "end": "13:40",
+          "subject": "국어"
+        },
+        {
+          "day": "MON",
+          "start": "13:50",
+          "end": "14:30",
+          "subject": "수학"
+        },
+        {
+          "day": "TUE",
+          "start": "09:00",
+          "end": "09:40",
+          "subject": "국어"
+        },
+        {
+          "day": "TUE",
+          "start": "09:50",
+          "end": "10:30",
+          "subject": "국어"
+        },
+        {
+          "day": "TUE",
+          "start": "10:40",
+          "end": "11:20",
+          "subject": "수학"
+        },
+        {
+          "day": "TUE",
+          "start": "13:50",
+          "end": "14:30",
+          "subject": "국어"
+        },
+        {
+          "day": "WED",
+          "start": "09:50",
+          "end": "10:30",
+          "subject": "국어"
+        },
+        {
+          "day": "THU",
+          "start": "09:50",
+          "end": "10:30",
+          "subject": "수학"
+        },
+        {
+          "day": "THU",
+          "start": "11:30",
+          "end": "12:10",
+          "subject": "수학"
+        },
+        {
+          "day": "FRI",
+          "start": "10:40",
+          "end": "11:20",
+          "subject": "국어"
+        },
+        {
+          "day": "FRI",
+          "start": "11:30",
+          "end": "12:10",
+          "subject": "국어"
+        },
+        {
+          "day": "FRI",
+          "start": "13:50",
+          "end": "14:30",
+          "subject": "수학"
+        }
+      ]
+    }
+  ]
+}

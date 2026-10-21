@@ -1,6 +1,6 @@
 {
   "$id": "ssyung/ValidateOutput",
-  "x-contract-version": "0.2.0",
+  "x-contract-version": "0.3.0",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "properties": {
@@ -155,7 +155,8 @@
             "type": "string",
             "enum": [
               "SPECIAL_CLASS_CROWDED",
-              "NO_SPECIAL_TEACHER"
+              "NO_SPECIAL_TEACHER",
+              "SPECIAL_CLASS_UNPLACED"
             ]
           },
           "date": {

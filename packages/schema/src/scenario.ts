@@ -1,6 +1,6 @@
 // 연쇄 시나리오 (fixtures/scenarios/cascade-scenarios.json). 배치 엔진 회귀 기준. M0 소유, M1·M2 읽기 전용.
 import { z } from "zod";
-import { ClassGroupCode, IsoDate, LocationRef, StaffCode, StudentCode, Subject } from "./ids.ts";
+import { ClassGroupCode, IsoDate, LocationRef, SpecialClassCode, StaffCode, StudentCode, Subject } from "./ids.ts";
 import { ChangeOp } from "./change-ops.ts";
 import { DiffType, ReasonCode } from "./scheduler.ts";
 
@@ -9,7 +9,7 @@ export const ScenarioTrigger = z.discriminatedUnion("type", [
   z.object({
     type: z.literal("setup_change"),
     patch: z.union([
-      z.object({ student_placement: z.object({ student: StudentCode, subject: Subject, location: LocationRef }) }),
+      z.object({ special_class_location: z.object({ special_class: SpecialClassCode, location: LocationRef }) }),
       z.object({ student_subject_support: z.object({
         student: StudentCode, subject: Subject,
         need_start: z.boolean().optional(), need_mid: z.boolean().optional(), need_end: z.boolean().optional(),
@@ -45,6 +45,7 @@ export const CascadeScenario = z.object({
     max: z.object({ gaps: z.number().int().optional(), late: z.number().int().optional() }).optional(),
   }),
   baseline_heuristic: z.record(z.enum(["A", "B", "C"]), Baseline),
+  baseline_note: z.string().optional().describe("기준선이 지금 데이터로 계산한 것이 아니면 그 이유. 없으면 pnpm mock:build가 계산한 값"),
 });
 
 export const CascadeScenarioSet = z.object({

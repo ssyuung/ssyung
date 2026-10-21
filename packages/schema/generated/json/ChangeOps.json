@@ -1,6 +1,6 @@
 {
   "$id": "ssyung/ChangeOps",
-  "x-contract-version": "0.2.0",
+  "x-contract-version": "0.3.0",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "properties": {
@@ -932,7 +932,7 @@
                 ]
               },
               "location": {
-                "description": "special_class일 때 수업 장소. 없으면 소속 특수학급 (D20)",
+                "description": "special_class일 때 수업 장소. 없으면 그 요일·시각에 그 과목을 하는 특수학급 (D25)",
                 "type": "string",
                 "pattern": "^(\\d-\\d{1,2}|K\\d{1,2}|L\\d{2,3})$"
               }

@@ -11,18 +11,21 @@
   - 저장하지 않음: M5 시작.
   - 저장함: M5와 architecture.md §5, API의 `NAME_SUSPECTED`를 지우고 이름 필드를 추가.
 
-- [ ] **특수학급 시간표** (M3 요청 `M3-special-class-timetable`, 보류 중): 소속 특수학급 없이 그 시간 과목으로 특수반 장소를 정한다면
-  - 특수학급 시간표는 요일 기준인지 날짜 기준인지
-  - 학생별 과목 장소(`special_class_subjects.location`)를 남길지
-  - `Student.special_class`(소속 특수학급)를 없앨지
+- [x] **특수학급 시간표 → D25**: 요일·시각 기준, 학생별 과목 장소·소속 특수학급 없앰, 안 맞으면 특수학급 수업 + 장소 미정(경고). 계약 0.3.0
 - [x] M3 `now` 범위 → **D24: 오늘 변경은 모두 요청 시각부터.** `now` 이후에 시작하는 칸만 바뀌고 진행 중인 칸은 그대로 (architecture.md §8.1)
 
 ### 계약 변경 요청
-상태와 처리 기록은 `contracts/requests/README.md`. 계약 0.2.0(2026-10-22)에서 5건 받음(M1 4건, M4 1건). 하위 호환이라 열린 PR 셋은 그대로 통과(타입 검사·테스트 79개·시나리오 확인함). M3 1건은 위 결정 대기.
+상태와 처리 기록은 `contracts/requests/README.md`. 6건 모두 받음: 0.2.0(M1 4건, M4 1건, 하위 호환), 0.3.0(M3 특수학급 시간표, 하위 호환 아님).
 
-### merge 전 (PR 수정)
-- [ ] **M3 PR #3**: `now`를 D24 범위로 고치기. M3 세션에 "M3-questions.md의 M0 답을 반영해"
-- [ ] PR #1·#2·#3 merge → `pnpm-lock.yaml`은 merge 때 `pnpm install`로 다시 생성. merge 뒤 요청 파일을 `contracts/requests/done/`으로
+### merge 순서 (main을 깨뜨리지 않게)
+- [ ] 1. main(계약 0.3.0) push
+- [ ] 2. **PR #2 M1** merge — 0.3.0에서 그대로 통과 확인함(테스트 28, 시나리오 3개). lockfile은 `pnpm install`로 다시 생성
+- [ ] 3. **M3 PR #3**: m3 워크트리에 main을 합친 뒤 M3 세션에 "M3-questions.md의 M0 답을 반영해" → ① `now`를 D24 범위로 ② 0.3.0 특수학급 시간표(장소, `unplaced`). 지금은 0.3.0에서 타입 오류 3개·테스트 11개 실패
+- [ ] 4. **M4 PR #1**: m4 워크트리에 main을 합친 뒤 M4 세션에 "M4-questions.md의 M0 답을 반영해" → 새 학생 형식, 특수학급 시간표 파일 → `special_classes[].lessons`. 지금은 타입 오류 4개·테스트 4개 실패
+- [ ] 5. merge 뒤 요청 파일을 `contracts/requests/done/`으로
+
+### 화면 (D25로 바뀐 것)
+- [ ] 시안(`docs/screens`)과 M8: 학생 설정의 "과목별 수업 장소" 선택을 없애고, ③에 **특수학급 시간표 입력**(요일 × 교시 표, 특수학급마다) 추가. 장소 미정 칸 경고 표시
 
 ### M1 질문 중 사람이 확인할 것 (`m1-scheduler/tasks/M1-questions.md`)
 - [ ] 5번: 요청 명령마다 1단계(`REQUESTED`)를 하나씩 둠. 부재처럼 칸이 안 바뀌는 명령은 단계에 칸이 없음 → W5 화면에서 괜찮은지

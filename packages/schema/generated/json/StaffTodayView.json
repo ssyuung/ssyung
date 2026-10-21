@@ -1,6 +1,6 @@
 {
   "$id": "ssyung/StaffTodayView",
-  "x-contract-version": "0.2.0",
+  "x-contract-version": "0.3.0",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "properties": {
@@ -136,11 +136,6 @@
                 "pattern": "^\\d-\\d{1,2}$",
                 "description": "원반 (3-2)"
               },
-              "special_class": {
-                "type": "string",
-                "pattern": "^K\\d{1,2}$",
-                "description": "특수학급 코드 (K1)"
-              },
               "lessons": {
                 "type": "array",
                 "items": {
@@ -165,9 +160,17 @@
                       ]
                     },
                     "location": {
-                      "type": "string",
-                      "pattern": "^(\\d-\\d{1,2}|K\\d{1,2}|L\\d{2,3})$",
-                      "description": "장소: 반 코드(원반 교실) | K 코드(특수학급) | L 코드(특별실 등)"
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "pattern": "^(\\d-\\d{1,2}|K\\d{1,2}|L\\d{2,3})$",
+                          "description": "장소: 반 코드(원반 교실) | K 코드(특수학급) | L 코드(특별실 등)"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "특수학급 수업인데 장소를 정하지 못하면 null (D25)"
                     }
                   },
                   "required": [
@@ -183,7 +186,6 @@
               "code",
               "label",
               "class_group",
-              "special_class",
               "lessons"
             ]
           }

@@ -193,9 +193,9 @@
           "gaps": 1,
           "late": 1,
           "kinds": {
-            "moved": 5,
             "gap": 1,
-            "retimed": 1
+            "retimed": 1,
+            "moved": 5
           }
         },
         "B": {
@@ -203,9 +203,9 @@
           "gaps": 1,
           "late": 1,
           "kinds": {
-            "moved": 5,
             "gap": 1,
-            "retimed": 1
+            "retimed": 1,
+            "moved": 5
           }
         },
         "C": {
@@ -213,8 +213,8 @@
           "gaps": 2,
           "late": 0,
           "kinds": {
-            "moved": 5,
-            "gap": 2
+            "gap": 2,
+            "moved": 5
           }
         }
       }
@@ -263,8 +263,8 @@
           "late": 0,
           "kinds": {
             "removed": 1,
-            "moved": 1,
-            "added": 1
+            "added": 1,
+            "moved": 1
           }
         },
         "B": {
@@ -283,8 +283,8 @@
           "late": 0,
           "kinds": {
             "removed": 1,
-            "moved": 1,
-            "added": 1
+            "added": 1,
+            "moved": 1
           }
         }
       }
@@ -358,20 +358,19 @@
     },
     {
       "id": "S6",
-      "title": "묶음이 쪼개짐",
+      "title": "묶음이 쪼개짐 (특수학급 교실 이동)",
       "date": "2026-09-18",
       "trigger": {
         "type": "setup_change",
         "patch": {
-          "student_placement": {
-            "student": "S06",
-            "subject": "국어",
+          "special_class_location": {
+            "special_class": "K2",
             "location": "L05"
           }
         }
       },
-      "chain": "학생6 국어 수업 장소가 도서실(2층)로 → 학생3과 같던 묶음(4F→1F)이 4F→1F, 4F→2F 둘로 나뉨 → 이동 수요가 늘어 사람이 모자람 → 두 번째 이동 또는 공백",
-      "checks": "과목별 수업 장소(D20) 변경, 묶음 분리 → 수요 증가",
+      "chain": "K2 교실이 도서실(2층)로 → K2로 가던 이동이 4F→1F에서 4F→2F로 바뀌어 K1로 가는 학생과 같던 묶음이 둘로 나뉨 → 이동 수요가 늘어 사람이 모자람 → 두 번째 이동 또는 공백",
+      "checks": "특수학급 장소(SpecialClass.location) 변경, 묶음 분리 → 수요 증가",
       "expect": {
         "change_kinds_include": [
           "group",
@@ -415,7 +414,8 @@
             "added": 2
           }
         }
-      }
+      },
+      "baseline_note": "D25(특수학급 시간표) 이전 데이터로 계산한 값. 시안 엔진으로 입력을 만들 수 없어 M3 merge 뒤 입력 파일과 함께 다시 계산한다"
     },
     {
       "id": "S7",
@@ -435,27 +435,27 @@
       },
       "baseline_heuristic": {
         "A": {
-          "changed": 4,
-          "gaps": 3,
+          "changed": 6,
+          "gaps": 4,
           "late": 1,
           "kinds": {
-            "retimed": 2,
-            "gap": 2
+            "gap": 3,
+            "retimed": 3
           }
         },
         "B": {
           "changed": 0,
-          "gaps": 3,
-          "late": 3,
+          "gaps": 4,
+          "late": 4,
           "kinds": {}
         },
         "C": {
-          "changed": 5,
-          "gaps": 4,
+          "changed": 7,
+          "gaps": 5,
           "late": 0,
           "kinds": {
-            "retimed": 2,
-            "gap": 3
+            "gap": 4,
+            "retimed": 3
           }
         }
       }
@@ -513,7 +513,8 @@
             "gap": 3
           }
         }
-      }
+      },
+      "baseline_note": "D25(특수학급 시간표) 이전 데이터로 계산한 값. 시안 엔진으로 입력을 만들 수 없어 M3 merge 뒤 입력 파일과 함께 다시 계산한다"
     },
     {
       "id": "S9",
@@ -576,7 +577,8 @@
             "added": 2
           }
         }
-      }
+      },
+      "baseline_note": "D25(특수학급 시간표) 이전 데이터로 계산한 값. 시안 엔진으로 입력을 만들 수 없어 M3 merge 뒤 입력 파일과 함께 다시 계산한다"
     },
     {
       "id": "S10",
@@ -637,7 +639,8 @@
             "added": 2
           }
         }
-      }
+      },
+      "baseline_note": "D25(특수학급 시간표) 이전 데이터로 계산한 값. 시안 엔진으로 입력을 만들 수 없어 M3 merge 뒤 입력 파일과 함께 다시 계산한다"
     }
   ]
 }

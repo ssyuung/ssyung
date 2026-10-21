@@ -5,7 +5,7 @@ import {
   StaffCode, StudentCode, Subject, TeacherCode,
 } from "./ids.ts";
 import { BellSchedule, Day, Interval, Minute } from "./time.ts";
-import { SpecialClassSubject, SupportSubject } from "./dataset.ts";
+import { SupportSubject } from "./dataset.ts";
 
 export const School = z.object({
   id: Id,
@@ -32,10 +32,19 @@ export const ClassGroup = z.object({
   has_timetable: z.boolean().describe("시간표 자료가 없는 반(개발 데이터의 1-3)은 false"),
 });
 
+/** 특수학급 시간표 한 칸 (D25). 요일·시각 기준으로 매주 반복한다 */
+export const SpecialClassLesson = z.object({
+  day: Day,
+  start: Minute,
+  end: Minute,
+  subject: Subject,
+});
 export const SpecialClass = z.object({
   code: SpecialClassCode,
   location: LocationRef,
   teachers: z.array(TeacherCode),
+  lessons: z.array(SpecialClassLesson)
+    .describe("특수학급 시간표. 그 요일·시각에 이 과목을 특수학급에서 듣는 학생이 여기로 모인다"),
 });
 
 /** ①③ 결과를 한 번에: 학교, 일과, 장소, 반, 특수학급 */
@@ -66,8 +75,8 @@ export const Student = z.object({
   code: StudentCode,
   label: Label,
   class_group: ClassGroupCode,
-  special_class: SpecialClassCode,
-  special_class_subjects: z.array(SpecialClassSubject),
+  special_class_subjects: z.array(Subject)
+    .describe("특수학급에서 듣는 과목. 소속 특수학급은 없고, 장소는 그 요일·시각에 그 과목을 하는 특수학급 (D25)"),
   support_subjects: z.array(SupportSubject),
   support_note: z.string().max(500),
 });
@@ -167,6 +176,8 @@ export type School = z.infer<typeof School>;
 export type SchoolBundle = z.infer<typeof SchoolBundle>;
 export type Location = z.infer<typeof Location>;
 export type ClassGroup = z.infer<typeof ClassGroup>;
+export type SpecialClass = z.infer<typeof SpecialClass>;
+export type SpecialClassLesson = z.infer<typeof SpecialClassLesson>;
 export type ClassLesson = z.infer<typeof ClassLesson>;
 export type Timetable = z.infer<typeof Timetable>;
 export type Student = z.infer<typeof Student>;

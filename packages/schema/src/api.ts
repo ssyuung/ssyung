@@ -34,12 +34,11 @@ export const StudentDayRow = z.object({
   code: StudentCode,
   label: Label,
   class_group: ClassGroupCode,
-  special_class: SpecialClassCode,
   lessons: z.array(z.object({
     period: z.number().int(),
     subject: Subject,
     placement: z.enum(["homeroom", "special_class"]),
-    location: LocationRef,
+    location: LocationRef.nullable().describe("특수학급 수업인데 장소를 정하지 못하면 null (D25)"),
   })),
 });
 /** W2 학생 현황·W2b 지원인력 현황·T1 교사 앱이 공통으로 쓰는 하루 */

@@ -38,6 +38,30 @@
       ]
     },
     {
+      "id": "mv:2026-09-15:b1:1-1",
+      "kind": "move_group",
+      "date": "2026-09-15",
+      "start": 580,
+      "end": 590,
+      "headcount": 1,
+      "after_period": 1,
+      "from_floor": 1,
+      "to_floor": 1,
+      "students": [
+        {
+          "student": "S02",
+          "from": "K2",
+          "to": "K1",
+          "late_cost": 1
+        }
+      ],
+      "late_cost": 1,
+      "second_trip": {
+        "start": 590,
+        "end": 600
+      }
+    },
+    {
       "id": "mv:2026-09-15:b1:1-2",
       "kind": "move_group",
       "date": "2026-09-15",
@@ -50,7 +74,7 @@
       "students": [
         {
           "student": "S01",
-          "from": "K1",
+          "from": "K2",
           "to": "3-2",
           "late_cost": 2
         }
@@ -276,7 +300,7 @@
         {
           "student": "S01",
           "from": "3-2",
-          "to": "K1",
+          "to": "K2",
           "late_cost": 1
         }
       ],
@@ -446,7 +470,7 @@
       "students": [
         {
           "student": "S01",
-          "from": "K1",
+          "from": "K2",
           "to": "3-2",
           "late_cost": 0
         }
@@ -525,7 +549,7 @@
         {
           "student": "S03",
           "from": "5-3",
-          "to": "K2",
+          "to": "K1",
           "late_cost": 1
         }
       ],
@@ -862,6 +886,30 @@
         ]
       },
       {
+        "id": "mv:2026-09-15:b1:1-1",
+        "kind": "move_group",
+        "date": "2026-09-15",
+        "start": 580,
+        "end": 590,
+        "headcount": 1,
+        "after_period": 1,
+        "from_floor": 1,
+        "to_floor": 1,
+        "students": [
+          {
+            "student": "S02",
+            "from": "K2",
+            "to": "K1",
+            "late_cost": 1
+          }
+        ],
+        "late_cost": 1,
+        "second_trip": {
+          "start": 590,
+          "end": 600
+        }
+      },
+      {
         "id": "mv:2026-09-15:b1:1-2",
         "kind": "move_group",
         "date": "2026-09-15",
@@ -874,7 +922,7 @@
         "students": [
           {
             "student": "S01",
-            "from": "K1",
+            "from": "K2",
             "to": "3-2",
             "late_cost": 2
           }
@@ -1100,7 +1148,7 @@
           {
             "student": "S01",
             "from": "3-2",
-            "to": "K1",
+            "to": "K2",
             "late_cost": 1
           }
         ],
@@ -1270,7 +1318,7 @@
         "students": [
           {
             "student": "S01",
-            "from": "K1",
+            "from": "K2",
             "to": "3-2",
             "late_cost": 0
           }
@@ -1349,7 +1397,7 @@
           {
             "student": "S03",
             "from": "5-3",
-            "to": "K2",
+            "to": "K1",
             "late_cost": 1
           }
         ],
@@ -1617,7 +1665,7 @@
     ],
     "assignments": [
       {
-        "staff": "A03",
+        "staff": "A01",
         "demand_id": "les:2026-09-15:S07:p1",
         "date": "2026-09-15",
         "start": 540,
@@ -1645,7 +1693,7 @@
       },
       {
         "staff": "A03",
-        "demand_id": "mv:2026-09-15:b1:4-1",
+        "demand_id": "mv:2026-09-15:b1:1-1",
         "date": "2026-09-15",
         "start": 580,
         "end": 590,
@@ -1663,11 +1711,11 @@
       },
       {
         "staff": "A02",
-        "demand_id": "les:2026-09-15:S01:p2",
+        "demand_id": "mv:2026-09-15:b1:4-1",
         "date": "2026-09-15",
         "start": 590,
-        "end": 630,
-        "mode": "normal",
+        "end": 600,
+        "mode": "second_trip",
         "pinned": false
       },
       {
@@ -1681,6 +1729,15 @@
       },
       {
         "staff": "A01",
+        "demand_id": "les:2026-09-15:S01:p2",
+        "date": "2026-09-15",
+        "start": 600,
+        "end": 630,
+        "mode": "normal",
+        "pinned": false
+      },
+      {
+        "staff": "A02",
         "demand_id": "les:2026-09-15:S04:p2",
         "date": "2026-09-15",
         "start": 600,
@@ -1690,15 +1747,6 @@
       },
       {
         "staff": "A01",
-        "demand_id": "mv:2026-09-15:b2:1-3",
-        "date": "2026-09-15",
-        "start": 630,
-        "end": 640,
-        "mode": "normal",
-        "pinned": false
-      },
-      {
-        "staff": "A02",
         "demand_id": "mv:2026-09-15:b2:2-1",
         "date": "2026-09-15",
         "start": 630,
@@ -1707,8 +1755,17 @@
         "pinned": false
       },
       {
-        "staff": "A03",
+        "staff": "A02",
         "demand_id": "mv:2026-09-15:b2:3-1",
+        "date": "2026-09-15",
+        "start": 630,
+        "end": 640,
+        "mode": "normal",
+        "pinned": false
+      },
+      {
+        "staff": "A03",
+        "demand_id": "mv:2026-09-15:b2:1-3",
         "date": "2026-09-15",
         "start": 630,
         "end": 640,
@@ -1735,7 +1792,7 @@
       },
       {
         "staff": "A03",
-        "demand_id": "les:2026-09-15:S03:p3",
+        "demand_id": "les:2026-09-15:S02:p3",
         "date": "2026-09-15",
         "start": 640,
         "end": 680,
@@ -1744,7 +1801,7 @@
       },
       {
         "staff": "A01",
-        "demand_id": "les:2026-09-15:S02:p3",
+        "demand_id": "les:2026-09-15:S03:p3",
         "date": "2026-09-15",
         "start": 650,
         "end": 680,
@@ -1753,7 +1810,7 @@
       },
       {
         "staff": "A01",
-        "demand_id": "mv:2026-09-15:b3:4-1",
+        "demand_id": "mv:2026-09-15:b3:1-4",
         "date": "2026-09-15",
         "start": 680,
         "end": 690,
@@ -1771,7 +1828,7 @@
       },
       {
         "staff": "A03",
-        "demand_id": "mv:2026-09-15:b3:1-4",
+        "demand_id": "mv:2026-09-15:b3:4-1",
         "date": "2026-09-15",
         "start": 680,
         "end": 690,
@@ -1780,7 +1837,7 @@
       },
       {
         "staff": "A01",
-        "demand_id": "les:2026-09-15:S02:p4",
+        "demand_id": "les:2026-09-15:S06:p4",
         "date": "2026-09-15",
         "start": 690,
         "end": 730,
@@ -1798,7 +1855,7 @@
       },
       {
         "staff": "A03",
-        "demand_id": "les:2026-09-15:S06:p4",
+        "demand_id": "les:2026-09-15:S02:p4",
         "date": "2026-09-15",
         "start": 690,
         "end": 730,
@@ -1807,15 +1864,6 @@
       },
       {
         "staff": "A01",
-        "demand_id": "les:2026-09-15:S02:p5",
-        "date": "2026-09-15",
-        "start": 780,
-        "end": 820,
-        "mode": "normal",
-        "pinned": false
-      },
-      {
-        "staff": "A02",
         "demand_id": "les:2026-09-15:S01:p5",
         "date": "2026-09-15",
         "start": 780,
@@ -1824,7 +1872,7 @@
         "pinned": false
       },
       {
-        "staff": "A03",
+        "staff": "A02",
         "demand_id": "les:2026-09-15:S03:p5",
         "date": "2026-09-15",
         "start": 780,
@@ -1833,7 +1881,16 @@
         "pinned": false
       },
       {
-        "staff": "A01",
+        "staff": "A03",
+        "demand_id": "les:2026-09-15:S02:p5",
+        "date": "2026-09-15",
+        "start": 780,
+        "end": 820,
+        "mode": "normal",
+        "pinned": false
+      },
+      {
+        "staff": "A03",
         "demand_id": "mv:2026-09-15:b5:4-1",
         "date": "2026-09-15",
         "start": 820,
@@ -1842,7 +1899,7 @@
         "pinned": false
       },
       {
-        "staff": "A03",
+        "staff": "A01",
         "demand_id": "les:2026-09-15:S06:p6",
         "date": "2026-09-15",
         "start": 830,

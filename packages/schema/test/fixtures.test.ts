@@ -54,6 +54,7 @@ test("dataset/: 파일 형식", () => {
   check(S.FloorLayoutFile, read(`${d}/db/서울개포초등학교/층배치.json`), "층배치.json");
   check(S.StudentsFile, read(`${d}/db/서울개포초등학교/학생.json`), "학생.json");
   check(S.StaffFile, read(`${d}/db/서울개포초등학교/지원인력.json`), "지원인력.json");
+  check(S.SpecialClassTimetableFile, read(`${d}/db/서울개포초등학교/특수학급시간표.json`), "특수학급시간표.json");
   check(S.NeisClassInfoFile, read(`${d}/api/서울개포초등학교/학급정보.json`).slice(1), "학급정보.json");
   check(S.NeisTimetableFile, read(`${d}/api/서울개포초등학교/초등학교시간표.json`).slice(1), "초등학교시간표.json");
 });
@@ -81,4 +82,14 @@ test("계약: 공용 시간 함수와 기본 일과", () => {
 test("fixtures/change-requests: 해석기 평가 세트", () => {
   const set = check(S.ChangeRequestSet, read("fixtures/change-requests/cases.json"), "cases.json") as z.infer<typeof S.ChangeRequestSet>;
   for (const c of set.cases) assert.equal(c.expected.unsupported === null, c.expected.ops.length > 0, `${c.id}: unsupported와 ops가 어긋남`);
+});
+
+test("D25: 9월 학생의 특수학급 수업은 모두 특수학급 하나로 정해진다(개발 데이터)", () => {
+  const bundle = read("fixtures/mock/domain/school.json") as S.SchoolBundle;
+  const demand = read("fixtures/mock/demand/2026-09.json") as S.DemandSet;
+  assert.deepEqual(demand.unplaced, []);
+  for (const k of bundle.special_classes) assert.ok(k.lessons.length > 0, `${k.code} 시간표`);
+  const moves = demand.demands.filter((d) => d.kind === "move_group") as S.MoveGroupDemand[];
+  const specialEnds = moves.flatMap((m) => m.students.flatMap((x) => [x.from, x.to])).filter((l) => l.startsWith("K"));
+  assert.ok(new Set(specialEnds).size === 2, "K1·K2 둘 다 이동 목적지로 쓰임");
 });

@@ -1,6 +1,6 @@
 {
   "$id": "ssyung/SchoolBundle",
-  "x-contract-version": "0.2.0",
+  "x-contract-version": "0.3.0",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "properties": {
@@ -241,12 +241,58 @@
               "pattern": "^T\\d{2,3}$",
               "description": "교사 코드 (T01)"
             }
+          },
+          "lessons": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "day": {
+                  "type": "string",
+                  "enum": [
+                    "MON",
+                    "TUE",
+                    "WED",
+                    "THU",
+                    "FRI"
+                  ]
+                },
+                "start": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1440,
+                  "multipleOf": 10,
+                  "description": "자정부터의 분, 10의 배수"
+                },
+                "end": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1440,
+                  "multipleOf": 10,
+                  "description": "자정부터의 분, 10의 배수"
+                },
+                "subject": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 20,
+                  "description": "NEIS 과목명 (과학)"
+                }
+              },
+              "required": [
+                "day",
+                "start",
+                "end",
+                "subject"
+              ]
+            },
+            "description": "특수학급 시간표. 그 요일·시각에 이 과목을 특수학급에서 듣는 학생이 여기로 모인다"
           }
         },
         "required": [
           "code",
           "location",
-          "teachers"
+          "teachers",
+          "lessons"
         ]
       }
     }

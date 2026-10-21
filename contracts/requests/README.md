@@ -18,12 +18,9 @@
 | `M1-validate-warnings` | M1 | 받음 (하위 호환으로) | 0.2.0: `ValidateOutput.warnings`를 선택 필드로(쓰지 않음, 1.0에서 뺌). API용 `ScheduleValidateOutput`(warnings 필수)을 `schedule.validate`·`updateDraft` 출력으로. 목데이터 엔진 출력에서 warnings 뺌 | M1: `warnings: []` 지우기. M7: 경고 계산 |
 | `M1-scenario-inputs` | M1 | 받음 | 0.2.0: `fixtures/scenarios/inputs/S1·S2·S3·S4·S5·S7.input.json`(시안 엔진이 수요를 만들 수 있는 6개), `CascadeScenario.input`. S6·S8·S9·S10은 M3 merge 뒤 그 결과로 | `scenario-lib.ts`의 입력 조립을 지우고 파일 읽기. 입력이 있는 6개 시나리오 켜기 |
 | `M4-last-code-no` | M4 | 받음 | 0.2.0: `StudentsFile`·`StaffFile`에 `last_code_no` 선택 필드 | 원본 JSON 직접 읽기를 스키마 파싱으로 |
-| `M3-special-class-timetable` | M3 | **보류 (사람 결정 필요)** | — | 그대로 우회(학생별 과목 장소) |
+| `M3-special-class-timetable` | M3 | 받음 (사람 결정 D25) | **0.3.0 (하위 호환 아님)**: `SpecialClass.lessons`(요일·시각), `Student.special_class` 삭제, `special_class_subjects`는 과목 목록, `DemandSet.unplaced`, 경고 `SPECIAL_CLASS_UNPLACED`, `SetPlacement.location` 설명, `dataset/db/특수학급시간표.json`, `SpecialClassTimetableFile`. 시나리오 S6을 "K2 교실 이동"으로 다시 정의, 기준선을 데이터로 다시 계산 | M3: 장소를 특수학급 시간표로, 장소 미정은 `unplaced`. M4: 새 학생 형식, 시간표 파일 → `SchoolBundle.special_classes[].lessons` |
 
-M3 요청에서 정해야 할 것:
-- 특수학급 시간표가 요일 기준인지 날짜 기준인지
-- 학생별 과목 장소(`special_class_subjects.location`)를 남길지
-- `Student.special_class`(소속 특수학급)를 없앨지
+M3 요청의 결정 (2026-10-22, D25): 시간표는 요일·시각 기준(요일마다 다름), 학생별 과목 장소는 없앰(시간표로만), 소속 특수학급 필드는 없앰. 그 시각 그 과목을 하는 특수학급이 없거나 둘 이상이면 특수학급 수업으로 보되 장소 미정(이동 수요 없음, 경고).
 
 ## 같이 반영한 M0 정리 (0.2.0)
 - 공용 시간 함수 `hhmmToMinute`, `minuteToHHMM`, `ceil10`, `weekdayOf`와 기본 일과 `DEFAULT_BELL`을 `@ssyung/schema`에 둠. 모듈마다 따로 만들던 것을 대신한다.

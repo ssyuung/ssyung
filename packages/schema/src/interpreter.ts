@@ -13,7 +13,7 @@ export const InterpretContext = z.object({
     .record(ClassGroupCode, z.record(IsoDate, z.array(Subject.nullable())))
     .describe("반 → 날짜 → 교시별 과목 (index 0 = 1교시). 학생이 속한 반만"),
   codes: z.object({
-    students: z.array(z.object({ code: StudentCode, label: Label, class_group: ClassGroupCode, special_class: z.string() })),
+    students: z.array(z.object({ code: StudentCode, label: Label, class_group: ClassGroupCode })),
     staff: z.array(z.object({ code: StaffCode, label: Label })),
     locations: z.array(z.object({ code: LocationRef, label: Label })),
   }),

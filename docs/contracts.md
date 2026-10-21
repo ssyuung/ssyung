@@ -1,6 +1,6 @@
 # ssyung 계약과 목데이터
 
-> 상태: 계약 0.2.0 (2026-10-22). 바뀐 것과 요청 처리 기록: [contracts/requests/README.md](../contracts/requests/README.md)
+> 상태: 계약 0.3.0 (2026-10-22, 특수학급 시간표 D25는 하위 호환 아님). 바뀐 것과 요청 처리 기록: [contracts/requests/README.md](../contracts/requests/README.md)
 > 관련 문서: [architecture.md](architecture.md), [agent-development.md](agent-development.md)
 
 모듈마다 다른 브랜치에서 동시에 개발할 수 있도록 **모듈 사이를 오가는 데이터 형식**을 `packages/schema`(zod)에 고정하고, 그 형식을 그대로 따르는 **목데이터**를 `fixtures/mock/`에 둔다. 각 모듈은 상대 모듈이 없어도 목데이터를 입력으로 받고, 자기 출력을 목데이터와 같은 형식으로 내면 된다.
@@ -43,6 +43,7 @@ pnpm mock:build    # dataset/ + 화면 시안 엔진 → fixtures/mock/ 다시 �
 - **설명 문장은 계약에 없다.** 이유 코드와 수요 id만 오가고, 문장은 `packages/core`가 만든다. 예외로 `ChangeRequest.summary`(해석 확인 문장)는 서버가 만들어 넘긴다.
 - **읽기 화면은 `view.*` 프로시저**로 서버가 조립한다(`DayView`). 화면 개발이 DB 구조에 묶이지 않게 하기 위해서다.
 - **이름 필드는 없다.** `label`은 별칭(학생1, 지원인력1)이다.
+- **특수학급 장소는 특수학급 시간표로 (D25).** 학생은 `special_class_subjects`(과목 목록)만 갖고 소속 특수학급이 없다. 장소 = 그 요일·시각에 그 과목을 하는 특수학급(`SchoolBundle.special_classes[].lessons`). 하나로 안 정해지면 `DemandSet.unplaced`(장소 미정, 이동 수요 없음)와 경고 `SPECIAL_CLASS_UNPLACED`. 개발 데이터는 전부 하나로 정해진다.
 - **오늘 변경은 요청 시각부터 (D24).** `ProposeInput.now`(날짜, 10분 올림 분). `now` 이후에 시작하는 칸만 바뀌고, 진행 중인 칸과 지난 칸은 그대로다. 수요 생성은 오늘 변경을 그 칸들에만 적용하고, 배치 엔진은 `now` 이전에 시작한 이전 배정을 고정한다. 목데이터의 `now`는 `null`이다(시안 엔진이 고정을 하지 않음).
 - **배치 경고는 API가 계산한다.** 엔진의 `ValidateOutput.warnings`는 쓰지 않고, `schedule.validate` 출력(`ScheduleValidateOutput`)에만 있다.
 

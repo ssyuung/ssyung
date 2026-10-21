@@ -137,7 +137,7 @@ export const Violation = z.object({
   end: Minute,
 });
 export const Warning = z.object({
-  code: z.enum(["SPECIAL_CLASS_CROWDED", "NO_SPECIAL_TEACHER"]),
+  code: z.enum(["SPECIAL_CLASS_CROWDED", "NO_SPECIAL_TEACHER", "SPECIAL_CLASS_UNPLACED"]),
   date: IsoDate,
   start: Minute,
   end: Minute,
