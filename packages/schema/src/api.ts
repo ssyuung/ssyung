@@ -13,7 +13,7 @@ import {
 import { FloorLayoutFile } from "./dataset.ts";
 import { Demand, DemandId } from "./demand.ts";
 import { ChangeOps } from "./change-ops.ts";
-import { Assignment, Metrics, Option, Shortfall, ValidateOutput } from "./scheduler.ts";
+import { Assignment, Metrics, Option, Shortfall, ValidateOutput, Warning } from "./scheduler.ts";
 
 // ---------- 오류 ----------
 export const ApiErrorCode = z.enum([
@@ -34,12 +34,11 @@ export const StudentDayRow = z.object({
   code: StudentCode,
   label: Label,
   class_group: ClassGroupCode,
-  special_class: SpecialClassCode,
   lessons: z.array(z.object({
     period: z.number().int(),
     subject: Subject,
     placement: z.enum(["homeroom", "special_class"]),
-    location: LocationRef,
+    location: LocationRef.nullable().describe("특수학급 수업인데 장소를 정하지 못하면 null (D25)"),
   })),
 });
 /** W2 학생 현황·W2b 지원인력 현황·T1 교사 앱이 공통으로 쓰는 하루 */
@@ -92,6 +91,9 @@ export const Proposal = z.object({
   recommended: z.string().regex(/^[A-Z]$/),
 });
 
+/** 엔진 검증 결과 + 배치 경고. 경고는 특수학급 배치·교사 정보로 서버가 계산한다 */
+export const ScheduleValidateOutput = ValidateOutput.omit({ warnings: true }).extend({ warnings: z.array(Warning) });
+
 // ---------- 프로시저 ----------
 const ok = z.object({ ok: z.literal(true) });
 const p = <I extends z.ZodType, O extends z.ZodType>(input: I, output: O, caller: string) => ({ input, output, caller });
@@ -122,8 +124,8 @@ export const procedures = {
   // 배정 (W4)
   "schedule.generate": p(z.object({ date_from: IsoDate, date_to: IsoDate }),
     z.object({ version: ScheduleVersion, option: Option }), "교사"),
-  "schedule.validate": p(z.object({ version_id: Id, date: IsoDate, assignments: z.array(Assignment) }), ValidateOutput, "교사"),
-  "schedule.updateDraft": p(z.object({ version_id: Id, date: IsoDate, assignments: z.array(Assignment) }), ValidateOutput, "교사"),
+  "schedule.validate": p(z.object({ version_id: Id, date: IsoDate, assignments: z.array(Assignment) }), ScheduleValidateOutput, "교사"),
+  "schedule.updateDraft": p(z.object({ version_id: Id, date: IsoDate, assignments: z.array(Assignment) }), ScheduleValidateOutput, "교사"),
   "schedule.activate": p(z.object({ version_id: Id }), z.object({ version: ScheduleVersion, notified: z.array(StaffCode) }), "교사"),
   "schedule.rollback": p(z.object({ version_id: Id }), ScheduleVersion, "교사"),
   // 변경 요청 (W5·T3)

@@ -6,12 +6,8 @@
       "input": {
         "label": "학생8",
         "class_group": "6-2",
-        "special_class": "K2",
         "special_class_subjects": [
-          {
-            "subject": "국어",
-            "location": "K2"
-          }
+          "국어"
         ],
         "support_subjects": [
           {
@@ -27,12 +23,8 @@
         "code": "S08",
         "label": "학생8",
         "class_group": "6-2",
-        "special_class": "K2",
         "special_class_subjects": [
-          {
-            "subject": "국어",
-            "location": "K2"
-          }
+          "국어"
         ],
         "support_subjects": [
           {
@@ -50,12 +42,8 @@
       "input": {
         "label": "홍길동",
         "class_group": "6-2",
-        "special_class": "K2",
         "special_class_subjects": [
-          {
-            "subject": "국어",
-            "location": "K2"
-          }
+          "국어"
         ],
         "support_subjects": [
           {

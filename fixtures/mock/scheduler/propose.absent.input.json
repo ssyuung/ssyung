@@ -2,6 +2,7 @@
   "dates": [
     "2026-09-18"
   ],
+  "now": null,
   "demands": [
     {
       "id": "les:2026-09-18:S05:p1",
@@ -543,7 +544,7 @@
         "students": [
           {
             "student": "S03",
-            "from": "K2",
+            "from": "K1",
             "to": "5-3",
             "late_cost": 0
           }

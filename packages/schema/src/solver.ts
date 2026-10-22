@@ -10,6 +10,7 @@ export const AssignRequest = z.object({
   staff: z.array(StaffWindow),
   pinned: z.array(Assignment),
   previous_assignments: z.array(Assignment),
+  frozen: z.array(Assignment).optional().describe("now 이전이라 바꿀 수 없는 배정 (D24). pinned처럼 그대로 둔다"),
   policy: Policy,
   time_limit_ms: z.number().int().min(100).max(60000),
 });

@@ -41,33 +41,42 @@ export const FloorLayoutFile = z.object({
   rooms: z.array(z.object({ code: RoomCode, label: Label, floor: z.number().int().min(1).nullable(), outdoor: z.boolean() })),
 });
 
-export const SpecialClassSubject = z.object({
-  subject: Subject,
-  location: LocationRef.describe("그 과목 수업 장소. 과목마다 다를 수 있음 (D20)"),
-});
 export const SupportSubject = z.object({
   subject: Subject,
   need_start: z.boolean(),
   need_mid: z.boolean(),
   need_end: z.boolean(),
 });
+const LastCodeNo = z.number().int().min(0).optional()
+  .describe("지금까지 발급한 가장 큰 코드 번호. 지운 번호는 다시 쓰지 않는다. 없으면 남은 코드의 최댓값");
+
 export const StudentsFile = z.object({
   _note: z.string().optional(),
+  last_code_no: LastCodeNo,
   students: z.array(
     z.object({
       code: StudentCode,
       label: Label,
       class: ClassGroupCode,
-      special_class: SpecialClassCode,
-      special_class_subjects: z.array(SpecialClassSubject),
+      special_class_subjects: z.array(Subject).describe("특수학급에서 듣는 과목. 장소는 특수학급 시간표로 정한다 (D25)"),
       support_subjects: z.array(SupportSubject),
       support_note: z.string().max(500),
     }),
   ),
 });
 
+/** dataset/db/<학교>/특수학급시간표.json. 요일·시각 기준, 매주 반복 (D25) */
+export const SpecialClassTimetableFile = z.object({
+  _note: z.string().optional(),
+  special_classes: z.array(z.object({
+    code: SpecialClassCode,
+    lessons: z.array(z.object({ day: Day, start: HHMM, end: HHMM, subject: Subject })),
+  })),
+});
+
 export const StaffFile = z.object({
   _note: z.string().optional(),
+  last_code_no: LastCodeNo,
   staff: z.array(
     z.object({
       code: StaffCode,

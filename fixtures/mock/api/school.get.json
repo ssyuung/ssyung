@@ -707,6 +707,116 @@
             "location": "K1",
             "teachers": [
               "T01"
+            ],
+            "lessons": [
+              {
+                "day": "MON",
+                "start": 590,
+                "end": 630,
+                "subject": "국어"
+              },
+              {
+                "day": "MON",
+                "start": 780,
+                "end": 820,
+                "subject": "수학"
+              },
+              {
+                "day": "TUE",
+                "start": 540,
+                "end": 580,
+                "subject": "수학"
+              },
+              {
+                "day": "TUE",
+                "start": 590,
+                "end": 630,
+                "subject": "수학"
+              },
+              {
+                "day": "TUE",
+                "start": 640,
+                "end": 680,
+                "subject": "국어"
+              },
+              {
+                "day": "TUE",
+                "start": 690,
+                "end": 730,
+                "subject": "국어"
+              },
+              {
+                "day": "WED",
+                "start": 540,
+                "end": 580,
+                "subject": "국어"
+              },
+              {
+                "day": "WED",
+                "start": 590,
+                "end": 630,
+                "subject": "수학"
+              },
+              {
+                "day": "WED",
+                "start": 640,
+                "end": 680,
+                "subject": "수학"
+              },
+              {
+                "day": "WED",
+                "start": 780,
+                "end": 820,
+                "subject": "국어"
+              },
+              {
+                "day": "THU",
+                "start": 540,
+                "end": 580,
+                "subject": "국어"
+              },
+              {
+                "day": "THU",
+                "start": 590,
+                "end": 630,
+                "subject": "국어"
+              },
+              {
+                "day": "THU",
+                "start": 640,
+                "end": 680,
+                "subject": "국어"
+              },
+              {
+                "day": "THU",
+                "start": 690,
+                "end": 730,
+                "subject": "국어"
+              },
+              {
+                "day": "THU",
+                "start": 780,
+                "end": 820,
+                "subject": "수학"
+              },
+              {
+                "day": "FRI",
+                "start": 540,
+                "end": 580,
+                "subject": "국어"
+              },
+              {
+                "day": "FRI",
+                "start": 590,
+                "end": 630,
+                "subject": "수학"
+              },
+              {
+                "day": "FRI",
+                "start": 780,
+                "end": 820,
+                "subject": "수학"
+              }
             ]
           },
           {
@@ -714,6 +824,92 @@
             "location": "K2",
             "teachers": [
               "T02"
+            ],
+            "lessons": [
+              {
+                "day": "MON",
+                "start": 540,
+                "end": 580,
+                "subject": "국어"
+              },
+              {
+                "day": "MON",
+                "start": 590,
+                "end": 630,
+                "subject": "수학"
+              },
+              {
+                "day": "MON",
+                "start": 780,
+                "end": 820,
+                "subject": "국어"
+              },
+              {
+                "day": "MON",
+                "start": 830,
+                "end": 870,
+                "subject": "수학"
+              },
+              {
+                "day": "TUE",
+                "start": 540,
+                "end": 580,
+                "subject": "국어"
+              },
+              {
+                "day": "TUE",
+                "start": 590,
+                "end": 630,
+                "subject": "국어"
+              },
+              {
+                "day": "TUE",
+                "start": 640,
+                "end": 680,
+                "subject": "수학"
+              },
+              {
+                "day": "TUE",
+                "start": 830,
+                "end": 870,
+                "subject": "국어"
+              },
+              {
+                "day": "WED",
+                "start": 590,
+                "end": 630,
+                "subject": "국어"
+              },
+              {
+                "day": "THU",
+                "start": 590,
+                "end": 630,
+                "subject": "수학"
+              },
+              {
+                "day": "THU",
+                "start": 690,
+                "end": 730,
+                "subject": "수학"
+              },
+              {
+                "day": "FRI",
+                "start": 640,
+                "end": 680,
+                "subject": "국어"
+              },
+              {
+                "day": "FRI",
+                "start": 690,
+                "end": 730,
+                "subject": "국어"
+              },
+              {
+                "day": "FRI",
+                "start": 830,
+                "end": 870,
+                "subject": "수학"
+              }
             ]
           }
         ]

@@ -1,6 +1,6 @@
 {
   "$id": "ssyung/InterpretRequest",
-  "x-contract-version": "0.1.0",
+  "x-contract-version": "0.3.0",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "properties": {
@@ -202,16 +202,12 @@
                     "type": "string",
                     "pattern": "^\\d-\\d{1,2}$",
                     "description": "원반 (3-2)"
-                  },
-                  "special_class": {
-                    "type": "string"
                   }
                 },
                 "required": [
                   "code",
                   "label",
-                  "class_group",
-                  "special_class"
+                  "class_group"
                 ]
               }
             },
