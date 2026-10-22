@@ -5,3 +5,8 @@ node_modules/
 .agent-state/
 .data/
 .next/
+
+# 환경 변수 (API 키 등). 예시 파일(.env.example)만 커밋한다
+.env
+.env.*
+!.env.example
