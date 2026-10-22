@@ -175,43 +175,6 @@
               ]
             },
             {
-              "code": "S05",
-              "label": "학생5",
-              "class_group": "4-7",
-              "lessons": [
-                {
-                  "period": 1,
-                  "subject": "영어",
-                  "placement": "homeroom",
-                  "location": "4-7"
-                },
-                {
-                  "period": 2,
-                  "subject": "과학",
-                  "placement": "homeroom",
-                  "location": "4-7"
-                },
-                {
-                  "period": 3,
-                  "subject": "자율·자치활동",
-                  "placement": "homeroom",
-                  "location": "4-7"
-                },
-                {
-                  "period": 4,
-                  "subject": "자율·자치활동",
-                  "placement": "homeroom",
-                  "location": "4-7"
-                },
-                {
-                  "period": 5,
-                  "subject": "체육",
-                  "placement": "homeroom",
-                  "location": "4-7"
-                }
-              ]
-            },
-            {
               "code": "S06",
               "label": "학생6",
               "class_group": "5-5",
@@ -370,23 +333,23 @@
               }
             },
             {
-              "id": "les:2026-09-18:S05:p2",
+              "id": "les:2026-09-18:S03:p2",
               "kind": "lesson",
               "date": "2026-09-18",
               "start": 590,
               "end": 630,
               "headcount": 1,
-              "student": "S05",
+              "student": "S03",
               "period": 2,
               "subject": "과학",
-              "location": "4-7",
-              "floor": 3,
+              "location": "5-3",
+              "floor": 4,
               "segments": [
                 {
                   "segment": "start",
                   "start": 590,
                   "end": 600,
-                  "priority": "HIGH"
+                  "priority": "LOW"
                 },
                 {
                   "segment": "mid",
@@ -463,16 +426,16 @@
               }
             },
             {
-              "id": "les:2026-09-18:S06:p4",
+              "id": "les:2026-09-18:S03:p4",
               "kind": "lesson",
               "date": "2026-09-18",
               "start": 690,
               "end": 730,
               "headcount": 1,
-              "student": "S06",
+              "student": "S03",
               "period": 4,
-              "subject": "과학",
-              "location": "5-5",
+              "subject": "음악",
+              "location": "5-3",
               "floor": 4,
               "segments": [
                 {
@@ -485,27 +448,27 @@
                   "segment": "mid",
                   "start": 700,
                   "end": 720,
-                  "priority": "HIGH"
+                  "priority": "LOW"
                 },
                 {
                   "segment": "end",
                   "start": 720,
                   "end": 730,
-                  "priority": "LOW"
+                  "priority": "HIGH"
                 }
               ]
             },
             {
-              "id": "les:2026-09-18:S07:p5",
+              "id": "les:2026-09-18:S03:p5",
               "kind": "lesson",
               "date": "2026-09-18",
               "start": 780,
               "end": 820,
               "headcount": 1,
-              "student": "S07",
+              "student": "S03",
               "period": 5,
-              "subject": "과학",
-              "location": "5-6",
+              "subject": "영어",
+              "location": "5-3",
               "floor": 4,
               "segments": [
                 {
@@ -518,13 +481,13 @@
                   "segment": "mid",
                   "start": 790,
                   "end": 810,
-                  "priority": "LOW"
+                  "priority": "HIGH"
                 },
                 {
                   "segment": "end",
                   "start": 810,
                   "end": 820,
-                  "priority": "LOW"
+                  "priority": "HIGH"
                 }
               ]
             },
@@ -580,7 +543,7 @@
             },
             {
               "staff": "A02",
-              "demand_id": "les:2026-09-18:S05:p2",
+              "demand_id": "les:2026-09-18:S03:p2",
               "date": "2026-09-18",
               "start": 590,
               "end": 630,
@@ -607,7 +570,7 @@
             },
             {
               "staff": "A02",
-              "demand_id": "les:2026-09-18:S06:p4",
+              "demand_id": "les:2026-09-18:S03:p4",
               "date": "2026-09-18",
               "start": 690,
               "end": 730,
@@ -616,7 +579,7 @@
             },
             {
               "staff": "A02",
-              "demand_id": "les:2026-09-18:S07:p5",
+              "demand_id": "les:2026-09-18:S03:p5",
               "date": "2026-09-18",
               "start": 780,
               "end": 820,
@@ -644,16 +607,6 @@
                 "code": "A02"
               },
               "checked_at": "2026-09-18T08:46:00+09:00"
-            },
-            {
-              "date": "2026-09-18",
-              "student": "S05",
-              "status": "present",
-              "checked_by": {
-                "kind": "staff",
-                "code": "A01"
-              },
-              "checked_at": "2026-09-18T08:50:00+09:00"
             },
             {
               "date": "2026-09-18",
@@ -695,9 +648,9 @@
           "notes": [],
           "metrics": {
             "staff_minutes": {
-              "A01": 110,
+              "A01": 190,
               "A02": 200,
-              "A03": 170
+              "A03": 90
             }
           }
         },

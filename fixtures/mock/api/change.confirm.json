@@ -86,7 +86,7 @@
               },
               {
                 "staff": "A02",
-                "demand_id": "les:2026-09-18:S05:p2",
+                "demand_id": "les:2026-09-18:S03:p2",
                 "date": "2026-09-18",
                 "start": 590,
                 "end": 630,
@@ -95,7 +95,7 @@
               },
               {
                 "staff": "A03",
-                "demand_id": "les:2026-09-18:S03:p2",
+                "demand_id": "les:2026-09-18:S05:p2",
                 "date": "2026-09-18",
                 "start": 590,
                 "end": 630,
@@ -148,7 +148,7 @@
                 "pinned": false
               },
               {
-                "staff": "A02",
+                "staff": "A01",
                 "demand_id": "les:2026-09-18:S06:p4",
                 "date": "2026-09-18",
                 "start": 690,
@@ -157,7 +157,7 @@
                 "pinned": false
               },
               {
-                "staff": "A03",
+                "staff": "A02",
                 "demand_id": "les:2026-09-18:S03:p4",
                 "date": "2026-09-18",
                 "start": 690,
@@ -166,7 +166,7 @@
                 "pinned": false
               },
               {
-                "staff": "A02",
+                "staff": "A01",
                 "demand_id": "les:2026-09-18:S07:p5",
                 "date": "2026-09-18",
                 "start": 780,
@@ -175,7 +175,7 @@
                 "pinned": false
               },
               {
-                "staff": "A03",
+                "staff": "A02",
                 "demand_id": "les:2026-09-18:S03:p5",
                 "date": "2026-09-18",
                 "start": 780,
@@ -213,19 +213,21 @@
                 "A03"
               ],
               "staff_minutes": {
-                "A01": 90,
+                "A01": 170,
                 "A02": 210,
-                "A03": 180
+                "A03": 100
               },
               "pair_share": {
                 "A01:S05": 0.5,
-                "A02:S05": 0.5,
-                "A02:S07": 1,
+                "A03:S05": 0.5,
+                "A02:S07": 0.6,
+                "A01:S07": 0.4,
                 "A01:S04": 1,
-                "A02:S03": 0.19,
-                "A03:S03": 0.81,
-                "A02:S06": 0.83,
+                "A02:S03": 0.94,
+                "A03:S03": 0.06,
+                "A02:S06": 0.17,
                 "A03:S06": 0.17,
+                "A01:S06": 0.67,
                 "A03:S01": 1,
                 "A02:S02": 0.2,
                 "A03:S02": 0.8
@@ -535,7 +537,7 @@
             ],
             "shortfalls": [],
             "metrics": {
-              "changed_cells": 9,
+              "changed_cells": 11,
               "gaps": 0,
               "late_students": 1,
               "notify_staff": [
@@ -583,6 +585,46 @@
                   "end": 580,
                   "students": [
                     "S07"
+                  ]
+                }
+              },
+              {
+                "demand_id": "les:2026-09-18:S03:p2",
+                "type": "moved",
+                "before": {
+                  "staff": "A02",
+                  "start": 590,
+                  "end": 630,
+                  "students": [
+                    "S03"
+                  ]
+                },
+                "after": {
+                  "staff": "A03",
+                  "start": 590,
+                  "end": 630,
+                  "students": [
+                    "S03"
+                  ]
+                }
+              },
+              {
+                "demand_id": "les:2026-09-18:S05:p2",
+                "type": "moved",
+                "before": {
+                  "staff": "A03",
+                  "start": 590,
+                  "end": 630,
+                  "students": [
+                    "S05"
+                  ]
+                },
+                "after": {
+                  "staff": "A02",
+                  "start": 590,
+                  "end": 630,
+                  "students": [
+                    "S05"
                   ]
                 }
               },
@@ -669,42 +711,42 @@
                 }
               },
               {
-                "demand_id": "les:2026-09-18:S06:p4",
+                "demand_id": "les:2026-09-18:S03:p4",
                 "type": "moved",
                 "before": {
                   "staff": "A02",
                   "start": 690,
                   "end": 730,
                   "students": [
-                    "S06"
+                    "S03"
                   ]
                 },
                 "after": {
-                  "staff": "A01",
+                  "staff": "A03",
                   "start": 690,
                   "end": 730,
                   "students": [
-                    "S06"
+                    "S03"
                   ]
                 }
               },
               {
-                "demand_id": "les:2026-09-18:S07:p5",
+                "demand_id": "les:2026-09-18:S03:p5",
                 "type": "moved",
                 "before": {
                   "staff": "A02",
                   "start": 780,
                   "end": 820,
                   "students": [
-                    "S07"
+                    "S03"
                   ]
                 },
                 "after": {
-                  "staff": "A01",
+                  "staff": "A03",
                   "start": 780,
                   "end": 820,
                   "students": [
-                    "S07"
+                    "S03"
                   ]
                 }
               },
@@ -761,12 +803,14 @@
                 },
                 "demand_ids": [
                   "les:2026-09-18:S07:p1",
+                  "les:2026-09-18:S03:p2",
+                  "les:2026-09-18:S05:p2",
                   "mv:2026-09-18:b2:1-2",
                   "mv:2026-09-18:b2:1-3",
                   "mv:2026-09-18:b3:1-4",
                   "mv:2026-09-18:b3:4-1",
-                  "les:2026-09-18:S06:p4",
-                  "les:2026-09-18:S07:p5",
+                  "les:2026-09-18:S03:p4",
+                  "les:2026-09-18:S03:p5",
                   "mv:2026-09-18:b5:4-1",
                   "les:2026-09-18:S02:p6"
                 ]
@@ -789,6 +833,8 @@
                   "code": "OVERLAP"
                 },
                 "demand_ids": [
+                  "les:2026-09-18:S03:p2",
+                  "les:2026-09-18:S05:p2",
                   "mv:2026-09-18:b3:1-4"
                 ]
               },
@@ -800,9 +846,9 @@
                 },
                 "demand_ids": [
                   "les:2026-09-18:S02:p6",
-                  "les:2026-09-18:S06:p4",
+                  "les:2026-09-18:S03:p4",
+                  "les:2026-09-18:S03:p5",
                   "les:2026-09-18:S07:p1",
-                  "les:2026-09-18:S07:p5",
                   "mv:2026-09-18:b5:4-1"
                 ]
               },
@@ -872,7 +918,7 @@
               },
               {
                 "staff": "A02",
-                "demand_id": "les:2026-09-18:S05:p2",
+                "demand_id": "les:2026-09-18:S03:p2",
                 "date": "2026-09-18",
                 "start": 590,
                 "end": 630,
@@ -881,7 +927,7 @@
               },
               {
                 "staff": "A03",
-                "demand_id": "les:2026-09-18:S03:p2",
+                "demand_id": "les:2026-09-18:S05:p2",
                 "date": "2026-09-18",
                 "start": 590,
                 "end": 630,
@@ -925,7 +971,7 @@
                 "pinned": false
               },
               {
-                "staff": "A02",
+                "staff": "A01",
                 "demand_id": "les:2026-09-18:S06:p4",
                 "date": "2026-09-18",
                 "start": 690,
@@ -934,7 +980,7 @@
                 "pinned": false
               },
               {
-                "staff": "A03",
+                "staff": "A02",
                 "demand_id": "les:2026-09-18:S03:p4",
                 "date": "2026-09-18",
                 "start": 690,
@@ -943,7 +989,7 @@
                 "pinned": false
               },
               {
-                "staff": "A02",
+                "staff": "A01",
                 "demand_id": "les:2026-09-18:S07:p5",
                 "date": "2026-09-18",
                 "start": 780,
@@ -952,7 +998,7 @@
                 "pinned": false
               },
               {
-                "staff": "A03",
+                "staff": "A02",
                 "demand_id": "les:2026-09-18:S03:p5",
                 "date": "2026-09-18",
                 "start": 780,
@@ -1001,19 +1047,21 @@
                 "A03"
               ],
               "staff_minutes": {
-                "A01": 90,
+                "A01": 170,
                 "A02": 200,
-                "A03": 180
+                "A03": 100
               },
               "pair_share": {
                 "A01:S05": 0.5,
-                "A02:S05": 0.5,
-                "A02:S07": 1,
+                "A03:S05": 0.5,
+                "A02:S07": 0.6,
+                "A01:S07": 0.4,
                 "A01:S04": 1,
-                "A02:S03": 0.19,
-                "A03:S03": 0.81,
-                "A02:S06": 0.83,
+                "A02:S03": 0.94,
+                "A03:S03": 0.06,
+                "A02:S06": 0.17,
                 "A03:S06": 0.17,
+                "A01:S06": 0.67,
                 "A03:S01": 1,
                 "A03:S02": 1
               }
@@ -1226,7 +1274,7 @@
                 "pinned": false
               },
               {
-                "staff": "A02",
+                "staff": "A03",
                 "demand_id": "les:2026-09-18:S05:p2",
                 "date": "2026-09-18",
                 "start": 590,
@@ -1280,7 +1328,7 @@
                 "pinned": false
               },
               {
-                "staff": "A02",
+                "staff": "A01",
                 "demand_id": "les:2026-09-18:S06:p4",
                 "date": "2026-09-18",
                 "start": 690,
@@ -1289,7 +1337,7 @@
                 "pinned": false
               },
               {
-                "staff": "A02",
+                "staff": "A01",
                 "demand_id": "les:2026-09-18:S07:p5",
                 "date": "2026-09-18",
                 "start": 780,
@@ -1322,22 +1370,22 @@
               "gaps": 0,
               "late_students": 0,
               "notify_staff": [
-                "A02",
-                "A03"
+                "A02"
               ],
               "staff_minutes": {
-                "A01": 110,
-                "A02": 190,
-                "A03": 50
+                "A01": 190,
+                "A02": 70,
+                "A03": 90
               },
               "pair_share": {
                 "A01:S05": 0.5,
-                "A02:S05": 0.5,
-                "A02:S07": 0.9,
-                "A01:S07": 0.1,
+                "A03:S05": 0.5,
+                "A02:S07": 0.5,
+                "A01:S07": 0.5,
                 "A01:S04": 1,
                 "A01:S01": 1,
-                "A02:S06": 1,
+                "A02:S06": 0.33,
+                "A01:S06": 0.67,
                 "A03:S02": 1
               }
             },
@@ -1359,7 +1407,7 @@
                 "demand_id": "les:2026-09-18:S03:p2",
                 "type": "removed",
                 "before": {
-                  "staff": "A03",
+                  "staff": "A02",
                   "start": 590,
                   "end": 630,
                   "students": [
@@ -1414,7 +1462,7 @@
                 "demand_id": "les:2026-09-18:S03:p4",
                 "type": "removed",
                 "before": {
-                  "staff": "A03",
+                  "staff": "A02",
                   "start": 690,
                   "end": 730,
                   "students": [
@@ -1427,7 +1475,7 @@
                 "demand_id": "les:2026-09-18:S03:p5",
                 "type": "removed",
                 "before": {
-                  "staff": "A03",
+                  "staff": "A02",
                   "start": 780,
                   "end": 820,
                   "students": [
@@ -1630,7 +1678,7 @@
             ],
             "shortfalls": [],
             "metrics": {
-              "changed_cells": 8,
+              "changed_cells": 11,
               "gaps": 0,
               "late_students": 0,
               "notify_staff": [
@@ -1673,7 +1721,7 @@
                 "demand_id": "les:2026-09-18:S03:p2",
                 "type": "removed",
                 "before": {
-                  "staff": "A03",
+                  "staff": "A02",
                   "start": 590,
                   "end": 630,
                   "students": [
@@ -1681,6 +1729,26 @@
                   ]
                 },
                 "after": null
+              },
+              {
+                "demand_id": "les:2026-09-18:S05:p2",
+                "type": "moved",
+                "before": {
+                  "staff": "A03",
+                  "start": 590,
+                  "end": 630,
+                  "students": [
+                    "S05"
+                  ]
+                },
+                "after": {
+                  "staff": "A02",
+                  "start": 590,
+                  "end": 630,
+                  "students": [
+                    "S05"
+                  ]
+                }
               },
               {
                 "demand_id": "mv:2026-09-18:b2:1-2",
@@ -1748,7 +1816,7 @@
                 "demand_id": "les:2026-09-18:S03:p4",
                 "type": "removed",
                 "before": {
-                  "staff": "A03",
+                  "staff": "A02",
                   "start": 690,
                   "end": 730,
                   "students": [
@@ -1758,10 +1826,30 @@
                 "after": null
               },
               {
+                "demand_id": "les:2026-09-18:S06:p4",
+                "type": "moved",
+                "before": {
+                  "staff": "A01",
+                  "start": 690,
+                  "end": 730,
+                  "students": [
+                    "S06"
+                  ]
+                },
+                "after": {
+                  "staff": "A02",
+                  "start": 690,
+                  "end": 730,
+                  "students": [
+                    "S06"
+                  ]
+                }
+              },
+              {
                 "demand_id": "les:2026-09-18:S03:p5",
                 "type": "removed",
                 "before": {
-                  "staff": "A03",
+                  "staff": "A02",
                   "start": 780,
                   "end": 820,
                   "students": [
@@ -1769,6 +1857,26 @@
                   ]
                 },
                 "after": null
+              },
+              {
+                "demand_id": "les:2026-09-18:S07:p5",
+                "type": "moved",
+                "before": {
+                  "staff": "A01",
+                  "start": 780,
+                  "end": 820,
+                  "students": [
+                    "S07"
+                  ]
+                },
+                "after": {
+                  "staff": "A02",
+                  "start": 780,
+                  "end": 820,
+                  "students": [
+                    "S07"
+                  ]
+                }
               },
               {
                 "demand_id": "mv:2026-09-18:b5:4-1",
@@ -1803,11 +1911,14 @@
                 "demand_ids": [
                   "mv:2026-09-18:b1:1-4",
                   "les:2026-09-18:S03:p2",
+                  "les:2026-09-18:S05:p2",
                   "mv:2026-09-18:b2:1-2",
                   "mv:2026-09-18:b2:4-1",
                   "mv:2026-09-18:b3:1-4",
                   "les:2026-09-18:S03:p4",
+                  "les:2026-09-18:S06:p4",
                   "les:2026-09-18:S03:p5",
+                  "les:2026-09-18:S07:p5",
                   "mv:2026-09-18:b5:4-1"
                 ]
               },
@@ -1843,6 +1954,9 @@
                   "code": "REPLANNED"
                 },
                 "demand_ids": [
+                  "les:2026-09-18:S05:p2",
+                  "les:2026-09-18:S06:p4",
+                  "les:2026-09-18:S07:p5",
                   "mv:2026-09-18:b5:4-1"
                 ]
               }

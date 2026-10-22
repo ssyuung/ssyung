@@ -1,6 +1,6 @@
 # M1 배치 엔진 v1 (임시 규칙 엔진)
 
-> 상태: 진행
+> 상태: 완료
 > 브랜치 `<id>/m1-scheduler` · 범위 `packages/scheduler/**` (단 `src/engines/cpsat/` 제외) · 공통 규칙 `CLAUDE.md`
 
 ## 목표
