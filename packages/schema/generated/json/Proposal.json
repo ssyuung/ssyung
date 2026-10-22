@@ -1,6 +1,6 @@
 {
   "$id": "ssyung/Proposal",
-  "x-contract-version": "0.1.0",
+  "x-contract-version": "0.3.0",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "properties": {
@@ -422,6 +422,7 @@
                         "UNAVAILABLE",
                         "CONTINUITY",
                         "GAP",
+                        "REPLANNED",
                         "BALANCE",
                         "ROTATION"
                       ]

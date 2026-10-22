@@ -73,6 +73,13 @@ export const DemandSet = z.object({
   date_to: IsoDate,
   version_id: Id.nullable().describe("수요를 만든 버전 입력(배치·추가 수요)"),
   absent: z.array(z.object({ date: IsoDate, student: StudentCode })).describe("결석으로 뺀 학생"),
+  unplaced: z.array(z.object({
+    date: IsoDate,
+    student: StudentCode,
+    period: z.number().int().min(1).max(8),
+    subject: Subject,
+    reason: z.enum(["none", "multiple"]).describe("none = 그 시각 그 과목을 하는 특수학급 없음, multiple = 둘 이상"),
+  })).describe("특수학급 수업인데 장소를 정하지 못한 칸 (D25). 이동 수요를 만들지 않는다. 교사가 set_placement로 장소를 지정하면 풀림"),
   demands: z.array(Demand),
 });
 

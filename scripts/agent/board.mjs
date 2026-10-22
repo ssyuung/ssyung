@@ -37,8 +37,12 @@ export function parseBoard(text) {
     const h = line.match(/^##\s+(.+)$/);
     if (h) { cur = h[1].trim(); sections[cur] = []; continue; }
     if (!cur) continue;
-    const item = line.match(/^\s*-\s+(?:\[( |x|X)\]\s+)?(.+)$/);
-    if (item) sections[cur].push({ done: item[1] ? item[1].toLowerCase() === "x" : null, text: item[2].trim() });
+    // 들여쓴 하위 항목은 바로 앞 항목의 설명으로 붙인다
+    const sub = line.match(/^\s{2,}-\s+(.+)$/);
+    const list = sections[cur];
+    if (sub && list.length) { list[list.length - 1].text += " / " + sub[1].trim(); continue; }
+    const item = line.match(/^-\s+(?:\[( |x|X)\]\s+)?(.+)$/);
+    if (item) list.push({ done: item[1] ? item[1].toLowerCase() === "x" : null, text: item[2].trim() });
   }
   const pick = (prefix) => Object.entries(sections).find(([k]) => k.startsWith(prefix))?.[1] ?? [];
   return { ...meta, current: pick("이번 버전"), next: pick("다음에 할 것"), needs: pick("다른 모듈에 필요한 것") };

@@ -35,7 +35,7 @@
     },
     {
       "staff": "A03",
-      "demand_id": "mv:2026-09-01:b1:1-4",
+      "demand_id": "mv:2026-09-01:b1:1-1",
       "date": "2026-09-01",
       "start": 580,
       "end": 590,
@@ -44,16 +44,16 @@
     },
     {
       "staff": "A01",
-      "demand_id": "les:2026-09-01:S04:p2",
+      "demand_id": "mv:2026-09-01:b1:1-4",
       "date": "2026-09-01",
       "start": 590,
-      "end": 630,
-      "mode": "normal",
+      "end": 600,
+      "mode": "second_trip",
       "pinned": false
     },
     {
       "staff": "A02",
-      "demand_id": "les:2026-09-01:S01:p2",
+      "demand_id": "les:2026-09-01:S04:p2",
       "date": "2026-09-01",
       "start": 590,
       "end": 630,
@@ -71,15 +71,15 @@
     },
     {
       "staff": "A01",
-      "demand_id": "mv:2026-09-01:b2:1-3",
+      "demand_id": "les:2026-09-01:S01:p2",
       "date": "2026-09-01",
-      "start": 630,
-      "end": 640,
+      "start": 600,
+      "end": 630,
       "mode": "normal",
       "pinned": false
     },
     {
-      "staff": "A02",
+      "staff": "A01",
       "demand_id": "mv:2026-09-01:b2:2-1",
       "date": "2026-09-01",
       "start": 630,
@@ -88,8 +88,17 @@
       "pinned": false
     },
     {
-      "staff": "A03",
+      "staff": "A02",
       "demand_id": "mv:2026-09-01:b2:3-1",
+      "date": "2026-09-01",
+      "start": 630,
+      "end": 640,
+      "mode": "normal",
+      "pinned": false
+    },
+    {
+      "staff": "A03",
+      "demand_id": "mv:2026-09-01:b2:1-3",
       "date": "2026-09-01",
       "start": 630,
       "end": 640,
@@ -116,7 +125,7 @@
     },
     {
       "staff": "A03",
-      "demand_id": "les:2026-09-01:S03:p3",
+      "demand_id": "les:2026-09-01:S02:p3",
       "date": "2026-09-01",
       "start": 640,
       "end": 680,
@@ -125,7 +134,7 @@
     },
     {
       "staff": "A01",
-      "demand_id": "les:2026-09-01:S02:p3",
+      "demand_id": "les:2026-09-01:S03:p3",
       "date": "2026-09-01",
       "start": 650,
       "end": 680,
@@ -134,7 +143,7 @@
     },
     {
       "staff": "A01",
-      "demand_id": "mv:2026-09-01:b3:4-1",
+      "demand_id": "mv:2026-09-01:b3:1-4",
       "date": "2026-09-01",
       "start": 680,
       "end": 690,
@@ -152,7 +161,7 @@
     },
     {
       "staff": "A03",
-      "demand_id": "mv:2026-09-01:b3:1-4",
+      "demand_id": "mv:2026-09-01:b3:4-1",
       "date": "2026-09-01",
       "start": 680,
       "end": 690,
@@ -161,7 +170,7 @@
     },
     {
       "staff": "A01",
-      "demand_id": "les:2026-09-01:S02:p4",
+      "demand_id": "les:2026-09-01:S06:p4",
       "date": "2026-09-01",
       "start": 690,
       "end": 730,
@@ -179,7 +188,7 @@
     },
     {
       "staff": "A03",
-      "demand_id": "les:2026-09-01:S06:p4",
+      "demand_id": "les:2026-09-01:S02:p4",
       "date": "2026-09-01",
       "start": 690,
       "end": 730,
@@ -188,15 +197,6 @@
     },
     {
       "staff": "A01",
-      "demand_id": "les:2026-09-01:S02:p5",
-      "date": "2026-09-01",
-      "start": 780,
-      "end": 820,
-      "mode": "normal",
-      "pinned": false
-    },
-    {
-      "staff": "A02",
       "demand_id": "les:2026-09-01:S01:p5",
       "date": "2026-09-01",
       "start": 780,
@@ -205,7 +205,7 @@
       "pinned": false
     },
     {
-      "staff": "A03",
+      "staff": "A02",
       "demand_id": "les:2026-09-01:S03:p5",
       "date": "2026-09-01",
       "start": 780,
@@ -214,7 +214,16 @@
       "pinned": false
     },
     {
-      "staff": "A01",
+      "staff": "A03",
+      "demand_id": "les:2026-09-01:S02:p5",
+      "date": "2026-09-01",
+      "start": 780,
+      "end": 820,
+      "mode": "normal",
+      "pinned": false
+    },
+    {
+      "staff": "A03",
       "demand_id": "mv:2026-09-01:b5:4-1",
       "date": "2026-09-01",
       "start": 820,
@@ -223,7 +232,7 @@
       "pinned": false
     },
     {
-      "staff": "A03",
+      "staff": "A01",
       "demand_id": "les:2026-09-01:S06:p6",
       "date": "2026-09-01",
       "start": 830,
@@ -305,7 +314,7 @@
     },
     {
       "staff": "A03",
-      "demand_id": "mv:2026-09-02:b2:1-4",
+      "demand_id": "mv:2026-09-02:b2:1-1",
       "date": "2026-09-02",
       "start": 630,
       "end": 640,
@@ -319,6 +328,15 @@
       "start": 640,
       "end": 680,
       "mode": "normal",
+      "pinned": false
+    },
+    {
+      "staff": "A02",
+      "demand_id": "mv:2026-09-02:b2:1-4",
+      "date": "2026-09-02",
+      "start": 640,
+      "end": 650,
+      "mode": "second_trip",
       "pinned": false
     },
     {
@@ -386,7 +404,7 @@
     },
     {
       "staff": "A01",
-      "demand_id": "mv:2026-09-03:b1:3-1",
+      "demand_id": "mv:2026-09-03:b1:1-1",
       "date": "2026-09-03",
       "start": 580,
       "end": 590,
@@ -395,6 +413,15 @@
     },
     {
       "staff": "A02",
+      "demand_id": "mv:2026-09-03:b1:3-1",
+      "date": "2026-09-03",
+      "start": 580,
+      "end": 590,
+      "mode": "normal",
+      "pinned": false
+    },
+    {
+      "staff": "A03",
       "demand_id": "mv:2026-09-03:b1:1-3",
       "date": "2026-09-03",
       "start": 580,
@@ -854,7 +881,7 @@
     },
     {
       "staff": "A03",
-      "demand_id": "mv:2026-09-08:b1:1-4",
+      "demand_id": "mv:2026-09-08:b1:1-1",
       "date": "2026-09-08",
       "start": 580,
       "end": 590,
@@ -863,16 +890,16 @@
     },
     {
       "staff": "A01",
-      "demand_id": "les:2026-09-08:S04:p2",
+      "demand_id": "mv:2026-09-08:b1:1-4",
       "date": "2026-09-08",
       "start": 590,
-      "end": 630,
-      "mode": "normal",
+      "end": 600,
+      "mode": "second_trip",
       "pinned": false
     },
     {
       "staff": "A02",
-      "demand_id": "les:2026-09-08:S01:p2",
+      "demand_id": "les:2026-09-08:S04:p2",
       "date": "2026-09-08",
       "start": 590,
       "end": 630,
@@ -890,15 +917,15 @@
     },
     {
       "staff": "A01",
-      "demand_id": "mv:2026-09-08:b2:1-3",
+      "demand_id": "les:2026-09-08:S01:p2",
       "date": "2026-09-08",
-      "start": 630,
-      "end": 640,
+      "start": 600,
+      "end": 630,
       "mode": "normal",
       "pinned": false
     },
     {
-      "staff": "A02",
+      "staff": "A01",
       "demand_id": "mv:2026-09-08:b2:2-1",
       "date": "2026-09-08",
       "start": 630,
@@ -907,8 +934,17 @@
       "pinned": false
     },
     {
-      "staff": "A03",
+      "staff": "A02",
       "demand_id": "mv:2026-09-08:b2:3-1",
+      "date": "2026-09-08",
+      "start": 630,
+      "end": 640,
+      "mode": "normal",
+      "pinned": false
+    },
+    {
+      "staff": "A03",
+      "demand_id": "mv:2026-09-08:b2:1-3",
       "date": "2026-09-08",
       "start": 630,
       "end": 640,
@@ -935,7 +971,7 @@
     },
     {
       "staff": "A03",
-      "demand_id": "les:2026-09-08:S03:p3",
+      "demand_id": "les:2026-09-08:S02:p3",
       "date": "2026-09-08",
       "start": 640,
       "end": 680,
@@ -944,7 +980,7 @@
     },
     {
       "staff": "A01",
-      "demand_id": "les:2026-09-08:S02:p3",
+      "demand_id": "les:2026-09-08:S03:p3",
       "date": "2026-09-08",
       "start": 650,
       "end": 680,
@@ -953,7 +989,7 @@
     },
     {
       "staff": "A01",
-      "demand_id": "mv:2026-09-08:b3:4-1",
+      "demand_id": "mv:2026-09-08:b3:1-4",
       "date": "2026-09-08",
       "start": 680,
       "end": 690,
@@ -971,7 +1007,7 @@
     },
     {
       "staff": "A03",
-      "demand_id": "mv:2026-09-08:b3:1-4",
+      "demand_id": "mv:2026-09-08:b3:4-1",
       "date": "2026-09-08",
       "start": 680,
       "end": 690,
@@ -980,7 +1016,7 @@
     },
     {
       "staff": "A01",
-      "demand_id": "les:2026-09-08:S02:p4",
+      "demand_id": "les:2026-09-08:S06:p4",
       "date": "2026-09-08",
       "start": 690,
       "end": 730,
@@ -998,7 +1034,7 @@
     },
     {
       "staff": "A03",
-      "demand_id": "les:2026-09-08:S06:p4",
+      "demand_id": "les:2026-09-08:S02:p4",
       "date": "2026-09-08",
       "start": 690,
       "end": 730,
@@ -1007,15 +1043,6 @@
     },
     {
       "staff": "A01",
-      "demand_id": "les:2026-09-08:S02:p5",
-      "date": "2026-09-08",
-      "start": 780,
-      "end": 820,
-      "mode": "normal",
-      "pinned": false
-    },
-    {
-      "staff": "A02",
       "demand_id": "les:2026-09-08:S01:p5",
       "date": "2026-09-08",
       "start": 780,
@@ -1024,7 +1051,16 @@
       "pinned": false
     },
     {
-      "staff": "A01",
+      "staff": "A03",
+      "demand_id": "les:2026-09-08:S02:p5",
+      "date": "2026-09-08",
+      "start": 780,
+      "end": 820,
+      "mode": "normal",
+      "pinned": false
+    },
+    {
+      "staff": "A03",
       "demand_id": "mv:2026-09-08:b5:4-1",
       "date": "2026-09-08",
       "start": 820,
@@ -1033,7 +1069,7 @@
       "pinned": false
     },
     {
-      "staff": "A03",
+      "staff": "A01",
       "demand_id": "les:2026-09-08:S06:p6",
       "date": "2026-09-08",
       "start": 830,
@@ -1115,7 +1151,7 @@
     },
     {
       "staff": "A03",
-      "demand_id": "mv:2026-09-09:b2:1-4",
+      "demand_id": "mv:2026-09-09:b2:1-1",
       "date": "2026-09-09",
       "start": 630,
       "end": 640,
@@ -1129,6 +1165,15 @@
       "start": 640,
       "end": 680,
       "mode": "normal",
+      "pinned": false
+    },
+    {
+      "staff": "A02",
+      "demand_id": "mv:2026-09-09:b2:1-4",
+      "date": "2026-09-09",
+      "start": 640,
+      "end": 650,
+      "mode": "second_trip",
       "pinned": false
     },
     {
@@ -1205,7 +1250,7 @@
     },
     {
       "staff": "A01",
-      "demand_id": "mv:2026-09-10:b1:3-1",
+      "demand_id": "mv:2026-09-10:b1:1-1",
       "date": "2026-09-10",
       "start": 580,
       "end": 590,
@@ -1214,6 +1259,15 @@
     },
     {
       "staff": "A02",
+      "demand_id": "mv:2026-09-10:b1:3-1",
+      "date": "2026-09-10",
+      "start": 580,
+      "end": 590,
+      "mode": "normal",
+      "pinned": false
+    },
+    {
+      "staff": "A03",
       "demand_id": "mv:2026-09-10:b1:1-3",
       "date": "2026-09-10",
       "start": 580,
@@ -1645,7 +1699,7 @@
       "pinned": false
     },
     {
-      "staff": "A03",
+      "staff": "A01",
       "demand_id": "les:2026-09-15:S07:p1",
       "date": "2026-09-15",
       "start": 540,
@@ -1673,7 +1727,7 @@
     },
     {
       "staff": "A03",
-      "demand_id": "mv:2026-09-15:b1:4-1",
+      "demand_id": "mv:2026-09-15:b1:1-1",
       "date": "2026-09-15",
       "start": 580,
       "end": 590,
@@ -1691,11 +1745,11 @@
     },
     {
       "staff": "A02",
-      "demand_id": "les:2026-09-15:S01:p2",
+      "demand_id": "mv:2026-09-15:b1:4-1",
       "date": "2026-09-15",
       "start": 590,
-      "end": 630,
-      "mode": "normal",
+      "end": 600,
+      "mode": "second_trip",
       "pinned": false
     },
     {
@@ -1709,6 +1763,15 @@
     },
     {
       "staff": "A01",
+      "demand_id": "les:2026-09-15:S01:p2",
+      "date": "2026-09-15",
+      "start": 600,
+      "end": 630,
+      "mode": "normal",
+      "pinned": false
+    },
+    {
+      "staff": "A02",
       "demand_id": "les:2026-09-15:S04:p2",
       "date": "2026-09-15",
       "start": 600,
@@ -1718,15 +1781,6 @@
     },
     {
       "staff": "A01",
-      "demand_id": "mv:2026-09-15:b2:1-3",
-      "date": "2026-09-15",
-      "start": 630,
-      "end": 640,
-      "mode": "normal",
-      "pinned": false
-    },
-    {
-      "staff": "A02",
       "demand_id": "mv:2026-09-15:b2:2-1",
       "date": "2026-09-15",
       "start": 630,
@@ -1735,8 +1789,17 @@
       "pinned": false
     },
     {
-      "staff": "A03",
+      "staff": "A02",
       "demand_id": "mv:2026-09-15:b2:3-1",
+      "date": "2026-09-15",
+      "start": 630,
+      "end": 640,
+      "mode": "normal",
+      "pinned": false
+    },
+    {
+      "staff": "A03",
+      "demand_id": "mv:2026-09-15:b2:1-3",
       "date": "2026-09-15",
       "start": 630,
       "end": 640,
@@ -1763,7 +1826,7 @@
     },
     {
       "staff": "A03",
-      "demand_id": "les:2026-09-15:S03:p3",
+      "demand_id": "les:2026-09-15:S02:p3",
       "date": "2026-09-15",
       "start": 640,
       "end": 680,
@@ -1772,7 +1835,7 @@
     },
     {
       "staff": "A01",
-      "demand_id": "les:2026-09-15:S02:p3",
+      "demand_id": "les:2026-09-15:S03:p3",
       "date": "2026-09-15",
       "start": 650,
       "end": 680,
@@ -1781,7 +1844,7 @@
     },
     {
       "staff": "A01",
-      "demand_id": "mv:2026-09-15:b3:4-1",
+      "demand_id": "mv:2026-09-15:b3:1-4",
       "date": "2026-09-15",
       "start": 680,
       "end": 690,
@@ -1799,7 +1862,7 @@
     },
     {
       "staff": "A03",
-      "demand_id": "mv:2026-09-15:b3:1-4",
+      "demand_id": "mv:2026-09-15:b3:4-1",
       "date": "2026-09-15",
       "start": 680,
       "end": 690,
@@ -1808,7 +1871,7 @@
     },
     {
       "staff": "A01",
-      "demand_id": "les:2026-09-15:S02:p4",
+      "demand_id": "les:2026-09-15:S06:p4",
       "date": "2026-09-15",
       "start": 690,
       "end": 730,
@@ -1826,7 +1889,7 @@
     },
     {
       "staff": "A03",
-      "demand_id": "les:2026-09-15:S06:p4",
+      "demand_id": "les:2026-09-15:S02:p4",
       "date": "2026-09-15",
       "start": 690,
       "end": 730,
@@ -1835,15 +1898,6 @@
     },
     {
       "staff": "A01",
-      "demand_id": "les:2026-09-15:S02:p5",
-      "date": "2026-09-15",
-      "start": 780,
-      "end": 820,
-      "mode": "normal",
-      "pinned": false
-    },
-    {
-      "staff": "A02",
       "demand_id": "les:2026-09-15:S01:p5",
       "date": "2026-09-15",
       "start": 780,
@@ -1852,7 +1906,7 @@
       "pinned": false
     },
     {
-      "staff": "A03",
+      "staff": "A02",
       "demand_id": "les:2026-09-15:S03:p5",
       "date": "2026-09-15",
       "start": 780,
@@ -1861,7 +1915,16 @@
       "pinned": false
     },
     {
-      "staff": "A01",
+      "staff": "A03",
+      "demand_id": "les:2026-09-15:S02:p5",
+      "date": "2026-09-15",
+      "start": 780,
+      "end": 820,
+      "mode": "normal",
+      "pinned": false
+    },
+    {
+      "staff": "A03",
       "demand_id": "mv:2026-09-15:b5:4-1",
       "date": "2026-09-15",
       "start": 820,
@@ -1870,7 +1933,7 @@
       "pinned": false
     },
     {
-      "staff": "A03",
+      "staff": "A01",
       "demand_id": "les:2026-09-15:S06:p6",
       "date": "2026-09-15",
       "start": 830,
@@ -1879,8 +1942,8 @@
       "pinned": false
     },
     {
-      "staff": "A01",
-      "demand_id": "les:2026-09-16:S06:p1",
+      "staff": "A02",
+      "demand_id": "les:2026-09-16:S05:p1",
       "date": "2026-09-16",
       "start": 540,
       "end": 580,
@@ -1888,8 +1951,8 @@
       "pinned": false
     },
     {
-      "staff": "A02",
-      "demand_id": "les:2026-09-16:S05:p1",
+      "staff": "A03",
+      "demand_id": "les:2026-09-16:S06:p1",
       "date": "2026-09-16",
       "start": 540,
       "end": 580,
@@ -1970,7 +2033,7 @@
     },
     {
       "staff": "A03",
-      "demand_id": "mv:2026-09-16:b2:1-4",
+      "demand_id": "mv:2026-09-16:b2:1-1",
       "date": "2026-09-16",
       "start": 630,
       "end": 640,
@@ -1987,8 +2050,17 @@
       "pinned": false
     },
     {
-      "staff": "A01",
-      "demand_id": "mv:2026-09-16:b3:1-4",
+      "staff": "A02",
+      "demand_id": "mv:2026-09-16:b2:1-4",
+      "date": "2026-09-16",
+      "start": 640,
+      "end": 650,
+      "mode": "second_trip",
+      "pinned": false
+    },
+    {
+      "staff": "A02",
+      "demand_id": "mv:2026-09-16:b3:1-3",
       "date": "2026-09-16",
       "start": 680,
       "end": 690,
@@ -1996,8 +2068,8 @@
       "pinned": false
     },
     {
-      "staff": "A02",
-      "demand_id": "mv:2026-09-16:b3:1-3",
+      "staff": "A03",
+      "demand_id": "mv:2026-09-16:b3:1-4",
       "date": "2026-09-16",
       "start": 680,
       "end": 690,
@@ -2023,7 +2095,7 @@
       "pinned": false
     },
     {
-      "staff": "A02",
+      "staff": "A03",
       "demand_id": "les:2026-09-16:S06:p5",
       "date": "2026-09-16",
       "start": 780,
@@ -2069,7 +2141,7 @@
     },
     {
       "staff": "A02",
-      "demand_id": "mv:2026-09-17:b1:3-1",
+      "demand_id": "mv:2026-09-17:b1:1-1",
       "date": "2026-09-17",
       "start": 580,
       "end": 590,
@@ -2078,7 +2150,7 @@
     },
     {
       "staff": "A03",
-      "demand_id": "mv:2026-09-17:b1:1-3",
+      "demand_id": "mv:2026-09-17:b1:3-1",
       "date": "2026-09-17",
       "start": 580,
       "end": 590,
@@ -2101,6 +2173,15 @@
       "start": 590,
       "end": 630,
       "mode": "normal",
+      "pinned": false
+    },
+    {
+      "staff": "A03",
+      "demand_id": "mv:2026-09-17:b1:1-3",
+      "date": "2026-09-17",
+      "start": 590,
+      "end": 600,
+      "mode": "second_trip",
       "pinned": false
     },
     {
@@ -2221,7 +2302,7 @@
       "pinned": false
     },
     {
-      "staff": "A01",
+      "staff": "A02",
       "demand_id": "les:2026-09-17:S06:p6",
       "date": "2026-09-17",
       "start": 830,
@@ -2545,7 +2626,7 @@
       "pinned": false
     },
     {
-      "staff": "A03",
+      "staff": "A01",
       "demand_id": "les:2026-09-22:S07:p1",
       "date": "2026-09-22",
       "start": 540,
@@ -2573,7 +2654,7 @@
     },
     {
       "staff": "A03",
-      "demand_id": "mv:2026-09-22:b1:4-1",
+      "demand_id": "mv:2026-09-22:b1:1-1",
       "date": "2026-09-22",
       "start": 580,
       "end": 590,
@@ -2591,11 +2672,11 @@
     },
     {
       "staff": "A02",
-      "demand_id": "les:2026-09-22:S01:p2",
+      "demand_id": "mv:2026-09-22:b1:4-1",
       "date": "2026-09-22",
       "start": 590,
-      "end": 630,
-      "mode": "normal",
+      "end": 600,
+      "mode": "second_trip",
       "pinned": false
     },
     {
@@ -2609,6 +2690,15 @@
     },
     {
       "staff": "A01",
+      "demand_id": "les:2026-09-22:S01:p2",
+      "date": "2026-09-22",
+      "start": 600,
+      "end": 630,
+      "mode": "normal",
+      "pinned": false
+    },
+    {
+      "staff": "A02",
       "demand_id": "les:2026-09-22:S04:p2",
       "date": "2026-09-22",
       "start": 600,
@@ -2618,15 +2708,6 @@
     },
     {
       "staff": "A01",
-      "demand_id": "mv:2026-09-22:b2:1-3",
-      "date": "2026-09-22",
-      "start": 630,
-      "end": 640,
-      "mode": "normal",
-      "pinned": false
-    },
-    {
-      "staff": "A02",
       "demand_id": "mv:2026-09-22:b2:2-1",
       "date": "2026-09-22",
       "start": 630,
@@ -2635,8 +2716,17 @@
       "pinned": false
     },
     {
-      "staff": "A03",
+      "staff": "A02",
       "demand_id": "mv:2026-09-22:b2:3-1",
+      "date": "2026-09-22",
+      "start": 630,
+      "end": 640,
+      "mode": "normal",
+      "pinned": false
+    },
+    {
+      "staff": "A03",
+      "demand_id": "mv:2026-09-22:b2:1-3",
       "date": "2026-09-22",
       "start": 630,
       "end": 640,
@@ -2663,7 +2753,7 @@
     },
     {
       "staff": "A03",
-      "demand_id": "les:2026-09-22:S03:p3",
+      "demand_id": "les:2026-09-22:S02:p3",
       "date": "2026-09-22",
       "start": 640,
       "end": 680,
@@ -2672,7 +2762,7 @@
     },
     {
       "staff": "A01",
-      "demand_id": "les:2026-09-22:S02:p3",
+      "demand_id": "les:2026-09-22:S03:p3",
       "date": "2026-09-22",
       "start": 650,
       "end": 680,
@@ -2681,7 +2771,7 @@
     },
     {
       "staff": "A01",
-      "demand_id": "mv:2026-09-22:b3:4-1",
+      "demand_id": "mv:2026-09-22:b3:1-4",
       "date": "2026-09-22",
       "start": 680,
       "end": 690,
@@ -2699,7 +2789,7 @@
     },
     {
       "staff": "A03",
-      "demand_id": "mv:2026-09-22:b3:1-4",
+      "demand_id": "mv:2026-09-22:b3:4-1",
       "date": "2026-09-22",
       "start": 680,
       "end": 690,
@@ -2708,7 +2798,7 @@
     },
     {
       "staff": "A01",
-      "demand_id": "les:2026-09-22:S02:p4",
+      "demand_id": "les:2026-09-22:S06:p4",
       "date": "2026-09-22",
       "start": 690,
       "end": 730,
@@ -2726,7 +2816,7 @@
     },
     {
       "staff": "A03",
-      "demand_id": "les:2026-09-22:S06:p4",
+      "demand_id": "les:2026-09-22:S02:p4",
       "date": "2026-09-22",
       "start": 690,
       "end": 730,
@@ -2735,15 +2825,6 @@
     },
     {
       "staff": "A01",
-      "demand_id": "les:2026-09-22:S02:p5",
-      "date": "2026-09-22",
-      "start": 780,
-      "end": 820,
-      "mode": "normal",
-      "pinned": false
-    },
-    {
-      "staff": "A02",
       "demand_id": "les:2026-09-22:S01:p5",
       "date": "2026-09-22",
       "start": 780,
@@ -2752,7 +2833,7 @@
       "pinned": false
     },
     {
-      "staff": "A03",
+      "staff": "A02",
       "demand_id": "les:2026-09-22:S03:p5",
       "date": "2026-09-22",
       "start": 780,
@@ -2761,7 +2842,16 @@
       "pinned": false
     },
     {
-      "staff": "A01",
+      "staff": "A03",
+      "demand_id": "les:2026-09-22:S02:p5",
+      "date": "2026-09-22",
+      "start": 780,
+      "end": 820,
+      "mode": "normal",
+      "pinned": false
+    },
+    {
+      "staff": "A03",
       "demand_id": "mv:2026-09-22:b5:4-1",
       "date": "2026-09-22",
       "start": 820,
@@ -2770,7 +2860,7 @@
       "pinned": false
     },
     {
-      "staff": "A03",
+      "staff": "A01",
       "demand_id": "les:2026-09-22:S06:p6",
       "date": "2026-09-22",
       "start": 830,
@@ -2779,8 +2869,8 @@
       "pinned": false
     },
     {
-      "staff": "A01",
-      "demand_id": "les:2026-09-23:S06:p1",
+      "staff": "A02",
+      "demand_id": "les:2026-09-23:S05:p1",
       "date": "2026-09-23",
       "start": 540,
       "end": 580,
@@ -2788,8 +2878,8 @@
       "pinned": false
     },
     {
-      "staff": "A02",
-      "demand_id": "les:2026-09-23:S05:p1",
+      "staff": "A03",
+      "demand_id": "les:2026-09-23:S06:p1",
       "date": "2026-09-23",
       "start": 540,
       "end": 580,
@@ -2870,7 +2960,7 @@
     },
     {
       "staff": "A03",
-      "demand_id": "mv:2026-09-23:b2:1-4",
+      "demand_id": "mv:2026-09-23:b2:1-1",
       "date": "2026-09-23",
       "start": 630,
       "end": 640,
@@ -2887,8 +2977,17 @@
       "pinned": false
     },
     {
-      "staff": "A01",
-      "demand_id": "mv:2026-09-23:b3:1-4",
+      "staff": "A02",
+      "demand_id": "mv:2026-09-23:b2:1-4",
+      "date": "2026-09-23",
+      "start": 640,
+      "end": 650,
+      "mode": "second_trip",
+      "pinned": false
+    },
+    {
+      "staff": "A02",
+      "demand_id": "mv:2026-09-23:b3:1-3",
       "date": "2026-09-23",
       "start": 680,
       "end": 690,
@@ -2896,8 +2995,8 @@
       "pinned": false
     },
     {
-      "staff": "A02",
-      "demand_id": "mv:2026-09-23:b3:1-3",
+      "staff": "A03",
+      "demand_id": "mv:2026-09-23:b3:1-4",
       "date": "2026-09-23",
       "start": 680,
       "end": 690,
@@ -2923,7 +3022,7 @@
       "pinned": false
     },
     {
-      "staff": "A02",
+      "staff": "A03",
       "demand_id": "les:2026-09-23:S06:p5",
       "date": "2026-09-23",
       "start": 780,
@@ -3085,7 +3184,7 @@
       "pinned": false
     },
     {
-      "staff": "A03",
+      "staff": "A01",
       "demand_id": "les:2026-09-29:S07:p1",
       "date": "2026-09-29",
       "start": 540,
@@ -3113,7 +3212,7 @@
     },
     {
       "staff": "A03",
-      "demand_id": "mv:2026-09-29:b1:4-1",
+      "demand_id": "mv:2026-09-29:b1:1-1",
       "date": "2026-09-29",
       "start": 580,
       "end": 590,
@@ -3131,11 +3230,11 @@
     },
     {
       "staff": "A02",
-      "demand_id": "les:2026-09-29:S01:p2",
+      "demand_id": "mv:2026-09-29:b1:4-1",
       "date": "2026-09-29",
       "start": 590,
-      "end": 630,
-      "mode": "normal",
+      "end": 600,
+      "mode": "second_trip",
       "pinned": false
     },
     {
@@ -3149,6 +3248,15 @@
     },
     {
       "staff": "A01",
+      "demand_id": "les:2026-09-29:S01:p2",
+      "date": "2026-09-29",
+      "start": 600,
+      "end": 630,
+      "mode": "normal",
+      "pinned": false
+    },
+    {
+      "staff": "A02",
       "demand_id": "les:2026-09-29:S04:p2",
       "date": "2026-09-29",
       "start": 600,
@@ -3158,15 +3266,6 @@
     },
     {
       "staff": "A01",
-      "demand_id": "mv:2026-09-29:b2:1-3",
-      "date": "2026-09-29",
-      "start": 630,
-      "end": 640,
-      "mode": "normal",
-      "pinned": false
-    },
-    {
-      "staff": "A02",
       "demand_id": "mv:2026-09-29:b2:2-1",
       "date": "2026-09-29",
       "start": 630,
@@ -3175,8 +3274,17 @@
       "pinned": false
     },
     {
-      "staff": "A03",
+      "staff": "A02",
       "demand_id": "mv:2026-09-29:b2:3-1",
+      "date": "2026-09-29",
+      "start": 630,
+      "end": 640,
+      "mode": "normal",
+      "pinned": false
+    },
+    {
+      "staff": "A03",
+      "demand_id": "mv:2026-09-29:b2:1-3",
       "date": "2026-09-29",
       "start": 630,
       "end": 640,
@@ -3203,7 +3311,7 @@
     },
     {
       "staff": "A03",
-      "demand_id": "les:2026-09-29:S03:p3",
+      "demand_id": "les:2026-09-29:S02:p3",
       "date": "2026-09-29",
       "start": 640,
       "end": 680,
@@ -3212,7 +3320,7 @@
     },
     {
       "staff": "A01",
-      "demand_id": "les:2026-09-29:S02:p3",
+      "demand_id": "les:2026-09-29:S03:p3",
       "date": "2026-09-29",
       "start": 650,
       "end": 680,
@@ -3221,7 +3329,7 @@
     },
     {
       "staff": "A01",
-      "demand_id": "mv:2026-09-29:b3:4-1",
+      "demand_id": "mv:2026-09-29:b3:1-4",
       "date": "2026-09-29",
       "start": 680,
       "end": 690,
@@ -3239,7 +3347,7 @@
     },
     {
       "staff": "A03",
-      "demand_id": "mv:2026-09-29:b3:1-4",
+      "demand_id": "mv:2026-09-29:b3:4-1",
       "date": "2026-09-29",
       "start": 680,
       "end": 690,
@@ -3248,7 +3356,7 @@
     },
     {
       "staff": "A01",
-      "demand_id": "les:2026-09-29:S02:p4",
+      "demand_id": "les:2026-09-29:S06:p4",
       "date": "2026-09-29",
       "start": 690,
       "end": 730,
@@ -3266,7 +3374,7 @@
     },
     {
       "staff": "A03",
-      "demand_id": "les:2026-09-29:S06:p4",
+      "demand_id": "les:2026-09-29:S02:p4",
       "date": "2026-09-29",
       "start": 690,
       "end": 730,
@@ -3275,15 +3383,6 @@
     },
     {
       "staff": "A01",
-      "demand_id": "les:2026-09-29:S02:p5",
-      "date": "2026-09-29",
-      "start": 780,
-      "end": 820,
-      "mode": "normal",
-      "pinned": false
-    },
-    {
-      "staff": "A02",
       "demand_id": "les:2026-09-29:S01:p5",
       "date": "2026-09-29",
       "start": 780,
@@ -3292,7 +3391,7 @@
       "pinned": false
     },
     {
-      "staff": "A03",
+      "staff": "A02",
       "demand_id": "les:2026-09-29:S03:p5",
       "date": "2026-09-29",
       "start": 780,
@@ -3301,7 +3400,16 @@
       "pinned": false
     },
     {
-      "staff": "A01",
+      "staff": "A03",
+      "demand_id": "les:2026-09-29:S02:p5",
+      "date": "2026-09-29",
+      "start": 780,
+      "end": 820,
+      "mode": "normal",
+      "pinned": false
+    },
+    {
+      "staff": "A03",
       "demand_id": "mv:2026-09-29:b5:4-1",
       "date": "2026-09-29",
       "start": 820,
@@ -3310,7 +3418,7 @@
       "pinned": false
     },
     {
-      "staff": "A03",
+      "staff": "A01",
       "demand_id": "les:2026-09-29:S06:p6",
       "date": "2026-09-29",
       "start": 830,
@@ -3319,8 +3427,8 @@
       "pinned": false
     },
     {
-      "staff": "A01",
-      "demand_id": "les:2026-09-30:S06:p1",
+      "staff": "A02",
+      "demand_id": "les:2026-09-30:S05:p1",
       "date": "2026-09-30",
       "start": 540,
       "end": 580,
@@ -3328,8 +3436,8 @@
       "pinned": false
     },
     {
-      "staff": "A02",
-      "demand_id": "les:2026-09-30:S05:p1",
+      "staff": "A03",
+      "demand_id": "les:2026-09-30:S06:p1",
       "date": "2026-09-30",
       "start": 540,
       "end": 580,
@@ -3409,6 +3517,15 @@
       "pinned": false
     },
     {
+      "staff": "A03",
+      "demand_id": "mv:2026-09-30:b2:1-1",
+      "date": "2026-09-30",
+      "start": 630,
+      "end": 640,
+      "mode": "normal",
+      "pinned": false
+    },
+    {
       "staff": "A01",
       "demand_id": "les:2026-09-30:S01:p3",
       "date": "2026-09-30",
@@ -3418,8 +3535,8 @@
       "pinned": false
     },
     {
-      "staff": "A01",
-      "demand_id": "mv:2026-09-30:b3:1-4",
+      "staff": "A02",
+      "demand_id": "mv:2026-09-30:b3:1-3",
       "date": "2026-09-30",
       "start": 680,
       "end": 690,
@@ -3427,8 +3544,8 @@
       "pinned": false
     },
     {
-      "staff": "A02",
-      "demand_id": "mv:2026-09-30:b3:1-3",
+      "staff": "A03",
+      "demand_id": "mv:2026-09-30:b3:1-4",
       "date": "2026-09-30",
       "start": 680,
       "end": 690,
@@ -3454,7 +3571,7 @@
       "pinned": false
     },
     {
-      "staff": "A02",
+      "staff": "A03",
       "demand_id": "les:2026-09-30:S06:p5",
       "date": "2026-09-30",
       "start": 780,
@@ -3465,7 +3582,17 @@
   ],
   "shortfalls": [
     {
-      "demand_id": "les:2026-09-01:S02:p3",
+      "demand_id": "les:2026-09-01:S01:p2",
+      "date": "2026-09-01",
+      "start": 590,
+      "end": 600,
+      "short_by": 1,
+      "priority": "HIGH",
+      "segment": "start",
+      "waived": false
+    },
+    {
+      "demand_id": "les:2026-09-01:S03:p3",
       "date": "2026-09-01",
       "start": 640,
       "end": 650,
@@ -3475,10 +3602,30 @@
       "waived": false
     },
     {
-      "demand_id": "les:2026-09-08:S02:p3",
+      "demand_id": "les:2026-09-08:S01:p2",
+      "date": "2026-09-08",
+      "start": 590,
+      "end": 600,
+      "short_by": 1,
+      "priority": "HIGH",
+      "segment": "start",
+      "waived": false
+    },
+    {
+      "demand_id": "les:2026-09-08:S03:p3",
       "date": "2026-09-08",
       "start": 640,
       "end": 650,
+      "short_by": 1,
+      "priority": "HIGH",
+      "segment": "start",
+      "waived": false
+    },
+    {
+      "demand_id": "les:2026-09-15:S01:p2",
+      "date": "2026-09-15",
+      "start": 590,
+      "end": 600,
       "short_by": 1,
       "priority": "HIGH",
       "segment": "start",
@@ -3495,7 +3642,7 @@
       "waived": false
     },
     {
-      "demand_id": "les:2026-09-15:S02:p3",
+      "demand_id": "les:2026-09-15:S03:p3",
       "date": "2026-09-15",
       "start": 640,
       "end": 650,
@@ -3532,6 +3679,16 @@
       "short_by": 1,
       "priority": "HIGH",
       "segment": "end",
+      "waived": false
+    },
+    {
+      "demand_id": "les:2026-09-22:S01:p2",
+      "date": "2026-09-22",
+      "start": 590,
+      "end": 600,
+      "short_by": 1,
+      "priority": "HIGH",
+      "segment": "start",
       "waived": false
     },
     {
@@ -3545,7 +3702,7 @@
       "waived": false
     },
     {
-      "demand_id": "les:2026-09-22:S02:p3",
+      "demand_id": "les:2026-09-22:S03:p3",
       "date": "2026-09-22",
       "start": 640,
       "end": 650,
@@ -3585,6 +3742,16 @@
       "waived": false
     },
     {
+      "demand_id": "les:2026-09-29:S01:p2",
+      "date": "2026-09-29",
+      "start": 590,
+      "end": 600,
+      "short_by": 1,
+      "priority": "HIGH",
+      "segment": "start",
+      "waived": false
+    },
+    {
       "demand_id": "les:2026-09-29:S04:p2",
       "date": "2026-09-29",
       "start": 590,
@@ -3595,7 +3762,7 @@
       "waived": false
     },
     {
-      "demand_id": "les:2026-09-29:S02:p3",
+      "demand_id": "les:2026-09-29:S03:p3",
       "date": "2026-09-29",
       "start": 640,
       "end": 650,
@@ -3638,46 +3805,46 @@
   "metrics_by_date": {
     "2026-09-01": {
       "changed_cells": 0,
-      "gaps": 1,
-      "late_students": 2,
+      "gaps": 2,
+      "late_students": 3,
       "notify_staff": [],
       "staff_minutes": {
-        "A01": 200,
+        "A01": 230,
         "A02": 160,
-        "A03": 230
+        "A03": 200
       },
       "pair_share": {
-        "A01:S01": 0.09,
-        "A02:S01": 0.91,
-        "A02:S04": 0.6,
-        "A01:S04": 0.4,
-        "A02:S05": 0.17,
-        "A03:S05": 0.83,
-        "A03:S06": 0.91,
-        "A01:S06": 0.09,
-        "A01:S02": 1,
-        "A03:S03": 0.8,
-        "A01:S03": 0.2,
-        "A03:S07": 1
+        "A01:S01": 0.9,
+        "A02:S01": 0.1,
+        "A02:S04": 1,
+        "A02:S05": 0.33,
+        "A03:S05": 0.67,
+        "A03:S02": 1,
+        "A01:S06": 1,
+        "A01:S03": 0.33,
+        "A03:S03": 0.22,
+        "A02:S03": 0.44,
+        "A01:S07": 1
       }
     },
     "2026-09-02": {
       "changed_cells": 0,
       "gaps": 0,
-      "late_students": 0,
+      "late_students": 1,
       "notify_staff": [],
       "staff_minutes": {
         "A01": 140,
-        "A02": 110,
+        "A02": 120,
         "A03": 70
       },
       "pair_share": {
-        "A02:S05": 1,
+        "A02:S05": 0.86,
+        "A03:S05": 0.14,
         "A03:S06": 1,
         "A01:S02": 0.14,
         "A02:S02": 0.86,
         "A01:S01": 1,
-        "A03:S03": 1
+        "A02:S03": 1
       }
     },
     "2026-09-03": {
@@ -3688,19 +3855,19 @@
       "staff_minutes": {
         "A01": 280,
         "A02": 90,
-        "A03": 100
+        "A03": 110
       },
       "pair_share": {
         "A01:S04": 1,
         "A02:S03": 1,
         "A03:S02": 0.9,
-        "A01:S02": 0.1,
-        "A02:S05": 0.1,
+        "A02:S02": 0.1,
+        "A01:S01": 0.33,
+        "A02:S01": 0.67,
+        "A01:S06": 0.83,
+        "A02:S06": 0.17,
+        "A03:S05": 0.2,
         "A01:S05": 0.8,
-        "A03:S05": 0.1,
-        "A02:S01": 1,
-        "A02:S06": 0.2,
-        "A01:S06": 0.8,
         "A02:S07": 1
       }
     },
@@ -3752,46 +3919,45 @@
     },
     "2026-09-08": {
       "changed_cells": 0,
-      "gaps": 1,
-      "late_students": 2,
+      "gaps": 2,
+      "late_students": 3,
       "notify_staff": [],
       "staff_minutes": {
-        "A01": 200,
-        "A02": 160,
-        "A03": 190
+        "A01": 230,
+        "A02": 120,
+        "A03": 200
       },
       "pair_share": {
-        "A01:S01": 0.09,
-        "A02:S01": 0.91,
-        "A02:S04": 0.6,
-        "A01:S04": 0.4,
-        "A02:S05": 0.17,
-        "A03:S05": 0.83,
-        "A03:S06": 0.91,
-        "A01:S06": 0.09,
-        "A01:S02": 1,
-        "A03:S03": 0.67,
-        "A01:S03": 0.33,
-        "A03:S07": 1
+        "A01:S01": 0.9,
+        "A02:S01": 0.1,
+        "A02:S04": 1,
+        "A02:S05": 0.33,
+        "A03:S05": 0.67,
+        "A03:S02": 1,
+        "A01:S06": 1,
+        "A01:S03": 0.6,
+        "A03:S03": 0.4,
+        "A01:S07": 1
       }
     },
     "2026-09-09": {
       "changed_cells": 0,
       "gaps": 0,
-      "late_students": 0,
+      "late_students": 1,
       "notify_staff": [],
       "staff_minutes": {
         "A01": 140,
-        "A02": 110,
+        "A02": 120,
         "A03": 110
       },
       "pair_share": {
-        "A02:S05": 1,
+        "A02:S05": 0.86,
+        "A03:S05": 0.14,
         "A03:S06": 1,
         "A01:S02": 0.14,
         "A02:S02": 0.86,
         "A01:S01": 1,
-        "A03:S03": 1
+        "A02:S03": 1
       }
     },
     "2026-09-10": {
@@ -3802,19 +3968,19 @@
       "staff_minutes": {
         "A01": 280,
         "A02": 90,
-        "A03": 100
+        "A03": 110
       },
       "pair_share": {
         "A01:S04": 1,
         "A02:S03": 1,
         "A03:S02": 0.9,
-        "A01:S02": 0.1,
-        "A02:S05": 0.1,
+        "A02:S02": 0.1,
+        "A01:S01": 0.33,
+        "A02:S01": 0.67,
+        "A01:S06": 0.83,
+        "A02:S06": 0.17,
+        "A03:S05": 0.2,
         "A01:S05": 0.8,
-        "A03:S05": 0.1,
-        "A02:S01": 1,
-        "A02:S06": 0.2,
-        "A01:S06": 0.8,
         "A02:S07": 1
       }
     },
@@ -3864,75 +4030,71 @@
     },
     "2026-09-15": {
       "changed_cells": 0,
-      "gaps": 3,
-      "late_students": 3,
+      "gaps": 4,
+      "late_students": 4,
       "notify_staff": [],
       "staff_minutes": {
-        "A01": 200,
+        "A01": 270,
         "A02": 160,
-        "A03": 270
+        "A03": 200
       },
       "pair_share": {
-        "A03:S07": 1,
-        "A01:S01": 0.09,
-        "A02:S01": 0.91,
-        "A02:S04": 0.67,
-        "A01:S04": 0.33,
-        "A02:S05": 0.17,
-        "A03:S05": 0.83,
-        "A01:S06": 0.18,
-        "A03:S06": 0.82,
-        "A01:S02": 1,
-        "A03:S03": 0.8,
-        "A01:S03": 0.2
+        "A01:S07": 0.83,
+        "A02:S07": 0.17,
+        "A01:S01": 0.9,
+        "A02:S01": 0.1,
+        "A02:S04": 1,
+        "A02:S05": 0.33,
+        "A03:S05": 0.67,
+        "A03:S02": 1,
+        "A01:S06": 1,
+        "A01:S03": 0.33,
+        "A03:S03": 0.22,
+        "A02:S03": 0.44
       }
     },
     "2026-09-16": {
       "changed_cells": 0,
       "gaps": 0,
-      "late_students": 1,
+      "late_students": 2,
       "notify_staff": [],
       "staff_minutes": {
-        "A01": 230,
-        "A02": 150,
-        "A03": 30
+        "A01": 180,
+        "A02": 120,
+        "A03": 120
       },
       "pair_share": {
-        "A01:S06": 0.5,
-        "A03:S06": 0.1,
-        "A02:S06": 0.4,
-        "A02:S05": 0.83,
-        "A03:S05": 0.17,
+        "A02:S05": 0.71,
+        "A03:S05": 0.29,
+        "A03:S06": 1,
         "A01:S02": 0.14,
         "A02:S02": 0.86,
         "A02:S07": 0.2,
         "A01:S07": 0.8,
         "A01:S01": 1,
-        "A03:S03": 1
+        "A02:S03": 1
       }
     },
     "2026-09-17": {
       "changed_cells": 0,
       "gaps": 0,
-      "late_students": 1,
+      "late_students": 2,
       "notify_staff": [],
       "staff_minutes": {
-        "A01": 280,
-        "A02": 130,
-        "A03": 110
+        "A01": 240,
+        "A02": 170,
+        "A03": 120
       },
       "pair_share": {
         "A01:S04": 1,
         "A02:S03": 1,
-        "A03:S02": 0.9,
-        "A02:S02": 0.1,
+        "A03:S02": 1,
         "A01:S07": 0.17,
         "A02:S07": 0.83,
-        "A03:S05": 0.2,
-        "A01:S05": 0.8,
         "A02:S01": 1,
-        "A02:S06": 0.2,
-        "A01:S06": 0.8
+        "A02:S06": 1,
+        "A03:S05": 0.2,
+        "A01:S05": 0.8
       }
     },
     "2026-09-18": {
@@ -3982,51 +4144,49 @@
     },
     "2026-09-22": {
       "changed_cells": 0,
-      "gaps": 3,
-      "late_students": 3,
+      "gaps": 4,
+      "late_students": 4,
       "notify_staff": [],
       "staff_minutes": {
-        "A01": 200,
+        "A01": 270,
         "A02": 160,
-        "A03": 270
+        "A03": 200
       },
       "pair_share": {
-        "A03:S07": 1,
-        "A01:S01": 0.09,
-        "A02:S01": 0.91,
-        "A02:S04": 0.67,
-        "A01:S04": 0.33,
-        "A02:S05": 0.17,
-        "A03:S05": 0.83,
-        "A01:S06": 0.18,
-        "A03:S06": 0.82,
-        "A01:S02": 1,
-        "A03:S03": 0.8,
-        "A01:S03": 0.2
+        "A01:S07": 0.83,
+        "A02:S07": 0.17,
+        "A01:S01": 0.9,
+        "A02:S01": 0.1,
+        "A02:S04": 1,
+        "A02:S05": 0.33,
+        "A03:S05": 0.67,
+        "A03:S02": 1,
+        "A01:S06": 1,
+        "A01:S03": 0.33,
+        "A03:S03": 0.22,
+        "A02:S03": 0.44
       }
     },
     "2026-09-23": {
       "changed_cells": 0,
       "gaps": 0,
-      "late_students": 1,
+      "late_students": 2,
       "notify_staff": [],
       "staff_minutes": {
-        "A01": 230,
-        "A02": 150,
-        "A03": 30
+        "A01": 180,
+        "A02": 120,
+        "A03": 120
       },
       "pair_share": {
-        "A01:S06": 0.5,
-        "A03:S06": 0.1,
-        "A02:S06": 0.4,
-        "A02:S05": 0.83,
-        "A03:S05": 0.17,
+        "A02:S05": 0.71,
+        "A03:S05": 0.29,
+        "A03:S06": 1,
         "A01:S02": 0.14,
         "A02:S02": 0.86,
         "A02:S07": 0.2,
         "A01:S07": 0.8,
         "A01:S01": 1,
-        "A03:S03": 1
+        "A02:S03": 1
       }
     },
     "2026-09-28": {
@@ -4053,27 +4213,27 @@
     },
     "2026-09-29": {
       "changed_cells": 0,
-      "gaps": 3,
-      "late_students": 3,
+      "gaps": 4,
+      "late_students": 4,
       "notify_staff": [],
       "staff_minutes": {
-        "A01": 200,
+        "A01": 270,
         "A02": 160,
-        "A03": 270
+        "A03": 200
       },
       "pair_share": {
-        "A03:S07": 1,
-        "A01:S01": 0.09,
-        "A02:S01": 0.91,
-        "A02:S04": 0.67,
-        "A01:S04": 0.33,
-        "A02:S05": 0.17,
-        "A03:S05": 0.83,
-        "A01:S06": 0.18,
-        "A03:S06": 0.82,
-        "A01:S02": 1,
-        "A03:S03": 0.8,
-        "A01:S03": 0.2
+        "A01:S07": 0.83,
+        "A02:S07": 0.17,
+        "A01:S01": 0.9,
+        "A02:S01": 0.1,
+        "A02:S04": 1,
+        "A02:S05": 0.33,
+        "A03:S05": 0.67,
+        "A03:S02": 1,
+        "A01:S06": 1,
+        "A01:S03": 0.33,
+        "A03:S03": 0.22,
+        "A02:S03": 0.44
       }
     },
     "2026-09-30": {
@@ -4082,16 +4242,14 @@
       "late_students": 1,
       "notify_staff": [],
       "staff_minutes": {
-        "A01": 230,
-        "A02": 150,
-        "A03": 20
+        "A01": 180,
+        "A02": 110,
+        "A03": 120
       },
       "pair_share": {
-        "A01:S06": 0.5,
-        "A03:S06": 0.1,
-        "A02:S06": 0.4,
-        "A02:S05": 0.83,
-        "A03:S05": 0.17,
+        "A02:S05": 0.71,
+        "A03:S05": 0.29,
+        "A03:S06": 1,
         "A01:S02": 0.14,
         "A02:S02": 0.86,
         "A02:S03": 1,

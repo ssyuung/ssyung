@@ -43,10 +43,12 @@
 | D12 | 같은 쉬는 시간에 **같은 층→같은 층**으로 이동하는 학생은 **지원인력 1명이 함께** 지원. 도착 층이 같으면 장소가 달라도 같은 묶음. 인원 제한 없음(당분간) | `move_group` 자동 생성, 묶음 단위로 배정 (§8.1) |
 | D13 | 학생마다 **지원 과목**을 고르고, 과목마다 **지원 구간**(시작 10분 · 중간 20분 · 종료 10분)을 체크 | `student_subject_support`. 수업 중엔 다 돕는 게 원칙이고, 쉬는 시간 이동이 몰릴 때 **체크 안 된 구간**의 우선순위를 낮춤 (§8.3) |
 | D14 | 학교를 고르면 반 목록과 시간표를 가져옴. 특수학급은 NEIS에 없어 직접 입력 | `neis_import`, `school.neis_school_code`. 지금은 데이터 파일, API는 나중에 |
-| D20 | 학생 배치는 **과목 기준**: 학생마다 특수학급 쪽에서 듣는 과목과 **그 과목의 수업 장소**(과목마다 다를 수 있음, 예: 국어 K1·수학 K2)를 정하고, 나머지는 원반. 특수학급 수업은 특수교사가 맡아 **지원인력 수업 지원이 없고** 원반↔특수학급 이동 지원만 생김. 특별실 과목(과학·음악 등)도 지금은 원반에서 함 | `student_placement(student, subject)`. 날짜별 시간표에 그대로 적용 (§4.5) |
+| D20 | 학생 배치는 **과목 기준**: 학생마다 특수학급에서 듣는 과목을 정하고, 나머지는 원반. 장소는 D25(특수학급 시간표)로 정함. 특수학급 수업은 특수교사가 맡아 **지원인력 수업 지원이 없고** 원반↔특수학급 이동 지원만 생김. 특별실 과목(과학·음악 등)도 지금은 원반에서 함 | `student_placement(student, subject)`. 날짜별 시간표에 그대로 적용 (§4.5) |
 | D21 | 지원인력은 앱에서 **오늘 맡은 학생마다 등교 체크**(등교만). **결석은 교사가** 변경 요청으로 처리 | `attendance`. 교사 현황판에 등교·결석·미확인 표시. 결석은 수정안(수업 지원 해제, 이동 묶음에서 빠짐)을 승인해야 반영(P3) |
 | D22 | 쉬는 시간에 이동 묶음이 사람보다 많으면 **두 번째 이동**: 한 지원인력이 쉬는 시간에 한 묶음, 다음 교시 **첫 10분**에 다른 묶음을 데려감(최대 20분). 두 번째 묶음은 10분 늦게 도착 | 늦어도 되는 묶음부터 두 번째로. 그 지원인력의 다음 수업 시작 10분은 체크 안 된 구간이면 비움(`EDGE_RELEASED`), 체크된 구간이면 마지막 수단 (§8.2-6) |
 | D23 | 배정(최초 생성·변경 요청)은 **선택지 여러 개**를 내고 **교사가 고름** | 기준을 달리한 수정안 최대 3개: A 변경 최소(이전 배정 유지, 체크된 시작 구간은 비우지 않음), B 처음부터 다시(이전 배정에 묶이지 않음), C 늦게 도착 없음(두 번째 이동 안 씀). 바뀌는 칸·지원 공백·늦게 도착 학생·알림 인원으로 비교. 결과가 같은 안은 합침. 고른 안만 승인 (P3) |
+| D25 | **소속 특수학급은 없다.** 특수학급마다 **요일·시각 기준 시간표**(매주 반복, 요일마다 다름)가 있고, 학생은 그 요일·시각에 자기 과목을 하는 특수학급으로 간다(예: 월 2교시에 수학을 하는 특수학급이 K1이면 그 시간 수학을 특수학급에서 듣는 학생은 K1로). 그런 특수학급이 없거나 둘 이상이면 특수학급 수업이지만 **장소 미정**: 이동 수요를 만들지 않고 경고, 교사가 배치 변경(장소 지정)으로 풂 | `special_class_lesson(special_class, day, start_min, end_min, subject)`. `student.special_class_id`와 학생별 과목 장소 없음. 수요의 `unplaced`, 경고 `SPECIAL_CLASS_UNPLACED` (§8.1) |
+| D24 | **오늘 날짜의 변경은 요청 시각부터** 적용. 이미 지난 칸은 바꾸지 않고 알림도 보내지 않음 (결석·배치 변경·장소 변경·추가 지원·지원인력 부재 모두) | 요청 시각 `now`(10분 올림). 기준은 하나: **`now` 이후에 시작하는 칸만 바뀐다. 진행 중인 칸은 그대로.** 수요 생성(M3)은 오늘 변경을 `now` 이후에 시작하는 칸에만 적용하고, 배치 엔진(M1)은 `now` 이전에 시작한 이전 배정을 고정한다. 계약 `ProposeInput.now` (§8.1, §8.2-7) |
 | D19 | 첫 개발은 **DB 없이** JSON 파일로. API로 가져올 정보(`dataset/api/`)와 DB에 들어갈 정보(`dataset/db/`)는 폴더를 나눔 | 저장소 인터페이스 뒤에 `JsonRepository`(지금)와 `SupabaseRepository`(나중) (§4.6) |
 | D15 | 시간은 **10분 단위**. 교사는 일간 편집에서 지원인력 배정을 10분 단위로 끌어 옮김 | 배정은 `[start_min, end_min)` 구간. 일과 시각은 10분 경계에 맞춤 (§4.1) |
 | D16 | 시간표 칸마다 **메모**와 **완료 체크**. 교사·지원인력 모두 쓰고 서로 봄 | `cell_note`, `cell_check` (§4.5) |
@@ -152,6 +154,7 @@ school                id, label, timezone, floors,
 member                id, school_id, auth_user_id, code(T01), role(owner|teacher)
 special_class         id, school_id, code(K1), location_id, label
 special_class_teacher special_class_id, member_id
+special_class_lesson  special_class_id, day(MON..FRI), start_min, end_min, subject   -- 특수학급 시간표 (D25). 요일·시각 기준, 매주 반복
 time_block            id, school_id, day(MON..FRI),
                       kind(class|break|lunch|arrival|dismissal|other),
                       period(수업일 때 1..8, 아니면 null), start_min, end_min,
@@ -187,7 +190,7 @@ class_lesson          school_id, class_group_id, date, period, subject, import_i
 ### 4.4 기초정보: 학생·지원인력·업무
 
 ```
-student                 id, school_id, code(S01), label, class_group_id, special_class_id
+student                 id, school_id, code(S01), label, class_group_id      -- 소속 특수학급 없음 (D25)
 student_subject_support student_id, subject, need_start, need_mid, need_end   -- D13
 support_note            id, student_id, body, updated_by, updated_at          -- 지원 방법·유의사항 (교사 관리)
 staff                   id, school_id, code(A01), label
@@ -210,7 +213,7 @@ schedule_version     id, school_id, parent_id, status(draft|active|archived),
                      cause(setup|change_request|timetable_import|manual|rollback),
                      created_by, created_at, activated_at
 student_placement    version_id, student_id, subject,
-                     placement(homeroom|special_class), location_id  -- 과목 기준 규칙 (D1, D20). 장소는 과목마다 다를 수 있음. 행이 없는 과목은 원반
+                     placement(homeroom|special_class)    -- 과목 기준 규칙 (D1, D20). 특수학급 장소는 특수학급 시간표로 정함(D25). 행이 없는 과목은 원반
 placement_override   version_id, student_id, date, period, placement, location_id  -- 특정 날짜만
 support_requirement  version_id, student_id, date, start_min, end_min, headcount   -- 과목 지원 외에 손으로 넣은 수요 (쉬는 시간 등)
 staff_absence        version_id, staff_id, date, start_min, end_min                -- 출장·병가 등
@@ -272,7 +275,8 @@ interface Repository {
 | 파일 (`dataset/db/서울개포초등학교/`) | 내용 | 화면 | 대응 테이블 |
 |---|---|---|---|
 | `층배치.json` | 5층, 반 39개(3학년은 2·3층에 나뉨), K1·K2 모두 1층, 특별실 9곳, 건물 밖 4곳. **임의로 만든 값, 실제 배치 아님** | ③ | `special_class`, `location`, `class_group.home_location_id` |
-| `학생.json` | S01–S07 학생1~7. 모두 다른 반(3-2, 4-1, 5-3, 4-4, 4-7, 5-5, 5-6), K1 4명·K2 3명. 학생마다 `special_class_subjects`(특수학급 쪽에서 듣는 과목과 장소 `[{subject, location}]`, 지금은 모두 국어·수학이고 장소는 소속 특수학급)와 `support_subjects`(원반 수업에서 지원이 필요한 과목과 지원 구간, 지금은 모두 과학·영어·음악)를 둔다. 둘 다에 있는 과목은 특수학급 수업이 우선이라 지원 수요가 생기지 않는다 | ④ ⑥ | `student`, `student_placement`, `student_subject_support`, `support_note` |
+| `특수학급시간표.json` | K1·K2의 요일·시각별 과목(국어·수학). 9월 학생의 특수학급 수업 253칸이 모두 특수학급 하나로 정해지도록 만듦. **임의로 만든 값** | ③(특수학급 시간표) | `special_class_lesson` |
+| `학생.json` | S01–S07 학생1~7. 모두 다른 반(3-2, 4-1, 5-3, 4-4, 4-7, 5-5, 5-6). 학생마다 `special_class_subjects`(특수학급에서 듣는 과목 목록, 지금은 모두 국어·수학. 장소는 특수학급 시간표로 정함)와 `support_subjects`(원반 수업에서 지원이 필요한 과목과 지원 구간, 지금은 모두 과학·영어·음악)를 둔다. 둘 다에 있는 과목은 특수학급 수업이 우선이라 지원 수요가 생기지 않는다 | ④ ⑥ | `student`, `student_placement`, `student_subject_support`, `support_note` |
 | `지원인력.json` | A01–A03 지원인력1~3. 근무는 모두 풀타임(월~금 08:40–16:40으로 가정) | ⑧ | `staff`, `staff_availability` |
 
 - 화면은 처음부터 **추가·설정 버튼으로 고치는 UI**로 만든다. `JsonRepository`가 파일을 읽어 초기값을 주고, 쓰기는 같은 파일에 반영한다(개발 서버에서만). DB 단계로 넘어가면 구현만 `SupabaseRepository`로 바꾸고 화면·API는 그대로 둔다.
@@ -604,7 +608,7 @@ D1에 따라 학생 배치는 입력값이다. 배치 엔진은 **10분 칸 단�
 **① 수업 지원 수요** — 학생 s, 날짜 d, 교시 p마다
 1. 과목 = `class_lesson(class(s), d, p)`. 없으면(휴일, 시간표 없는 반) 건너뜀.
 2. 배치 = `placement_override(s, d, p)` → 없으면 `student_placement(s, 과목)` → 없으면 `homeroom`.
-3. 장소 = 특수학급이면 그 과목의 `student_placement.location_id`(과목마다 다를 수 있음), 아니면 `subject_location(과목)` → 없으면 반 교실. (`relocate_class`가 있으면 그 장소). 첫 개발 단계에서는 `subject_location`을 비워 두어 특별실 과목도 반 교실이다.
+3. 장소 = 특수학급이면 `placement_override`의 장소 → 없으면 **그 요일·시각에 그 과목을 하는 특수학급**(D25, `special_class_lesson`이 그 교시와 겹치고 과목이 같은 것). 하나가 아니면(없거나 둘 이상) 장소 미정으로 `DemandSet.unplaced`에 남기고 그 칸은 수요·이동을 만들지 않는다. 원반이면 `subject_location(과목)` → 없으면 반 교실. (`relocate_class`가 있으면 그 장소). 첫 개발 단계에서는 `subject_location`을 비워 두어 특별실 과목도 반 교실이다.
 4. 배치가 `homeroom`이고 과목이 `student_subject_support`에 있으면, 구간 3개를 수요로 만든다.
 
 | 구간 | 칸 | 우선순위 |
@@ -625,6 +629,12 @@ D1에 따라 학생 배치는 입력값이다. 배치 엔진은 **10분 칸 단�
 
 **③ 추가 수요**: `support_requirement`(날짜, 구간, 인원). 우선순위 HIGH.
 
+**오늘 변경 (D24)**: 변경 명령이 가리키는 날짜가 오늘이면, 요청 시각 `now`(10분 올림) **이후에 시작하는 칸**(수업 지원, 이동 묶음, 추가 수요)에만 적용한다. 이미 시작한 칸은 진행 중이어도 그대로 둔다.
+- 예: 10:15에 "학생3 오늘 결석" → `now` = 10:20. 1교시, 1교시 뒤 쉬는 시간 이동, 2교시(09:50 시작, 진행 중)는 그대로. 2교시 뒤 쉬는 시간(10:30) 이동부터 학생3이 빠진다.
+- 하루 전체 추가 지원(`set_support`)은 `now`부터 하교 끝까지.
+- 다른 날짜의 변경, 과거 날짜를 가리킨 변경은 자르지 않는다(과거 날짜는 해석 단계에서 교사에게 확인).
+- 배치 엔진의 지난 칸 고정(§8.2-7)과 같은 기준이라, 고정된 배정이 사라진 수요를 가리키는 일이 없다.
+
 **④ 업무 수요**: `duty`(요일, 구간, 장소, 인원, 동행 학생)를 날짜 범위에 펼친 것. 우선순위 HIGH.
 
 ### 8.2 변수와 하드 제약
@@ -638,6 +648,7 @@ D1에 따라 학생 배치는 입력값이다. 배치 엔진은 **10분 칸 단�
 6. **두 번째 이동 (D22)**: 쉬는 시간 b에 배정되지 못한 이동 묶음은 `[b.end, b.end+10)`(다음 교시 첫 10분)으로 옮겨 다시 배정할 수 있다. 더 늦게는 옮기지 않는다.
    - 어떤 묶음을 두 번째로 보낼지: 늦게 도착 비용이 낮은 묶음부터. 학생별 비용 0 = 다음 수업이 원반이고 시작 구간 체크 안 됨(또는 지원 없는 과목), 1 = 특수학급 수업, 2 = 시작 구간 체크됨. 묶음 비용 = 학생 비용의 최댓값.
    - 누가 데려갈지: 그 10분이 비어 있는 사람 → 다음 수업 시작 구간이 체크 안 된 학생을 맡은 사람(그 10분 비움) → 체크된 구간을 맡은 사람(마지막 수단, 그 10분은 지원 공백). 쉬는 시간에 이미 한 묶음을 데려간 사람을 우선한다.
+7. **지난 칸 고정 (D24)**: `ProposeInput.now`가 있으면, 그 날짜에 `now` 이전에 시작한 이전 배정은 진행 중이어도 그대로 둔다(pinned처럼). 수요 생성의 오늘 변경 규칙(§8.1)과 같은 기준이다. 이미 지난 칸이 바뀌거나 그 칸으로 알림이 가지 않게 하기 위해서다. 검증은 이런 칸이 바뀌면 `BEFORE_NOW_CHANGED`를 낸다.
 5. **층 간 연속 배정**: **미정**(§15-7). 정해질 때까지 제약을 두지 않는다. 솔버에 `floor_transition` 제약 자리만 만들어 두고, 규칙이 정해지면 그 자리에 넣는다.
 
 ### 8.3 목적함수 (단계별 최소화)
@@ -673,7 +684,7 @@ D1에 따라 학생 배치는 입력값이다. 배치 엔진은 **10분 칸 단�
 
 ### 8.5 검증 (`/validate`)
 
-W4에서 끌어 놓을 때마다 호출한다. 하드 제약 위반(겹침, 근무 밖, 고정 해제, 이동 묶음에 2명 이상 또는 0명)과 부족분을 돌려준다. 배정과 무관한 배치 문제도 **경고**로 돌려준다.
+W4에서 끌어 놓을 때마다 호출한다. 하드 제약 위반(겹침, 근무 밖, 고정 해제, 이동 묶음에 2명 이상, 지난 칸 변경)과 부족분을 돌려준다. 이동 묶음 0명은 위반이 아니라 부족분(지원 공백)이다. 배정과 무관한 배치 문제는 API(`schedule.validate`)가 **경고**로 덧붙인다. 엔진 입력에는 특수학급 배치·교사 정보가 없기 때문이다.
 - 특수학급에 같은 칸에 학생이 너무 많음
 - 특수학급에 그 칸 담당 교사가 없음
 
@@ -717,6 +728,7 @@ W4에서 끌어 놓을 때마다 호출한다. 하드 제약 위반(겹침, 근�
 | `UNAVAILABLE` | 기존 담당자가 부재·근무시간 밖 |
 | `CONTINUITY` | 한 교시 안에서 같은 사람이 이어 맡도록 함께 옮김 |
 | `GAP` | 다시 배정했지만 맡을 사람이 없어 지원 공백이 됨 |
+| `REPLANNED` | 처음부터 다시(B) 정책이라 연쇄 없이 담당이 바뀜. 원인은 그 요청 단계 |
 | `BALANCE`, `ROTATION` | 예약. 업무강도·매칭 알고리즘(D17)이 들어오면 사용 |
 
 `TRAVEL_TIME_SHORT`는 없앴다(D11).

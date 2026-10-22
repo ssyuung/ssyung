@@ -1,6 +1,6 @@
 {
   "$id": "ssyung/ValidateOutput",
-  "x-contract-version": "0.1.0",
+  "x-contract-version": "0.3.0",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "properties": {
@@ -18,7 +18,8 @@
               "PINNED_CHANGED",
               "MOVE_GROUP_HEADCOUNT",
               "SECOND_TRIP_WINDOW",
-              "UNKNOWN_DEMAND"
+              "UNKNOWN_DEMAND",
+              "BEFORE_NOW_CHANGED"
             ]
           },
           "staff": {
@@ -145,6 +146,7 @@
       }
     },
     "warnings": {
+      "description": "쓰지 않음. 배치 경고는 엔진 입력에 없는 정보가 필요해 API(schedule.validate)가 계산한다. 계약 1.0에서 뺀다",
       "type": "array",
       "items": {
         "type": "object",
@@ -153,7 +155,8 @@
             "type": "string",
             "enum": [
               "SPECIAL_CLASS_CROWDED",
-              "NO_SPECIAL_TEACHER"
+              "NO_SPECIAL_TEACHER",
+              "SPECIAL_CLASS_UNPLACED"
             ]
           },
           "date": {
@@ -200,7 +203,6 @@
   },
   "required": [
     "violations",
-    "shortfalls",
-    "warnings"
+    "shortfalls"
   ]
 }

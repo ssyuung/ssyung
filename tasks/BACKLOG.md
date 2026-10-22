@@ -11,15 +11,21 @@
   - 저장하지 않음: M5 시작.
   - 저장함: M5와 architecture.md §5, API의 `NAME_SUSPECTED`를 지우고 이름 필드를 추가.
 
-### M1이 올린 계약 변경 요청 (`m1-scheduler/contracts/requests/`)
-처리하는 곳: architecture 워크트리(M0). Claude에게 "M1 요청 처리해"라고 하면 반영 → 목데이터 다시 생성 → main merge까지 한다.
+- [x] **특수학급 시간표 → D25**: 요일·시각 기준, 학생별 과목 장소·소속 특수학급 없앰, 안 맞으면 특수학급 수업 + 장소 미정(경고). 계약 0.3.0
+- [x] M3 `now` 범위 → **D24: 오늘 변경은 모두 요청 시각부터.** `now` 이후에 시작하는 칸만 바뀌고 진행 중인 칸은 그대로 (architecture.md §8.1)
 
-| 요청 | 내용 | 추천 |
-|---|---|---|
-| `M1-replanned-reason` | 이유 코드 `REPLANNED` 추가 (처음부터 다시 정책에서 연쇄 없이 바뀐 칸) | 받음. 목데이터가 이 칸들을 `OVERLAP`으로 잘못 분류하고 있음 |
-| `M1-move-group-empty` | 이동 묶음 0명은 위반이 아니라 지원 공백 | 받음. 목데이터 생성기도 이미 그렇게 동작 |
-| `M1-validate-warnings` | 특수학급 경고는 엔진 밖(API)에서 계산 | 받음. 하위 호환이 깨지므로 M7 지시서에 반영 |
-| `M1-scenario-inputs` | 시나리오 입력을 `fixtures/scenarios/inputs/`에 고정 | 받음. M2가 같은 입력을 써야 함 |
+### 계약 변경 요청
+상태와 처리 기록은 `contracts/requests/README.md`. 6건 모두 받음: 0.2.0(M1 4건, M4 1건, 하위 호환), 0.3.0(M3 특수학급 시간표, 하위 호환 아님).
+
+### merge 순서 (main을 깨뜨리지 않게)
+- [ ] 1. main(계약 0.3.0) push
+- [ ] 2. **PR #2 M1** merge — 0.3.0에서 그대로 통과 확인함(테스트 28, 시나리오 3개). lockfile은 `pnpm install`로 다시 생성
+- [ ] 3. **M3 PR #3**: m3 워크트리에 main을 합친 뒤 M3 세션에 "M3-questions.md의 M0 답을 반영해" → ① `now`를 D24 범위로 ② 0.3.0 특수학급 시간표(장소, `unplaced`). 지금은 0.3.0에서 타입 오류 3개·테스트 11개 실패
+- [ ] 4. **M4 PR #1**: m4 워크트리에 main을 합친 뒤 M4 세션에 "M4-questions.md의 M0 답을 반영해" → 새 학생 형식, 특수학급 시간표 파일 → `special_classes[].lessons`. 지금은 타입 오류 4개·테스트 4개 실패
+- [ ] 5. merge 뒤 요청 파일을 `contracts/requests/done/`으로
+
+### 화면 (D25로 바뀐 것)
+- [ ] 시안(`docs/screens`)과 M8: 학생 설정의 "과목별 수업 장소" 선택을 없애고, ③에 **특수학급 시간표 입력**(요일 × 교시 표, 특수학급마다) 추가. 장소 미정 칸 경고 표시
 
 ### M1 질문 중 사람이 확인할 것 (`m1-scheduler/tasks/M1-questions.md`)
 - [ ] 5번: 요청 명령마다 1단계(`REQUESTED`)를 하나씩 둠. 부재처럼 칸이 안 바뀌는 명령은 단계에 칸이 없음 → W5 화면에서 괜찮은지
@@ -27,8 +33,7 @@
 
 ### 세션
 - [x] 워크트리 준비: m1-scheduler, m3-demand, m4-data
-- [ ] M3, M4 세션 시작 (`tasks/M3-demand.md를 읽고 수행해`)
-- [ ] M1 v1 PR 검토 → merge
+- [ ] M1·M3·M4 v1 커밋 요청 → PR 검토 → merge (세 모듈 모두 완료 조건 통과, 테스트 M1 28·M3 27·M4 17개)
 - [ ] 1차(M1·M3·M4) PR 몇 개 merge 뒤: m6-interpreter, m7-api 워크트리 만들고 init
 
 ## 2. 반복 업무
@@ -48,8 +53,8 @@
 ### M1 배치 엔진
 | 버전 | 내용 | 시작 조건 | 상태 |
 |---|---|---|---|
-| v1 | 임시 규칙 엔진, propose·validate, 정책 3개, diff·설명·지표, 시나리오 3개(S2·S3·S7) | — | 진행 (`tasks/M1-scheduler.md`) |
-| v2 | 시나리오 10개 전부 켜기, 계약 요청 4건 반영(REPLANNED, warnings 이동, 시나리오 입력 파일), 목데이터 생성기를 이 패키지로 교체 | M3 merge, 요청 4건 처리 | 대기 |
+| v1 | 임시 규칙 엔진, propose·validate, 정책 3개, diff·설명·지표, 시나리오 3개(S2·S3·S7) | — | 진행, PR 대기 |
+| v2 | 계약 0.2.0 따라가기(REPLANNED 단계, `warnings` 빼기, `fixtures/scenarios/inputs` 읽기 → 시나리오 6개), **D24 지난 칸 고정**(`now` 이전 배정 고정, `BEFORE_NOW_CHANGED`), 공용 시간 함수 쓰기, `explain.ts` 단순화, M3 merge 뒤 시나리오 10개, 목데이터 생성기를 이 패키지로 교체 | 요청 4건 반영됨(0.2.0), M3 merge | 대기 |
 | v3 | 엔진 교체 구조: 정책마다 heuristic·cpsat 선택, 두 엔진 비교표 | M2 v1 merge | 대기 |
 | v4 | 무작위 시험(9월 20일 × 결석·부재·배치 변경 수백 번), 성능 목표(10일 15초) | v2 | 대기 |
 | 이후 | 업무강도 균형(`BALANCE`)·매칭 분산(`ROTATION`) | 결정 §5-3 | 결정 필요 |
@@ -60,13 +65,15 @@
 ### M3 수요 생성
 | 버전 | 내용 | 시작 조건 | 상태 |
 |---|---|---|---|
-| v1 | 수업 지원·이동 묶음 수요, ChangeOps 반영 | — | 준비됨 (`tasks/M3-demand.md`) |
-| v2 | 업무(duty) 펼치기, 추가 수요, 45·50분 수업 구간 | 업무 데이터, 결정 §5-6 | 대기 |
+| v1 | 수업 지원·이동 묶음 수요, ChangeOps 반영 | — | 진행, PR 대기 |
+| v2 | 공용 시간 함수·`DEFAULT_BELL` 쓰기, 시나리오 S6·S8·S9·S10 입력 만들기(M0와 함께), 특수학급 시간표(결정 뒤), 업무(duty) 펼치기, 45·50분 수업 구간 | 결정 | 대기 |
 
 ### M4 학교 데이터·저장소
 | 버전 | 내용 | 시작 조건 | 상태 |
 |---|---|---|---|
-| v1 | FileSource, JsonRepository, 저장소 계약 테스트 | — | 준비됨 (`tasks/M4-data.md`) |
+| v1 | MockSource(목데이터를 그대로 돌려줌), JsonRepository, 저장소 계약 테스트. NEIS 정규화(FileSource)는 보류 — 사람 결정 B안 (M4-questions Q1) | — | 진행, PR 대기 |
+| v1.5 | 리뷰 반영: `last_code_no`를 스키마로 파싱, `MockSource` 학교 목록을 `domain/school.json`에서, `Schema<T>` 대신 `z.ZodType`, `bell.ts` 대신 `DEFAULT_BELL`·공용 시간 함수 | 0.2.0 | 대기 |
+| v1.6 | FileSource: `dataset/api/` NEIS 응답 정규화 + 9월 목데이터 대조 (`test/mock-source.test.ts` 그대로) | 필요할 때 | 대기 |
 | v2 | 버전·배정·메모·체크 저장 | M7 v1 | 대기 |
 | v3 | SupabaseRepository (같은 계약 테스트), NeisSource | Wave 2 | 대기 |
 
@@ -76,7 +83,7 @@
 | M2 CP-SAT | v1 지시서 작성 (Claude에게 요청) | M1 v1·M3 v1 merge |
 | M5 실명 검사 | v1 (`tasks/M5-name-guard.md`, 보류) | §1 결정 |
 | M6 해석기 | v1 (`tasks/M6-interpreter.md`), eval은 사람이 API 키로 실행 | 1차 merge 뒤 |
-| M7 API | v1 (`tasks/M7-api.md`) → v2 실제 모듈 연결 | 1차 merge 뒤 |
+| M7 API | v1 (`tasks/M7-api.md`) → v2 실제 모듈 연결. 지시서 보강: `schedule.validate` 경고 계산(`ScheduleValidateOutput`), `now` 채우기(D24), `generateDemands`의 `version_id`·`requirements`·`now`, `JsonRepository({ dir, schoolId, source })` | 1차 merge 뒤 |
 | M8·M9 화면 | v1 지시서 작성 | M7 v1 (`dev:mock`) |
 | M10·M11 | v1 지시서 작성 | Wave 2 |
 

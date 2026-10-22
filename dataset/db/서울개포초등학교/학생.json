@@ -1,20 +1,13 @@
 {
-  "_note": "개발용 학생 데이터. DB 대신 사용. label은 별칭이며 실명을 쓰지 않는다. special_class = 소속 특수학급. special_class_subjects = 특수학급 쪽에서 듣는 과목과 그 과목의 수업 장소(과목마다 다를 수 있음, 특수교사가 맡아 지원인력 수업 지원 없음, 원반↔장소 이동만 생김). support_subjects = 원반 수업에서 지원인력 지원이 필요한 과목과 지원 구간. 둘 다에 있는 과목은 특수학급 수업이 우선이다.",
+  "_note": "개발용 학생 데이터. DB 대신 사용. label은 별칭. special_class_subjects = 특수학급에서 듣는 과목(장소는 그 요일·시각에 그 과목을 하는 특수학급, 특수학급시간표.json, D25). 특수교사가 맡아 지원인력 수업 지원 없음, 원반↔특수학급 이동만 생김. support_subjects = 원반 수업에서 지원인력 지원이 필요한 과목과 지원 구간. 둘 다에 있는 과목은 특수학급 수업이 우선이다. 소속 특수학급은 없다.",
   "students": [
     {
       "code": "S01",
       "label": "학생1",
       "class": "3-2",
-      "special_class": "K1",
       "special_class_subjects": [
-        {
-          "subject": "국어",
-          "location": "K1"
-        },
-        {
-          "subject": "수학",
-          "location": "K1"
-        }
+        "국어",
+        "수학"
       ],
       "support_subjects": [
         {
@@ -42,16 +35,9 @@
       "code": "S02",
       "label": "학생2",
       "class": "4-1",
-      "special_class": "K1",
       "special_class_subjects": [
-        {
-          "subject": "국어",
-          "location": "K1"
-        },
-        {
-          "subject": "수학",
-          "location": "K1"
-        }
+        "국어",
+        "수학"
       ],
       "support_subjects": [
         {
@@ -79,16 +65,9 @@
       "code": "S03",
       "label": "학생3",
       "class": "5-3",
-      "special_class": "K2",
       "special_class_subjects": [
-        {
-          "subject": "국어",
-          "location": "K2"
-        },
-        {
-          "subject": "수학",
-          "location": "K2"
-        }
+        "국어",
+        "수학"
       ],
       "support_subjects": [
         {
@@ -116,16 +95,9 @@
       "code": "S04",
       "label": "학생4",
       "class": "4-4",
-      "special_class": "K1",
       "special_class_subjects": [
-        {
-          "subject": "국어",
-          "location": "K1"
-        },
-        {
-          "subject": "수학",
-          "location": "K1"
-        }
+        "국어",
+        "수학"
       ],
       "support_subjects": [
         {
@@ -153,16 +125,9 @@
       "code": "S05",
       "label": "학생5",
       "class": "4-7",
-      "special_class": "K1",
       "special_class_subjects": [
-        {
-          "subject": "국어",
-          "location": "K1"
-        },
-        {
-          "subject": "수학",
-          "location": "K1"
-        }
+        "국어",
+        "수학"
       ],
       "support_subjects": [
         {
@@ -190,16 +155,9 @@
       "code": "S06",
       "label": "학생6",
       "class": "5-5",
-      "special_class": "K2",
       "special_class_subjects": [
-        {
-          "subject": "국어",
-          "location": "K2"
-        },
-        {
-          "subject": "수학",
-          "location": "K2"
-        }
+        "국어",
+        "수학"
       ],
       "support_subjects": [
         {
@@ -227,16 +185,9 @@
       "code": "S07",
       "label": "학생7",
       "class": "5-6",
-      "special_class": "K2",
       "special_class_subjects": [
-        {
-          "subject": "국어",
-          "location": "K2"
-        },
-        {
-          "subject": "수학",
-          "location": "K2"
-        }
+        "국어",
+        "수학"
       ],
       "support_subjects": [
         {

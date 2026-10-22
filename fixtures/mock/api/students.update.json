@@ -20,16 +20,9 @@
         "code": "S02",
         "label": "학생2",
         "class_group": "4-1",
-        "special_class": "K1",
         "special_class_subjects": [
-          {
-            "subject": "국어",
-            "location": "K1"
-          },
-          {
-            "subject": "수학",
-            "location": "K1"
-          }
+          "국어",
+          "수학"
         ],
         "support_subjects": [
           {

@@ -7,6 +7,7 @@ import { readFileSync, writeFileSync, mkdirSync, rmSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseHTML } from "linkedom";
+import { DEFAULT_BELL, hhmmToMinute, weekdayOf } from "../../packages/schema/src/index.ts";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const API_DIR = join(ROOT, "dataset/api/서울개포초등학교");
@@ -27,32 +28,12 @@ const NOW = 615; // 10:15 — 시안의 NOW_DEMO
 const WEEK = ["2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18"];
 const TS = (date: string, min: number) =>
   `${date}T${String(Math.floor(min / 60)).padStart(2, "0")}:${String(min % 60).padStart(2, "0")}:00+09:00`;
-const hhmm = (m: number) => `${String(Math.floor(m / 60)).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`;
-const toMin = (t: string) => +t.slice(0, 2) * 60 + +t.slice(3, 5);
+const toMin = hhmmToMinute;
 const ymd = (d: string) => `${d.slice(0, 4)}-${d.slice(4, 6)}-${d.slice(6, 8)}`;
-const DAYS = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"] as const;
-const dayOf = (date: string) => DAYS[new Date(date + "T00:00:00Z").getUTCDay()];
+const dayOf = weekdayOf;
 
-// 일과 (②). 시안과 같은 초등 40분 수업 가정
-const BELL_RAW: [string, string, string, string, number | null][] = [
-  ["arrival", "08:40", "09:00", "등교", null],
-  ["class", "09:00", "09:40", "1교시", 1],
-  ["break", "09:40", "09:50", "쉬는 시간", null],
-  ["class", "09:50", "10:30", "2교시", 2],
-  ["break", "10:30", "10:40", "쉬는 시간", null],
-  ["class", "10:40", "11:20", "3교시", 3],
-  ["break", "11:20", "11:30", "쉬는 시간", null],
-  ["class", "11:30", "12:10", "4교시", 4],
-  ["lunch", "12:10", "13:00", "점심", null],
-  ["class", "13:00", "13:40", "5교시", 5],
-  ["break", "13:40", "13:50", "쉬는 시간", null],
-  ["class", "13:50", "14:30", "6교시", 6],
-  ["dismissal", "14:30", "14:50", "하교", null],
-  ["other", "14:50", "16:40", "방과 후", null],
-];
-const BELL = BELL_RAW.map(([kind, s, e, label, period]) => ({
-  kind, period, start: toMin(s), end: toMin(e), label, part_of_day: toMin(s) < 720 ? "morning" : "afternoon",
-}));
+// 일과 (②): 계약의 기본 일과 (초등 40분 수업)
+const BELL = DEFAULT_BELL[0]!.blocks;
 const PERIODS = BELL.filter((b) => b.kind === "class");
 const periodAt = (min: number) => PERIODS.find((b) => b.start <= min && min < b.end)?.period ?? null;
 const periodEndingAt = (min: number) => PERIODS.find((b) => b.end === min)?.period ?? null;
@@ -61,6 +42,7 @@ const periodEndingAt = (min: number) => PERIODS.find((b) => b.end === min)?.peri
 const layout = json(join(DB_DIR, "층배치.json"));
 const studentsFile = json(join(DB_DIR, "학생.json"));
 const staffFile = json(join(DB_DIR, "지원인력.json"));
+const scFile = json(join(DB_DIR, "특수학급시간표.json"));
 const ttRows = json(join(API_DIR, "초등학교시간표.json")).slice(1);
 
 const floorOf: Record<string, number | "OUT"> = {};
@@ -101,7 +83,11 @@ const LOC_LABEL: Record<string, string> = Object.fromEntries(locations.map((l: a
 const classGroups = layout.classes.map((c: any) => ({
   code: c.class, grade: c.grade, home_location: c.class, has_timetable: withTimetable.has(c.class),
 }));
-const specialClasses = layout.special_classes.map((k: any, i: number) => ({ code: k.code, location: k.code, teachers: [`T0${i + 1}`] }));
+const scLessons: Record<string, any[]> = Object.fromEntries(scFile.special_classes.map((k: any) => [k.code, k.lessons]));
+const specialClasses = layout.special_classes.map((k: any, i: number) => ({
+  code: k.code, location: k.code, teachers: [`T0${i + 1}`],
+  lessons: (scLessons[k.code] ?? []).map((x: any) => ({ day: x.day, start: toMin(x.start), end: toMin(x.end), subject: x.subject })),
+}));
 const schoolBundle = {
   school,
   bell: [{ days: ["MON", "TUE", "WED", "THU", "FRI"], blocks: BELL }],
@@ -110,7 +96,7 @@ const schoolBundle = {
   special_classes: specialClasses,
 };
 const students = studentsFile.students.map((s: any) => ({
-  code: s.code, label: s.label, class_group: s.class, special_class: s.special_class,
+  code: s.code, label: s.label, class_group: s.class,
   special_class_subjects: s.special_class_subjects, support_subjects: s.support_subjects, support_note: s.support_note,
 }));
 const staff = staffFile.staff.map((a: any) => ({
@@ -118,6 +104,32 @@ const staff = staffFile.staff.map((a: any) => ({
   availability: a.availability.map((v: any) => ({ day: v.day, start: toMin(v.start), end: toMin(v.end) })),
 }));
 const LABEL: Record<string, string> = Object.fromEntries([...students, ...staff].map((x: any) => [x.code, x.label]));
+
+// ---------------------------------------------------------------- 특수학급 장소 (D25)
+// 학생이 특수학급에서 듣는 과목이면, 그 요일·시각에 그 과목을 하는 특수학급으로 간다. 없거나 둘 이상이면 장소 미정
+function specialPlace(student: any, date: string, period: number, subject: string): { loc: string | null; reason?: "none" | "multiple" } {
+  const b = PERIODS.find((x) => x.period === period)!;
+  const day = dayOf(date);
+  const hits = specialClasses.filter((k: any) => k.lessons.some((x: any) => x.day === day && x.subject === subject && x.start < b.end && b.start < x.end));
+  return hits.length === 1 ? { loc: hits[0].code } : { loc: null, reason: hits.length ? "multiple" : "none" };
+}
+const unplaced: any[] = [];
+/** 날짜별 시안 엔진 입력: 학생 → 교시(0부터) → 특수학급 */
+const basePlace: Record<string, Record<string, Record<number, string>>> = {};
+for (const l of lessons) {
+  for (const st of students.filter((x: any) => x.class_group === l.class_group && x.special_class_subjects.includes(l.subject))) {
+    const r = specialPlace(st, l.date, l.period, l.subject);
+    if (!r.loc) { unplaced.push({ date: l.date, student: st.code, period: l.period, subject: l.subject, reason: r.reason }); continue; }
+    ((basePlace[l.date] ??= {})[st.code] ??= {})[l.period - 1] = r.loc;
+  }
+}
+// 시안 엔진은 장소 미정(이동 없음)을 표현하지 못한다. 개발 데이터는 전부 맞도록 시간표를 만들었다
+if (unplaced.length) throw new Error(`특수학급 시간표와 안 맞는 칸 ${unplaced.length}개: ${JSON.stringify(unplaced.slice(0, 3))}`);
+const withPlace = (date: string, mod: any = {}) => {
+  const place: any = structuredClone(basePlace[date] ?? {});
+  for (const [st, m] of Object.entries(mod.place ?? {})) Object.assign((place[st] ??= {}), m);
+  return { ...mod, place };
+};
 
 // ---------------------------------------------------------------- 시안 엔진 부팅
 function bootPrototype() {
@@ -222,7 +234,7 @@ function metricsOf(c: ReturnType<typeof convert>, diff: any[] = []) {
 const basePlans: Record<string, Plan> = {};
 const base: Record<string, ReturnType<typeof convert>> = {};
 for (const date of schoolDays) {
-  basePlans[date] = X.buildDay(diOf(date));
+  basePlans[date] = X.buildDay(diOf(date), withPlace(date));
   base[date] = convert(date, basePlans[date]);
 }
 
@@ -251,7 +263,7 @@ function propose(date: string, mod: any, ops: any[]) {
   b.req.forEach((r) => (ids[r.sig] = r.id));
   const options: any[] = [];
   for (const pol of POLICIES) {
-    const m = { ...JSON.parse(JSON.stringify(mod)), prev: (pol.flags as any).fresh ? {} : prev, ids, tag: "n",
+    const m = { ...withPlace(date, JSON.parse(JSON.stringify(mod))), prev: (pol.flags as any).fresh ? {} : prev, ids, tag: "n",
       noLate: !!(pol.flags as any).noLate, noLast: !!(pol.flags as any).noLast };
     const p: Plan = X.buildDay(diOf(date), m);
     const c = convert(date, p);
@@ -305,8 +317,14 @@ function propose(date: string, mod: any, ops: any[]) {
     const dem = tagged.filter((x) => ["removed", "added", "group"].includes(x.t));
     const sDem = push("MOVE_SUPPORT_NEEDED", dem, 1);
     const mv = tagged.filter((x) => x.t === "moved" && !isRt(x.n, x.t));
-    const sUn = push("UNAVAILABLE", mv.filter((x) => x.os && away[x.os]), 1);
-    push("OVERLAP", mv.filter((x) => !(x.os && away[x.os])), sUn || sDem || 1);
+    const isAway = (x: (typeof tagged)[number]) => !!(x.os && away[x.os]);
+    // 이전 담당자가 새 배정에서 그 시간에 다른 일을 맡았는지
+    const busy = (x: (typeof tagged)[number]) =>
+      !!x.os && c.assignments.some((a) => a.staff === x.os && a.demand_id !== x.e.demand_id && a.start < x.e.before.end && x.e.before.start < a.end);
+    const fresh = !!(pol.flags as any).fresh;
+    const sUn = push("UNAVAILABLE", mv.filter(isAway), 1);
+    push("OVERLAP", mv.filter((x) => !isAway(x) && (busy(x) || !fresh)), sUn || sDem || 1);
+    push("REPLANNED", mv.filter((x) => !isAway(x) && !busy(x) && fresh), 1);
     push("EDGE_RELEASED", tagged.filter((x) => isRt(x.n, x.t)), sDem || sUn || 1);
     push("GAP", tagged.filter((x) => x.t === "gap"), 1);
 
@@ -332,9 +350,9 @@ write("domain/staff.json", staff);
 write("domain/timetable-2026-09.json", { source: "file", date_from: "2026-09-01", date_to: "2026-09-30", school_days: schoolDays, lessons });
 
 // demand/ + schedule/
-write(`demand/${TODAY}.json`, { date_from: TODAY, date_to: TODAY, version_id: "ver_0901", absent: [], demands: base[TODAY].demands });
+write(`demand/${TODAY}.json`, { date_from: TODAY, date_to: TODAY, version_id: "ver_0901", absent: [], unplaced: [], demands: base[TODAY].demands });
 write("demand/2026-09.json", {
-  date_from: "2026-09-01", date_to: "2026-09-30", version_id: "ver_0901", absent: [],
+  date_from: "2026-09-01", date_to: "2026-09-30", version_id: "ver_0901", absent: [], unplaced: [],
   demands: schoolDays.flatMap((d) => base[d].demands),
 });
 const version = {
@@ -362,7 +380,7 @@ for (const cs of CASES) {
   const opts = propose(TODAY, cs.mod, cs.ops);
   const newDemands = opts[0]._demands;
   const input = {
-    dates: [TODAY], demands: newDemands, staff: staffWindows(TODAY, cs.away),
+    dates: [TODAY], now: null, demands: newDemands, staff: staffWindows(TODAY, cs.away),
     previous: { demands: base[TODAY].demands, assignments: base[TODAY].assignments },
     pinned: [], policies: POLICIES.map((p) => p.key), request: { change_request_id: `cr_${cs.name}`, ops: cs.ops },
   };
@@ -370,6 +388,56 @@ for (const cs of CASES) {
   write(`scheduler/propose.${cs.name}.input.json`, input);
   write(`scheduler/propose.${cs.name}.output.json`, output);
   proposals[cs.name] = { input, output, cs };
+}
+
+// 연쇄 시나리오 입력 (fixtures/scenarios/inputs/, 계약 ProposeInput). M1·M2가 같은 입력으로 시나리오를 돌린다.
+// 시안 엔진이 수요를 만들 수 있는 것만 만든다. 나머지(S6 과목 장소, S8 지원 구간, S9 반 장소, S10 시간표)는 M3 merge 뒤 그 결과로 만든다.
+{
+  const SCN_DIR = join(ROOT, "fixtures/scenarios");
+  const set = json(join(SCN_DIR, "cascade-scenarios.json"));
+  const MODS: Record<string, { mod: any; away: Record<string, [number, number]> }> = {
+    S1: { mod: { absent: ["S03"] }, away: {} },
+    S2: { mod: { away: { A01: [630, 690] } }, away: { A01: [630, 690] } },
+    S3: { mod: { away: { A03: [520, 1000] } }, away: { A03: [520, 1000] } },
+    S4: { mod: { place: { S01: { 2: "K1" } } }, away: {} },
+    S5: { mod: { place: { S04: { 1: "K1" } } }, away: {} },
+    S7: { mod: {}, away: {} },
+  };
+  rmSync(join(SCN_DIR, "inputs"), { recursive: true, force: true });
+  mkdirSync(join(SCN_DIR, "inputs"), { recursive: true });
+  for (const sc of set.scenarios) {
+    delete sc.input;
+    const m = MODS[sc.id];
+    if (!m) {
+      sc.baseline_note = "D25(특수학급 시간표) 이전 데이터로 계산한 값. 시안 엔진으로 입력을 만들 수 없어 M3 merge 뒤 입력 파일과 함께 다시 계산한다";
+      continue;
+    }
+    const ops = sc.trigger.type === "change_ops" ? sc.trigger.ops : [];
+    const opts = propose(sc.date, m.mod, ops);
+    const input = {
+      dates: [sc.date], now: null, demands: opts[0]._demands, staff: staffWindows(sc.date, m.away),
+      previous: { demands: base[sc.date].demands, assignments: base[sc.date].assignments },
+      pinned: [], policies: POLICIES.map((p) => p.key), request: ops.length ? { change_request_id: null, ops } : null,
+    };
+    // 기준선: 이 입력으로 시안 엔진이 낸 결과 (정책 A·B·C)
+    const LETTER = { keep_minimal: "A", fresh: "B", no_late: "C" } as const;
+    sc.baseline_heuristic = {};
+    for (const [key, letter] of Object.entries(LETTER)) {
+      const o = opts.find((x: any) => x.policies.includes(key))!;
+      const kinds: Record<string, number> = {};
+      for (const e of o.diff) kinds[e.type] = (kinds[e.type] ?? 0) + 1;
+      sc.baseline_heuristic[letter] = { changed: o.metrics.changed_cells, gaps: o.metrics.gaps, late: o.metrics.late_students, kinds };
+    }
+    delete sc.baseline_note;
+    const rel = `inputs/${sc.id}.input.json`;
+    writeFileSync(join(SCN_DIR, rel), JSON.stringify(input, null, 2) + "\n");
+    // 시나리오 정의에서 trigger 바로 뒤에 input을 둔다
+    const ordered: any = {};
+    for (const [k, v] of Object.entries(sc)) { ordered[k] = v; if (k === "trigger") ordered.input = rel; }
+    Object.keys(sc).forEach((k) => delete sc[k]);
+    Object.assign(sc, ordered);
+  }
+  writeFileSync(join(SCN_DIR, "cascade-scenarios.json"), JSON.stringify(set, null, 2) + "\n");
 }
 
 // validate: W4에서 지원인력1이 맡은 첫 이동 묶음에 지원인력2를 하나 더 끌어 놓음 → 겹침 + 묶음 2명
@@ -395,7 +463,7 @@ function validate(demands: any[], windows: any[], assignments: any[]) {
   const target = asg.find((a: any) => a.staff === "A01" && a.demand_id.startsWith("mv:"))!;
   const edited = asg.concat([{ ...target, staff: "A02" }]).sort((x: any, y: any) => x.start - y.start || x.staff.localeCompare(y.staff));
   const vin = { demands: base[TODAY].demands, staff: staffWindows(TODAY), pinned: [], assignments: edited };
-  const vout = { violations: validate(vin.demands, vin.staff, edited), shortfalls: base[TODAY].shortfalls, warnings: [] };
+  const vout = { violations: validate(vin.demands, vin.staff, edited), shortfalls: base[TODAY].shortfalls };
   write("scheduler/validate.overlap.input.json", vin);
   write("scheduler/validate.overlap.output.json", vout);
   proposals.validate = { edited, vout };
@@ -432,7 +500,7 @@ function validate(demands: any[], windows: any[], assignments: any[]) {
     part_of_day: { morning: [1, 2, 3, 4], afternoon: [5, 6] },
     class_subjects: classSubjects,
     codes: {
-      students: students.map((s: any) => ({ code: s.code, label: s.label, class_group: s.class_group, special_class: s.special_class })),
+      students: students.map((s: any) => ({ code: s.code, label: s.label, class_group: s.class_group })),
       staff: staff.map((a: any) => ({ code: a.code, label: a.label })),
       locations: locations.filter((l: any) => l.kind !== "homeroom").map((l: any) => ({ code: l.code, label: l.label })),
     },
@@ -467,10 +535,10 @@ function dayState(date: string) {
 function dayView(date: string, c = base[date], ver: any = version) {
   const st = date === TODAY ? dayState(date) : { checks: [], attendance: [] };
   const rows = students.map((s: any) => ({
-    code: s.code, label: s.label, class_group: s.class_group, special_class: s.special_class,
+    code: s.code, label: s.label, class_group: s.class_group,
     lessons: lessons.filter((l) => l.class_group === s.class_group && l.date === date).map((l) => {
-      const k = s.special_class_subjects.find((x: any) => x.subject === l.subject);
-      return { period: l.period, subject: l.subject, placement: k ? "special_class" : "homeroom", location: k ? k.location : s.class_group };
+      const k = s.special_class_subjects.includes(l.subject);
+      return { period: l.period, subject: l.subject, placement: k ? "special_class" : "homeroom", location: k ? specialPlace(s, date, l.period, l.subject).loc : s.class_group };
     }),
   }));
   const notes = date === TODAY ? [{
@@ -505,7 +573,7 @@ api("school.get", [{ title: "학교 기초정보", input: {}, output: schoolBund
 api("setup.saveLayout", [{ title: "층 배치 저장 (③ 끌어 놓기)", input: { floors: layout.floors, special_classes: layout.special_classes, classes: layout.classes, rooms: layout.rooms }, output: schoolBundle }]);
 api("setup.previewMoveGroups", [{ title: "현재 배치로 생기는 이동 묶음 (⑥)", input: { date: TODAY }, output: base[TODAY].demands.filter((d: any) => d.kind === "move_group") }]);
 api("students.list", [{ title: "학생 목록", input: {}, output: students }]);
-const newStudent = { label: "학생8", class_group: "6-2", special_class: "K2", special_class_subjects: [{ subject: "국어", location: "K2" }],
+const newStudent = { label: "학생8", class_group: "6-2", special_class_subjects: ["국어"],
   support_subjects: [{ subject: "과학", need_start: true, need_mid: true, need_end: true }], support_note: "" };
 api("students.add", [
   { title: "학생 추가", input: newStudent, output: { code: "S08", ...newStudent } },
@@ -538,8 +606,8 @@ const draft = { ...version, id: "ver_draft01", parent_id: null, status: "draft",
     output: { version: draft, option: { key: "A", policies: ["fresh"], label: "처음부터 다시", assignments: all.assignments, shortfalls: all.shortfalls,
       metrics: metricsOf(all as any), diff: [], explanation: [] } } }]);
 }
-api("schedule.validate", [{ title: "끌어 놓기로 겹침 발생 (W4)", input: { version_id: "ver_draft01", date: TODAY, assignments: proposals.validate.edited }, output: proposals.validate.vout }]);
-api("schedule.updateDraft", [{ title: "수동 수정 저장 (겹침은 경고로 돌려줌)", input: { version_id: "ver_draft01", date: TODAY, assignments: proposals.validate.edited }, output: proposals.validate.vout }]);
+api("schedule.validate", [{ title: "끌어 놓기로 겹침 발생 (W4)", input: { version_id: "ver_draft01", date: TODAY, assignments: proposals.validate.edited }, output: { ...proposals.validate.vout, warnings: [] } }]);
+api("schedule.updateDraft", [{ title: "수동 수정 저장 (겹침은 경고로 돌려줌)", input: { version_id: "ver_draft01", date: TODAY, assignments: proposals.validate.edited }, output: { ...proposals.validate.vout, warnings: [] } }]);
 api("schedule.activate", [{ title: "draft 승인", input: { version_id: "ver_draft01" },
   output: { version: { ...draft, status: "active", activated_at: TS("2026-09-11", 910) }, notified: ["A01", "A02", "A03"] } }]);
 api("schedule.rollback", [{ title: "과거 버전 복제 → draft", input: { version_id: "ver_0901" },

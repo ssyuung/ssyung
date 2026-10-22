@@ -134,7 +134,6 @@
                 "code": "S01",
                 "label": "학생1",
                 "class_group": "3-2",
-                "special_class": "K1",
                 "lessons": [
                   {
                     "period": 1,
@@ -172,7 +171,6 @@
                 "code": "S02",
                 "label": "학생2",
                 "class_group": "4-1",
-                "special_class": "K1",
                 "lessons": [
                   {
                     "period": 1,
@@ -210,7 +208,6 @@
                 "code": "S03",
                 "label": "학생3",
                 "class_group": "5-3",
-                "special_class": "K2",
                 "lessons": [
                   {
                     "period": 1,
@@ -254,7 +251,6 @@
                 "code": "S04",
                 "label": "학생4",
                 "class_group": "4-4",
-                "special_class": "K1",
                 "lessons": [
                   {
                     "period": 1,
@@ -292,13 +288,12 @@
                 "code": "S05",
                 "label": "학생5",
                 "class_group": "4-7",
-                "special_class": "K1",
                 "lessons": [
                   {
                     "period": 1,
                     "subject": "국어",
                     "placement": "special_class",
-                    "location": "K1"
+                    "location": "K2"
                   },
                   {
                     "period": 2,
@@ -330,7 +325,6 @@
                 "code": "S06",
                 "label": "학생6",
                 "class_group": "5-5",
-                "special_class": "K2",
                 "lessons": [
                   {
                     "period": 1,
@@ -360,7 +354,7 @@
                     "period": 5,
                     "subject": "수학",
                     "placement": "special_class",
-                    "location": "K2"
+                    "location": "K1"
                   },
                   {
                     "period": 6,
@@ -374,7 +368,6 @@
                 "code": "S07",
                 "label": "학생7",
                 "class_group": "5-6",
-                "special_class": "K2",
                 "lessons": [
                   {
                     "period": 1,
@@ -464,7 +457,7 @@
                 "students": [
                   {
                     "student": "S05",
-                    "from": "K1",
+                    "from": "K2",
                     "to": "4-7",
                     "late_cost": 0
                   }
@@ -863,7 +856,7 @@
                 "students": [
                   {
                     "student": "S06",
-                    "from": "K2",
+                    "from": "K1",
                     "to": "5-5",
                     "late_cost": 0
                   }
@@ -1257,13 +1250,12 @@
                 "code": "S01",
                 "label": "학생1",
                 "class_group": "3-2",
-                "special_class": "K1",
                 "lessons": [
                   {
                     "period": 1,
                     "subject": "국어",
                     "placement": "special_class",
-                    "location": "K1"
+                    "location": "K2"
                   },
                   {
                     "period": 2,
@@ -1275,7 +1267,7 @@
                     "period": 3,
                     "subject": "수학",
                     "placement": "special_class",
-                    "location": "K1"
+                    "location": "K2"
                   },
                   {
                     "period": 4,
@@ -1295,13 +1287,12 @@
                 "code": "S02",
                 "label": "학생2",
                 "class_group": "4-1",
-                "special_class": "K1",
                 "lessons": [
                   {
                     "period": 1,
                     "subject": "국어",
                     "placement": "special_class",
-                    "location": "K1"
+                    "location": "K2"
                   },
                   {
                     "period": 2,
@@ -1333,7 +1324,6 @@
                 "code": "S03",
                 "label": "학생3",
                 "class_group": "5-3",
-                "special_class": "K2",
                 "lessons": [
                   {
                     "period": 1,
@@ -1357,7 +1347,7 @@
                     "period": 4,
                     "subject": "국어",
                     "placement": "special_class",
-                    "location": "K2"
+                    "location": "K1"
                   },
                   {
                     "period": 5,
@@ -1377,7 +1367,6 @@
                 "code": "S04",
                 "label": "학생4",
                 "class_group": "4-4",
-                "special_class": "K1",
                 "lessons": [
                   {
                     "period": 1,
@@ -1415,7 +1404,6 @@
                 "code": "S05",
                 "label": "학생5",
                 "class_group": "4-7",
-                "special_class": "K1",
                 "lessons": [
                   {
                     "period": 1,
@@ -1453,7 +1441,6 @@
                 "code": "S06",
                 "label": "학생6",
                 "class_group": "5-5",
-                "special_class": "K2",
                 "lessons": [
                   {
                     "period": 1,
@@ -1497,7 +1484,6 @@
                 "code": "S07",
                 "label": "학생7",
                 "class_group": "5-6",
-                "special_class": "K2",
                 "lessons": [
                   {
                     "period": 1,
@@ -1608,6 +1594,30 @@
                 ]
               },
               {
+                "id": "mv:2026-09-15:b1:1-1",
+                "kind": "move_group",
+                "date": "2026-09-15",
+                "start": 580,
+                "end": 590,
+                "headcount": 1,
+                "after_period": 1,
+                "from_floor": 1,
+                "to_floor": 1,
+                "students": [
+                  {
+                    "student": "S02",
+                    "from": "K2",
+                    "to": "K1",
+                    "late_cost": 1
+                  }
+                ],
+                "late_cost": 1,
+                "second_trip": {
+                  "start": 590,
+                  "end": 600
+                }
+              },
+              {
                 "id": "mv:2026-09-15:b1:1-2",
                 "kind": "move_group",
                 "date": "2026-09-15",
@@ -1620,7 +1630,7 @@
                 "students": [
                   {
                     "student": "S01",
-                    "from": "K1",
+                    "from": "K2",
                     "to": "3-2",
                     "late_cost": 2
                   }
@@ -1846,7 +1856,7 @@
                   {
                     "student": "S01",
                     "from": "3-2",
-                    "to": "K1",
+                    "to": "K2",
                     "late_cost": 1
                   }
                 ],
@@ -2016,7 +2026,7 @@
                 "students": [
                   {
                     "student": "S01",
-                    "from": "K1",
+                    "from": "K2",
                     "to": "3-2",
                     "late_cost": 0
                   }
@@ -2095,7 +2105,7 @@
                   {
                     "student": "S03",
                     "from": "5-3",
-                    "to": "K2",
+                    "to": "K1",
                     "late_cost": 1
                   }
                 ],
@@ -2363,7 +2373,7 @@
             ],
             "assignments": [
               {
-                "staff": "A03",
+                "staff": "A01",
                 "demand_id": "les:2026-09-15:S07:p1",
                 "date": "2026-09-15",
                 "start": 540,
@@ -2391,7 +2401,7 @@
               },
               {
                 "staff": "A03",
-                "demand_id": "mv:2026-09-15:b1:4-1",
+                "demand_id": "mv:2026-09-15:b1:1-1",
                 "date": "2026-09-15",
                 "start": 580,
                 "end": 590,
@@ -2409,11 +2419,11 @@
               },
               {
                 "staff": "A02",
-                "demand_id": "les:2026-09-15:S01:p2",
+                "demand_id": "mv:2026-09-15:b1:4-1",
                 "date": "2026-09-15",
                 "start": 590,
-                "end": 630,
-                "mode": "normal",
+                "end": 600,
+                "mode": "second_trip",
                 "pinned": false
               },
               {
@@ -2427,6 +2437,15 @@
               },
               {
                 "staff": "A01",
+                "demand_id": "les:2026-09-15:S01:p2",
+                "date": "2026-09-15",
+                "start": 600,
+                "end": 630,
+                "mode": "normal",
+                "pinned": false
+              },
+              {
+                "staff": "A02",
                 "demand_id": "les:2026-09-15:S04:p2",
                 "date": "2026-09-15",
                 "start": 600,
@@ -2436,15 +2455,6 @@
               },
               {
                 "staff": "A01",
-                "demand_id": "mv:2026-09-15:b2:1-3",
-                "date": "2026-09-15",
-                "start": 630,
-                "end": 640,
-                "mode": "normal",
-                "pinned": false
-              },
-              {
-                "staff": "A02",
                 "demand_id": "mv:2026-09-15:b2:2-1",
                 "date": "2026-09-15",
                 "start": 630,
@@ -2453,8 +2463,17 @@
                 "pinned": false
               },
               {
-                "staff": "A03",
+                "staff": "A02",
                 "demand_id": "mv:2026-09-15:b2:3-1",
+                "date": "2026-09-15",
+                "start": 630,
+                "end": 640,
+                "mode": "normal",
+                "pinned": false
+              },
+              {
+                "staff": "A03",
+                "demand_id": "mv:2026-09-15:b2:1-3",
                 "date": "2026-09-15",
                 "start": 630,
                 "end": 640,
@@ -2481,7 +2500,7 @@
               },
               {
                 "staff": "A03",
-                "demand_id": "les:2026-09-15:S03:p3",
+                "demand_id": "les:2026-09-15:S02:p3",
                 "date": "2026-09-15",
                 "start": 640,
                 "end": 680,
@@ -2490,7 +2509,7 @@
               },
               {
                 "staff": "A01",
-                "demand_id": "les:2026-09-15:S02:p3",
+                "demand_id": "les:2026-09-15:S03:p3",
                 "date": "2026-09-15",
                 "start": 650,
                 "end": 680,
@@ -2499,7 +2518,7 @@
               },
               {
                 "staff": "A01",
-                "demand_id": "mv:2026-09-15:b3:4-1",
+                "demand_id": "mv:2026-09-15:b3:1-4",
                 "date": "2026-09-15",
                 "start": 680,
                 "end": 690,
@@ -2517,7 +2536,7 @@
               },
               {
                 "staff": "A03",
-                "demand_id": "mv:2026-09-15:b3:1-4",
+                "demand_id": "mv:2026-09-15:b3:4-1",
                 "date": "2026-09-15",
                 "start": 680,
                 "end": 690,
@@ -2526,7 +2545,7 @@
               },
               {
                 "staff": "A01",
-                "demand_id": "les:2026-09-15:S02:p4",
+                "demand_id": "les:2026-09-15:S06:p4",
                 "date": "2026-09-15",
                 "start": 690,
                 "end": 730,
@@ -2544,7 +2563,7 @@
               },
               {
                 "staff": "A03",
-                "demand_id": "les:2026-09-15:S06:p4",
+                "demand_id": "les:2026-09-15:S02:p4",
                 "date": "2026-09-15",
                 "start": 690,
                 "end": 730,
@@ -2553,15 +2572,6 @@
               },
               {
                 "staff": "A01",
-                "demand_id": "les:2026-09-15:S02:p5",
-                "date": "2026-09-15",
-                "start": 780,
-                "end": 820,
-                "mode": "normal",
-                "pinned": false
-              },
-              {
-                "staff": "A02",
                 "demand_id": "les:2026-09-15:S01:p5",
                 "date": "2026-09-15",
                 "start": 780,
@@ -2570,7 +2580,7 @@
                 "pinned": false
               },
               {
-                "staff": "A03",
+                "staff": "A02",
                 "demand_id": "les:2026-09-15:S03:p5",
                 "date": "2026-09-15",
                 "start": 780,
@@ -2579,7 +2589,16 @@
                 "pinned": false
               },
               {
-                "staff": "A01",
+                "staff": "A03",
+                "demand_id": "les:2026-09-15:S02:p5",
+                "date": "2026-09-15",
+                "start": 780,
+                "end": 820,
+                "mode": "normal",
+                "pinned": false
+              },
+              {
+                "staff": "A03",
                 "demand_id": "mv:2026-09-15:b5:4-1",
                 "date": "2026-09-15",
                 "start": 820,
@@ -2588,7 +2607,7 @@
                 "pinned": false
               },
               {
-                "staff": "A03",
+                "staff": "A01",
                 "demand_id": "les:2026-09-15:S06:p6",
                 "date": "2026-09-15",
                 "start": 830,
@@ -2598,6 +2617,16 @@
               }
             ],
             "shortfalls": [
+              {
+                "demand_id": "les:2026-09-15:S01:p2",
+                "date": "2026-09-15",
+                "start": 590,
+                "end": 600,
+                "short_by": 1,
+                "priority": "HIGH",
+                "segment": "start",
+                "waived": false
+              },
               {
                 "demand_id": "les:2026-09-15:S04:p2",
                 "date": "2026-09-15",
@@ -2609,7 +2638,7 @@
                 "waived": false
               },
               {
-                "demand_id": "les:2026-09-15:S02:p3",
+                "demand_id": "les:2026-09-15:S03:p3",
                 "date": "2026-09-15",
                 "start": 640,
                 "end": 650,
@@ -2654,9 +2683,9 @@
             "notes": [],
             "metrics": {
               "staff_minutes": {
-                "A01": 200,
+                "A01": 270,
                 "A02": 160,
-                "A03": 270
+                "A03": 200
               }
             }
           },
@@ -2785,7 +2814,6 @@
                 "code": "S01",
                 "label": "학생1",
                 "class_group": "3-2",
-                "special_class": "K1",
                 "lessons": [
                   {
                     "period": 1,
@@ -2823,7 +2851,6 @@
                 "code": "S02",
                 "label": "학생2",
                 "class_group": "4-1",
-                "special_class": "K1",
                 "lessons": [
                   {
                     "period": 1,
@@ -2861,19 +2888,18 @@
                 "code": "S03",
                 "label": "학생3",
                 "class_group": "5-3",
-                "special_class": "K2",
                 "lessons": [
                   {
                     "period": 1,
                     "subject": "국어",
                     "placement": "special_class",
-                    "location": "K2"
+                    "location": "K1"
                   },
                   {
                     "period": 2,
                     "subject": "수학",
                     "placement": "special_class",
-                    "location": "K2"
+                    "location": "K1"
                   },
                   {
                     "period": 3,
@@ -2899,7 +2925,6 @@
                 "code": "S04",
                 "label": "학생4",
                 "class_group": "4-4",
-                "special_class": "K1",
                 "lessons": [
                   {
                     "period": 1,
@@ -2937,7 +2962,6 @@
                 "code": "S05",
                 "label": "학생5",
                 "class_group": "4-7",
-                "special_class": "K1",
                 "lessons": [
                   {
                     "period": 1,
@@ -2949,7 +2973,7 @@
                     "period": 2,
                     "subject": "국어",
                     "placement": "special_class",
-                    "location": "K1"
+                    "location": "K2"
                   },
                   {
                     "period": 3,
@@ -2975,7 +2999,6 @@
                 "code": "S06",
                 "label": "학생6",
                 "class_group": "5-5",
-                "special_class": "K2",
                 "lessons": [
                   {
                     "period": 1,
@@ -2993,7 +3016,7 @@
                     "period": 3,
                     "subject": "수학",
                     "placement": "special_class",
-                    "location": "K2"
+                    "location": "K1"
                   },
                   {
                     "period": 4,
@@ -3013,13 +3036,12 @@
                 "code": "S07",
                 "label": "학생7",
                 "class_group": "5-6",
-                "special_class": "K2",
                 "lessons": [
                   {
                     "period": 1,
                     "subject": "국어",
                     "placement": "special_class",
-                    "location": "K2"
+                    "location": "K1"
                   },
                   {
                     "period": 2,
@@ -3187,7 +3209,7 @@
                 "students": [
                   {
                     "student": "S07",
-                    "from": "K2",
+                    "from": "K1",
                     "to": "5-6",
                     "late_cost": 2
                   }
@@ -3212,7 +3234,7 @@
                   {
                     "student": "S05",
                     "from": "4-7",
-                    "to": "K1",
+                    "to": "K2",
                     "late_cost": 1
                   }
                 ],
@@ -3313,6 +3335,36 @@
                 ]
               },
               {
+                "id": "mv:2026-09-16:b2:1-1",
+                "kind": "move_group",
+                "date": "2026-09-16",
+                "start": 630,
+                "end": 640,
+                "headcount": 1,
+                "after_period": 2,
+                "from_floor": 1,
+                "to_floor": 1,
+                "students": [
+                  {
+                    "student": "S05",
+                    "from": "K2",
+                    "to": "K1",
+                    "late_cost": 1
+                  },
+                  {
+                    "student": "S06",
+                    "from": "K2",
+                    "to": "K1",
+                    "late_cost": 1
+                  }
+                ],
+                "late_cost": 1,
+                "second_trip": {
+                  "start": 640,
+                  "end": 650
+                }
+              },
+              {
                 "id": "mv:2026-09-16:b2:1-2",
                 "kind": "move_group",
                 "date": "2026-09-16",
@@ -3349,7 +3401,7 @@
                 "students": [
                   {
                     "student": "S03",
-                    "from": "K2",
+                    "from": "K1",
                     "to": "5-3",
                     "late_cost": 0
                   }
@@ -3460,7 +3512,7 @@
                 "students": [
                   {
                     "student": "S06",
-                    "from": "K2",
+                    "from": "K1",
                     "to": "5-5",
                     "late_cost": 0
                   }
@@ -3573,8 +3625,8 @@
             ],
             "assignments": [
               {
-                "staff": "A01",
-                "demand_id": "les:2026-09-16:S06:p1",
+                "staff": "A02",
+                "demand_id": "les:2026-09-16:S05:p1",
                 "date": "2026-09-16",
                 "start": 540,
                 "end": 580,
@@ -3582,8 +3634,8 @@
                 "pinned": false
               },
               {
-                "staff": "A02",
-                "demand_id": "les:2026-09-16:S05:p1",
+                "staff": "A03",
+                "demand_id": "les:2026-09-16:S06:p1",
                 "date": "2026-09-16",
                 "start": 540,
                 "end": 580,
@@ -3664,7 +3716,7 @@
               },
               {
                 "staff": "A03",
-                "demand_id": "mv:2026-09-16:b2:1-4",
+                "demand_id": "mv:2026-09-16:b2:1-1",
                 "date": "2026-09-16",
                 "start": 630,
                 "end": 640,
@@ -3681,8 +3733,17 @@
                 "pinned": false
               },
               {
-                "staff": "A01",
-                "demand_id": "mv:2026-09-16:b3:1-4",
+                "staff": "A02",
+                "demand_id": "mv:2026-09-16:b2:1-4",
+                "date": "2026-09-16",
+                "start": 640,
+                "end": 650,
+                "mode": "second_trip",
+                "pinned": false
+              },
+              {
+                "staff": "A02",
+                "demand_id": "mv:2026-09-16:b3:1-3",
                 "date": "2026-09-16",
                 "start": 680,
                 "end": 690,
@@ -3690,8 +3751,8 @@
                 "pinned": false
               },
               {
-                "staff": "A02",
-                "demand_id": "mv:2026-09-16:b3:1-3",
+                "staff": "A03",
+                "demand_id": "mv:2026-09-16:b3:1-4",
                 "date": "2026-09-16",
                 "start": 680,
                 "end": 690,
@@ -3717,7 +3778,7 @@
                 "pinned": false
               },
               {
-                "staff": "A02",
+                "staff": "A03",
                 "demand_id": "les:2026-09-16:S06:p5",
                 "date": "2026-09-16",
                 "start": 780,
@@ -3732,9 +3793,9 @@
             "notes": [],
             "metrics": {
               "staff_minutes": {
-                "A01": 230,
-                "A02": 150,
-                "A03": 30
+                "A01": 180,
+                "A02": 120,
+                "A03": 120
               }
             }
           },
@@ -3863,7 +3924,6 @@
                 "code": "S01",
                 "label": "학생1",
                 "class_group": "3-2",
-                "special_class": "K1",
                 "lessons": [
                   {
                     "period": 1,
@@ -3875,7 +3935,7 @@
                     "period": 2,
                     "subject": "수학",
                     "placement": "special_class",
-                    "location": "K1"
+                    "location": "K2"
                   },
                   {
                     "period": 3,
@@ -3907,7 +3967,6 @@
                 "code": "S02",
                 "label": "학생2",
                 "class_group": "4-1",
-                "special_class": "K1",
                 "lessons": [
                   {
                     "period": 1,
@@ -3951,7 +4010,6 @@
                 "code": "S03",
                 "label": "학생3",
                 "class_group": "5-3",
-                "special_class": "K2",
                 "lessons": [
                   {
                     "period": 1,
@@ -3995,7 +4053,6 @@
                 "code": "S04",
                 "label": "학생4",
                 "class_group": "4-4",
-                "special_class": "K1",
                 "lessons": [
                   {
                     "period": 1,
@@ -4039,7 +4096,6 @@
                 "code": "S05",
                 "label": "학생5",
                 "class_group": "4-7",
-                "special_class": "K1",
                 "lessons": [
                   {
                     "period": 1,
@@ -4063,7 +4119,7 @@
                     "period": 4,
                     "subject": "수학",
                     "placement": "special_class",
-                    "location": "K1"
+                    "location": "K2"
                   },
                   {
                     "period": 5,
@@ -4077,13 +4133,12 @@
                 "code": "S06",
                 "label": "학생6",
                 "class_group": "5-5",
-                "special_class": "K2",
                 "lessons": [
                   {
                     "period": 1,
                     "subject": "국어",
                     "placement": "special_class",
-                    "location": "K2"
+                    "location": "K1"
                   },
                   {
                     "period": 2,
@@ -4121,13 +4176,12 @@
                 "code": "S07",
                 "label": "학생7",
                 "class_group": "5-6",
-                "special_class": "K2",
                 "lessons": [
                   {
                     "period": 1,
                     "subject": "국어",
                     "placement": "special_class",
-                    "location": "K2"
+                    "location": "K1"
                   },
                   {
                     "period": 2,
@@ -4151,7 +4205,7 @@
                     "period": 5,
                     "subject": "수학",
                     "placement": "special_class",
-                    "location": "K2"
+                    "location": "K1"
                   },
                   {
                     "period": 6,
@@ -4298,6 +4352,36 @@
                 ]
               },
               {
+                "id": "mv:2026-09-17:b1:1-1",
+                "kind": "move_group",
+                "date": "2026-09-17",
+                "start": 580,
+                "end": 590,
+                "headcount": 1,
+                "after_period": 1,
+                "from_floor": 1,
+                "to_floor": 1,
+                "students": [
+                  {
+                    "student": "S01",
+                    "from": "K1",
+                    "to": "K2",
+                    "late_cost": 1
+                  },
+                  {
+                    "student": "S06",
+                    "from": "K1",
+                    "to": "K2",
+                    "late_cost": 1
+                  }
+                ],
+                "late_cost": 1,
+                "second_trip": {
+                  "start": 590,
+                  "end": 600
+                }
+              },
+              {
                 "id": "mv:2026-09-17:b1:1-3",
                 "kind": "move_group",
                 "date": "2026-09-17",
@@ -4334,7 +4418,7 @@
                 "students": [
                   {
                     "student": "S07",
-                    "from": "K2",
+                    "from": "K1",
                     "to": "5-6",
                     "late_cost": 2
                   }
@@ -4448,7 +4532,7 @@
                 "students": [
                   {
                     "student": "S01",
-                    "from": "K1",
+                    "from": "K2",
                     "to": "3-2",
                     "late_cost": 0
                   }
@@ -4659,7 +4743,7 @@
                   {
                     "student": "S05",
                     "from": "4-7",
-                    "to": "K1",
+                    "to": "K2",
                     "late_cost": 1
                   }
                 ],
@@ -4772,7 +4856,7 @@
                 "students": [
                   {
                     "student": "S07",
-                    "from": "K2",
+                    "from": "K1",
                     "to": "5-6",
                     "late_cost": 0
                   }
@@ -4856,7 +4940,7 @@
               },
               {
                 "staff": "A02",
-                "demand_id": "mv:2026-09-17:b1:3-1",
+                "demand_id": "mv:2026-09-17:b1:1-1",
                 "date": "2026-09-17",
                 "start": 580,
                 "end": 590,
@@ -4865,7 +4949,7 @@
               },
               {
                 "staff": "A03",
-                "demand_id": "mv:2026-09-17:b1:1-3",
+                "demand_id": "mv:2026-09-17:b1:3-1",
                 "date": "2026-09-17",
                 "start": 580,
                 "end": 590,
@@ -4888,6 +4972,15 @@
                 "start": 590,
                 "end": 630,
                 "mode": "normal",
+                "pinned": false
+              },
+              {
+                "staff": "A03",
+                "demand_id": "mv:2026-09-17:b1:1-3",
+                "date": "2026-09-17",
+                "start": 590,
+                "end": 600,
+                "mode": "second_trip",
                 "pinned": false
               },
               {
@@ -5008,7 +5101,7 @@
                 "pinned": false
               },
               {
-                "staff": "A01",
+                "staff": "A02",
                 "demand_id": "les:2026-09-17:S06:p6",
                 "date": "2026-09-17",
                 "start": 830,
@@ -5023,9 +5116,9 @@
             "notes": [],
             "metrics": {
               "staff_minutes": {
-                "A01": 280,
-                "A02": 130,
-                "A03": 110
+                "A01": 240,
+                "A02": 170,
+                "A03": 120
               }
             }
           },
@@ -5154,7 +5247,6 @@
                 "code": "S01",
                 "label": "학생1",
                 "class_group": "3-2",
-                "special_class": "K1",
                 "lessons": [
                   {
                     "period": 1,
@@ -5192,7 +5284,6 @@
                 "code": "S02",
                 "label": "학생2",
                 "class_group": "4-1",
-                "special_class": "K1",
                 "lessons": [
                   {
                     "period": 1,
@@ -5236,13 +5327,12 @@
                 "code": "S03",
                 "label": "학생3",
                 "class_group": "5-3",
-                "special_class": "K2",
                 "lessons": [
                   {
                     "period": 1,
                     "subject": "국어",
                     "placement": "special_class",
-                    "location": "K2"
+                    "location": "K1"
                   },
                   {
                     "period": 2,
@@ -5280,7 +5370,6 @@
                 "code": "S04",
                 "label": "학생4",
                 "class_group": "4-4",
-                "special_class": "K1",
                 "lessons": [
                   {
                     "period": 1,
@@ -5318,7 +5407,6 @@
                 "code": "S05",
                 "label": "학생5",
                 "class_group": "4-7",
-                "special_class": "K1",
                 "lessons": [
                   {
                     "period": 1,
@@ -5356,7 +5444,6 @@
                 "code": "S06",
                 "label": "학생6",
                 "class_group": "5-5",
-                "special_class": "K2",
                 "lessons": [
                   {
                     "period": 1,
@@ -5400,7 +5487,6 @@
                 "code": "S07",
                 "label": "학생7",
                 "class_group": "5-6",
-                "special_class": "K2",
                 "lessons": [
                   {
                     "period": 1,
@@ -5580,7 +5666,7 @@
                 "students": [
                   {
                     "student": "S03",
-                    "from": "K2",
+                    "from": "K1",
                     "to": "5-3",
                     "late_cost": 0
                   }

@@ -1,6 +1,6 @@
 {
   "$id": "ssyung/Student",
-  "x-contract-version": "0.1.0",
+  "x-contract-version": "0.3.0",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "properties": {
@@ -19,33 +19,15 @@
       "pattern": "^\\d-\\d{1,2}$",
       "description": "원반 (3-2)"
     },
-    "special_class": {
-      "type": "string",
-      "pattern": "^K\\d{1,2}$",
-      "description": "특수학급 코드 (K1)"
-    },
     "special_class_subjects": {
       "type": "array",
       "items": {
-        "type": "object",
-        "properties": {
-          "subject": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 20,
-            "description": "NEIS 과목명 (과학)"
-          },
-          "location": {
-            "type": "string",
-            "pattern": "^(\\d-\\d{1,2}|K\\d{1,2}|L\\d{2,3})$",
-            "description": "그 과목 수업 장소. 과목마다 다를 수 있음 (D20)"
-          }
-        },
-        "required": [
-          "subject",
-          "location"
-        ]
-      }
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 20,
+        "description": "NEIS 과목명 (과학)"
+      },
+      "description": "특수학급에서 듣는 과목. 소속 특수학급은 없고, 장소는 그 요일·시각에 그 과목을 하는 특수학급 (D25)"
     },
     "support_subjects": {
       "type": "array",
@@ -85,7 +67,6 @@
     "code",
     "label",
     "class_group",
-    "special_class",
     "special_class_subjects",
     "support_subjects",
     "support_note"

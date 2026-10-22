@@ -41,6 +41,7 @@
         ],
         "scope": "this_week"
       },
+      "input": "inputs/S1.input.json",
       "chain": "학생3 수업 지원 해제 → 이동 묶음 3개에서 학생3이 빠짐(학생6·학생7 혼자 이동) → 학생3의 09:40 이동 없어짐",
       "checks": "묶음 축소, 없어진 수요가 다른 칸을 흔들지 않음",
       "expect": {
@@ -109,6 +110,7 @@
         ],
         "scope": "this_week"
       },
+      "input": "inputs/S2.input.json",
       "chain": "지원인력1의 이동 2개가 지원인력2로 → 지원인력2의 10:30 이동이 겹쳐 지원인력3으로 → 지원인력3의 10:30 묶음 이동이 밀려 두 번째 이동(늦게 도착) 또는 지원 공백",
       "checks": "3단계 이상 밀림, 선택지별로 늦게 도착과 공백이 맞바뀜",
       "expect": {
@@ -171,6 +173,7 @@
         ],
         "scope": "this_week"
       },
+      "input": "inputs/S3.input.json",
       "chain": "남은 2명에게 하루 전체 재배정 → 쉬는 시간마다 이동이 사람보다 많아짐 → 두 번째 이동 → 맡은 사람의 다음 수업 시작 10분 비움 → 남는 수업은 지원 공백",
       "checks": "하루 전체 재계산, 두 번째 이동 우선순위(늦게 도착 비용), 선택지 차이",
       "expect": {
@@ -190,9 +193,9 @@
           "gaps": 1,
           "late": 1,
           "kinds": {
-            "moved": 5,
             "gap": 1,
-            "retimed": 1
+            "retimed": 1,
+            "moved": 5
           }
         },
         "B": {
@@ -200,9 +203,9 @@
           "gaps": 1,
           "late": 1,
           "kinds": {
-            "moved": 5,
             "gap": 1,
-            "retimed": 1
+            "retimed": 1,
+            "moved": 5
           }
         },
         "C": {
@@ -210,8 +213,8 @@
           "gaps": 2,
           "late": 0,
           "kinds": {
-            "moved": 5,
-            "gap": 2
+            "gap": 2,
+            "moved": 5
           }
         }
       }
@@ -236,6 +239,7 @@
         ],
         "scope": "this_week"
       },
+      "input": "inputs/S4.input.json",
       "chain": "10:30 이동(K1→3-2) 없어짐 → 11:20 이동(K1→3-2) 생김 → 11:20에 그 지원인력이 맡던 학생7 이동이 겹쳐 다른 사람으로",
       "checks": "없어짐·생김·바뀜이 한 번에",
       "expect": {
@@ -259,8 +263,8 @@
           "late": 0,
           "kinds": {
             "removed": 1,
-            "moved": 1,
-            "added": 1
+            "added": 1,
+            "moved": 1
           }
         },
         "B": {
@@ -279,8 +283,8 @@
           "late": 0,
           "kinds": {
             "removed": 1,
-            "moved": 1,
-            "added": 1
+            "added": 1,
+            "moved": 1
           }
         }
       }
@@ -305,6 +309,7 @@
         ],
         "scope": "this_week"
       },
+      "input": "inputs/S5.input.json",
       "chain": "학생4 2교시 과학 지원 해제 → 09:40 이동(K1→4-4) 없어짐 → 10:30 학생4가 학생2의 묶음(1F→3F)에 합류 → 학생4를 맡던 사람이 비게 됨",
       "checks": "묶음 확대가 수요를 줄임(사람이 남음)",
       "expect": {
@@ -353,20 +358,19 @@
     },
     {
       "id": "S6",
-      "title": "묶음이 쪼개짐",
+      "title": "묶음이 쪼개짐 (특수학급 교실 이동)",
       "date": "2026-09-18",
       "trigger": {
         "type": "setup_change",
         "patch": {
-          "student_placement": {
-            "student": "S06",
-            "subject": "국어",
+          "special_class_location": {
+            "special_class": "K2",
             "location": "L05"
           }
         }
       },
-      "chain": "학생6 국어 수업 장소가 도서실(2층)로 → 학생3과 같던 묶음(4F→1F)이 4F→1F, 4F→2F 둘로 나뉨 → 이동 수요가 늘어 사람이 모자람 → 두 번째 이동 또는 공백",
-      "checks": "과목별 수업 장소(D20) 변경, 묶음 분리 → 수요 증가",
+      "chain": "K2 교실이 도서실(2층)로 → K2로 가던 이동이 4F→1F에서 4F→2F로 바뀌어 K1로 가는 학생과 같던 묶음이 둘로 나뉨 → 이동 수요가 늘어 사람이 모자람 → 두 번째 이동 또는 공백",
+      "checks": "특수학급 장소(SpecialClass.location) 변경, 묶음 분리 → 수요 증가",
       "expect": {
         "change_kinds_include": [
           "group",
@@ -410,7 +414,8 @@
             "added": 2
           }
         }
-      }
+      },
+      "baseline_note": "D25(특수학급 시간표) 이전 데이터로 계산한 값. 시안 엔진으로 입력을 만들 수 없어 M3 merge 뒤 입력 파일과 함께 다시 계산한다"
     },
     {
       "id": "S7",
@@ -419,6 +424,7 @@
       "trigger": {
         "type": "none"
       },
+      "input": "inputs/S7.input.json",
       "chain": "쉬는 시간마다 이동 묶음 4개, 지원인력 3명 → 늦어도 되는 묶음이 두 번째 이동 → 맡은 사람의 다음 수업 시작 10분 비움 → 체크된 구간이면 마지막 수단(공백)",
       "checks": "늦게 도착 비용 순서, 시작 구간 체크 반영, 기준선 자체가 회귀 테스트",
       "expect": {
@@ -429,27 +435,27 @@
       },
       "baseline_heuristic": {
         "A": {
-          "changed": 4,
-          "gaps": 3,
+          "changed": 6,
+          "gaps": 4,
           "late": 1,
           "kinds": {
-            "retimed": 2,
-            "gap": 2
+            "gap": 3,
+            "retimed": 3
           }
         },
         "B": {
           "changed": 0,
-          "gaps": 3,
-          "late": 3,
+          "gaps": 4,
+          "late": 4,
           "kinds": {}
         },
         "C": {
-          "changed": 5,
-          "gaps": 4,
+          "changed": 7,
+          "gaps": 5,
           "late": 0,
           "kinds": {
-            "retimed": 2,
-            "gap": 3
+            "gap": 4,
+            "retimed": 3
           }
         }
       }
@@ -507,7 +513,8 @@
             "gap": 3
           }
         }
-      }
+      },
+      "baseline_note": "D25(특수학급 시간표) 이전 데이터로 계산한 값. 시안 엔진으로 입력을 만들 수 없어 M3 merge 뒤 입력 파일과 함께 다시 계산한다"
     },
     {
       "id": "S9",
@@ -570,7 +577,8 @@
             "added": 2
           }
         }
-      }
+      },
+      "baseline_note": "D25(특수학급 시간표) 이전 데이터로 계산한 값. 시안 엔진으로 입력을 만들 수 없어 M3 merge 뒤 입력 파일과 함께 다시 계산한다"
     },
     {
       "id": "S10",
@@ -631,7 +639,8 @@
             "added": 2
           }
         }
-      }
+      },
+      "baseline_note": "D25(특수학급 시간표) 이전 데이터로 계산한 값. 시안 엔진으로 입력을 만들 수 없어 M3 merge 뒤 입력 파일과 함께 다시 계산한다"
     }
   ]
 }

@@ -32,7 +32,7 @@ export const SetPlacement = z.strictObject({
   student: StudentCode,
   when: Whens,
   placement: z.enum(["homeroom", "special_class"]),
-  location: LocationRef.optional().describe("special_class일 때 수업 장소. 없으면 소속 특수학급 (D20)"),
+  location: LocationRef.optional().describe("special_class일 때 수업 장소. 없으면 그 요일·시각에 그 과목을 하는 특수학급 (D25)"),
 });
 export const SetSupport = z.strictObject({
   op: z.literal("set_support"),

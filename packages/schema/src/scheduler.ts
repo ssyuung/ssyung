@@ -36,7 +36,8 @@ export const Shortfall = z.object({
 });
 
 export const RuleKey = z.enum([
-  "move_group", "segment_priority", "second_trip", "edge_release", "keep_previous",
+  "move_group", // 항상 켜짐(D12). 엔진은 읽지 않는다. 계약 1.0에서 뺀다
+  "segment_priority", "second_trip", "edge_release", "keep_previous",
   "balance", "rotation", // 예약 (D17)
 ]);
 export const PolicyKey = z.enum(["keep_minimal", "fresh", "no_late"]);
@@ -64,7 +65,9 @@ export const DiffEntry = z.object({
 
 export const ReasonCode = z.enum([
   "REQUESTED", "TIMETABLE_CHANGED", "MOVE_SUPPORT_NEEDED", "GROUP_MOVE", "EDGE_RELEASED",
-  "OVERLAP", "UNAVAILABLE", "CONTINUITY", "GAP", "BALANCE", "ROTATION",
+  "OVERLAP", "UNAVAILABLE", "CONTINUITY", "GAP",
+  "REPLANNED", // 처음부터 다시(keep_previous 끔) 정책이라 연쇄 없이 담당이 바뀜. cause는 그 요청 단계
+  "BALANCE", "ROTATION",
 ]);
 export const ExplanationStep = z.object({
   step: z.number().int().min(1),
@@ -97,8 +100,13 @@ export const Option = z.object({
   explanation: z.array(ExplanationStep),
 });
 
+/** 요청 시각 (D24). 이 날짜의 now 이전 칸은 이미 지났으므로 이전 배정을 그대로 둔다 */
+export const Now = z.object({ date: IsoDate, minute: Minute.describe("10분 올림") });
+
 export const ProposeInput = z.object({
   dates: z.array(IsoDate).min(1),
+  now: Now.nullable().optional()
+    .describe("오늘 변경이면 요청 시각. 이 날짜의 now 이전에 시작한 이전 배정은 바꾸지 않는다(고정). 없거나 null이면 모든 칸을 다시 볼 수 있음"),
   demands: z.array(Demand),
   staff: z.array(StaffWindow),
   previous: z
@@ -116,7 +124,9 @@ export const ProposeOutput = z.object({
 
 export const ViolationCode = z.enum([
   "OVERLAP", "OUTSIDE_AVAILABILITY", "ABSENT", "PINNED_CHANGED",
-  "MOVE_GROUP_HEADCOUNT", "SECOND_TRIP_WINDOW", "UNKNOWN_DEMAND",
+  "MOVE_GROUP_HEADCOUNT", // 이동 묶음 담당이 2명 이상. 0명은 위반이 아니라 부족분(priority MOVE)
+  "SECOND_TRIP_WINDOW", "UNKNOWN_DEMAND",
+  "BEFORE_NOW_CHANGED", // now 이전 배정이 이전과 다름 (D24)
 ]);
 export const Violation = z.object({
   code: ViolationCode,
@@ -127,13 +137,15 @@ export const Violation = z.object({
   end: Minute,
 });
 export const Warning = z.object({
-  code: z.enum(["SPECIAL_CLASS_CROWDED", "NO_SPECIAL_TEACHER"]),
+  code: z.enum(["SPECIAL_CLASS_CROWDED", "NO_SPECIAL_TEACHER", "SPECIAL_CLASS_UNPLACED"]),
   date: IsoDate,
   start: Minute,
   end: Minute,
   params: z.record(z.string(), z.union([z.string(), z.number()])),
 });
 export const ValidateInput = z.object({
+  now: Now.nullable().optional().describe("있으면 now 이전 배정이 previous와 다를 때 BEFORE_NOW_CHANGED"),
+  previous: z.array(Assignment).optional(),
   demands: z.array(Demand),
   staff: z.array(StaffWindow),
   pinned: z.array(Assignment),
@@ -142,10 +154,12 @@ export const ValidateInput = z.object({
 export const ValidateOutput = z.object({
   violations: z.array(Violation),
   shortfalls: z.array(Shortfall),
-  warnings: z.array(Warning),
+  warnings: z.array(Warning).optional()
+    .describe("쓰지 않음. 배치 경고는 엔진 입력에 없는 정보가 필요해 API(schedule.validate)가 계산한다. 계약 1.0에서 뺀다"),
 });
 
 export type StaffWindow = z.infer<typeof StaffWindow>;
+export type Now = z.infer<typeof Now>;
 export type Assignment = z.infer<typeof Assignment>;
 export type Shortfall = z.infer<typeof Shortfall>;
 export type Policy = z.infer<typeof Policy>;
