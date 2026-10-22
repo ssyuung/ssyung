@@ -23,6 +23,10 @@
 
 M3 요청의 결정 (2026-10-22, D25): 시간표는 요일·시각 기준(요일마다 다름), 학생별 과목 장소는 없앰(시간표로만), 소속 특수학급 필드는 없앰. 그 시각 그 과목을 하는 특수학급이 없거나 둘 이상이면 특수학급 수업으로 보되 장소 미정(이동 수요 없음, 경고).
 
+## M0 정리 (0.3.1)
+- `ProposeInput.request.cause`(`change_request`·`setup`·`timetable_import`): 설명 1단계 이유 코드를 정하려면 엔진이 원인을 알아야 한다. 시간표가 바뀐 시나리오(S10)의 `TIMETABLE_CHANGED`에 필요. 선택 필드.
+- 목데이터·시나리오 입력·기준선을 실제 엔진(`@ssyung/core`, `@ssyung/scheduler`)으로 생성.
+
 ## 같이 반영한 M0 정리 (0.2.0)
 - 공용 시간 함수 `hhmmToMinute`, `minuteToHHMM`, `ceil10`, `weekdayOf`와 기본 일과 `DEFAULT_BELL`을 `@ssyung/schema`에 둠. 모듈마다 따로 만들던 것을 대신한다.
 - `RuleKey.move_group`: 엔진이 읽지 않는 설정(D12는 항상 켜짐). 1.0에서 뺀다.

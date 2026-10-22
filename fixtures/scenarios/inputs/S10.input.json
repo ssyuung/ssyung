@@ -1,0 +1,1278 @@
+{
+  "dates": [
+    "2026-09-18"
+  ],
+  "now": null,
+  "demands": [
+    {
+      "id": "les:2026-09-18:S04:p1",
+      "kind": "lesson",
+      "date": "2026-09-18",
+      "start": 540,
+      "end": 580,
+      "headcount": 1,
+      "student": "S04",
+      "period": 1,
+      "subject": "과학",
+      "location": "4-4",
+      "floor": 3,
+      "segments": [
+        {
+          "segment": "start",
+          "start": 540,
+          "end": 550,
+          "priority": "HIGH"
+        },
+        {
+          "segment": "mid",
+          "start": 550,
+          "end": 570,
+          "priority": "LOW"
+        },
+        {
+          "segment": "end",
+          "start": 570,
+          "end": 580,
+          "priority": "HIGH"
+        }
+      ]
+    },
+    {
+      "id": "les:2026-09-18:S05:p1",
+      "kind": "lesson",
+      "date": "2026-09-18",
+      "start": 540,
+      "end": 580,
+      "headcount": 1,
+      "student": "S05",
+      "period": 1,
+      "subject": "영어",
+      "location": "4-7",
+      "floor": 3,
+      "segments": [
+        {
+          "segment": "start",
+          "start": 540,
+          "end": 550,
+          "priority": "LOW"
+        },
+        {
+          "segment": "mid",
+          "start": 550,
+          "end": 570,
+          "priority": "LOW"
+        },
+        {
+          "segment": "end",
+          "start": 570,
+          "end": 580,
+          "priority": "HIGH"
+        }
+      ]
+    },
+    {
+      "id": "les:2026-09-18:S07:p1",
+      "kind": "lesson",
+      "date": "2026-09-18",
+      "start": 540,
+      "end": 580,
+      "headcount": 1,
+      "student": "S07",
+      "period": 1,
+      "subject": "음악",
+      "location": "5-6",
+      "floor": 4,
+      "segments": [
+        {
+          "segment": "start",
+          "start": 540,
+          "end": 550,
+          "priority": "LOW"
+        },
+        {
+          "segment": "mid",
+          "start": 550,
+          "end": 570,
+          "priority": "HIGH"
+        },
+        {
+          "segment": "end",
+          "start": 570,
+          "end": 580,
+          "priority": "HIGH"
+        }
+      ]
+    },
+    {
+      "id": "mv:2026-09-18:b1:1-4",
+      "kind": "move_group",
+      "date": "2026-09-18",
+      "start": 580,
+      "end": 590,
+      "headcount": 1,
+      "after_period": 1,
+      "from_floor": 1,
+      "to_floor": 4,
+      "students": [
+        {
+          "student": "S03",
+          "from": "K1",
+          "to": "5-3",
+          "late_cost": 0
+        }
+      ],
+      "late_cost": 0,
+      "second_trip": {
+        "start": 590,
+        "end": 600
+      }
+    },
+    {
+      "id": "les:2026-09-18:S03:p2",
+      "kind": "lesson",
+      "date": "2026-09-18",
+      "start": 590,
+      "end": 630,
+      "headcount": 1,
+      "student": "S03",
+      "period": 2,
+      "subject": "과학",
+      "location": "5-3",
+      "floor": 4,
+      "segments": [
+        {
+          "segment": "start",
+          "start": 590,
+          "end": 600,
+          "priority": "LOW"
+        },
+        {
+          "segment": "mid",
+          "start": 600,
+          "end": 620,
+          "priority": "HIGH"
+        },
+        {
+          "segment": "end",
+          "start": 620,
+          "end": 630,
+          "priority": "HIGH"
+        }
+      ]
+    },
+    {
+      "id": "les:2026-09-18:S05:p2",
+      "kind": "lesson",
+      "date": "2026-09-18",
+      "start": 590,
+      "end": 630,
+      "headcount": 1,
+      "student": "S05",
+      "period": 2,
+      "subject": "과학",
+      "location": "4-7",
+      "floor": 3,
+      "segments": [
+        {
+          "segment": "start",
+          "start": 590,
+          "end": 600,
+          "priority": "HIGH"
+        },
+        {
+          "segment": "mid",
+          "start": 600,
+          "end": 620,
+          "priority": "HIGH"
+        },
+        {
+          "segment": "end",
+          "start": 620,
+          "end": 630,
+          "priority": "HIGH"
+        }
+      ]
+    },
+    {
+      "id": "mv:2026-09-18:b2:1-2",
+      "kind": "move_group",
+      "date": "2026-09-18",
+      "start": 630,
+      "end": 640,
+      "headcount": 1,
+      "after_period": 2,
+      "from_floor": 1,
+      "to_floor": 2,
+      "students": [
+        {
+          "student": "S01",
+          "from": "K1",
+          "to": "3-2",
+          "late_cost": 0
+        }
+      ],
+      "late_cost": 0,
+      "second_trip": {
+        "start": 640,
+        "end": 650
+      }
+    },
+    {
+      "id": "mv:2026-09-18:b2:1-3",
+      "kind": "move_group",
+      "date": "2026-09-18",
+      "start": 630,
+      "end": 640,
+      "headcount": 1,
+      "after_period": 2,
+      "from_floor": 1,
+      "to_floor": 3,
+      "students": [
+        {
+          "student": "S02",
+          "from": "K1",
+          "to": "4-1",
+          "late_cost": 0
+        }
+      ],
+      "late_cost": 0,
+      "second_trip": {
+        "start": 640,
+        "end": 650
+      }
+    },
+    {
+      "id": "mv:2026-09-18:b2:4-1",
+      "kind": "move_group",
+      "date": "2026-09-18",
+      "start": 630,
+      "end": 640,
+      "headcount": 1,
+      "after_period": 2,
+      "from_floor": 4,
+      "to_floor": 1,
+      "students": [
+        {
+          "student": "S03",
+          "from": "5-3",
+          "to": "K2",
+          "late_cost": 1
+        },
+        {
+          "student": "S06",
+          "from": "5-5",
+          "to": "K2",
+          "late_cost": 1
+        }
+      ],
+      "late_cost": 1,
+      "second_trip": {
+        "start": 640,
+        "end": 650
+      }
+    },
+    {
+      "id": "mv:2026-09-18:b3:1-4",
+      "kind": "move_group",
+      "date": "2026-09-18",
+      "start": 680,
+      "end": 690,
+      "headcount": 1,
+      "after_period": 3,
+      "from_floor": 1,
+      "to_floor": 4,
+      "students": [
+        {
+          "student": "S03",
+          "from": "K2",
+          "to": "5-3",
+          "late_cost": 0
+        },
+        {
+          "student": "S06",
+          "from": "K2",
+          "to": "5-5",
+          "late_cost": 0
+        }
+      ],
+      "late_cost": 0,
+      "second_trip": {
+        "start": 690,
+        "end": 700
+      }
+    },
+    {
+      "id": "mv:2026-09-18:b3:4-1",
+      "kind": "move_group",
+      "date": "2026-09-18",
+      "start": 680,
+      "end": 690,
+      "headcount": 1,
+      "after_period": 3,
+      "from_floor": 4,
+      "to_floor": 1,
+      "students": [
+        {
+          "student": "S07",
+          "from": "5-6",
+          "to": "K2",
+          "late_cost": 1
+        }
+      ],
+      "late_cost": 1,
+      "second_trip": {
+        "start": 690,
+        "end": 700
+      }
+    },
+    {
+      "id": "les:2026-09-18:S03:p4",
+      "kind": "lesson",
+      "date": "2026-09-18",
+      "start": 690,
+      "end": 730,
+      "headcount": 1,
+      "student": "S03",
+      "period": 4,
+      "subject": "음악",
+      "location": "5-3",
+      "floor": 4,
+      "segments": [
+        {
+          "segment": "start",
+          "start": 690,
+          "end": 700,
+          "priority": "LOW"
+        },
+        {
+          "segment": "mid",
+          "start": 700,
+          "end": 720,
+          "priority": "LOW"
+        },
+        {
+          "segment": "end",
+          "start": 720,
+          "end": 730,
+          "priority": "HIGH"
+        }
+      ]
+    },
+    {
+      "id": "les:2026-09-18:S06:p4",
+      "kind": "lesson",
+      "date": "2026-09-18",
+      "start": 690,
+      "end": 730,
+      "headcount": 1,
+      "student": "S06",
+      "period": 4,
+      "subject": "과학",
+      "location": "5-5",
+      "floor": 4,
+      "segments": [
+        {
+          "segment": "start",
+          "start": 690,
+          "end": 700,
+          "priority": "LOW"
+        },
+        {
+          "segment": "mid",
+          "start": 700,
+          "end": 720,
+          "priority": "HIGH"
+        },
+        {
+          "segment": "end",
+          "start": 720,
+          "end": 730,
+          "priority": "LOW"
+        }
+      ]
+    },
+    {
+      "id": "les:2026-09-18:S03:p5",
+      "kind": "lesson",
+      "date": "2026-09-18",
+      "start": 780,
+      "end": 820,
+      "headcount": 1,
+      "student": "S03",
+      "period": 5,
+      "subject": "영어",
+      "location": "5-3",
+      "floor": 4,
+      "segments": [
+        {
+          "segment": "start",
+          "start": 780,
+          "end": 790,
+          "priority": "HIGH"
+        },
+        {
+          "segment": "mid",
+          "start": 790,
+          "end": 810,
+          "priority": "HIGH"
+        },
+        {
+          "segment": "end",
+          "start": 810,
+          "end": 820,
+          "priority": "HIGH"
+        }
+      ]
+    },
+    {
+      "id": "les:2026-09-18:S07:p5",
+      "kind": "lesson",
+      "date": "2026-09-18",
+      "start": 780,
+      "end": 820,
+      "headcount": 1,
+      "student": "S07",
+      "period": 5,
+      "subject": "과학",
+      "location": "5-6",
+      "floor": 4,
+      "segments": [
+        {
+          "segment": "start",
+          "start": 780,
+          "end": 790,
+          "priority": "HIGH"
+        },
+        {
+          "segment": "mid",
+          "start": 790,
+          "end": 810,
+          "priority": "LOW"
+        },
+        {
+          "segment": "end",
+          "start": 810,
+          "end": 820,
+          "priority": "LOW"
+        }
+      ]
+    },
+    {
+      "id": "mv:2026-09-18:b5:4-1",
+      "kind": "move_group",
+      "date": "2026-09-18",
+      "start": 820,
+      "end": 830,
+      "headcount": 1,
+      "after_period": 5,
+      "from_floor": 4,
+      "to_floor": 1,
+      "students": [
+        {
+          "student": "S03",
+          "from": "5-3",
+          "to": "K2",
+          "late_cost": 1
+        },
+        {
+          "student": "S07",
+          "from": "5-6",
+          "to": "K2",
+          "late_cost": 1
+        }
+      ],
+      "late_cost": 1,
+      "second_trip": {
+        "start": 830,
+        "end": 840
+      }
+    },
+    {
+      "id": "les:2026-09-18:S02:p6",
+      "kind": "lesson",
+      "date": "2026-09-18",
+      "start": 830,
+      "end": 870,
+      "headcount": 1,
+      "student": "S02",
+      "period": 6,
+      "subject": "과학",
+      "location": "4-1",
+      "floor": 3,
+      "segments": [
+        {
+          "segment": "start",
+          "start": 830,
+          "end": 840,
+          "priority": "HIGH"
+        },
+        {
+          "segment": "mid",
+          "start": 840,
+          "end": 860,
+          "priority": "HIGH"
+        },
+        {
+          "segment": "end",
+          "start": 860,
+          "end": 870,
+          "priority": "LOW"
+        }
+      ]
+    }
+  ],
+  "staff": [
+    {
+      "staff": "A01",
+      "date": "2026-09-18",
+      "available": [
+        {
+          "start": 520,
+          "end": 1000
+        }
+      ],
+      "absent": []
+    },
+    {
+      "staff": "A02",
+      "date": "2026-09-18",
+      "available": [
+        {
+          "start": 520,
+          "end": 1000
+        }
+      ],
+      "absent": []
+    },
+    {
+      "staff": "A03",
+      "date": "2026-09-18",
+      "available": [
+        {
+          "start": 520,
+          "end": 1000
+        }
+      ],
+      "absent": []
+    }
+  ],
+  "previous": {
+    "demands": [
+      {
+        "id": "les:2026-09-18:S05:p1",
+        "kind": "lesson",
+        "date": "2026-09-18",
+        "start": 540,
+        "end": 580,
+        "headcount": 1,
+        "student": "S05",
+        "period": 1,
+        "subject": "영어",
+        "location": "4-7",
+        "floor": 3,
+        "segments": [
+          {
+            "segment": "start",
+            "start": 540,
+            "end": 550,
+            "priority": "LOW"
+          },
+          {
+            "segment": "mid",
+            "start": 550,
+            "end": 570,
+            "priority": "LOW"
+          },
+          {
+            "segment": "end",
+            "start": 570,
+            "end": 580,
+            "priority": "HIGH"
+          }
+        ]
+      },
+      {
+        "id": "les:2026-09-18:S07:p1",
+        "kind": "lesson",
+        "date": "2026-09-18",
+        "start": 540,
+        "end": 580,
+        "headcount": 1,
+        "student": "S07",
+        "period": 1,
+        "subject": "음악",
+        "location": "5-6",
+        "floor": 4,
+        "segments": [
+          {
+            "segment": "start",
+            "start": 540,
+            "end": 550,
+            "priority": "LOW"
+          },
+          {
+            "segment": "mid",
+            "start": 550,
+            "end": 570,
+            "priority": "HIGH"
+          },
+          {
+            "segment": "end",
+            "start": 570,
+            "end": 580,
+            "priority": "HIGH"
+          }
+        ]
+      },
+      {
+        "id": "mv:2026-09-18:b1:1-3",
+        "kind": "move_group",
+        "date": "2026-09-18",
+        "start": 580,
+        "end": 590,
+        "headcount": 1,
+        "after_period": 1,
+        "from_floor": 1,
+        "to_floor": 3,
+        "students": [
+          {
+            "student": "S04",
+            "from": "K1",
+            "to": "4-4",
+            "late_cost": 2
+          }
+        ],
+        "late_cost": 2,
+        "second_trip": {
+          "start": 590,
+          "end": 600
+        }
+      },
+      {
+        "id": "mv:2026-09-18:b1:1-4",
+        "kind": "move_group",
+        "date": "2026-09-18",
+        "start": 580,
+        "end": 590,
+        "headcount": 1,
+        "after_period": 1,
+        "from_floor": 1,
+        "to_floor": 4,
+        "students": [
+          {
+            "student": "S03",
+            "from": "K1",
+            "to": "5-3",
+            "late_cost": 0
+          }
+        ],
+        "late_cost": 0,
+        "second_trip": {
+          "start": 590,
+          "end": 600
+        }
+      },
+      {
+        "id": "les:2026-09-18:S03:p2",
+        "kind": "lesson",
+        "date": "2026-09-18",
+        "start": 590,
+        "end": 630,
+        "headcount": 1,
+        "student": "S03",
+        "period": 2,
+        "subject": "과학",
+        "location": "5-3",
+        "floor": 4,
+        "segments": [
+          {
+            "segment": "start",
+            "start": 590,
+            "end": 600,
+            "priority": "LOW"
+          },
+          {
+            "segment": "mid",
+            "start": 600,
+            "end": 620,
+            "priority": "HIGH"
+          },
+          {
+            "segment": "end",
+            "start": 620,
+            "end": 630,
+            "priority": "HIGH"
+          }
+        ]
+      },
+      {
+        "id": "les:2026-09-18:S04:p2",
+        "kind": "lesson",
+        "date": "2026-09-18",
+        "start": 590,
+        "end": 630,
+        "headcount": 1,
+        "student": "S04",
+        "period": 2,
+        "subject": "과학",
+        "location": "4-4",
+        "floor": 3,
+        "segments": [
+          {
+            "segment": "start",
+            "start": 590,
+            "end": 600,
+            "priority": "HIGH"
+          },
+          {
+            "segment": "mid",
+            "start": 600,
+            "end": 620,
+            "priority": "LOW"
+          },
+          {
+            "segment": "end",
+            "start": 620,
+            "end": 630,
+            "priority": "HIGH"
+          }
+        ]
+      },
+      {
+        "id": "les:2026-09-18:S05:p2",
+        "kind": "lesson",
+        "date": "2026-09-18",
+        "start": 590,
+        "end": 630,
+        "headcount": 1,
+        "student": "S05",
+        "period": 2,
+        "subject": "과학",
+        "location": "4-7",
+        "floor": 3,
+        "segments": [
+          {
+            "segment": "start",
+            "start": 590,
+            "end": 600,
+            "priority": "HIGH"
+          },
+          {
+            "segment": "mid",
+            "start": 600,
+            "end": 620,
+            "priority": "HIGH"
+          },
+          {
+            "segment": "end",
+            "start": 620,
+            "end": 630,
+            "priority": "HIGH"
+          }
+        ]
+      },
+      {
+        "id": "mv:2026-09-18:b2:1-2",
+        "kind": "move_group",
+        "date": "2026-09-18",
+        "start": 630,
+        "end": 640,
+        "headcount": 1,
+        "after_period": 2,
+        "from_floor": 1,
+        "to_floor": 2,
+        "students": [
+          {
+            "student": "S01",
+            "from": "K1",
+            "to": "3-2",
+            "late_cost": 0
+          }
+        ],
+        "late_cost": 0,
+        "second_trip": {
+          "start": 640,
+          "end": 650
+        }
+      },
+      {
+        "id": "mv:2026-09-18:b2:1-3",
+        "kind": "move_group",
+        "date": "2026-09-18",
+        "start": 630,
+        "end": 640,
+        "headcount": 1,
+        "after_period": 2,
+        "from_floor": 1,
+        "to_floor": 3,
+        "students": [
+          {
+            "student": "S02",
+            "from": "K1",
+            "to": "4-1",
+            "late_cost": 0
+          }
+        ],
+        "late_cost": 0,
+        "second_trip": {
+          "start": 640,
+          "end": 650
+        }
+      },
+      {
+        "id": "mv:2026-09-18:b2:4-1",
+        "kind": "move_group",
+        "date": "2026-09-18",
+        "start": 630,
+        "end": 640,
+        "headcount": 1,
+        "after_period": 2,
+        "from_floor": 4,
+        "to_floor": 1,
+        "students": [
+          {
+            "student": "S03",
+            "from": "5-3",
+            "to": "K2",
+            "late_cost": 1
+          },
+          {
+            "student": "S06",
+            "from": "5-5",
+            "to": "K2",
+            "late_cost": 1
+          }
+        ],
+        "late_cost": 1,
+        "second_trip": {
+          "start": 640,
+          "end": 650
+        }
+      },
+      {
+        "id": "mv:2026-09-18:b3:1-4",
+        "kind": "move_group",
+        "date": "2026-09-18",
+        "start": 680,
+        "end": 690,
+        "headcount": 1,
+        "after_period": 3,
+        "from_floor": 1,
+        "to_floor": 4,
+        "students": [
+          {
+            "student": "S03",
+            "from": "K2",
+            "to": "5-3",
+            "late_cost": 0
+          },
+          {
+            "student": "S06",
+            "from": "K2",
+            "to": "5-5",
+            "late_cost": 0
+          }
+        ],
+        "late_cost": 0,
+        "second_trip": {
+          "start": 690,
+          "end": 700
+        }
+      },
+      {
+        "id": "mv:2026-09-18:b3:4-1",
+        "kind": "move_group",
+        "date": "2026-09-18",
+        "start": 680,
+        "end": 690,
+        "headcount": 1,
+        "after_period": 3,
+        "from_floor": 4,
+        "to_floor": 1,
+        "students": [
+          {
+            "student": "S07",
+            "from": "5-6",
+            "to": "K2",
+            "late_cost": 1
+          }
+        ],
+        "late_cost": 1,
+        "second_trip": {
+          "start": 690,
+          "end": 700
+        }
+      },
+      {
+        "id": "les:2026-09-18:S03:p4",
+        "kind": "lesson",
+        "date": "2026-09-18",
+        "start": 690,
+        "end": 730,
+        "headcount": 1,
+        "student": "S03",
+        "period": 4,
+        "subject": "음악",
+        "location": "5-3",
+        "floor": 4,
+        "segments": [
+          {
+            "segment": "start",
+            "start": 690,
+            "end": 700,
+            "priority": "LOW"
+          },
+          {
+            "segment": "mid",
+            "start": 700,
+            "end": 720,
+            "priority": "LOW"
+          },
+          {
+            "segment": "end",
+            "start": 720,
+            "end": 730,
+            "priority": "HIGH"
+          }
+        ]
+      },
+      {
+        "id": "les:2026-09-18:S06:p4",
+        "kind": "lesson",
+        "date": "2026-09-18",
+        "start": 690,
+        "end": 730,
+        "headcount": 1,
+        "student": "S06",
+        "period": 4,
+        "subject": "과학",
+        "location": "5-5",
+        "floor": 4,
+        "segments": [
+          {
+            "segment": "start",
+            "start": 690,
+            "end": 700,
+            "priority": "LOW"
+          },
+          {
+            "segment": "mid",
+            "start": 700,
+            "end": 720,
+            "priority": "HIGH"
+          },
+          {
+            "segment": "end",
+            "start": 720,
+            "end": 730,
+            "priority": "LOW"
+          }
+        ]
+      },
+      {
+        "id": "les:2026-09-18:S03:p5",
+        "kind": "lesson",
+        "date": "2026-09-18",
+        "start": 780,
+        "end": 820,
+        "headcount": 1,
+        "student": "S03",
+        "period": 5,
+        "subject": "영어",
+        "location": "5-3",
+        "floor": 4,
+        "segments": [
+          {
+            "segment": "start",
+            "start": 780,
+            "end": 790,
+            "priority": "HIGH"
+          },
+          {
+            "segment": "mid",
+            "start": 790,
+            "end": 810,
+            "priority": "HIGH"
+          },
+          {
+            "segment": "end",
+            "start": 810,
+            "end": 820,
+            "priority": "HIGH"
+          }
+        ]
+      },
+      {
+        "id": "les:2026-09-18:S07:p5",
+        "kind": "lesson",
+        "date": "2026-09-18",
+        "start": 780,
+        "end": 820,
+        "headcount": 1,
+        "student": "S07",
+        "period": 5,
+        "subject": "과학",
+        "location": "5-6",
+        "floor": 4,
+        "segments": [
+          {
+            "segment": "start",
+            "start": 780,
+            "end": 790,
+            "priority": "HIGH"
+          },
+          {
+            "segment": "mid",
+            "start": 790,
+            "end": 810,
+            "priority": "LOW"
+          },
+          {
+            "segment": "end",
+            "start": 810,
+            "end": 820,
+            "priority": "LOW"
+          }
+        ]
+      },
+      {
+        "id": "mv:2026-09-18:b5:4-1",
+        "kind": "move_group",
+        "date": "2026-09-18",
+        "start": 820,
+        "end": 830,
+        "headcount": 1,
+        "after_period": 5,
+        "from_floor": 4,
+        "to_floor": 1,
+        "students": [
+          {
+            "student": "S03",
+            "from": "5-3",
+            "to": "K2",
+            "late_cost": 1
+          },
+          {
+            "student": "S07",
+            "from": "5-6",
+            "to": "K2",
+            "late_cost": 1
+          }
+        ],
+        "late_cost": 1,
+        "second_trip": {
+          "start": 830,
+          "end": 840
+        }
+      },
+      {
+        "id": "les:2026-09-18:S02:p6",
+        "kind": "lesson",
+        "date": "2026-09-18",
+        "start": 830,
+        "end": 870,
+        "headcount": 1,
+        "student": "S02",
+        "period": 6,
+        "subject": "과학",
+        "location": "4-1",
+        "floor": 3,
+        "segments": [
+          {
+            "segment": "start",
+            "start": 830,
+            "end": 840,
+            "priority": "HIGH"
+          },
+          {
+            "segment": "mid",
+            "start": 840,
+            "end": 860,
+            "priority": "HIGH"
+          },
+          {
+            "segment": "end",
+            "start": 860,
+            "end": 870,
+            "priority": "LOW"
+          }
+        ]
+      }
+    ],
+    "assignments": [
+      {
+        "staff": "A01",
+        "demand_id": "les:2026-09-18:S05:p1",
+        "date": "2026-09-18",
+        "start": 540,
+        "end": 580,
+        "mode": "normal",
+        "pinned": false
+      },
+      {
+        "staff": "A02",
+        "demand_id": "les:2026-09-18:S07:p1",
+        "date": "2026-09-18",
+        "start": 540,
+        "end": 580,
+        "mode": "normal",
+        "pinned": false
+      },
+      {
+        "staff": "A01",
+        "demand_id": "mv:2026-09-18:b1:1-3",
+        "date": "2026-09-18",
+        "start": 580,
+        "end": 590,
+        "mode": "normal",
+        "pinned": false
+      },
+      {
+        "staff": "A02",
+        "demand_id": "mv:2026-09-18:b1:1-4",
+        "date": "2026-09-18",
+        "start": 580,
+        "end": 590,
+        "mode": "normal",
+        "pinned": false
+      },
+      {
+        "staff": "A01",
+        "demand_id": "les:2026-09-18:S04:p2",
+        "date": "2026-09-18",
+        "start": 590,
+        "end": 630,
+        "mode": "normal",
+        "pinned": false
+      },
+      {
+        "staff": "A02",
+        "demand_id": "les:2026-09-18:S03:p2",
+        "date": "2026-09-18",
+        "start": 590,
+        "end": 630,
+        "mode": "normal",
+        "pinned": false
+      },
+      {
+        "staff": "A03",
+        "demand_id": "les:2026-09-18:S05:p2",
+        "date": "2026-09-18",
+        "start": 590,
+        "end": 630,
+        "mode": "normal",
+        "pinned": false
+      },
+      {
+        "staff": "A01",
+        "demand_id": "mv:2026-09-18:b2:1-2",
+        "date": "2026-09-18",
+        "start": 630,
+        "end": 640,
+        "mode": "normal",
+        "pinned": false
+      },
+      {
+        "staff": "A02",
+        "demand_id": "mv:2026-09-18:b2:4-1",
+        "date": "2026-09-18",
+        "start": 630,
+        "end": 640,
+        "mode": "normal",
+        "pinned": false
+      },
+      {
+        "staff": "A03",
+        "demand_id": "mv:2026-09-18:b2:1-3",
+        "date": "2026-09-18",
+        "start": 630,
+        "end": 640,
+        "mode": "normal",
+        "pinned": false
+      },
+      {
+        "staff": "A01",
+        "demand_id": "mv:2026-09-18:b3:4-1",
+        "date": "2026-09-18",
+        "start": 680,
+        "end": 690,
+        "mode": "normal",
+        "pinned": false
+      },
+      {
+        "staff": "A02",
+        "demand_id": "mv:2026-09-18:b3:1-4",
+        "date": "2026-09-18",
+        "start": 680,
+        "end": 690,
+        "mode": "normal",
+        "pinned": false
+      },
+      {
+        "staff": "A01",
+        "demand_id": "les:2026-09-18:S06:p4",
+        "date": "2026-09-18",
+        "start": 690,
+        "end": 730,
+        "mode": "normal",
+        "pinned": false
+      },
+      {
+        "staff": "A02",
+        "demand_id": "les:2026-09-18:S03:p4",
+        "date": "2026-09-18",
+        "start": 690,
+        "end": 730,
+        "mode": "normal",
+        "pinned": false
+      },
+      {
+        "staff": "A01",
+        "demand_id": "les:2026-09-18:S07:p5",
+        "date": "2026-09-18",
+        "start": 780,
+        "end": 820,
+        "mode": "normal",
+        "pinned": false
+      },
+      {
+        "staff": "A02",
+        "demand_id": "les:2026-09-18:S03:p5",
+        "date": "2026-09-18",
+        "start": 780,
+        "end": 820,
+        "mode": "normal",
+        "pinned": false
+      },
+      {
+        "staff": "A02",
+        "demand_id": "mv:2026-09-18:b5:4-1",
+        "date": "2026-09-18",
+        "start": 820,
+        "end": 830,
+        "mode": "normal",
+        "pinned": false
+      },
+      {
+        "staff": "A03",
+        "demand_id": "les:2026-09-18:S02:p6",
+        "date": "2026-09-18",
+        "start": 830,
+        "end": 870,
+        "mode": "normal",
+        "pinned": false
+      }
+    ]
+  },
+  "pinned": [],
+  "policies": [
+    "keep_minimal",
+    "fresh",
+    "no_late"
+  ],
+  "request": {
+    "change_request_id": null,
+    "ops": [],
+    "cause": "timetable_import"
+  }
+}

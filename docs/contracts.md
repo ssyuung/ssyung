@@ -1,6 +1,6 @@
 # ssyung 계약과 목데이터
 
-> 상태: 계약 0.3.0 (2026-10-22, 특수학급 시간표 D25는 하위 호환 아님). 바뀐 것과 요청 처리 기록: [contracts/requests/README.md](../contracts/requests/README.md)
+> 상태: 계약 0.3.1 (2026-10-22). 0.3.0 특수학급 시간표(D25)는 하위 호환 아님, 0.3.1은 `ProposeInput.request.cause` 추가. 바뀐 것과 요청 처리 기록: [contracts/requests/README.md](../contracts/requests/README.md)
 > 관련 문서: [architecture.md](architecture.md), [agent-development.md](agent-development.md)
 
 모듈마다 다른 브랜치에서 동시에 개발할 수 있도록 **모듈 사이를 오가는 데이터 형식**을 `packages/schema`(zod)에 고정하고, 그 형식을 그대로 따르는 **목데이터**를 `fixtures/mock/`에 둔다. 각 모듈은 상대 모듈이 없어도 목데이터를 입력으로 받고, 자기 출력을 목데이터와 같은 형식으로 내면 된다.
@@ -49,7 +49,7 @@ pnpm mock:build    # dataset/ + 화면 시안 엔진 → fixtures/mock/ 다시 �
 
 ## 3. 목데이터 (`fixtures/mock/`)
 
-`pnpm mock:build`가 생성한다. **손으로 고치지 않는다.** 배정은 화면 시안(`docs/screens/ssyung-screens.html`)의 임시 규칙 엔진이 실제로 계산한 값이며, 연쇄 시나리오 기준선과 같은 숫자가 나온다(S1 A 7/0/0, S2 A 4/0/1·C 4/1/0). 기준일은 **2026-09-18(금) 10:15**다.
+`pnpm mock:build`가 생성한다. **손으로 고치지 않는다.** 수요는 `@ssyung/core`(M3), 배정·선택지·검증은 `@ssyung/scheduler`(M1)가 실제로 계산한 값이다(2026-10-22부터, 그 전에는 화면 시안의 임시 규칙). 모듈 코드를 바꿔 결과가 달라지면 M0가 다시 생성하고 사람이 바뀐 값을 승인한다. 연쇄 시나리오 10개의 입력과 기준선도 같은 엔진으로 만든다. 기준일은 **2026-09-18(금) 10:15**다.
 
 | 경로 | 계약 | 내용 | 주로 쓰는 모듈 |
 |---|---|---|---|
@@ -72,7 +72,7 @@ pnpm mock:build    # dataset/ + 화면 시안 엔진 → fixtures/mock/ 다시 �
 | 경로 | 계약 | 내용 |
 |---|---|---|
 | `fixtures/scenarios/cascade-scenarios.json` | `CascadeScenarioSet` | 연쇄 시나리오 10개와 정책별 기준선 ([scheduler-scenarios.md](scheduler-scenarios.md)) |
-| `fixtures/scenarios/inputs/S*.input.json` | `ProposeInput` | 시나리오 엔진 입력. 지금 S1·S2·S3·S4·S5·S7 (`pnpm mock:build`가 생성). M1·M2가 같은 입력으로 돌린다 |
+| `fixtures/scenarios/inputs/S*.input.json` | `ProposeInput` | 시나리오 엔진 입력 10개 (`pnpm mock:build`가 수요 생성으로 만듦). M1·M2가 같은 입력으로 돌린다. 기초정보·시간표 변경 시나리오는 `request.cause`가 `setup`·`timetable_import` |
 | `fixtures/change-requests/cases.json` | `ChangeRequestSet` | 해석기 평가 세트 22건. 어려운 유형(상대 날짜, 오전·오후, 과목→교시, 복합 명령, 지원 안 하는 요청, 수업일 아님)을 2건 이상씩 |
 
 ### 3.1 화면이 쓰는 주요 예시

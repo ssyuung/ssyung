@@ -1,6 +1,6 @@
 {
   "$id": "ssyung/ProposeInput",
-  "x-contract-version": "0.3.0",
+  "x-contract-version": "0.3.1",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "properties": {
@@ -3029,6 +3029,15 @@
                   }
                 ]
               }
+            },
+            "cause": {
+              "description": "다시 배정하는 원인. 설명 1단계 이유 코드: change_request·setup → REQUESTED, timetable_import → TIMETABLE_CHANGED. 없으면 change_request",
+              "type": "string",
+              "enum": [
+                "change_request",
+                "setup",
+                "timetable_import"
+              ]
             }
           },
           "required": [

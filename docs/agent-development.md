@@ -202,7 +202,7 @@ packages/schema (zod)
 | `scripts/hooks/guard-bash.mjs` | PreToolUse(Bash): 누구에게나 강제 push, 루트·상위 `rm -rf`, 공유 stash, 검사 건너뛰기 차단. 모듈 에이전트에게는 push·merge·rebase·브랜치 이동·`reset --hard` 등, 요청 없는 커밋(`SSY_ALLOW_COMMIT=1`일 때만), 외부 전송, 워크트리 밖 경로 수정도 차단 |
 | `scripts/hooks/post-edit.mjs` | PostToolUse: 고친 TS 파일이 속한 패키지의 `typecheck`를 돌려 실패를 바로 돌려줌 |
 | `scripts/hooks/stop-check.mjs` | Stop: 바뀐 파일이 있으면 `requires` 확인 후 모듈 `check` + `always_check`(계약·목데이터 검증) 실행. 실패하면 끝내지 못하게 하고, 3번 연속이면 사람에게 넘김 |
-| `scripts/hooks/test/hooks.test.mjs` | 하네스 테스트 29개 (임시 저장소에서 훅을 실제로 호출) |
+| `scripts/hooks/test/hooks.test.mjs` | 하네스 테스트 30개 (임시 저장소에서 훅을 실제로 호출) |
 | `scripts/ci/scope-check.mjs` | CI: 브랜치 이름 → 모듈, main 대비 바뀐 파일이 모두 범위 안인지 |
 | `scripts/agent/init.sh` | 워크트리 준비: `.agent-scope`, `pnpm i`, 시작 문장 안내 |
 | `tasks/board/<ID>.md` | 모듈 보드: 이번 버전 체크리스트, 다음에 할 것(제안), 다른 모듈에 필요한 것. 그 모듈만 고치고 끝낼 때마다 갱신(Stop 훅이 확인). 모듈마다 파일이 따로라 merge 충돌이 없다 |

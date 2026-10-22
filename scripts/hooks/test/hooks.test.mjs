@@ -91,6 +91,12 @@ test("M7·M10: apps/web/server 안에서 notify만 M10", () => {
   assert.equal(edit("supabase/migrations/0001_init.sql", "M7").code, 2);
   assert.equal(edit("supabase/migrations/0002_votes.sql", "M7").code, 0);
 });
+test("M7·M8: tRPC 라우트(app/api)는 M7, 나머지 화면은 M8", () => {
+  assert.equal(edit("apps/web/app/api/trpc/[trpc]/route.ts", "M7").code, 0);
+  assert.equal(edit("apps/web/app/api/trpc/[trpc]/route.ts", "M8").code, 2);
+  assert.equal(edit("apps/web/app/page.tsx", "M8").code, 0);
+  assert.equal(edit("apps/web/app/page.tsx", "M7").code, 2);
+});
 test("M11: 보호된 .github 중 deploy 워크플로만 허용", () => {
   assert.equal(edit(".github/workflows/deploy-solver.yml", "M11").code, 0);
   assert.equal(edit(".github/workflows/ci.yml", "M11").code, 2);

@@ -21,7 +21,7 @@
 ## 절대 규칙
 
 1. **계약은 고치지 않는다.** `packages/schema`, `fixtures/**`(목데이터·시나리오·평가 세트), `**/generated/**`, 하네스(`scripts/`, `.claude/`, `.agent-scopes/`, 이 파일)는 M0만 고친다. 바꿔야 하면 `contracts/requests/<ID>-<주제>.md`를 쓴다(`contracts/requests/_template.md`).
-2. **다른 모듈 코드를 import하지 않는다.** 모듈 사이는 `@ssyung/schema` 타입과 `fixtures/mock/` 목데이터로만 만난다.
+2. **다른 모듈 코드를 import하지 않는다.** 모듈 사이는 `@ssyung/schema` 타입과 `fixtures/mock/` 목데이터로만 만난다. 예외는 M7(API) 하나: 모듈을 부르는 쪽이라 merge된 모듈 패키지를 `apps/web/server/deps.ts` 한 곳에서만 import한다.
 3. **커밋·push·merge는 사람이 요청할 때만.** 일이 끝나면 바꾼 것, 완료 명령 결과, 남은 질문을 보고하고 멈춘다.
 4. **추측하지 않는다.** 계약이나 지시서가 모호하면 `tasks/<ID>-questions.md`에 질문을 적고, 가장 보수적인 해석으로 진행한 뒤 보고에 적는다.
 5. **기준을 낮춰 통과시키지 않는다.** 테스트 기대값, 시나리오 기준선, 목데이터를 내 코드에 맞춰 바꾸지 않는다.

@@ -115,7 +115,12 @@ export const ProposeInput = z.object({
     .describe("최초 생성이면 null"),
   pinned: z.array(Assignment),
   policies: z.array(PolicyKey).min(1),
-  request: z.object({ change_request_id: Id.nullable(), ops: z.array(ChangeOp) }).nullable(),
+  request: z.object({
+    change_request_id: Id.nullable(),
+    ops: z.array(ChangeOp),
+    cause: z.enum(["change_request", "setup", "timetable_import"]).optional()
+      .describe("다시 배정하는 원인. 설명 1단계 이유 코드: change_request·setup → REQUESTED, timetable_import → TIMETABLE_CHANGED. 없으면 change_request"),
+  }).nullable(),
 });
 export const ProposeOutput = z.object({
   options: z.array(Option).min(1),

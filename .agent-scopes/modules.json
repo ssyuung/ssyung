@@ -146,9 +146,12 @@
       "branch": "m7-api",
       "write": [
         "apps/web/server/**",
+        "apps/web/app/api/**",
         "apps/web/package.json",
         "apps/web/tsconfig.json",
         "apps/web/*.config.*",
+        "apps/web/next-env.d.ts",
+        "apps/web/.gitignore",
         "supabase/migrations/**",
         "supabase/tests/**",
         "supabase/config.toml"
@@ -177,7 +180,9 @@
         "packages/api-client/**",
         "packages/design-tokens/**"
       ],
-      "deny": [],
+      "deny": [
+        "apps/web/app/api/**"
+      ],
       "requires": [
         "apps/web/package.json"
       ],

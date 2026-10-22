@@ -1256,6 +1256,7 @@
         "placement": "special_class",
         "location": "K1"
       }
-    ]
+    ],
+    "cause": "change_request"
   }
 }
