@@ -50,9 +50,9 @@ test("시간표 없는 반(1-3) 학생은 수요가 없다", () => {
 });
 
 test("특수학급 과목만 있는 날에는 수요가 없다", () => {
-  // 3-2의 9/18 과목을 모두 K1에서 들으면 수업 지원도 이동도 없다
+  // 3-2의 9/18 과목을 모두 특수학급에서 들으면(장소 미정 칸 포함) 수업 지원도 이동도 없다
   const subjects = [...new Set(timetable.lessons.filter((l) => l.class_group === "3-2" && l.date === "2026-09-18").map((l) => l.subject))];
-  const s = { ...students[0]!, special_class_subjects: subjects.map((subject) => ({ subject, location: "K1" })) };
+  const s = { ...students[0]!, special_class_subjects: subjects };
   const got = generateDemands({ school, timetable, students: [s], dates: ["2026-09-18"] });
   assert.deepEqual(got.demands, []);
 });

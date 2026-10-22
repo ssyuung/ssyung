@@ -1,9 +1,10 @@
 // 수요 생성 (architecture.md §8.1). 가져온 시간표와 배치로 날짜 범위의 수요를 만든다.
+import { ceil10 } from "@ssyung/schema";
 import type {
   ChangeOp, Demand, DemandSet, Floor, IsoDate, LessonDemand, LocationRef, Minute, MoveGroupDemand,
-  SchoolBundle, Student, Timetable,
+  SchoolBundle, Student, TimeBlock, Timetable,
 } from "@ssyung/schema";
-import { blocksOn, breakAfter, classBlock, periodsIn, resolveWhen } from "./when.ts";
+import { blocksOn, breakAfter, classBlock, periodsIn, resolveWhen, weekdayOf } from "./when.ts";
 
 export { expandDuties } from "./duty.ts";
 export * from "./when.ts";
@@ -19,16 +20,19 @@ export type GenerateDemandsInput = {
   version_id?: string | null;
   /** 버전에 저장된 추가 수요. set_support가 이 위에 덮어쓴다 */
   requirements?: RequirementDemand[];
-  /** 요청 시각. 하루 전체를 가리킨 set_support는 이 날짜면 이 시각부터 */
+  /** 요청 시각 (D24). 이 날짜의 변경은 now(10분 올림) 이후에 시작하는 칸에만 적용한다 */
   now?: { date: IsoDate; minute: number };
 };
 
 type RequirementDemand = Extract<Demand, { kind: "requirement" }>;
 type Req = Pick<RequirementDemand, "date" | "student" | "start" | "end" | "headcount">;
+type Unplaced = DemandSet["unplaced"][number];
 type Placement = "homeroom" | "special_class";
 type LateCost = 0 | 1 | 2;
-/** 학생 s의 교시 p 상태 */
-type Slot = { subject: string; placement: Placement; location: LocationRef; floor: Floor; lateCost: LateCost };
+/** 학생 s의 교시 p 상태. 특수학급 장소를 못 정하면 unplaced */
+type Slot =
+  | { subject: string; placement: Placement; location: LocationRef; floor: Floor; lateCost: LateCost; unplaced?: undefined }
+  | { subject: string; placement: "special_class"; unplaced: Unplaced["reason"] };
 
 const key = (...parts: (string | number)[]) => parts.join("|");
 
@@ -45,6 +49,14 @@ export function generateDemands(input: GenerateDemandsInput): DemandSet {
   };
   const homeOf = new Map(school.class_groups.map((c) => [c.code, c.home_location]));
 
+  /** 그 요일·시각에 그 과목을 하는 특수학급 교실 (D25) */
+  const specialRoom = (date: IsoDate, b: TimeBlock, subject: string): LocationRef | Unplaced["reason"] => {
+    const day = weekdayOf(date);
+    const found = school.special_classes.filter((k) =>
+      k.lessons.some((l) => l.day === day && l.subject === subject && l.start < b.end && b.start < l.end));
+    return found.length === 1 ? found[0]!.location : found.length === 0 ? "none" : "multiple";
+  };
+
   // 날짜 → 반 → 교시 → 과목
   const dateSet = new Set(dates);
   const lessons = new Map<string, Map<number, string>>();
@@ -56,17 +68,19 @@ export function generateDemands(input: GenerateDemandsInput): DemandSet {
   }
 
   // ---------- 변경 요청을 입력으로 바꿈. 같은 칸은 뒤의 op가 이긴다 ----------
-  const overrides = new Map<string, { placement: Placement; location?: LocationRef }>(); // 학생|날짜|교시
-  const relocations = new Map<string, LocationRef>(); // 반|날짜|교시
-  const absences = new Map<string, { start: Minute; end: Minute }[]>(); // 학생|날짜
+  // from: 이 시각 이후에 시작하는 칸에만 적용 (D24). 오늘이 아니면 0
+  const fromOf = (date: IsoDate): Minute => (input.now?.date === date ? ceil10(input.now.minute) : 0);
+  const overrides = new Map<string, { placement: Placement; location?: LocationRef; from: Minute }>(); // 학생|날짜|교시
+  const relocations = new Map<string, { location: LocationRef; from: Minute }>(); // 반|날짜|교시
+  const absences = new Map<string, { start: Minute; end: Minute; from: Minute }[]>(); // 학생|날짜
   const wholeAbsent = new Set<string>(); // 학생|날짜
   // 추가 수요. 버전에 저장된 것에서 시작해 set_support가 그 구간을 덮어쓴다(겹친 부분만 잘라 냄)
   let requirements: Req[] = (input.requirements ?? [])
     .filter((r) => dateSet.has(r.date))
     .map(({ date, student, start, end, headcount }) => ({ date, student, start, end, headcount }));
-  const cut = (date: IsoDate, student: string, start: Minute, end: Minute) => {
+  const cut = (date: IsoDate, student: string, start: Minute, end: Minute, from: Minute) => {
     requirements = requirements.flatMap((r) =>
-      r.date !== date || r.student !== student || r.end <= start || end <= r.start
+      r.date !== date || r.student !== student || r.start < from || r.end <= start || end <= r.start
         ? [r]
         : [
             ...(r.start < start ? [{ ...r, end: start }] : []),
@@ -80,38 +94,43 @@ export function generateDemands(input: GenerateDemandsInput): DemandSet {
     for (const r of resolveWhen(op.when, school.bell, dates)) {
       if (!dateSet.has(r.date)) continue;
       const blocks = blocksOn(school.bell, r.date);
+      const from = fromOf(r.date);
       if (op.op === "mark_absent") {
         const k = key(op.student, r.date);
         if (!absences.has(k)) absences.set(k, []);
-        absences.get(k)!.push({ start: r.start, end: r.end });
+        absences.get(k)!.push({ start: r.start, end: r.end, from });
         if (r.whole) wholeAbsent.add(k);
       } else if (op.op === "set_placement") {
         if (op.location) floor(op.location);
-        for (const p of periodsIn(blocks, r)) overrides.set(key(op.student, r.date, p), { placement: op.placement, location: op.location });
+        for (const p of periodsIn(blocks, r)) {
+          overrides.set(key(op.student, r.date, p), { placement: op.placement, location: op.location, from });
+        }
       } else if (op.op === "relocate_class") {
         floor(op.location);
-        for (const p of periodsIn(blocks, r)) relocations.set(key(op.class_group, r.date, p), op.location);
+        for (const p of periodsIn(blocks, r)) relocations.set(key(op.class_group, r.date, p), { location: op.location, from });
       } else {
-        // 하루 전체 = 등교 시작 ~ 하교 끝. 일과 중에 요청했으면 그 시각(10분 올림)부터
+        // 하루 전체 = 등교 시작 ~ 하교 끝. 오늘이면 now부터
         let { start, end } = r;
         if (r.whole) {
           if (blocks.length === 0) continue;
           start = (blocks.find((b) => b.kind === "arrival") ?? blocks[0]!).start;
           end = (blocks.find((b) => b.kind === "dismissal") ?? blocks.at(-1)!).end;
-          if (input.now?.date === r.date) start = Math.max(start, Math.ceil(input.now.minute / 10) * 10);
-          if (start >= end) continue;
         }
-        cut(r.date, op.student, start, end);
+        start = Math.max(start, from);
+        if (start >= end) continue;
+        cut(r.date, op.student, start, end, from);
         if (op.headcount > 0) requirements.push({ date: r.date, student: op.student, start, end, headcount: op.headcount });
       }
     }
   }
 
+  /** 칸(cellStart에 시작)이 결석 구간과 겹치고, 결석이 적용되는 시각 이후에 시작하는지 */
   const isAbsent = (student: string, date: IsoDate, start: Minute, end: Minute) =>
-    (absences.get(key(student, date)) ?? []).some((a) => a.start < end && start < a.end);
+    (absences.get(key(student, date)) ?? []).some((a) => a.start < end && start < a.end && start >= a.from);
 
   // ---------- 학생·날짜별 계산 ----------
   const demands: Demand[] = [];
+  const unplaced: Unplaced[] = [];
   for (const date of dates) {
     const blocks = blocksOn(school.bell, date);
     const groups = new Map<string, MoveGroupDemand>();
@@ -120,20 +139,23 @@ export function generateDemands(input: GenerateDemandsInput): DemandSet {
       const subjects = lessons.get(key(date, s.class_group));
       if (!subjects) continue; // 휴일, 시간표 없는 반
 
-      const slotAt = (p: number): Slot | undefined => {
+      /** 교시 p의 상태. cellStart는 이 상태를 쓰는 칸의 시작 시각(변경 적용 여부를 가름) */
+      const slotAt = (p: number, cellStart: Minute): Slot | undefined => {
         const subject = subjects.get(p);
-        if (subject === undefined) return undefined;
-        const rule = s.special_class_subjects.find((x) => x.subject === subject);
-        const ov = overrides.get(key(s.code, date, p));
-        const placement: Placement = ov?.placement ?? (rule ? "special_class" : "homeroom");
-        // 특수학급 장소는 그 시간 과목으로 정한다: 지정 장소 → 그 과목의 특수학급 장소(D20).
-        // 특수학급 시간표가 계약에 생기면 그것으로 바꾼다 (contracts/requests/M3-special-class-timetable.md)
+        const b = classBlock(blocks, p);
+        if (subject === undefined || !b) return undefined;
+        const ovRaw = overrides.get(key(s.code, date, p));
+        const ov = ovRaw && cellStart >= ovRaw.from ? ovRaw : undefined;
+        const placement: Placement = ov?.placement ?? (s.special_class_subjects.includes(subject) ? "special_class" : "homeroom");
         let location: LocationRef;
-        if (placement === "homeroom") location = relocations.get(key(s.class_group, date, p)) ?? homeOf.get(s.class_group)!;
-        else {
-          const loc = ov?.location ?? rule?.location;
-          if (!loc) throw new Error(`${s.code} ${date} ${p}교시 ${subject}: 이 과목의 특수학급 장소가 없습니다. 장소를 지정하세요.`);
-          location = loc;
+        if (placement === "homeroom") {
+          const rel = relocations.get(key(s.class_group, date, p));
+          location = rel && cellStart >= rel.from ? rel.location : homeOf.get(s.class_group)!;
+        } else {
+          // 특수학급 장소: 지정 장소 → 그 요일·시각에 그 과목을 하는 특수학급 (D25)
+          const room = ov?.location ?? specialRoom(date, b, subject);
+          if (room === "none" || room === "multiple") return { subject, placement, unplaced: room };
+          location = room;
         }
         const support = placement === "homeroom" ? s.support_subjects.find((x) => x.subject === subject) : undefined;
         const lateCost: LateCost = placement === "special_class" ? 1 : support?.need_start ? 2 : 0;
@@ -144,7 +166,11 @@ export function generateDemands(input: GenerateDemandsInput): DemandSet {
       for (const p of [...subjects.keys()].sort((a, b) => a - b)) {
         const b = classBlock(blocks, p);
         if (!b || isAbsent(s.code, date, b.start, b.end)) continue;
-        const slot = slotAt(p)!;
+        const slot = slotAt(p, b.start)!;
+        if (slot.unplaced) {
+          unplaced.push({ date, student: s.code, period: p, subject: slot.subject, reason: slot.unplaced });
+          continue;
+        }
         if (slot.placement !== "homeroom") continue;
         const support = s.support_subjects.find((x) => x.subject === slot.subject);
         if (!support) continue;
@@ -161,13 +187,13 @@ export function generateDemands(input: GenerateDemandsInput): DemandSet {
         demands.push(lesson);
       }
 
-      // ② 이동 묶음 (D12). 점심을 사이에 둔 이동은 업무로 다루므로 만들지 않는다
+      // ② 이동 묶음 (D12). 점심을 사이에 둔 이동은 업무로 다루므로 만들지 않는다. 장소 미정 칸 앞뒤도 만들지 않는다
       for (const p of subjects.keys()) {
         const brk = breakAfter(blocks, p);
         if (!brk || !subjects.has(p + 1) || isAbsent(s.code, date, brk.start, brk.end)) continue;
-        const from = slotAt(p)!;
-        const to = slotAt(p + 1)!;
-        if (from.location === to.location) continue;
+        const from = slotAt(p, brk.start);
+        const to = slotAt(p + 1, brk.start);
+        if (!from || !to || from.unplaced || to.unplaced || from.location === to.location) continue;
         const gid = `mv:${date}:b${p}:${from.floor}-${to.floor}`;
         let g = groups.get(gid);
         if (!g) {
@@ -193,7 +219,7 @@ export function generateDemands(input: GenerateDemandsInput): DemandSet {
   // ③ 추가 수요. 결석 구간만큼 잘라 낸다
   for (const [k, list] of absences) {
     const [student, date] = k.split("|") as [string, IsoDate];
-    for (const a of list) cut(date, student, a.start, a.end);
+    for (const a of list) cut(date, student, a.start, a.end, a.from);
   }
   for (const r of requirements) {
     demands.push({
@@ -203,9 +229,10 @@ export function generateDemands(input: GenerateDemandsInput): DemandSet {
   }
 
   demands.sort((a, b) => a.date.localeCompare(b.date) || a.start - b.start || a.id.localeCompare(b.id));
+  unplaced.sort((a, b) => a.date.localeCompare(b.date) || a.student.localeCompare(b.student) || a.period - b.period);
   const absent = [...wholeAbsent]
     .map((k) => { const [student, date] = k.split("|") as [string, IsoDate]; return { date, student }; })
     .sort((a, b) => a.date.localeCompare(b.date) || a.student.localeCompare(b.student));
 
-  return { date_from: dates[0]!, date_to: dates.at(-1)!, version_id: input.version_id ?? null, absent, demands };
+  return { date_from: dates[0]!, date_to: dates.at(-1)!, version_id: input.version_id ?? null, absent, unplaced, demands };
 }
