@@ -1,0 +1,31 @@
+{
+  "name": "@ssyung/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc -p .",
+    "test": "node --test \"server/test/*.test.ts\""
+  },
+  "dependencies": {
+    "@ssyung/core": "workspace:*",
+    "@ssyung/repository": "workspace:*",
+    "@ssyung/scheduler": "workspace:*",
+    "@ssyung/schema": "workspace:*",
+    "@ssyung/school-data": "workspace:*",
+    "@trpc/client": "11.19.0",
+    "@trpc/server": "11.19.0",
+    "next": "16.4.2",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "typescript": "^5.9.3"
+  }
+}
