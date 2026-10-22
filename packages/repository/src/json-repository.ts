@@ -1,23 +1,25 @@
 // JSON 파일 저장소. dataset/db/<학교>/ 파일을 읽고, 쓰기도 같은 파일 형식으로 한다(개발 서버에서만).
 import { readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
+import type { z } from "zod";
 import {
-  FloorLayoutFile, procedures, SchoolBundle, Staff, StaffFile, StaffInput, Student, StudentInput, StudentsFile,
+  DEFAULT_BELL, FloorLayoutFile, hhmmToMinute, minuteToHHMM, procedures, SchoolBundle, SpecialClassTimetableFile, Staff,
+  StaffFile, StaffInput, Student, StudentInput, StudentsFile,
 } from "@ssyung/schema";
-import type { ClassGroup, Location } from "@ssyung/schema";
+import type { ClassGroup, Location, SpecialClass } from "@ssyung/schema";
 import type { SchoolDataSource } from "@ssyung/school-data";
-import { defaultBell, toHHMM, toMin } from "./bell.ts";
 import {
   issuedMax, nextCode, RepositoryError, type FloorLayout, type Repository, type StaffPatch, type StudentPatch,
 } from "./repository.ts";
 import type { StaffInput as StaffInputT, StudentInput as StudentInputT } from "./repository.ts";
 
-type LayoutFile = ReturnType<typeof FloorLayoutFile.parse>;
-type StudentsFileT = ReturnType<typeof StudentsFile.parse>;
-type StaffFileT = ReturnType<typeof StaffFile.parse>;
-type Schema<T> = { safeParse(v: unknown): { success: true; data: T } | { success: false; error: { issues: unknown[] } } };
+type LayoutFile = z.infer<typeof FloorLayoutFile>;
+type StudentsFileT = z.infer<typeof StudentsFile>;
+type StaffFileT = z.infer<typeof StaffFile>;
 
-const FILES = { layout: "층배치.json", students: "학생.json", staff: "지원인력.json" } as const;
+const FILES = {
+  layout: "층배치.json", students: "학생.json", staff: "지원인력.json", specialTimetable: "특수학급시간표.json",
+} as const;
 /** 층배치.json에는 장소 종류가 없어 이름으로 나눈다 (목데이터 생성기와 같은 규칙) */
 const OFFICE_LABELS = ["교무실", "행정실", "보건실", "급식실"];
 
@@ -30,7 +32,7 @@ export interface JsonRepositoryOptions {
   source: SchoolDataSource;
 }
 
-function check<T>(schema: Schema<T>, value: unknown, what: string): T {
+function check<S extends z.ZodType>(schema: S, value: unknown, what: string): z.infer<S> {
   const r = schema.safeParse(value);
   if (!r.success) throw new RepositoryError("VALIDATION", `${what} 형식이 맞지 않아요.`, { issues: r.error.issues });
   return r.data;
@@ -123,7 +125,7 @@ export class JsonRepository implements Repository {
       }),
   };
 
-  // ---------- 층 배치 → SchoolBundle ----------
+  // ---------- 층 배치 + 특수학급 시간표 → SchoolBundle ----------
   private async bundle(layout: LayoutFile) {
     const s = layout.school;
     const groups = await this.opts.source.getClassGroups(
@@ -144,9 +146,15 @@ export class JsonRepository implements Repository {
     const classGroups = layout.classes.map((c): ClassGroup => ({
       code: c.class, grade: c.grade, home_location: c.class, has_timetable: withTimetable.has(c.class),
     }));
+    // 층 배치에 있는 특수학급만. 시간표 파일에 없는 특수학급은 수업 없음
+    const timetable = await this.readSpecialTimetable();
+    const lessonsOf = new Map(timetable.special_classes.map((k) => [k.code, k.lessons]));
     // 교사 코드는 교사 저장 전까지 특수학급 순서대로 T01, T02 (Q3)
-    const specialClasses = layout.special_classes.map((k, i) => ({
+    const specialClasses = layout.special_classes.map((k, i): SpecialClass => ({
       code: k.code, location: k.code, teachers: [`T${String(i + 1).padStart(2, "0")}`],
+      lessons: (lessonsOf.get(k.code) ?? []).map((l) => ({
+        day: l.day, start: hhmmToMinute(l.start), end: hhmmToMinute(l.end), subject: l.subject,
+      })),
     }));
     return SchoolBundle.parse({
       school: {
@@ -158,7 +166,7 @@ export class JsonRepository implements Repository {
         floors: layout.floors,
         timezone: "Asia/Seoul",
       },
-      bell: defaultBell(),
+      bell: DEFAULT_BELL,
       locations,
       class_groups: classGroups,
       special_classes: specialClasses,
@@ -180,35 +188,21 @@ export class JsonRepository implements Repository {
   private async readLayout() {
     return FloorLayoutFile.parse(await this.read(FILES.layout));
   }
-  private async readStudents(): Promise<WithSeq<StudentsFileT>> {
-    const raw = await this.read(FILES.students);
-    return { ...StudentsFile.parse(raw), last_code_no: lastCodeNo(raw) };
+  private async readSpecialTimetable() {
+    return SpecialClassTimetableFile.parse(await this.read(FILES.specialTimetable));
   }
-  private async readStaff(): Promise<WithSeq<StaffFileT>> {
-    const raw = await this.read(FILES.staff);
-    return { ...StaffFile.parse(raw), last_code_no: lastCodeNo(raw) };
+  private async readStudents() {
+    return StudentsFile.parse(await this.read(FILES.students));
   }
-  private writeStudents({ last_code_no, ...file }: WithSeq<StudentsFileT>, students: StudentsFileT["students"]) {
-    return this.write(FILES.students, withSeq(StudentsFile.parse({ ...file, students }), last_code_no));
+  private async readStaff() {
+    return StaffFile.parse(await this.read(FILES.staff));
   }
-  private writeStaff({ last_code_no, ...file }: WithSeq<StaffFileT>, staff: StaffFileT["staff"]) {
-    return this.write(FILES.staff, withSeq(StaffFile.parse({ ...file, staff }), last_code_no));
+  private writeStudents(file: StudentsFileT, students: StudentsFileT["students"]) {
+    return this.write(FILES.students, StudentsFile.parse({ ...file, students }));
   }
-}
-
-// ---------- 발급 번호 ----------
-// 지금까지 발급한 가장 큰 코드 번호. 지운 번호를 다시 쓰지 않으려고 파일에 남긴다.
-// 계약에 아직 없는 필드라 원본 JSON에서 직접 읽는다 (contracts/requests/M4-last-code-no.md)
-type WithSeq<F> = F & { last_code_no?: number };
-
-function lastCodeNo(raw: unknown): number | undefined {
-  const v = (raw as { last_code_no?: unknown }).last_code_no;
-  if (v === undefined) return undefined;
-  if (!Number.isInteger(v) || (v as number) < 0) throw new RepositoryError("VALIDATION", "last_code_no 형식이 맞지 않아요.");
-  return v as number;
-}
-function withSeq<F extends object>(file: F, last: number | undefined) {
-  return last === undefined ? file : { ...file, last_code_no: last };
+  private writeStaff(file: StaffFileT, staff: StaffFileT["staff"]) {
+    return this.write(FILES.staff, StaffFile.parse({ ...file, staff }));
+  }
 }
 
 // ---------- 파일 행 ↔ 도메인 ----------
@@ -217,19 +211,25 @@ type StaffRow = StaffFileT["staff"][number];
 
 function fromStudentRow(r: StudentRow): Student {
   return {
-    code: r.code, label: r.label, class_group: r.class, special_class: r.special_class,
+    code: r.code, label: r.label, class_group: r.class,
     special_class_subjects: r.special_class_subjects, support_subjects: r.support_subjects, support_note: r.support_note,
   };
 }
 function toStudentRow(s: Student): StudentRow {
   return {
-    code: s.code, label: s.label, class: s.class_group, special_class: s.special_class,
+    code: s.code, label: s.label, class: s.class_group,
     special_class_subjects: s.special_class_subjects, support_subjects: s.support_subjects, support_note: s.support_note,
   };
 }
 function fromStaffRow(r: StaffRow): Staff {
-  return { code: r.code, label: r.label, availability: r.availability.map((v) => ({ day: v.day, start: toMin(v.start), end: toMin(v.end) })) };
+  return {
+    code: r.code, label: r.label,
+    availability: r.availability.map((v) => ({ day: v.day, start: hhmmToMinute(v.start), end: hhmmToMinute(v.end) })),
+  };
 }
 function toStaffRow(a: Staff): StaffRow {
-  return { code: a.code, label: a.label, availability: a.availability.map((v) => ({ day: v.day, start: toHHMM(v.start), end: toHHMM(v.end) })) };
+  return {
+    code: a.code, label: a.label,
+    availability: a.availability.map((v) => ({ day: v.day, start: minuteToHHMM(v.start), end: minuteToHHMM(v.end) })),
+  };
 }

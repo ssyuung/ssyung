@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "@ssyung/schema": "workspace:*",
-    "@ssyung/school-data": "workspace:*"
+    "@ssyung/school-data": "workspace:*",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@types/node": "^26.6.5",

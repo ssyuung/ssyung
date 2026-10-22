@@ -29,6 +29,9 @@ importers:
       '@ssyung/school-data':
         specifier: workspace:*
         version: link:../school-data
+      zod:
+        specifier: ^4.1.12
+        version: 4.6.7
     devDependencies:
       '@types/node':
         specifier: ^26.6.5

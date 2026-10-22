@@ -3,7 +3,7 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { ClassGroup, procedures, Timetable } from "@ssyung/schema";
+import { ClassGroup, procedures, SchoolBundle, Timetable } from "@ssyung/schema";
 import type { IsoDate, ProcedureName } from "@ssyung/schema";
 import { SourceError, type SchoolDataSource, type SchoolRef } from "./source.ts";
 
@@ -52,13 +52,16 @@ export class MockSource implements SchoolDataSource {
     });
   }
 
+  /** 학교는 domain/school.json 하나. 주소는 계약에 없어 school.search 예시에서 찾고, 없으면 빈 값 */
   private async schools(): Promise<SchoolRef[]> {
+    const { school } = SchoolBundle.pick({ school: true }).parse(await this.json("domain/school.json"));
     const name: ProcedureName = "school.search";
     const file = (await this.json(`api/${name}.json`)) as { examples: { output: unknown }[] };
-    const out = procedures[name].output;
-    const seen = new Map<string, SchoolRef>();
-    for (const ex of file.examples) for (const s of out.parse(ex.output)) seen.set(s.neis_school_code, s);
-    return [...seen.values()];
+    const examples = file.examples.flatMap((ex) => procedures[name].output.parse(ex.output));
+    const address = examples.find((s) => s.neis_school_code === school.neis_school_code)?.address ?? "";
+    return [{
+      label: school.label, neis_office_code: school.neis_office_code, neis_school_code: school.neis_school_code, address,
+    }];
   }
 
   private async bundle(school: SchoolRef) {

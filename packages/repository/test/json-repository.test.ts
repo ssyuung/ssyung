@@ -32,7 +32,7 @@ test("JsonRepository: 쓰기는 같은 파일 형식이고 다시 열어도 남�
   try {
     const repo = open(dir);
     const s = await repo.students.add({
-      label: "학생8", class_group: "6-2", special_class: "K2",
+      label: "학생8", class_group: "6-2",
       special_class_subjects: [], support_subjects: [], support_note: "",
     });
     await repo.staff.update("A01", { availability: [{ day: "MON", start: 540, end: 780 }] });
@@ -53,7 +53,7 @@ test("JsonRepository: 쓰기는 같은 파일 형식이고 다시 열어도 남�
 test("JsonRepository: 발급 번호는 파일에 남아 다시 열어도 이어진다", async () => {
   const { dir, cleanup } = await copy();
   try {
-    const input = { label: "학생", class_group: "6-2", special_class: "K2", special_class_subjects: [], support_subjects: [], support_note: "" };
+    const input = { label: "학생", class_group: "6-2", special_class_subjects: [], support_subjects: [], support_note: "" };
     const repo = open(dir);
     await repo.students.add(input);
     await repo.students.remove("S08");
@@ -69,7 +69,7 @@ test("JsonRepository: 동시에 추가해도 코드가 겹치지 않는다", asy
   const { dir, cleanup } = await copy();
   try {
     const repo = open(dir);
-    const input = { label: "학생", class_group: "6-2", special_class: "K2", special_class_subjects: [], support_subjects: [], support_note: "" };
+    const input = { label: "학생", class_group: "6-2", special_class_subjects: [], support_subjects: [], support_note: "" };
     const added = await Promise.all([repo.students.add(input), repo.students.add(input), repo.students.add(input)]);
     assert.deepEqual(added.map((s) => s.code).sort(), ["S08", "S09", "S10"]);
     assert.equal((await repo.students.list()).length, 10);

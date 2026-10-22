@@ -5,6 +5,7 @@ import { describe, test } from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { SchoolBundle, Staff, Student } from "@ssyung/schema";
+import type { SpecialClass } from "@ssyung/schema";
 import { RepositoryError, type Repository } from "../src/index.ts";
 
 export interface ContractTarget {
@@ -41,6 +42,19 @@ export function repositoryContract(name: string, target: ContractTarget) {
       const staff = await repo.staff.list();
       Staff.array().parse(staff);
       assert.deepEqual(staff, await mock("domain/staff.json"));
+    });
+
+    withRepo("특수학급 시간표: 요일·분으로 읽는다 (D25)", async (repo) => {
+      const { special_classes } = await repo.school.get();
+      const expected = (await mock("domain/school.json")).special_classes as SpecialClass[];
+      assert.deepEqual(special_classes, expected);
+      assert.deepEqual(special_classes.map((k) => k.code), ["K1", "K2"]);
+      for (const k of special_classes) {
+        assert.ok(k.lessons.length > 0, `${k.code} 수업 있음`);
+        for (const l of k.lessons) assert.ok(l.start < l.end && l.start % 10 === 0 && l.end % 10 === 0);
+      }
+      // 첫 수업: 월 09:50–10:30 국어 (dataset/db 특수학급시간표.json)
+      assert.deepEqual(special_classes[0]!.lessons[0], { day: "MON", start: 590, end: 630, subject: "국어" });
     });
 
     withRepo("학생: 추가 → 목록 → 수정 → 삭제", async (repo) => {
