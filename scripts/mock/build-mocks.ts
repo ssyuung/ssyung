@@ -390,7 +390,6 @@ const newStudent = { label: "학생8", class_group: "6-2", special_class_subject
   support_subjects: [{ subject: "과학", need_start: true, need_mid: true, need_end: true }], support_note: "" };
 api("students.add", [
   { title: "학생 추가", input: newStudent, output: { code: "S08", ...newStudent } },
-  { title: "실명으로 보이는 별칭은 거부", input: { ...newStudent, label: "홍길동" }, error: { code: "NAME_SUSPECTED", message: "사람 이름으로 보이는 별칭은 쓸 수 없어요. 학생8처럼 별칭을 써 주세요.", details: { field: "label" } } },
 ]);
 api("students.update", [{ title: "지원 구간 수정", input: { code: "S02", patch: { support_subjects: [{ subject: "과학", need_start: false, need_mid: true, need_end: false }] } },
   output: { ...students[1], support_subjects: [{ subject: "과학", need_start: false, need_mid: true, need_end: false }] } }]);
@@ -437,7 +436,6 @@ api("change.interpret", [
   { title: "결석", input: { raw_text: proposals.absent.cs.text, today: TODAY }, output: crOf("absent") },
   { title: "지원하지 않는 요청", input: { raw_text: `${LABEL.S07} 지원 강도 올려줘`, today: TODAY },
     output: { ...crOf("absent"), id: "cr_unsup", raw_text: `${LABEL.S07} 지원 강도 올려줘`, parsed: { ops: [], scope: "this_week", confidence: "high", unsupported: "지원 과목·구간은 기초정보의 학생 설정(④)에서 바꿔요" }, summary: [] } },
-  { title: "실명으로 보이는 입력", input: { raw_text: "김철수 오늘 결석", today: TODAY }, error: { code: "NAME_SUSPECTED", message: "사람 이름으로 보이는 말이 있어요. 학생1처럼 별칭으로 써 주세요.", details: { spans: [[0, 3]] } } },
 ]);
 const proposalOf = (name: string) => ({ id: `prp_${name}`, change_request_id: `cr_${name}`, base_version_id: "ver_0901", dates: [TODAY],
   options: proposals[name].output.options, recommended: "A" });

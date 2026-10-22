@@ -17,7 +17,6 @@ M1(배치 엔진)·M3(수요 생성)·M4(학교 데이터·저장소)는 **main�
 | 수요 생성 | `generateDemands({ school, timetable, students, dates, ops, version_id, requirements, now })` | `@ssyung/core` (M3) |
 | 배치 엔진 | `propose(input)`, `validate(input)` | `@ssyung/scheduler` (M1) |
 | 해석기 | **가짜**: `fixtures/change-requests/cases.json`과 `fixtures/mock/api/change.interpret.json`의 원문이면 그 기대 ChangeOps, 아니면 `unsupported` | M6 merge 뒤 `@ssyung/interpreter` |
-| 실명 검사 | **가짜**: `change.interpret` 목데이터의 `NAME_SUSPECTED` 예시 원문만 거부 | M5 (보류) |
 | 알림 | **가짜**: 보낸 알림을 메모리에 기록 | M10 |
 
 - **import 규칙:** 다른 모듈 패키지는 `apps/web/server/deps.ts` 한 곳에서만 import한다(CLAUDE.md 규칙 2의 M7 예외). 라우터는 `deps`를 받아 쓴다. 테스트는 `createDeps({ mode: "test" })`로 같은 구성을 만든다.
@@ -32,11 +31,11 @@ M1(배치 엔진)·M3(수요 생성)·M4(학교 데이터·저장소)는 **main�
 |---|---|
 | `school.*`, `setup.saveLayout` | `JsonRepository.school`, `MockSource` |
 | `setup.previewMoveGroups` | 그 날짜 `generateDemands` 결과 중 `move_group` |
-| `students.*`, `staff.*` | `JsonRepository`. 라벨 실명 검사는 가짜 실명 검사기 |
+| `students.*`, `staff.*` | `JsonRepository` |
 | `view.day`·`view.week`·`view.staffToday` | active 버전의 그날 배정 + `generateDemands`의 수요·`unplaced` + 등교·체크·칸 메모(메모리). 학생 행의 장소는 아래 "특수학급 장소" 참고 |
 | `schedule.generate` | 날짜 범위 수요 → `propose({ previous: null, policies: ["fresh"] })` → draft 버전 |
 | `schedule.validate`·`updateDraft` | 엔진 `validate()` + **배치 경고**(`ScheduleValidateOutput.warnings`): `SPECIAL_CLASS_UNPLACED`(그날 `unplaced`), `NO_SPECIAL_TEACHER`(그 칸 특수학급의 `teachers`가 비었음), `SPECIAL_CLASS_CROWDED`(한 특수학급 한 칸 학생 수가 기준 초과. 기준은 질문 파일에 적고 일단 8명) |
-| `change.interpret` | 가짜 실명 검사 → 가짜 해석기 → `ChangeRequest`(`summary` 문장은 서버가 ops에서 만든다) |
+| `change.interpret` | 가짜 해석기 → `ChangeRequest`(`summary` 문장은 서버가 ops에서 만든다) |
 | `change.confirm` | ops의 날짜마다: `generateDemands({ ops, now })`, 근무 = 지원인력 근무 − `staff_unavailable` 구간, previous = active 배정 → `propose({ policies: 3개, now, request: { change_request_id, ops, cause: "change_request" } })` → `Proposal` |
 | `proposal.approve` | `base_version_id`가 지금 active가 아니면 `BASE_VERSION_CHANGED`. 맞으면 고른 선택지의 배정으로 새 active 버전 + `notified` = `metrics.notify_staff`(가짜 알림 기록) |
 | `attendance.*`, `cell.*`, `memo.*`, `notification.ack` | 메모리. 지원인력은 오늘 자기 배정에 걸린 학생·칸만 |
@@ -71,7 +70,7 @@ M1(배치 엔진)·M3(수요 생성)·M4(학교 데이터·저장소)는 **main�
 ## 범위 밖
 - 화면(M8·M9)
 - Supabase 연결과 RLS(Wave 2, 마이그레이션 초안까지는 해도 됨)
-- 실제 해석기(M6)·실명 검사(M5)·알림(M10) 연결
+- 실제 해석기(M6)·알림(M10) 연결 (실명 검사는 보류, architecture.md §5.3)
 - 버전·배정 DB 저장(M4 v2)
 
 ## 산출물

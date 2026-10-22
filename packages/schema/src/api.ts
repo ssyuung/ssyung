@@ -18,7 +18,7 @@ import { Assignment, Metrics, Option, Shortfall, ValidateOutput, Warning } from 
 // ---------- 오류 ----------
 export const ApiErrorCode = z.enum([
   "UNAUTHORIZED", "FORBIDDEN", "NOT_FOUND", "VALIDATION",
-  "NAME_SUSPECTED", // 실명으로 보이는 입력 (M5)
+  "NAME_SUSPECTED", // 보류: 실명 검사는 지금 하지 않는다 (architecture.md §5.3). 쓰지 않음
   "BASE_VERSION_CHANGED", // 승인 시점 active 버전이 다름 → 재계산 필요
   "NOT_SCHOOL_DAY", "NOT_IMPLEMENTED",
 ]);

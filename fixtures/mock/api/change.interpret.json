@@ -90,25 +90,6 @@
         "created_by": "T01",
         "created_at": "2026-09-18T10:00:00+09:00"
       }
-    },
-    {
-      "title": "실명으로 보이는 입력",
-      "input": {
-        "raw_text": "김철수 오늘 결석",
-        "today": "2026-09-18"
-      },
-      "error": {
-        "code": "NAME_SUSPECTED",
-        "message": "사람 이름으로 보이는 말이 있어요. 학생1처럼 별칭으로 써 주세요.",
-        "details": {
-          "spans": [
-            [
-              0,
-              3
-            ]
-          ]
-        }
-      }
     }
   ]
 }
