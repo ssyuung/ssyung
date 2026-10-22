@@ -86,7 +86,9 @@
 | M5 실명 검사 | **보류** (이름 저장·실명 검사를 지금 고려하지 않음) | — |
 | M6 해석기 | **v1 완료** (PR #4). 다음: 업무(duty) 고정, unsupported 재시도 여부 | — |
 | M7 API | **v1 완료** (PR #5, 테스트 89개, 개발 서버 흐름 확인). v2: 가짜 실명 검사·`NAME_SUSPECTED` 처리 지우기, M3 v2의 `placementsOn`으로 `server/school.ts` 규칙 교체, 실제 해석기(M6) 연결, 운영 모드에서 오류 스택 숨기기 확인 | M3 v2 |
-| M8·M9 화면 | v1 지시서 작성 | M7 v1 (`dev:mock`) |
+| M8 교사 웹 | v1 (`tasks/M8-web.md`): 현황판(W2·W2b), 변경 요청(W5), 기초정보(학생·지원인력, 학교 보기). Playwright e2e. 시작 전 `playwright install chromium` | **시작 가능** (m8-web 워크트리) |
+| M8 v2 | 일간 편집(W4), 설정 마법사(층 배치·특수학급 시간표 편집), 주간(W3) | 특수학급 시간표 저장 프로시저(M0 계약 + M7 v2 + M4) |
+| M9 앱 | v1 지시서 작성 (지원인력 A1, 교사 T1–T3) | M8 v1 (`@ssyung/api-client` 공용) |
 | M10·M11 | v1 지시서 작성 | Wave 2 |
 
 ## 4. 다음 버전을 시작하는 방법 (예: M1 v2)

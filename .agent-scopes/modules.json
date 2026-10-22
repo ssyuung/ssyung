@@ -178,7 +178,9 @@
         "apps/web/public/**",
         "apps/web/e2e/**",
         "packages/api-client/**",
-        "packages/design-tokens/**"
+        "packages/design-tokens/**",
+        "apps/web/package.json",
+        "apps/web/playwright.config.ts"
       ],
       "deny": [
         "apps/web/app/api/**"
@@ -188,7 +190,9 @@
       ],
       "check": [
         "pnpm --filter @ssyung/web typecheck",
-        "pnpm --filter @ssyung/web test"
+        "pnpm --filter @ssyung/web test",
+        "pnpm --filter @ssyung/web build",
+        "pnpm --filter @ssyung/web e2e"
       ],
       "protected_ok": []
     },
