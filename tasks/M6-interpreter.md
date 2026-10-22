@@ -1,7 +1,12 @@
 # M6 해석기 v1
 
-> 상태: 진행
+> 상태: 완료
 > 브랜치 `<id>/m6-interpreter` · 범위 `packages/interpreter/**` · 공통 규칙 `CLAUDE.md`
+
+## 구현에서 바뀐 것 (사람과 합의, 2026-10-22)
+- 모델은 **원문만** 받아 구조화된 출력으로 표현(날짜·시간·사람·장소를 쓴 그대로)만 뽑는다. 날짜·교시·과목·코드 계산은 해석 함수(`src/resolve.ts`)가 `InterpretContext`로 한다. 컨텍스트와 별칭 목록은 모델에 보내지 않는다.
+- 1차 모델은 **Haiku 5.5**(`claude-haiku-5-5`, 평가 22/22, 건당 약 0.14원), 재시도는 Sonnet 5.5.
+- 아래 목표의 "input_schema는 ChangeOps.json", "컨텍스트를 프롬프트에 넣는다", "Haiku 4.5"는 위로 대체됐다.
 
 ## 목표
 `@ssyung/interpreter`: 변경 요청 원문을 `ChangeOps`로 바꾼다 (docs/cost-strategy.md, architecture.md §7).

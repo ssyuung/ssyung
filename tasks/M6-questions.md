@@ -18,3 +18,9 @@
 6. **업무(duty) 고정**: `InterpretContext`에 업무 목록이 없어 pin의 target duty는 아직 못 만든다(학생 고정만).
 7. **컨텍스트 만들기**: architecture.md 폴더 설명은 interpreter에 "컨텍스트 사전 계산"을 넣었지만, 지시서는 범위 밖(M7·core)이다. 지시서대로 받기만 한다.
 8. **eval 정확도 정의**: ops(순서 무시, when 하나와 원소 하나짜리 배열은 같음)·scope·unsupported 여부가 같으면 정답. unsupported 문구와 confidence는 따로 센다.
+
+## M0 답 (2026-10-22, v1 merge 뒤)
+- **1번 (`@anthropic-ai/sdk`)**: 그대로 둔다.
+- **3번 (unsupported면 재시도)**: 지시서대로(재시도 안 함) 둔다. 평가 세트가 늘어 지원 안 함 오판이 보이면 다시 정한다.
+- **5번 (API 오류)**: 그대로 throw한다. M7이 화면에 오류로 보여 준다.
+- 설계 변경과 Haiku 5.5는 지시서(`tasks/M6-interpreter.md`)에 반영했다.

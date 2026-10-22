@@ -1,13 +1,12 @@
 // 목데이터 출처. fixtures/mock/의 정규화된 결과를 그대로 돌려준다.
 // NEIS 응답(dataset/api/) 정규화는 보류 (tasks/M4-questions.md Q1).
 import { readFile } from "node:fs/promises";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { ClassGroup, procedures, SchoolBundle, Timetable } from "@ssyung/schema";
 import type { IsoDate, ProcedureName } from "@ssyung/schema";
 import { SourceError, type SchoolDataSource, type SchoolRef } from "./source.ts";
 
-const MOCK_DIR = fileURLToPath(new URL("../../../fixtures/mock", import.meta.url));
 
 export interface MockSourceOptions {
   /** fixtures/mock 경로. 기본은 저장소의 fixtures/mock */
@@ -18,7 +17,9 @@ export class MockSource implements SchoolDataSource {
   private readonly dir: string;
 
   constructor(options: MockSourceOptions = {}) {
-    this.dir = options.mockDir ?? MOCK_DIR;
+    // 기본 경로는 실행할 때 dirname·join으로 만든다. new URL("…", import.meta.url) 꼴은 Next(Turbopack)가 자산 참조로 읽어
+    // next build가 깨진다 (contracts/requests/done/M7-school-data-bundle.md)
+    this.dir = options.mockDir ?? join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "fixtures", "mock");
   }
 
   async searchSchools(query: string): Promise<SchoolRef[]> {

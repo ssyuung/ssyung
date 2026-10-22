@@ -1,6 +1,6 @@
 # M7 API v1 (실제 모듈 연결 + 가짜 해석기)
 
-> 상태: 진행
+> 상태: 완료
 > 브랜치 `<id>/m7-api` · 범위 `apps/web/server/**`, `apps/web/app/api/**`, `apps/web` 설정 파일, `supabase/` (0001 제외) · 공통 규칙 `CLAUDE.md`
 
 ## 목표

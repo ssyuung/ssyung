@@ -8,7 +8,7 @@ import { apiMockSchema, ChangeRequestSet, procedures, ScheduleSnapshot } from "@
 import type { ApiError, ProcedureInput, ProcedureName, ProcedureOutput } from "@ssyung/schema";
 import { blocksOn, generateDemands, periodsIn, resolveWhen } from "@ssyung/core";
 import { JsonRepository, type Repository } from "@ssyung/repository";
-import type { MockSource as MockSourceT, SchoolDataSource, SchoolRef } from "@ssyung/school-data";
+import { MockSource, type SchoolDataSource, type SchoolRef } from "@ssyung/school-data";
 import { computeDiff, computeMetrics, propose, validate } from "@ssyung/scheduler";
 import { fakeInterpreter, fakeNameGuard, fakeNotifier, type Interpreter, type NameGuard, type Notifier } from "./fakes.ts";
 import { createStore, type Store } from "./store.ts";
@@ -63,7 +63,7 @@ export async function createDeps(opts: CreateDepsOptions): Promise<Deps> {
     ?? (opts.mode === "dev" ? join(root, ".data", SCHOOL_DIR) : join(await mkdtemp(join(tmpdir(), "ssyung-web-")), SCHOOL_DIR));
   if (!(await stat(dataDir).catch(() => null))) await cp(seed, dataDir, { recursive: true });
 
-  const source = new (await loadSchoolData()).MockSource({ mockDir });
+  const source = new MockSource({ mockDir });
   const repo = new JsonRepository({ dir: dataDir, schoolId: SCHOOL_ID, source });
   const active = ScheduleSnapshot.parse(readJson("fixtures/mock/schedule/active-2026-09.json"));
 
@@ -95,15 +95,6 @@ type MockExample<N extends ProcedureName> =
   | { title: string; input: ProcedureInput<N>; error: ApiError };
 
 /** fixtures/mock/api/<프로시저>.json 예시 (계약으로 검증) */
-/**
- * @ssyung/school-data는 번들하지 않고 실행 시 Node가 읽는다. MockSource의 `new URL("../../../fixtures/mock", import.meta.url)`을
- * Turbopack이 자산으로 해석해 빌드가 깨지기 때문 (contracts/requests/M7-school-data-bundle.md). M4가 고치면 정적 import로 돌린다
- */
-async function loadSchoolData(): Promise<{ MockSource: typeof MockSourceT }> {
-  const name = "@ssyung/school-data";
-  return import(/* turbopackIgnore: true */ /* webpackIgnore: true */ name);
-}
-
 function mockExamples<N extends ProcedureName>(name: N, readJson: (rel: string) => unknown): MockExample<N>[] {
   return apiMockSchema(name).parse(readJson(`fixtures/mock/api/${name}.json`)).examples as MockExample<N>[];
 }
