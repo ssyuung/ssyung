@@ -2,7 +2,7 @@
 
 > 사람(통합 담당)이 보는 목록이다. 모듈 에이전트는 이 파일을 고치지 않는다(훅이 막음).
 > 모듈별 진행·제안은 각 모듈 보드(`tasks/board/<ID>.md`, 그 모듈 에이전트가 갱신)에 있다. `pnpm board`(요약)·`pnpm board --all`(제안·요청까지)로 모든 워크트리의 보드를 모아 본다. 보드의 "다음에 할 것"을 여기 로드맵으로 옮기면 다음 버전 후보가 된다.
-> 갱신: 2026-10-22 · 모듈 연결도: https://claude.ai/artifact/Di63u5H8eM4dCCpxF7JfKg
+> 갱신: 2026-10-22 (D24·D25, 계약 0.3.0, M1 v1 merge) · 모듈 연결도: https://claude.ai/artifact/Di63u5H8eM4dCCpxF7JfKg
 
 ## 1. 지금 할 일
 
@@ -18,14 +18,15 @@
 상태와 처리 기록은 `contracts/requests/README.md`. 6건 모두 받음: 0.2.0(M1 4건, M4 1건, 하위 호환), 0.3.0(M3 특수학급 시간표, 하위 호환 아님).
 
 ### merge 순서 (main을 깨뜨리지 않게)
-- [ ] 1. main(계약 0.3.0) push
-- [ ] 2. **PR #2 M1** merge — 0.3.0에서 그대로 통과 확인함(테스트 28, 시나리오 3개). lockfile은 `pnpm install`로 다시 생성
-- [ ] 3. **M3 PR #3**: m3 워크트리에 main을 합친 뒤 M3 세션에 "M3-questions.md의 M0 답을 반영해" → ① `now`를 D24 범위로 ② 0.3.0 특수학급 시간표(장소, `unplaced`). 지금은 0.3.0에서 타입 오류 3개·테스트 11개 실패
-- [ ] 4. **M4 PR #1**: m4 워크트리에 main을 합친 뒤 M4 세션에 "M4-questions.md의 M0 답을 반영해" → 새 학생 형식, 특수학급 시간표 파일 → `special_classes[].lessons`. 지금은 타입 오류 4개·테스트 4개 실패
+- [x] 1. main(계약 0.3.0) push
+- [x] 2. **PR #2 M1** merge (2026-10-22, 요청 4건 `done/`으로) — 0.3.0에서 그대로 통과 확인함(테스트 28, 시나리오 3개). lockfile은 `pnpm install`로 다시 생성
+- [ ] 3. **M3 PR #3**: m3 워크트리에 main 합침(완료) → M3 세션에 "M3-questions.md의 M0 답을 반영해" → ① `now`를 D24 범위로 ② 0.3.0 특수학급 시간표(장소, `unplaced`). 지금 타입 오류 4개·테스트 11개 실패
+- [ ] 4. **M4 PR #1**: m4 워크트리에 main 합침(완료) → M4 세션에 "M4-questions.md의 M0 답을 반영해" → 새 학생 형식, 특수학급 시간표 파일 → `special_classes[].lessons`. 지금 타입 오류 5개·테스트 4개 실패
 - [ ] 5. merge 뒤 요청 파일을 `contracts/requests/done/`으로
 
 ### 화면 (D25로 바뀐 것)
-- [ ] 시안(`docs/screens`)과 M8: 학생 설정의 "과목별 수업 장소" 선택을 없애고, ③에 **특수학급 시간표 입력**(요일 × 교시 표, 특수학급마다) 추가. 장소 미정 칸 경고 표시
+- [x] 시안 v12.30 (`docs/screens`, https://claude.ai/artifact/9haPR9wNoo16VgRMjy977H): ③에 특수학급 시간표 편집(특수학급 탭, 요일 × 교시, 이 달 장소 미정 칸 수), ④는 특수학급 과목만 고름(과목별 장소 삭제), 현황판은 학년별 묶음
+- [ ] M8: 위 화면을 실제로 만들 때 특수학급 시간표 저장 프로시저가 필요(지금 계약에 없음, `setup.saveSpecialClassTimetable` 등)
 
 ### M1 질문 중 사람이 확인할 것 (`m1-scheduler/tasks/M1-questions.md`)
 - [ ] 5번: 요청 명령마다 1단계(`REQUESTED`)를 하나씩 둠. 부재처럼 칸이 안 바뀌는 명령은 단계에 칸이 없음 → W5 화면에서 괜찮은지
@@ -53,7 +54,7 @@
 ### M1 배치 엔진
 | 버전 | 내용 | 시작 조건 | 상태 |
 |---|---|---|---|
-| v1 | 임시 규칙 엔진, propose·validate, 정책 3개, diff·설명·지표, 시나리오 3개(S2·S3·S7) | — | 진행, PR 대기 |
+| v1 | 임시 규칙 엔진, propose·validate, 정책 3개, diff·설명·지표, 시나리오 3개(S2·S3·S7) | — | **완료** (PR #2 merge) |
 | v2 | 계약 0.2.0 따라가기(REPLANNED 단계, `warnings` 빼기, `fixtures/scenarios/inputs` 읽기 → 시나리오 6개), **D24 지난 칸 고정**(`now` 이전 배정 고정, `BEFORE_NOW_CHANGED`), 공용 시간 함수 쓰기, `explain.ts` 단순화, M3 merge 뒤 시나리오 10개, 목데이터 생성기를 이 패키지로 교체 | 요청 4건 반영됨(0.2.0), M3 merge | 대기 |
 | v3 | 엔진 교체 구조: 정책마다 heuristic·cpsat 선택, 두 엔진 비교표 | M2 v1 merge | 대기 |
 | v4 | 무작위 시험(9월 20일 × 결석·부재·배치 변경 수백 번), 성능 목표(10일 15초) | v2 | 대기 |
