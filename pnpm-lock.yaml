@@ -34,6 +34,25 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
 
+  packages/interpreter:
+    dependencies:
+      '@anthropic-ai/sdk':
+        specifier: ^1.1.0
+        version: 1.1.0(zod@4.6.7)
+      '@ssyung/schema':
+        specifier: workspace:*
+        version: link:../schema
+      zod:
+        specifier: ^4.1.12
+        version: 4.6.7
+    devDependencies:
+      '@types/node':
+        specifier: ^26.6.5
+        version: 26.6.5
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+
   packages/repository:
     dependencies:
       '@ssyung/schema':
@@ -100,6 +119,26 @@ packages:
   '@acemir/cssom@0.9.32':
     resolution: {integrity: sha512-OijrAUu7rrJhSIoHNg6LMPS5e344nwUHA+1EFYYjrh64D+GmytUsfBQjci45TjT+rd5Spsp8B5xsZDT+TgyXXQ==}
 
+  '@anthropic-ai/sdk@1.1.0':
+    resolution: {integrity: sha512-Op/fKMsfVwFCfObc87leLOFlORE0RjOvLzRzPCWWLI7Ww6bobpKR6YmYC8ZYgulRh+m2a/3/61VUXoWHFtCXIw==}
+    hasBin: true
+    peerDependencies:
+      zod: ^3.25.0 || ^4.0.0
+    peerDependenciesMeta:
+      zod:
+        optional: true
+
+  '@babel/runtime@7.29.10':
+    resolution: {integrity: sha512-NpugTzbKgGrNe45Ui32cN8vCFFMxVtP/9rtfwv0nP5FRDAjvYBxJcLVpYA9mr1jxP6cnIT7x9LUzuDTbWYYNRA==}
+    engines: {node: '>=6.9.0'}
+
+  '@opentelemetry/api@1.10.0':
+    resolution: {integrity: sha512-lMkyes8iHrG+mk6WH7X70MdCLI2RS0FwNBY1PyQ8UemaijE2m5mv5A0Niy3HtbYTFrgkUEQjFMXmSAk2hQDuPQ==}
+    engines: {node: '>=8.0.0'}
+
+  '@stablelib/base64@1.0.1':
+    resolution: {integrity: sha512-1bnPQqSxSuc3Ii6MhBysoWCg58j97aUjuCSZrGSmDxNqtytIi0k8utUenAwTZN4V5mXXYGsVUI9zeBqy+jBOSQ==}
+
   '@types/node@26.6.5':
     resolution: {integrity: sha512-uMzsv9stDdofIZBx4UGh4Z9ZgXnGC9seRDscilBcTHAeOFk67MZg/k9bWVfO+bk4qZmG+l52hRnLwUiH2LnJTg==}
 
@@ -156,11 +195,18 @@ packages:
     resolution: {integrity: sha512-kxL7msIffSuh9aaFAMD7rxAIuTRMAHMeBtgHW2yUdWw732ZNh4MehkF2gdjvtdmikkaIP9bFDDJOPlsvm7avrA==}
     engines: {node: '>=20.19.0'}
 
+  fast-sha256@1.3.0:
+    resolution: {integrity: sha512-n11RGP/lrWEFI/bWdygLxhI+pVeo1ZYIVwvvPkW7azl/rOy+F3HYRZ2K5zeE9mmkhQppyv9sQFx0JM9UabnpPQ==}
+
   html-escaper@3.0.3:
     resolution: {integrity: sha512-RuMffC89BOWQoY0WKGpIhn5gX3iI54O6nRA0yC124NYVtzjmFWBIiFd8M0x+ZdX0P9R4lADg1mgP8C7PxGOWuQ==}
 
   htmlparser2@10.1.0:
     resolution: {integrity: sha512-VTZkM9GWRAtEpveh7MSF6SjjrpNVNNVJfFup7xTY3UpFtm67foy9HDVXneLtFVt4pMz5kZtgNcvCniNFb1hlEQ==}
+
+  json-schema-to-ts@3.1.1:
+    resolution: {integrity: sha512-+DWg8jCJG2TEnpy7kOm/7/AxaYoaRbjVB4LFZLySZlWn8exGs3A4OLJR966cVvU26N7X9TWxl+Jsw7dzAqKT6g==}
+    engines: {node: '>=16'}
 
   linkedom@0.18.14:
     resolution: {integrity: sha512-BRUnkOm4YR5vo+qI3j0EbungB0vZPSCue5AdnTQRaxAGSbsOZiBFRO0rh4zlo8qXUhli8pxvnpEXDklMnlq2Rg==}
@@ -174,6 +220,12 @@ packages:
   nth-check@3.0.1:
     resolution: {integrity: sha512-GX0gsdbGVCgnRgbeGaubfjpBXyYRWOOCVeYh08bSQvDZqxz5ndXs1OTfAt/h36G1xvI94YIspsI0sVFqAV9+RQ==}
     engines: {node: '>=20.19.0'}
+
+  standardwebhooks@1.1.1:
+    resolution: {integrity: sha512-bCbX9ZEyFkWPsRz7Bl3NuQUJohmwGSev/yhr7vhaGPlc4AfIrspIRa6cPTBuI1ItmrTDJ4d/S2hCsfe4+vQGnQ==}
+
+  ts-algebra@2.0.0:
+    resolution: {integrity: sha512-FPAhNPFMrkwz76P7cdjdmiShwMynZYN6SgOujD1urY4oNm80Ou9oMdmbR45LotcKOXoy7wSmHkRFE6Mxbrhefw==}
 
   typescript@5.9.3:
     resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
@@ -192,6 +244,20 @@ packages:
 snapshots:
 
   '@acemir/cssom@0.9.32': {}
+
+  '@anthropic-ai/sdk@1.1.0(zod@4.6.7)':
+    dependencies:
+      '@opentelemetry/api': 1.10.0
+      json-schema-to-ts: 3.1.1
+      standardwebhooks: 1.1.1
+    optionalDependencies:
+      zod: 4.6.7
+
+  '@babel/runtime@7.29.10': {}
+
+  '@opentelemetry/api@1.10.0': {}
+
+  '@stablelib/base64@1.0.1': {}
 
   '@types/node@26.6.5':
     dependencies:
@@ -251,6 +317,8 @@ snapshots:
 
   entities@8.1.0: {}
 
+  fast-sha256@1.3.0: {}
+
   html-escaper@3.0.3: {}
 
   htmlparser2@10.1.0:
@@ -259,6 +327,11 @@ snapshots:
       domhandler: 5.0.3
       domutils: 3.2.2
       entities: 7.0.1
+
+  json-schema-to-ts@3.1.1:
+    dependencies:
+      '@babel/runtime': 7.29.10
+      ts-algebra: 2.0.0
 
   linkedom@0.18.14:
     dependencies:
@@ -271,6 +344,13 @@ snapshots:
   nth-check@3.0.1:
     dependencies:
       boolbase: 2.0.0
+
+  standardwebhooks@1.1.1:
+    dependencies:
+      '@stablelib/base64': 1.0.1
+      fast-sha256: 1.3.0
+
+  ts-algebra@2.0.0: {}
 
   typescript@5.9.3: {}
 
