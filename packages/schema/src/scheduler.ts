@@ -185,4 +185,6 @@ export interface Engine {
 }
 export type AssignProblem = Pick<ProposeInput, "dates" | "demands" | "staff" | "pinned"> & {
   previous_assignments: Assignment[];
+  /** now 이전이라 바꿀 수 없는 이전 배정 (D24). pinned처럼 그대로 둔다. AssignRequest.frozen과 같음 */
+  frozen?: Assignment[];
 };

@@ -55,7 +55,7 @@
 | 버전 | 내용 | 시작 조건 | 상태 |
 |---|---|---|---|
 | v1 | 임시 규칙 엔진, propose·validate, 정책 3개, diff·설명·지표, 시나리오 3개(S2·S3·S7) | — | **완료** (PR #2 merge) |
-| v2 | 계약 따라가기: REPLANNED 단계, `warnings` 빼기, `fixtures/scenarios/inputs` 읽기 → **시나리오 10개 전부 켜기**(입력 준비됨). 지금 기대 결과가 안 맞는 것: S5 `GROUP_MOVE`(이유 코드 미구현), S10 `TIMETABLE_CHANGED`(`request.cause` 읽기, 0.3.1). **D24 지난 칸 고정**(`now` 이전 배정 고정, `BEFORE_NOW_CHANGED`). 공용 시간 함수, `explain.ts` 단순화 | 조건 충족 (M3 merge, 0.3.1, 목데이터가 실제 엔진) | **다음 차례** |
+| v2 | 계약 따라가기: REPLANNED 단계, `warnings` 빼기, `fixtures/scenarios/inputs` 읽기 → **시나리오 10개 전부 켜기**(입력 준비됨). 지금 기대 결과가 안 맞는 것: S5 `GROUP_MOVE`(이유 코드 미구현), S10 `TIMETABLE_CHANGED`(`request.cause` 읽기, 0.3.1). **D24 지난 칸 고정**(`now` 이전 배정 고정, `BEFORE_NOW_CHANGED`). 공용 시간 함수, `explain.ts` 단순화 | 조건 충족 | **지시서 있음** (`tasks/M1-scheduler-v2.md`) |
 | v3 | 엔진 교체 구조: 정책마다 heuristic·cpsat 선택, 두 엔진 비교표 | M2 v1 merge | 대기 |
 | v4 | 무작위 시험(9월 20일 × 결석·부재·배치 변경 수백 번), 성능 목표(10일 15초) | v2 | 대기 |
 | 이후 | 업무강도 균형(`BALANCE`)·매칭 분산(`ROTATION`) | 결정 §5-3 | 결정 필요 |
@@ -81,7 +81,7 @@
 ### 그 밖
 | 모듈 | 다음 | 시작 조건 |
 |---|---|---|
-| M2 CP-SAT | v1 지시서 작성 (Claude에게 요청) | M1 v1·M3 v1 merge |
+| M2 CP-SAT | v1 (`tasks/M2-cpsat.md`). 시작 전 `brew install uv` 필요 | **시작 가능** (m2-cpsat 워크트리) |
 | M5 실명 검사 | v1 (`tasks/M5-name-guard.md`, 보류) | §1 결정 |
 | M6 해석기 | v1 (`tasks/M6-interpreter.md`), eval은 사람이 API 키로 실행 | 1차 merge 뒤 |
 | M7 API | v1 (`tasks/M7-api.md`, 2026-10-22 보강): 실제 M1·M3·M4를 `server/deps.ts`로 연결, 해석기·실명 검사·알림만 가짜. 배치 경고 계산, D24 `now`, 흐름 테스트(출장 → 선택지 → 승인) | **시작 가능** (m7-api 워크트리) |
