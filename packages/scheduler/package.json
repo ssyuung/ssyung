@@ -1,0 +1,22 @@
+{
+  "name": "@ssyung/scheduler",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p .",
+    "test": "node --test \"test/**/*.test.ts\"",
+    "scenarios": "node scripts/scenarios.ts"
+  },
+  "dependencies": {
+    "@ssyung/schema": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "typescript": "^5.9.3",
+    "zod": "^4.1.12"
+  }
+}
