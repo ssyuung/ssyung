@@ -69,12 +69,12 @@
           }
         },
         "B": {
-          "changed": 8,
+          "changed": 11,
           "gaps": 0,
           "late": 0,
           "kinds": {
             "removed": 4,
-            "moved": 3,
+            "moved": 6,
             "group": 1
           }
         },
@@ -135,11 +135,11 @@
           }
         },
         "B": {
-          "changed": 9,
+          "changed": 11,
           "gaps": 0,
           "late": 1,
           "kinds": {
-            "moved": 8,
+            "moved": 10,
             "retimed": 1
           }
         },
@@ -189,32 +189,32 @@
       },
       "baseline_heuristic": {
         "A": {
-          "changed": 7,
+          "changed": 3,
           "gaps": 1,
           "late": 1,
           "kinds": {
             "gap": 1,
             "retimed": 1,
-            "moved": 5
+            "moved": 1
           }
         },
         "B": {
-          "changed": 7,
+          "changed": 3,
           "gaps": 1,
           "late": 1,
           "kinds": {
             "gap": 1,
             "retimed": 1,
-            "moved": 5
+            "moved": 1
           }
         },
         "C": {
-          "changed": 7,
+          "changed": 3,
           "gaps": 2,
           "late": 0,
           "kinds": {
             "gap": 2,
-            "moved": 5
+            "moved": 1
           }
         }
       }
@@ -268,11 +268,11 @@
           }
         },
         "B": {
-          "changed": 9,
+          "changed": 11,
           "gaps": 0,
           "late": 0,
           "kinds": {
-            "moved": 7,
+            "moved": 9,
             "removed": 1,
             "added": 1
           }
@@ -336,12 +336,12 @@
           }
         },
         "B": {
-          "changed": 12,
+          "changed": 7,
           "gaps": 0,
           "late": 0,
           "kinds": {
             "removed": 2,
-            "moved": 9,
+            "moved": 4,
             "group": 1
           }
         },
