@@ -1,6 +1,6 @@
 # M3 수요 생성 v1
 
-> 상태: 진행
+> 상태: 완료
 > 브랜치 `<id>/m3-demand` · 범위 `packages/core/**` · 공통 규칙 `CLAUDE.md`
 
 ## 목표

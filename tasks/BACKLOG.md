@@ -20,9 +20,9 @@
 ### merge 순서 (main을 깨뜨리지 않게)
 - [x] 1. main(계약 0.3.0) push
 - [x] 2. **PR #2 M1** merge (2026-10-22, 요청 4건 `done/`으로) — 0.3.0에서 그대로 통과 확인함(테스트 28, 시나리오 3개). lockfile은 `pnpm install`로 다시 생성
-- [ ] 3. **M3 PR #3**: m3 워크트리에 main 합침(완료) → M3 세션에 "M3-questions.md의 M0 답을 반영해" → ① `now`를 D24 범위로 ② 0.3.0 특수학급 시간표(장소, `unplaced`). 지금 타입 오류 4개·테스트 11개 실패
-- [ ] 4. **M4 PR #1**: m4 워크트리에 main 합침(완료) → M4 세션에 "M4-questions.md의 M0 답을 반영해" → 새 학생 형식, 특수학급 시간표 파일 → `special_classes[].lessons`. 지금 타입 오류 5개·테스트 4개 실패
-- [ ] 5. merge 뒤 요청 파일을 `contracts/requests/done/`으로
+- [x] 3. **M3 PR #3**: m3 워크트리에 main 합침(완료) → M3 세션에 "M3-questions.md의 M0 답을 반영해" → ① `now`를 D24 범위로 ② 0.3.0 특수학급 시간표(장소, `unplaced`). 지금 타입 오류 4개·테스트 11개 실패
+- [x] 4. **M4 PR #1**: m4 워크트리에 main 합침(완료) → M4 세션에 "M4-questions.md의 M0 답을 반영해" → 새 학생 형식, 특수학급 시간표 파일 → `special_classes[].lessons`. 지금 타입 오류 5개·테스트 4개 실패
+- [x] 5. merge 뒤 요청 파일을 `contracts/requests/done/`으로 (6건 모두)
 
 ### 화면 (D25로 바뀐 것)
 - [x] 시안 v12.30 (`docs/screens`, https://claude.ai/artifact/9haPR9wNoo16VgRMjy977H): ③에 특수학급 시간표 편집(특수학급 탭, 요일 × 교시, 이 달 장소 미정 칸 수), ④는 특수학급 과목만 고름(과목별 장소 삭제), 현황판은 학년별 묶음
@@ -34,7 +34,7 @@
 
 ### 세션
 - [x] 워크트리 준비: m1-scheduler, m3-demand, m4-data
-- [ ] M1·M3·M4 v1 커밋 요청 → PR 검토 → merge (세 모듈 모두 완료 조건 통과, 테스트 M1 28·M3 27·M4 17개)
+- [x] M1·M3·M4 v1 merge (2026-10-22, 테스트 M1 28·M3 35·M4 18개)
 - [ ] 1차(M1·M3·M4) PR 몇 개 merge 뒤: m6-interpreter, m7-api 워크트리 만들고 init
 
 ## 2. 반복 업무
@@ -66,14 +66,14 @@
 ### M3 수요 생성
 | 버전 | 내용 | 시작 조건 | 상태 |
 |---|---|---|---|
-| v1 | 수업 지원·이동 묶음 수요, ChangeOps 반영 | — | 진행, PR 대기 |
+| v1 | 수업 지원·이동 묶음 수요, ChangeOps 반영, D24 `now`, D25 특수학급 시간표·`unplaced` | — | **완료** (PR #3 merge) |
 | v2 | 공용 시간 함수·`DEFAULT_BELL` 쓰기, 시나리오 S6·S8·S9·S10 입력 만들기(M0와 함께), 특수학급 시간표(결정 뒤), 업무(duty) 펼치기, 45·50분 수업 구간 | 결정 | 대기 |
 
 ### M4 학교 데이터·저장소
 | 버전 | 내용 | 시작 조건 | 상태 |
 |---|---|---|---|
-| v1 | MockSource(목데이터를 그대로 돌려줌), JsonRepository, 저장소 계약 테스트. NEIS 정규화(FileSource)는 보류 — 사람 결정 B안 (M4-questions Q1) | — | 진행, PR 대기 |
-| v1.5 | 리뷰 반영: `last_code_no`를 스키마로 파싱, `MockSource` 학교 목록을 `domain/school.json`에서, `Schema<T>` 대신 `z.ZodType`, `bell.ts` 대신 `DEFAULT_BELL`·공용 시간 함수 | 0.2.0 | 대기 |
+| v1 | MockSource(목데이터를 그대로 돌려줌), JsonRepository, 저장소 계약 테스트, 0.3.0 특수학급 시간표 읽기. NEIS 정규화(FileSource)는 보류 — 사람 결정 B안 (M4-questions Q1) | — | **완료** (PR #1 merge) |
+| v1.5 | 리뷰 반영: `last_code_no`를 스키마로 파싱, `MockSource` 학교 목록을 `domain/school.json`에서, `Schema<T>` 대신 `z.ZodType`, `bell.ts` 대신 `DEFAULT_BELL`·공용 시간 함수 | 0.2.0 | **완료** (v1 PR에 포함) |
 | v1.6 | FileSource: `dataset/api/` NEIS 응답 정규화 + 9월 목데이터 대조 (`test/mock-source.test.ts` 그대로) | 필요할 때 | 대기 |
 | v2 | 버전·배정·메모·체크 저장 | M7 v1 | 대기 |
 | v3 | SupabaseRepository (같은 계약 테스트), NeisSource | Wave 2 | 대기 |

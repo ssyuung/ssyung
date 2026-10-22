@@ -1,6 +1,6 @@
 # M4 학교 데이터·저장소 v1
 
-> 상태: 진행
+> 상태: 완료
 > 브랜치 `<id>/m4-data` · 범위 `packages/school-data/**`, `packages/repository/**` · 공통 규칙 `CLAUDE.md`
 
 ## 목표
