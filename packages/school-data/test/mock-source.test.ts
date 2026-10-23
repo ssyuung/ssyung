@@ -27,7 +27,9 @@ test("학급: school.json의 class_groups와 같고 1-3은 시간표 없음", as
 test("시간표 9월: timetable-2026-09.json과 같음", async () => {
   const tt = await src.getTimetable(gaepo!, "2026-09-01", "2026-09-30");
   Timetable.parse(tt);
-  assert.deepEqual(tt, await mock("domain/timetable-2026-09.json"));
+  const all = await mock("domain/timetable-2026-09.json");
+  const sept = (d: string) => d <= "2026-09-30";
+  assert.deepEqual(tt, { ...all, date_to: "2026-09-30", school_days: all.school_days.filter(sept), lessons: all.lessons.filter((l: any) => sept(l.date)) });
 });
 
 test("시간표 기간 지정: 그 주만", async () => {
@@ -38,7 +40,7 @@ test("시간표 기간 지정: 그 주만", async () => {
 });
 
 test("목데이터 밖 기간·학년도·학교는 오류", async () => {
-  await assert.rejects(src.getTimetable(gaepo!, "2026-09-28", "2026-10-02"), isCode("NOT_IMPLEMENTED"));
+  await assert.rejects(src.getTimetable(gaepo!, "2026-12-28", "2027-01-04"), isCode("NOT_IMPLEMENTED"));
   await assert.rejects(src.getTimetable(gaepo!, "2026-09-10", "2026-09-01"), isCode("VALIDATION"));
   await assert.rejects(src.getClassGroups(gaepo!, 2025), isCode("NOT_FOUND"));
   const other: SchoolRef = { ...gaepo!, neis_school_code: "0000000" };

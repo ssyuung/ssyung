@@ -56,9 +56,9 @@ pnpm mock:build    # dataset/ + 화면 시안 엔진 → fixtures/mock/ 다시 �
 | `domain/school.json` | `SchoolBundle` | 학교, 일과(40분 수업 6교시), 장소 54곳, 반 39개(1-3은 `has_timetable: false`), 특수학급 K1·K2 | M4 출력 기대값, M7·M8 |
 | `domain/students.json` | `Student[]` | S01–S07 | 〃 |
 | `domain/staff.json` | `Staff[]` | A01–A03 풀타임 | 〃 |
-| `domain/timetable-2026-09.json` | `Timetable` | 9월 수업일 20일, 3,895칸 | M3 입력, M4 출력 기대값 |
+| `domain/timetable-2026-09.json` | `Timetable` | 9/1–12/31. 9월 수업일 20일은 dataset 그대로, **10–12월 64일은 같은 요일의 9/14–9/18 시간표를 날짜만 바꿔 복사**(공휴일 10/3·10/9·12/25 제외, 6-7반은 기준 주에 자료가 없어 빔) | M3 입력, M4 출력 기대값 |
 | `demand/2026-09-18.json`, `demand/2026-09.json` | `DemandSet` | 하루 18개(수업 10 + 이동 묶음 8), 9월 전체 | M3 출력 기대값, M1 입력 |
-| `schedule/active-2026-09.json` | `ScheduleSnapshot` | 9월 active 버전 배정·부족분·날짜별 지표 | M7, M8 |
+| `schedule/active-2026-09.json` | `ScheduleSnapshot` | active 버전 배정·부족분·날짜별 지표(9/1–12/31). 10–12월은 같은 요일 9/14–9/18 배정을 날짜만 바꿔 복사 | M7, M8 |
 | `scheduler/propose.absent.{input,output}.json` | `ProposeInput/Output` | 학생3 결석 → 선택지 2개 (A·C가 같아 합침) | M1 |
 | `scheduler/propose.staff-away.{input,output}.json` | 〃 | 지원인력1 10:30–11:30 출장 → 선택지 3개, diff·연쇄 4단계 | M1, M8(W5), M9(T3) |
 | `scheduler/validate.overlap.{input,output}.json` | `ValidateInput/Output` | 지원인력2를 이미 맡은 이동 묶음에 하나 더 끌어 놓음 → `OVERLAP` + `MOVE_GROUP_HEADCOUNT` | M1, M8(W4) |

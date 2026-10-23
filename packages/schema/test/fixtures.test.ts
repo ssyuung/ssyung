@@ -40,7 +40,7 @@ test("목데이터: 배정은 존재하는 수요를 가리키고 겹치지 않�
   const ids = new Set(read("fixtures/mock/demand/2026-09.json").demands.map((d: S.Demand) => d.id));
   const byStaffDay: Record<string, S.Assignment[]> = {};
   for (const a of snap.assignments as S.Assignment[]) {
-    assert.ok(ids.has(a.demand_id), `없는 수요: ${a.demand_id}`);
+    if (a.date <= "2026-09-30") assert.ok(ids.has(a.demand_id), `없는 수요: ${a.demand_id}`); // demand/2026-09.json은 9월분
     (byStaffDay[a.staff + a.date] ??= []).push(a);
   }
   for (const list of Object.values(byStaffDay)) {

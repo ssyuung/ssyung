@@ -113,7 +113,7 @@ test("draft를 활성화하면 그 기간만 바뀌고 나머지 날짜 배정�
     const out = await e.call("T01", "schedule.activate", { version_id: version.id });
     assert.equal(out.version.status, "active");
     assert.equal(out.version.date_from, "2026-09-01");
-    assert.equal(out.version.date_to, "2026-09-30");
+    assert.equal(out.version.date_to, "2026-12-31");
 
     const d15 = await e.call("T01", "view.day", { date: "2026-09-15" });
     assert.equal(d15.version.id, version.id);

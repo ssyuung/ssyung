@@ -476,6 +476,32 @@ api("device.redeemInvite", [
   { title: "만료된 코드", input: { code: "000000", push_token: null }, error: { code: "NOT_FOUND", message: "코드가 없거나 만료됐어요." } },
 ]);
 
+// 10–12월: 9월 자료밖에 없어, 시간표와 active 배정을 같은 요일의 9/14–9/18 것으로 날짜만 바꿔 복사한다 (공휴일 제외, 2026-10-23)
+{
+  const BASE: Record<number, string> = { 1: "2026-09-14", 2: "2026-09-15", 3: "2026-09-16", 4: "2026-09-17", 5: "2026-09-18" };
+  const HOLIDAYS = new Set(["2026-10-03", "2026-10-09", "2026-12-25"]);
+  const ttPath = join(OUT, "domain/timetable-2026-09.json"), snapPath = join(OUT, "schedule/active-2026-09.json");
+  const tt = json(ttPath), snap = json(snapPath);
+  const sept = tt.lessons.slice(), asg = snap.assignments.slice(), sf = snap.shortfalls.slice();
+  const swap = (x: any, b: string, d: string) => ({ ...x, date: d, demand_id: x.demand_id.replace(`:${b}:`, `:${d}:`) });
+  for (let t = Date.UTC(2026, 9, 1); ; t += 86_400_000) {
+    const d = new Date(t).toISOString().slice(0, 10);
+    if (d > "2026-12-31") break;
+    const b = BASE[new Date(t).getUTCDay()];
+    if (!b || HOLIDAYS.has(d)) continue;
+    tt.school_days.push(d);
+    for (const l of sept) if (l.date === b) tt.lessons.push({ ...l, date: d });
+    for (const a of asg) if (a.date === b) snap.assignments.push(swap(a, b, d));
+    for (const x of sf) if (x.date === b) snap.shortfalls.push(swap(x, b, d));
+    snap.metrics_by_date[d] = snap.metrics_by_date[b];
+  }
+  tt.date_to = "2026-12-31";
+  snap.version.date_to = "2026-12-31";
+  snap._note = "active 버전의 배정(9/1–12/31). 9월은 배치 엔진 결과, 10–12월은 같은 요일의 9/14–9/18 배정을 날짜만 바꿔 복사";
+  writeFileSync(ttPath, JSON.stringify(tt, null, 2) + "\n");
+  writeFileSync(snapPath, JSON.stringify(snap, null, 2) + "\n");
+}
+
 // 색인
 write("manifest.json", {
   _note: "목데이터 파일 → 계약(packages/schema) 스키마. pnpm mock:build로 생성하고 packages/schema 테스트가 전부 검증한다",
